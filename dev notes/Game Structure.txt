@@ -1,0 +1,18 @@
+[GAMEPLAY STRUCTURE]
+
+*Player score is 0
+*Player chapter score is 0
+*Thought in a chapter by chapter, means you can restart the chapter if you want
+*Next Chapter is locked until the current chapter is finished
+
+[CHAPTER STRUCTURE]
+*Chapter Score is 0
+*You are thought the chapter topics
+* you are questioned along the way
+*chapter score is calculated by your questions
+*end of chapter has a Chapter Quiz
+Chapter Quiz Difficulty based off your
+0-30% EASY
+31-70% MODERATE
+71-100% HARD
+

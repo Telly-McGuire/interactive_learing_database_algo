@@ -1,0 +1,185 @@
+Chapter 0 : Introduction To The Game
+
+Chapter 1: Introduction
+to Abstract Data Types
+• Explain the theory of Abstract Data Types (
+ADTs) and its relation
+to data structure.
+• Discuss the principles
+of Stacks and
+Queues
+
+Chapter 2: Arrays
+• Types of Lists
+Elements
+• Class ArrayListClass
+• Unordered Lists
+• Class Vector
+
+Chapter 3: Linked Lists
+• Linked Lists
+Properties
+• Item Insertion and
+Deletion
+• Building Linked Lists
+Linked Lists as ADT’s
+• Doubly Linked Lists
+
+Chapter 4: Stacks and
+Queues
+• Stack exception
+class
+• Implementation of
+Stacks as Arrays
+• Linked
+Implementation of
+Stacks
+• Stack as derived
+from class
+• LinkedListClass
+• Removing Recursion
+• Queue exception
+class
+• Application of
+Stacks and Queues
+
+Chapter 5: Binary Trees
+• Types of Binary Trees
+• Properties of Binary
+Trees
+• Structure of Binary
+Trees
+• Operations on
+Binary Trees
+• Binary Tree traversals
+• Binary Search Trees
+
+Chapter 6: Balanced
+Binary Search
+Trees(AVL Trees)
+• Properties of AVL
+Trees
+• Structure of AVL Tree
+• AVL tree rotations
+
+Chapter 7: Binary
+Search Trees(Red-Black
+Trees)
+• The logic of RedBlack trees
+• Re-coloring and
+Rotation cases
+• Red-black tree
+illustrations
+• Comparison of Redblack trees and AVL
+trees
+
+Chapter 8: Heaps
+• Introduction to
+priority queues
+• Heap basics
+• Heap introduction –
+array representation
+• Heap introduction –
+remove operation
+• Using heap data
+structure to sort
+• Heap introduction –
+operations
+complexities
+• Binomial and
+Fibonacci heaps
+
+Chapter 9: Associative
+Arrays(Dictionaries)
+* associative arrays
+• Hash table
+introduction –
+collisions
+• Hash table
+introduction –
+dynamic resizing
+
+Chapter 10: Graph
+Algorithms
+• Graph theory
+overview
+• Adjacency matrix
+and adjacency list
+• Applicatio
+
+Chapter 11: Graph
+Traversal Algorithms
+• Breadth-first search
+introduction
+• Introduction to web
+crawlers
+• Depth-first search
+introduction
+• Uniform cost search
+algorithm
+• A * search algorithm
+• Iterative deepening
+search
+• Memory
+managem BFS vs.
+DFS
+
+Chapter 12: Graph
+Algorithms – Shortest
+paths with Dijkstra’s
+Algorithm
+• Discussion of the
+shortest path
+problem
+• Dijkstra algorithm
+visualization
+• Dijkstra algorithm
+implementation
+• Dijkstra algorithm
+with adjacency
+matrix
+implementation
+• Adjacency matrix
+representation
+implementation
+
+Chapter 13: Graph
+Algorithms – Shortest
+paths with BellmanFord Algorithm
+Introduction to
+Bellman-Ford 
+• Bellman-Ford
+algorithm
+visualization
+• Bellman-Ford
+algorithm
+implementation
+• Greedy algorithm or
+dynamic
+programming
+approach
+
+Chapter 14: Graph
+Algorithms – Spanning
+Trees with Kruskal
+Algorithm
+• Disjoint set data
+structure
+• Disjoint sets
+visualization
+• Kruskal’s algorithm
+introduction
+• Kruskal’s algorithm
+implementation –
+basic classes
+• Kruskal’s algorithm
+implementation –
+disjoint set
+• Kruskal’s algorithm
+implementation –
+algorithm
+• Kruskal’s algorithm
+implementation
+testing
+
+

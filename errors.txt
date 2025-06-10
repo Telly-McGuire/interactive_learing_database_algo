@@ -1,0 +1,114 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/chapters/chapter_1.rpy", line 562: menu statement expects a non-empty block.
+    menu:
+        ^
+
+File "game/chapters/chapter_1.rpy", line 563: expected statement.
+    "Time Complexity":
+                     ^
+
+File "game/chapters/chapter_1.rpy", line 566: expected statement.
+    "Space Complexity":
+                      ^
+
+File "game/chapters/chapter_1.rpy", line 569: expected statement.
+    "User Interface Design":
+                           ^
+
+File "game/chapters/chapter_1.rpy", line 576: menu statement expects a non-empty block.
+    menu:
+        ^
+
+File "game/chapters/chapter_1.rpy", line 577: expected statement.
+    "A stack is LIFO (Last In First Out) and a queue is FIFO (First In First Out)":
+                                                                                  ^
+
+File "game/chapters/chapter_1.rpy", line 581: expected statement.
+    "A stack is FIFO and a queue is LIFO":
+                                         ^
+
+File "game/chapters/chapter_1.rpy", line 584: expected statement.
+    "There is no difference":
+                            ^
+
+File "game/chapters/chapter_1.rpy", line 590: menu statement expects a non-empty block.
+    menu:
+        ^
+
+File "game/chapters/chapter_1.rpy", line 591: expected statement.
+    "To find specific data within a larger dataset quickly and efficiently":
+                                                                           ^
+
+File "game/chapters/chapter_1.rpy", line 595: expected statement.
+    "To sort data in a specific order":
+                                      ^
+
+File "game/chapters/chapter_1.rpy", line 598: expected statement.
+    "To delete data from a dataset":
+                                   ^
+
+File "game/chapters/chapter_1.rpy", line 604: menu statement expects a non-empty block.
+    menu:
+        ^
+
+File "game/chapters/chapter_1.rpy", line 605: expected statement.
+    "Searching":
+               ^
+
+File "game/chapters/chapter_1.rpy", line 608: expected statement.
+    "Sorting":
+             ^
+
+File "game/chapters/chapter_1.rpy", line 611: expected statement.
+    "Extracting":
+                ^
+
+File "game/chapters/chapter_1.rpy", line 615: expected statement.
+    "Deletion":
+              ^
+
+File "game/chapters/chapter_1.rpy", line 621: menu statement expects a non-empty block.
+    menu:
+        ^
+
+File "game/chapters/chapter_1.rpy", line 622: expected statement.
+    "Unambiguous":
+                 ^
+
+File "game/chapters/chapter_1.rpy", line 625: expected statement.
+    "Infinite steps":
+                    ^
+
+File "game/chapters/chapter_1.rpy", line 629: expected statement.
+    "Effective":
+               ^
+
+File "game/chapters/chapter_1.rpy", line 632: expected statement.
+    "Feasible":
+              ^
+
+File "game/chapters/chapter_1.rpy", line 638: menu statement expects a non-empty block.
+    menu:
+        ^
+
+File "game/chapters/chapter_1.rpy", line 639: expected statement.
+    "True":
+          ^
+
+File "game/chapters/chapter_1.rpy", line 643: expected statement.
+    "False":
+           ^
+
+File "game/chapters/chapter_1.rpy", line 651: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
+    if answer.lower() == "updating":
+    ^
+
+File "game/chapters/chapter_1.rpy", line 655: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
+    else:
+    ^
+
+Ren'Py Version: Ren'Py 8.3.0.24082114
+Sat Jun  7 16:23:13 2025
