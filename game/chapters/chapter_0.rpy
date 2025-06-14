@@ -1,11 +1,16 @@
 define a = Character("Adrian")
 
+transform ease(start, end, time):
+    subpixel True
+    start
+    easein time end
 
 transform smaller:
     zoom 0.5
 
 label chapter_0:
-
+    show black
+    pause 1.0
     scene mt tree
 
     show adrian smiling :
@@ -146,4 +151,5 @@ label chapter_0_ending:
     a "You can now move on to Chapter 1"
     a "You can also review the questions and answers if you want"
     $persistent.chapter_0 = True
+    stop music fadeout 1.0
     jump menu

@@ -1,30 +1,70 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/chapters/chapter_2.rpy", line 9, in script
-    show black with dissolve(2.0)
-TypeError: 'Dissolve' object is not callable
+While processing text tag {1, 2} in '{1, 2}, {3, 4}'.:
+  File "game/chapters/chapter_2.rpy", line 882, in script
+    menu:
+Exception: Unknown text tag '1, 2'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_2.rpy", line 9, in script
-    show black with dissolve(2.0)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1361, in execute
-    renpy.exports.with_statement(trans, paired=paired)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\statementexports.py", line 257, in with_statement
-    return renpy.game.interface.do_with(trans, paired, clear=clear)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 1551, in do_with
-    return self.interact(trans_pause=True,
+  File "game/chapters/chapter_2.rpy", line 882, in script
+    menu:
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1619, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\menuexports.py", line 134, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\menuexports.py", line 424, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ui.py", line 301, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2188, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2626, in interact_core
-    trans = instantiate_transition(None, old_root, layers_root)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2535, in instantiate_transition
-    trans = self.ongoing_transition[layer](
-TypeError: 'Dissolve' object is not callable
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2836, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 1354, in draw_screen
+    surftree = renpy.display.render.render_screen(
+  File "render.pyx", line 486, in renpy.display.render.render_screen
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 754, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1171, in render
+    surf = render(d, width - x, rh, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\behavior.py", line 974, in render
+    rv = super(Button, self).render(width, height, st, at)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1454, in render
+    surf = render(child,
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 260, in renpy.display.render.render
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 2518, in render
+    virtual_layout = Layout(self, width, height, renders, drawable_res=False, size_only=True)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 703, in __init__
+    self.paragraphs = self.segment(text.tokens, style, renders, text)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 1499, in segment
+    raise Exception("Unknown text tag %r" % text)
+Exception: Unknown text tag '1, 2'
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : Database And Algorithms 1.0
-Tue Jun 10 17:16:04 2025
+Sat Jun 14 18:23:16 2025

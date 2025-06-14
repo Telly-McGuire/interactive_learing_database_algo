@@ -6,6 +6,7 @@ screen chapter_1_introscreen:
         yalign 0.5
         text "Chapter 1: Abstract Data Structures" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 label chapter_1_intro:
+    
     show black
     pause 1.0
     show screen chapter_1_introscreen
@@ -16,7 +17,17 @@ label chapter_1_intro:
     show adrian smiling at center:
         smaller
     with dissolve
-
+    
+    if persistent.chapter_1 == True:
+        a "Hey Welcome back to Chapter 1"
+        a "Would you like to take the quizzes again?"
+        menu :
+            "Yes":
+                jump chapter_1_quiz1
+            "No":
+                pass
+    else:
+        pass
     a "Welcome to Chapter 1"
     a "Today, we’re diving into something that forms the backbone of computer science—data structures and algorithms."
     a "These are the building blocks of efficient programming, and mastering them can make all the difference in how we handle large amounts of data"
@@ -199,6 +210,13 @@ label chapter_1_quiz1:
             
 
     a "Your Current Score is [chapter_1_questions] out of 4"
+    if persistent.chapter_1 == True:
+        a "Would you like to continue to the next quiz?"
+        menu:
+            "Yes":
+                jump chapter_1_quiz2
+            "No":
+                pass
 
 
 label chapter_1_explanation2:
@@ -446,7 +464,16 @@ label chapter_1_continue:
             show adrian sad
             a "Incorrect. Updating algorithms modify existing data."
     show adrian happy
-    a "Good job!!! Your Score has been Graded"
+    a "Good job!!! Your Score of [chapter_1_questions] has been Graded"
+
+    if persistent.chapter_1 == True:
+        a "Would you like to continue to the chapter quiz?"
+        menu:
+            "yes":
+                jump chapter_1_restart
+            "no":
+                pass
+
     jump chapter_1_explanation3
 
 
@@ -527,23 +554,21 @@ label chapter_1_explanation3:
         a "You will be getting the Easy Quiz"
         jump chapter_1_quizeasy
 
-label chapter_1_restart:
-    if chapter_1_questions <= 9:
-        show adrian happy
-        a "You will be getting the Hard Quiz"
-    jump chapter_1_quizhard
-
+label chapter_1_restart:    
+    a "Your score of [chapter_1_questions] will tell how hard your quiz will be"
     if chapter_1_questions >= 8:
         show adrian smiling
-        a "You will be getting the Moderate Quiz"
-        jump chapter_1_quizmedium
+        jump chapter_1_quiz_medium
+    elif chapter_1_questions >= 4:
+        show adrian blush
+        jump chapter_1_quiz_easy
+    else:
+        show adrian happy
+        jump chapter_1_quiz_hard
     
-    if chapter_1_questions >=4:
-        show adriab blush
-        a "You will be getting the Easy Quiz"
-        jump chapter_1_quizeasy
+
         
-label chapter_1_quizhard:
+label chapter_1_quiz_hard:
     $ chapter_1_score = 0
 
     show adrian smiling at center
@@ -1056,7 +1081,7 @@ label chapter_1_quiz_medium:
     jump chapter_1_ending
 
 
-label chapter_1_quizeasy:
+label chapter_1_quiz_easy:
     $ chapter_1_score = 0
     show adrian smiling at center
     a "Welcome to the Easy Quiz! Let's see how much you've learned."
@@ -1214,8 +1239,9 @@ label chapter_1_ending:
             jump chapter_1_restart
         "No":
             pass
+    show adrian happy
     a "You have finished chapter 1. You can continue to Chapter 2!"
-    jump menu_screen
+    jump menu
     
     
-    $persistent.chapter_1 = True
+    $ persistent.chapter_1 = True
