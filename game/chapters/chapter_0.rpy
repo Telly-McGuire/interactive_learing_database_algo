@@ -1,21 +1,56 @@
 define a = Character("Adrian")
 
-transform ease(start, end, time):
-    subpixel True
-    start
-    easein time end
+screen chapter_0_introscreen:
+    vbox:
+        spacing 20
+        xalign 0.5
+        yalign 0.5
+
+        text "Welcome to" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)] xalign 0.5
+        text "Interactive Learning :" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)] xalign 0.5
+        text "Data Structures & Algorithms" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)] xalign 0.5
+
+
 
 transform smaller:
     zoom 0.5
 
 label chapter_0:
-    show black
+    play sound "sfx/start.mp3"
+    stop music fadeout 1.0
+    
+    scene black
     pause 1.0
-    scene mt tree
+    show screen chapter_0_introscreen
+    with dissolve
+    pause 4.0
+    scene mt tree 
+    with dissolve
+    pause 1.0
+    hide screen chapter_0_introscreen
 
-    show adrian smiling :
+    show screen menu_btn
+    show adrian smiling at center:
         smaller
+    with dissolve
+
+    play music "bgm/city-high-life.mp3" fadein 1.0
         
+    if persistent.chapter_0 == True:
+        a "Hi welcome back to chapter 0"
+        a "are you sure you want to go through this chapter again?"
+        menu:
+            "Yes":
+                pass
+            "No":
+                jump menu
+    else:
+        pass
+
+    
+    show adrian smiling at center :
+        smaller
+    
     voice "chapter 0/ch_0_1.mp3"
     a "Hello"
     
@@ -150,6 +185,6 @@ label chapter_0_ending:
     a "You have completed Chapter 0"
     a "You can now move on to Chapter 1"
     a "You can also review the questions and answers if you want"
-    $persistent.chapter_0 = True
+    $ persistent.chapter_0 = True
     stop music fadeout 1.0
     jump menu

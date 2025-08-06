@@ -1,35 +1,61 @@
-define a = Character("Adrian") 
+
 screen chapter_1_introscreen:
-    vbox:
-        spacing 20
+    frame:
         xalign 0.5
         yalign 0.5
-        text "Chapter 1: Abstract Data Structures" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+        xpadding 60
+        ypadding 60
+        vbox:
+            spacing 20
+            xalign 0.5
+            yalign 0.5
+            text "Chapter 1: Abstract Data Structures" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+
 label chapter_1_intro:
+    play sound "sfx/start.mp3"
+    stop music fadeout 1.0
     
-    show black
+    scene black
     pause 1.0
     show screen chapter_1_introscreen
     pause 2.0
     scene mt tree with dissolve
     pause 1.0
     hide screen chapter_1_introscreen
+    
+    play music "bgm/city-high-life.mp3" fadein 1.0
     show adrian smiling at center:
         smaller
     with dissolve
     
     if persistent.chapter_1 == True:
         a "Hey Welcome back to Chapter 1"
-        a "Would you like to take the quizzes again?"
-        menu :
-            "Yes":
+        a "What do you want to do again?"
+        menu:
+            "Start from the beginning":
+                jump chapter_1_explanation1
+            "Take the Quizzes":
                 jump chapter_1_quiz1
-            "No":
-                pass
+            
+            "Would you like to review the chapter?":
+                menu:
+                    "Yes":
+                        "Please Pick a topic to review:"
+                        menu:
+                            "Data Search":
+                                jump chapter_1_explanation1
+                            "Characteristics of Algorithms":
+                                jump chapter_1_explanation2
+                            "Good Programming":
+                                jump chapter_1_explanation3
+                    "No":
+                        return
     else:
         pass
+    show screen menu_btn
     a "Welcome to Chapter 1"
-    a "Today, we’re diving into something that forms the backbone of computer science—data structures and algorithms."
+    a "Today, we’re diving into something that forms the backbone of computer science:"
+    a "{size=+30}Data Structures and Algorithms."
     a "These are the building blocks of efficient programming, and mastering them can make all the difference in how we handle large amounts of data"
     
     show adrian explaining:
@@ -45,118 +71,214 @@ label chapter_1_intro:
     a "Let's get started with the first topic."
     a "But before we do that, look at this this"
 
+    window hide dissolve
+    stop music
     play sound "sfx/slideleft.mp3"
     show adrian smiling at left with move:
         smaller
-    a "Slide to the left"
+    pause(1.5)
 
     play sound "sfx/slideright.mp3"
     show adrian smiling at right with move:
         smaller
+    pause(1.5)
 
+    play sound "sfx/crisscross.mp3"
+    show adrian at left with move
+    pause (0.2)
+    show adrian at right with move
+    pause (0.2)
+
+    show adrian at left with move
+    pause (0.2)
+    show adrian at right with move
+    pause (0.2)
+
+    pause(1.0)
     
-    a "Slide to the right"
+    play sound "sfx/chacha.mp3"
+    show adrian normal at center:
+        xzoom -1
+    with move
+    pause 0.3
+    show adrian smiling at center:
+        xzoom 1
+    pause 0.3
+    show adrian normal at center:
+        xzoom -1
+    pause 0.3
+    show adrian smiling at center:
+        xzoom 1
+    pause 0.3
+    show adrian normal at center:
+        xzoom -1
+    pause 0.3
+    show adrian smiling at center:
+        xzoom 1
+    pause 0.3
+    show adrian normal at center:
+        xzoom -1
+    pause 0.3
+    show adrian smiling at center:
+        xzoom 1
+    pause 0.3
+    show adrian normal at center:
+        xzoom -1
+    pause 0.3
+    show adrian smiling at center:
+        xzoom 1
+    pause 0.3
 
-    show adrian explaining at left with move:
+    pause 2.0   
+
+    window show dissolve
+    window auto
+
+    show adrian explaining at left: 
         smaller
+    with move
 
     transform right_centered:
         zoom 1.5
         xalign 0.8   # Aligns to the left
-        yalign 0.5
+        yalign 0.2
 
+    play music "bgm/city-high-life.mp3" fadein 1.0
     show adrian smiling     
     a "Now I have your attention, let’s talk about data structures and algorithms."
-
-    show tree at right_centered
-    a "Data Structures : They are ways to organize and store data in a computer so that it can be used efficiently."
-    hide tree
-
-    show graph at right_centered
+    a "{b}Data Structures{/b} : They are ways to organize and store data in a computer so that it can be used efficiently."
     a "Think of them as containers that hold data in a specific format, making it easier to access and manipulate."
-    hide graph
-
-    show linklist at right_centered
-    a "Imagine you’re looking for a book in a massive library with no organization." 
-    hide linklist
-
-    show stack at right_centered
-    a "Finding what you need would take forever, right? That’s exactly what happens when we don’t structure our data efficiently in programming."
-    hide stack
-
-    show adrian smiling at center with move
-    a "There are three common problems that data structures help us solve: data search, processer speed, multiple requests"
+    a "There are three common problems that data structures help us solve: {b}data search, processer speed, multiple requests{/b}"
 
     # Add more content for Chapter 1 here...
 
     jump chapter_1_explanation1
 
+#data search 
 label chapter_1_explanation1:
     show adrian explaining at center:
         smaller
 
-    a "Now, let’s talk about data search algorithms."
+    a "Now, let’s talk about {b} Data Search Algorithms. {/b}"
+
+    show adrian at left
+    with move
+
+    show maglass at Position(xpos=0.7, ypos=0.8) with dissolve
+    pause 0.5
+
     a "These algorithms help us find specific data within a larger dataset quickly and efficiently."
     
     show adrian normal:
         smaller
 
     #add visual 
-
-    a "Data search : is the process of retrieving relevant information from a dataset, 
+    show maglass at Position(xpos=0.9, ypos=0.7) with move
+    pause 0.5
+    a "{size=+10}Data search{/size} : is the process of retrieving relevant information from a dataset, 
     database, or the web using methods like keyword search, pattern matching, and ranking algorithms."
     
+    show maglass at Position(xpos=0.5, ypos=0.5) with move
+    pause 0.5
     show adrian smiling:
         smaller
-
     a "Efficient search techniques, such as binary search or hash-based lookup, enhance speed and accuracy in locating data."
-     
+    show maglass at Position(xpos=0.2, ypos=0.7) with move
+    pause 0.5
+
+    hide maglass 
+    with dissolve
     #add visual
     show adrian normal
-    a "Next, we have Processor Speed."
-    a "Processor speed although being very high, falls limited if the data grows to billion records."
+    show clock at Position(xpos=0.7,ypos=0.8) with dissolve
+    a "Next, we have {b}Processor Speed{/b}."
+    a "{size=+10}Processor speed{/size} : although being very high, falls limited if the data grows to billion records."
     a "In such cases, we need to optimize our algorithms and data structures to ensure that our programs run efficiently."
+
+    hide clock with dissolve
+
+    image mail = "assets/mail.png"
+    image mail2 = "assets/mail.png"
+    image mail3 = "assets/mail.png"
+    image mail4 = "assets/mail.png"
+    image mail5 = "assets/mail.png"
+    image mail6 = "assets/mail.png"
+    image mail7 = "assets/mail.png"
+    image mail8 = "assets/mail.png"
+    image mail9 = "assets/mail.png"
+
+    play sound "sfx/paper.mp3"
+    show mail at Move((0.7, -0.3), (0.7, 0.4), 3.0)
+    show mail2 at Move((0.2, -0.3), (0.2, 0.3), 4.0)
+    show mail3 at Move((0.5, -0.3), (0.5, 0.5), 2.0)
 
     show adrian explaining:
         smaller
-    a "Last is Multiple Requests."
+    a "Last is {b}Multiple Requests.{/b}"
+
+    play sound "sfx/paper.mp3"
+    show mail4 at Move((0.3, -0.3), (0.3, 0.6), 2.5)
+    show mail5 at Move((0.8, -0.3), (0.8, 0.3), 3.8)
+    show mail6 at Move((0.6, -0.3), (0.6, 0.25), 2.2)
     a "When multiple requests are made to access or modify data simultaneously, it can lead to bottlenecks and inefficiencies."
+    
+    play sound "sfx/paper.mp3"
+    show mail7 at Move((0.1, -0.3), (0.1, 0.4), 2.7)
+    show mail8 at Move((0.4, -0.3), (0.4, 0.5), 4.5)
+    show mail9 at Move((0.9, -0.3), (0.9, 0.3), 2.3)
     a "Data structures like queues and stacks help manage these requests effectively, 
     ensuring that data is processed in the right order and without conflicts."
 
-    show adrian normal:
+    hide mail with dissolve
+    hide mail2 with dissolve
+    hide mail3 with dissolve
+    hide mail4 with dissolve
+    hide mail5 with dissolve
+    hide mail6 with dissolve
+    hide mail7 with dissolve
+    hide mail8 with dissolve
+    hide mail9 with dissolve
+
+    show adrian normal at center:
         smaller
+    with move
     a "There are 3 Characteristics of data structures that we need to consider when choosing the right one for our needs."
-    a "These characteristics are: Time Complexity, Space Complexity, and Correctness."
+    a "These characteristics are: {b}Time Complexity, Space Complexity, and Correctness.{/b}"
 
     show adrian explaining:
         smaller
-    a "Time Complexity: refers to the amount of time an algorithm takes to complete as the size of the input data increases."
+    a "{b}Time Complexity {/b}: refers to the amount of time an algorithm takes to complete as the size of the input data increases."
     a "It’s crucial to choose data structures that minimize time complexity, especially for large datasets."
-    a "For example, A hash table is like a magic shortcut for finding things. Instead of checking every item one by one, 
-    it uses a unique code to jump straight to the right spot—kind of like knowing exactly where your keys are instead of searching the whole house."
+    a "For example, A hash table is like a magic shortcut for finding things." 
+    a "Instead of checking every item one by one, it uses a unique code to jump straight to the right spot—kind of like knowing exactly where your keys are instead of searching the whole house."
 
     show adrian normal:
         smaller
-    a "Space Complexity: refers to the amount of memory an algorithm uses as the size of the input data increases."
+    a "{b}Space Complexity {/b}: refers to the amount of memory an algorithm uses as the size of the input data increases."
     a "It’s important to consider space complexity when working with limited memory resources or large datasets."
     a "For example, a linked list uses less memory than an array for storing data, but it may take longer to access specific elements."
 
     show adrian explaining:
         smaller
-    a "Correctness: refers to the accuracy and reliability of an algorithm in producing the expected results."
+    a "{b}Correctness {/b}: refers to the accuracy and reliability of an algorithm in producing the expected results."
     a "Choosing the right data structure ensures that our algorithms are correct and produce the desired outcomes."
     a "Imagine you have a big list of words written on cards, all neatly arranged from A to Z. 
     Instead of flipping through one card at a time, a binary search tree works like a smart guessing game." 
     a "You start in the middle—if your word is earlier in the alphabet, you look in the left half; if it's later, you check the right"
 
+    play sound "sfx/bell.mp3"
+    show adrian smiling
+    a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+
     jump chapter_1_quiz1
 
 label chapter_1_quiz1:
+    play music "bgm/better-answer.mp3" fadein 0.5
     $ chapter_1_questions = 0
     show adrian smiling at center:
         smaller
 
+    
     a "Now that we’ve covered the basics, let’s see how well you understand these concepts."
     a "I have a few questions for you to test your knowledge."
     a "Don’t worry, it’s all part of the learning process, and I’m here to help you along the way."
@@ -206,9 +328,11 @@ label chapter_1_quiz1:
             a "Incorrect. Sorting algorithms are used for arranging data, not searching for it."
         "To delete data from a dataset":
             a "Incorrect. Deletion algorithms are used for removing data, not searching for it."
-        
-            
-
+    
+    stop music fadeout 1.0
+   
+    play music "bgm/city-high-life.mp3" fadein 0.5        
+    play sound "sfx/success.mp3"
     a "Your Current Score is [chapter_1_questions] out of 4"
     if persistent.chapter_1 == True:
         a "Would you like to continue to the next quiz?"
@@ -218,30 +342,29 @@ label chapter_1_quiz1:
             "No":
                 pass
 
-
+#Charactericistican of Algorithms
 label chapter_1_explanation2:
     show adrian explaining at center:
         smaller
-    
     a "Now, let’s dive deeper into the characteristics of data structures."
-    a "From the data structure point of view, following are some important categories of algorithms "
-    a "1. Search or Searching Algorithms: These algorithms help us find specific data within a larger dataset quickly and efficiently."
-    a "2. Sort or Sorting Algorithms: These algorithms arrange data in a specific order, such as ascending or descending, to make it easier to analyze and retrieve."
-    a "3. Insert or Insertion Algorithms: These algorithms add new data to an existing dataset while maintaining its structure and order."
-    a "4. Update or Updating Algorithms: These algorithms modify existing data in a dataset, ensuring that the changes are reflected accurately."
-    a "5. Delete or Deletion Algorithms: These algorithms remove specific data from a dataset, ensuring that the remaining data remains organized and accessible."
+    a "From the data structure point of view, following are some important categories of algorithms:"
+    a "{b}1. Search or Searching Algorithms:{/b} These algorithms help us find specific data within a larger dataset quickly and efficiently."
+    a "{b}2. Sort or Sorting Algorithms:{/b} These algorithms arrange data in a specific order, such as ascending or descending, to make it easier to analyze and retrieve."
+    a "{b}3. Insert or Insertion Algorithms:{/b} These algorithms add new data to an existing dataset while maintaining its structure and order."
+    a "{b}4. Update or Updating Algorithms:{/b} These algorithms modify existing data in a dataset, ensuring that the changes are reflected accurately."
+    a "{b}5. Delete or Deletion Algorithms:{/b} These algorithms remove specific data from a dataset, ensuring that the remaining data remains organized and accessible."
 
     a "There are many more algorithms, but these are the most common ones that we will encounter in this chapter."
     a "Now, let’s take a closer look at some of these algorithms and how they work."
 
     show adrian smiling
-    a "But First, What do you think of algorithmns?"
+    a "But First, What do you think of algorithms?"
     menu:
         "Theyre kinda cute":
             show adrian blush
-            a "Haha, I guess you could say that! Algorithms can be cute in their own way, especially when they solve problems efficiently." 
+            a "Haha, I guess you could say that! Algorithms can be cute in their own way, especially when they solve problems efficiently."
             show adrian smug
-            a "do you think I am cute too?"
+            a "Do you think I am cute too?"
         "Theyre boring":
             show adrian normal
             a "I understand, algorithms can seem boring at first, but they are essential for solving complex problems in programming."
@@ -250,25 +373,24 @@ label chapter_1_explanation2:
             a "Haha, I guess you could say that! Algorithms can be hot when they solve problems efficiently and elegantly."
     
     show adrian explaining at center
-    a "Now Lets continue to algorithms"
-    a "Algorithms are step-by-step procedures for solving problems or performing tasks."
-    a "They are essential for processing data efficiently and effectively."
-    a "Every single procedure that a computer performs is an algorithm"
+    a "Now let's continue to algorithms."
+    a "{b}Algorithms{/b} are step-by-step procedures for solving problems or performing tasks."
+    a "They are {b}essential{/b} for processing data efficiently and effectively."
+    a "Every single procedure that a computer performs is an algorithm."
     a "An algorithm states the actions to be executed and the order in which these actions are to be executed."
 
     show adrian normal
-    a "There are 3 Cases for algorithms. What are cases you ask?  Think of cases like different ways something can happen. Imagine you're playing a guessing game"
+    a "{b}There are 3 Cases for algorithms.{/b} What are cases you ask?  Think of cases like different ways something can happen. Imagine you're playing a guessing game."
 
-    a "Well, there are 3 cases for algorithms: Best Case, Average Case, and Worst Case."
-    a "1. Best Case: This is the scenario where the algorithm performs the least amount of work, resulting in the fastest execution time."
-    a "2. Average Case: This is the scenario where the algorithm performs a moderate amount of work, resulting in an average execution time."
-    a "3. Worst Case: This is the scenario where the algorithm performs the most amount of work, resulting in the slowest execution time."
+    a "Well, there are 3 cases for algorithms: {b}Best Case, Average Case, and Worst Case.{/b}"
+    a "{b}1. Best Case:{/b} This is the scenario where the algorithm performs the least amount of work, resulting in the fastest execution time."
+    a "{b}2. Average Case:{/b} This is the scenario where the algorithm performs a moderate amount of work, resulting in an average execution time."
+    a "{b}3. Worst Case:{/b} This is the scenario where the algorithm performs the most amount of work, resulting in the slowest execution time."
 
     show adrian smug
-    a "Its like when youre going to the bathroom, sometimes you get there quickly, sometimes you have to wait in line,
-        and sometimes you have to wait for a long time because someone is taking forever."
+    a "It's like when you're going to the bathroom, sometimes you get there quickly, sometimes you have to wait in line, and sometimes you have to wait for a long time because someone is taking forever."
     show adrian smiling
-    a "algorithms are like that too, they can be fast, slow, or somewhere in between depending on the situation."
+    a "Algorithms are like that too, they can be fast, slow, or somewhere in between depending on the situation."
 
     a "Speaking of algorithms, do you have a type?"
 
@@ -276,48 +398,49 @@ label chapter_1_explanation2:
     a "I like girls teehee. What about you?"
     menu:
         "I like boys":
-            a "Ooooh Very mucho intresting. My friend is a dude, maybe you two can meet up"
+            a "Ooooh, very mucho interesting. My friend is a dude, maybe you two can meet up."
         "I like girls":
-            a "I like girks too, Teehee. Theyre so Pretty and cute"
+            a "I like girls too, Teehee. They're so pretty and cute."
         "I prefer not to say":
-            a "Thats okay, you dont have to say. Its your personal preference and I respect that"
+            a "That's okay, you don't have to say. It's your personal preference and I respect that."
 
     show adrian normal
     a "So you ask me why the random question about types?"
     a "Well, just like how we have different types of people, there are also different types of algorithms."
-    a "and different types have different characteristics and performance."
-    a "and there are certain characteristics before we call something an algorithm."
+    a "And different types have different characteristics and performance."
+    a "And there are certain characteristics before we call something an algorithm."
 
-    a "1. Unambiguous: An algorithm must be clear and unambiguous, meaning that each step should be precisely defined and easy to understand."
+    a "{b}1. Unambiguous:{/b} An algorithm must be clear and unambiguous, meaning that each step should be precisely defined and easy to understand."
     show adrian smiling
-    a "Its like you have to be clear about what you want, like when you order food at a restaurant."
-    a "like you have to say exactly what you want, like 'I want a cheeseburger with no pickles and extra cheese.'"
+    a "It's like you have to be clear about what you want, like when you order food at a restaurant."
+    a "Like you have to say exactly what you want, like 'I want a cheeseburger with no pickles and extra cheese.'"
 
     show adrian explaining
-    a "2. Input: An algorithm should have zero or more inputs, which are the data that the algorithm will process."
-    a "Its like when you order food, you have to give them your order, like 'I want a cheeseburger with no pickles and extra cheese.'"
+    a "{b}2. Input:{/b} An algorithm should have zero or more inputs, which are the data that the algorithm will process."
+    a "It's like when you order food, you have to give them your order, like 'I want a cheeseburger with no pickles and extra cheese.'"
 
     show adrian normal
-    a "3. Output: An algorithm should produce one or more outputs, which are the results of the algorithm's processing."
-    a "Its like when you order food, you get your food as the output, like 'Here is your cheeseburger with no pickles and extra cheese.'"
+    a "{b}3. Output:{/b} An algorithm should produce one or more outputs, which are the results of the algorithm's processing."
+    a "It's like when you order food, you get your food as the output, like 'Here is your cheeseburger with no pickles and extra cheese.'"
 
     show adrian explaining
-    a "4. Finiteness: An algorithm must terminate after a finite number of steps, meaning it should not run indefinitely."
-    a "Its like when you order food, you have to wait for your food to be ready, and then you can eat it."
+    a "{b}4. Finiteness:{/b} An algorithm must terminate after a finite number of steps, meaning it should not run indefinitely."
+    a "It's like when you order food, you have to wait for your food to be ready, and then you can eat it."
     a "1, 2, 3. Start to Finish"
 
     show adrian smiling
-    a "5. Effectiveness: An algorithm should be effective, meaning that it should be able to solve the problem it was designed for in a reasonable amount of time."
-    a "Your Burger should be perfect and should get what you want within the time you order it"
+    a "{b}5. Effectiveness:{/b} An algorithm should be effective, meaning that it should be able to solve the problem it was designed for in a reasonable amount of time."
+    a "Your burger should be perfect and you should get what you want within the time you order it."
 
     show adrian normal
-    a "6. Feasibility: An algorithm should be feasible, meaning that it should be able to be implemented with the available resources and technology."
-    a "Your burger should always be available"
+    a "{b}6. Feasibility:{/b} An algorithm should be feasible, meaning that it should be able to be implemented with the available resources and technology."
+    a "Your burger should always be available."
 
     show adrian smiling
-    a "7. Indipendent: An algorithm should be independent of any programming language or platform, meaning that it can be implemented in any programming language or platform."
-    a "and the burger you get should be only that and nothing more. If you get extra burgers or side orders it would be good for you but bad for business"
-    a "So your algorithmn should stand alone on its two feet"
+    a "{b}7. Independent:{/b} An algorithm should be independent of any programming language or platform, meaning that it can be implemented in any programming language or platform."
+    a "And the burger you get should be only that and nothing more. If you get extra burgers or side orders it would be good for you but bad for business."
+    a "So your algorithm should stand alone on its two feet."
+
 
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
@@ -325,6 +448,9 @@ label chapter_1_explanation2:
     jump chapter_1_quiz2
 
 label chapter_1_quiz2:
+
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 0.5
     
     show adrian smiling at center
     a "Lets start with a few questions"
@@ -464,6 +590,11 @@ label chapter_1_continue:
             show adrian sad
             a "Incorrect. Updating algorithms modify existing data."
     show adrian happy
+
+    stop music fadeout 1.0
+   
+    play music "bgm/city-high-life.mp3" fadein 0.5        
+    play sound "sfx/success.mp3"
     a "Good job!!! Your Score of [chapter_1_questions] has been Graded"
 
     if persistent.chapter_1 == True:
@@ -476,7 +607,7 @@ label chapter_1_continue:
 
     jump chapter_1_explanation3
 
-
+#Good Programming
 label chapter_1_explanation3:
     show adrian smiling 
     a "We'll be tackling the last few topics of this chapter, so hang in there! Okay?"
@@ -537,31 +668,17 @@ label chapter_1_explanation3:
     show adrian smug
     play sound "sfx/bell.mp3"
     a "Uh Oh, Theres that sound again. Its time for your chapter quiz!"
-    a "Since you got [chapter_1_questions] you will be taking the"
-
-    if chapter_1_questions < 9:
-        show adrian happy
-        a "You will be getting the Hard Quiz"
-        jump chapter_1_quizhard
-    
-    if chapter_1_questions >= 8:
-        show adrian smiling
-        a "You will be getting the Moderate Quiz"
-        jump chapter_1_quiz_medium
-    
-    if chapter_1_questions >=4:
-        show adriab blush
-        a "You will be getting the Easy Quiz"
-        jump chapter_1_quizeasy
+    jump chapter_1_restart
 
 label chapter_1_restart:    
-    a "Your score of [chapter_1_questions] will tell how hard your quiz will be"
-    if chapter_1_questions >= 8:
+    if chapter_1_questions <= 8:
         show adrian smiling
         jump chapter_1_quiz_medium
-    elif chapter_1_questions >= 4:
+
+    if chapter_1_questions <= 4:
         show adrian blush
         jump chapter_1_quiz_easy
+        
     else:
         show adrian happy
         jump chapter_1_quiz_hard
@@ -569,17 +686,19 @@ label chapter_1_restart:
 
         
 label chapter_1_quiz_hard:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 0.5
     $ chapter_1_score = 0
 
     show adrian smiling at center
-    a "Welcome to the Moderate Quiz! Let's test your knowledge with some medium-difficulty questions."
+    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
 
     # Question 1 - Multiple Choice
     a "1. Which data structure allows elements to be added or removed from both ends?"
     menu:
         "Deque":
             show adrian happy
-            $ chapter_1_score += 1
+            call ch1_scoreadd
             a "Correct! A deque allows insertion and deletion at both ends."
         "Stack":
             show adrian sad
@@ -603,7 +722,7 @@ label chapter_1_quiz_hard:
         "User Interface Design":
             show adrian happy
             a "Correct! User interface design is not a characteristic of data structures."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
 
     # Question 3
     a "3. What is the difference between a stack and a queue?"
@@ -611,7 +730,7 @@ label chapter_1_quiz_hard:
         "A stack is LIFO (Last In First Out) and a queue is FIFO (First In First Out)":
             show adrian happy
             a "Correct! A stack is LIFO and a queue is FIFO."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "A stack is FIFO and a queue is LIFO":
             show adrian sad
             a "Incorrect. A stack is LIFO and a queue is FIFO."
@@ -625,7 +744,7 @@ label chapter_1_quiz_hard:
         "To find specific data within a larger dataset quickly and efficiently":
             show adrian happy
             a "Correct! Search algorithms are designed to find specific data quickly and efficiently."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "To sort data in a specific order":
             show adrian sad
             a "Incorrect. Sorting algorithms are used for arranging data, not searching for it."
@@ -645,7 +764,7 @@ label chapter_1_quiz_hard:
         "Extracting":
             show adrian happy
             a "Correct! Extracting is not typically listed as a common category of algorithms."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Deletion":
             show adrian sad
             a "Incorrect. Deletion is a common category of algorithms."
@@ -659,7 +778,7 @@ label chapter_1_quiz_hard:
         "Infinite steps":
             show adrian happy
             a "Correct! A good algorithm must always terminate after a finite number of steps."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Effective":
             show adrian sad
             a "Incorrect. Effectiveness is a key characteristic of a good algorithm."
@@ -673,7 +792,7 @@ label chapter_1_quiz_hard:
         "True":
             show adrian happy
             a "You are Correct. Good JOB!!"
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "False":
             show adrian sad
             a "Incorrect. Of course you add new data, you insert something."
@@ -684,7 +803,7 @@ label chapter_1_quiz_hard:
     if answer.lower() == "updating":
         show adrian happy
         a "You are Correct. Good Job!!"
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_hard1
     else:
         show adrian sad
@@ -699,7 +818,7 @@ label chapter_1_quiz_hard:
     if answer.lower() == "stack":
         show adrian happy
         a "Correct! Stack is the right answer."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_hard2
 
     else:
@@ -713,7 +832,7 @@ label chapter_1_quiz_hard:
     if answer.lower() == "sorting":
         show adrian happy
         a "Correct! Sorting is the process."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_hard3
     else:
         show adrian sad
@@ -727,7 +846,7 @@ label chapter_1_quiz_hard:
     if answer.lower() == "binary":
         show adrian happy
         a "Correct! Binary search requires a sorted dataset."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_hard4
     else:
         show adrian sad
@@ -741,7 +860,7 @@ label chapter_1_quiz_hard:
         "Linked List":
             show adrian happy
             a "Correct! Linked lists use nodes that point to the next node."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Array":
             show adrian sad
             a "Incorrect. Arrays do not use nodes."
@@ -758,7 +877,7 @@ label chapter_1_quiz_hard:
         "Tree":
             show adrian happy
             a "Correct! Trees are non-linear data structures."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Queue":
             show adrian sad
             a "Incorrect. Queue is linear."
@@ -775,7 +894,7 @@ label chapter_1_quiz_hard:
         "Pop":
             show adrian happy
             a "Correct! Pop removes the top element from a stack."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Push":
             show adrian sad
             a "Incorrect. Push adds an element."
@@ -792,7 +911,7 @@ label chapter_1_quiz_hard:
         "First In, First Out":
             show adrian happy
             a "Correct! Queue is FIFO."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Last In, First Out":
             show adrian sad
             a "Incorrect. That's a stack."
@@ -804,7 +923,7 @@ label chapter_1_quiz_hard:
             a "Incorrect. That's a tree."
 
     show adrian smiling
-    a "Great job! You finished the Moderate Quiz. Your total score is [chapter_1_score]."
+    
 
     #ADD MATCHING TYPE
     # Matching Type Question
@@ -819,7 +938,7 @@ label chapter_1_quiz_hard:
     if matching_answer.startswith("1d,2c,3a,4b"):
         show adrian happy
         a "Excellent! All your matches are correct."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
     else:
         show adrian sad
         a "Not quite. The correct matches are: 1D, 2C, 3A, 4B."
@@ -835,25 +954,35 @@ label chapter_1_quiz_hard:
     if matching_answer2.startswith("1c,2d,3b,4a"):
         show adrian happy
         a "Excellent! All your matches are correct."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
     else:
         show adrian sad
         a "Not quite. The correct matches are: 1C, 2D, 3B, 4A."
+ 
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job! You finished the Moderate Quiz. Your total score is [chapter_1_score]."
 
     jump chapter_1_ending
 
 label chapter_1_quiz_medium:
+    
     $ chapter_1_score = 0
 
+
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 0.5
+
     show adrian smiling at center
-    a "Welcome to the Moderate Quiz! Let's test your knowledge with some medium-difficulty questions."
+    a "Welcome to the {b}Quiz{/b}! Let's see how much you've learned."
 
     # Question 1 - Multiple Choice
     a "1. Which data structure allows elements to be added or removed from both ends?"
     menu:
         "Deque":
             show adrian happy
-            $ chapter_1_score += 1
+            call ch1_scoreadd
             a "Correct! A deque allows insertion and deletion at both ends."
         "Stack":
             show adrian sad
@@ -877,7 +1006,7 @@ label chapter_1_quiz_medium:
         "User Interface Design":
             show adrian happy
             a "Correct! User interface design is not a characteristic of data structures."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
 
     # Question 3
     a "3. What is the difference between a stack and a queue?"
@@ -885,7 +1014,7 @@ label chapter_1_quiz_medium:
         "A stack is LIFO (Last In First Out) and a queue is FIFO (First In First Out)":
             show adrian happy
             a "Correct! A stack is LIFO and a queue is FIFO."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "A stack is FIFO and a queue is LIFO":
             show adrian sad
             a "Incorrect. A stack is LIFO and a queue is FIFO."
@@ -899,7 +1028,7 @@ label chapter_1_quiz_medium:
         "To find specific data within a larger dataset quickly and efficiently":
             show adrian happy
             a "Correct! Search algorithms are designed to find specific data quickly and efficiently."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "To sort data in a specific order":
             show adrian sad
             a "Incorrect. Sorting algorithms are used for arranging data, not searching for it."
@@ -919,7 +1048,7 @@ label chapter_1_quiz_medium:
         "Extracting":
             show adrian happy
             a "Correct! Extracting is not typically listed as a common category of algorithms."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Deletion":
             show adrian sad
             a "Incorrect. Deletion is a common category of algorithms."
@@ -933,7 +1062,7 @@ label chapter_1_quiz_medium:
         "Infinite steps":
             show adrian happy
             a "Correct! A good algorithm must always terminate after a finite number of steps."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Effective":
             show adrian sad
             a "Incorrect. Effectiveness is a key characteristic of a good algorithm."
@@ -947,7 +1076,7 @@ label chapter_1_quiz_medium:
         "True":
             show adrian happy
             a "You are Correct. Good JOB!!"
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "False":
             show adrian sad
             a "Incorrect. Of course you add new data, you insert something."
@@ -958,7 +1087,7 @@ label chapter_1_quiz_medium:
     if answer.lower() == "updating":
         show adrian happy
         a "You are Correct. Good Job!!"
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_med1
     else:
         show adrian sad
@@ -972,7 +1101,7 @@ label chapter_1_quiz_medium:
     if answer.lower() == "stack":
         show adrian happy
         a "Correct! Stack is the right answer."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_med2
 
     else:
@@ -986,7 +1115,7 @@ label chapter_1_quiz_medium:
     if answer.lower() == "sorting":
         show adrian happy
         a "Correct! Sorting is the process."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_med3
     else:
         show adrian sad
@@ -1000,7 +1129,7 @@ label chapter_1_quiz_medium:
     if answer.lower() == "binary":
         show adrian happy
         a "Correct! Binary search requires a sorted dataset."
-        $ chapter_1_score += 1
+        call ch1_scoreadd
         jump ch1_med4
     else:
         show adrian sad
@@ -1014,7 +1143,7 @@ label chapter_1_quiz_medium:
         "Linked List":
             show adrian happy
             a "Correct! Linked lists use nodes that point to the next node."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Array":
             show adrian sad
             a "Incorrect. Arrays do not use nodes."
@@ -1031,7 +1160,7 @@ label chapter_1_quiz_medium:
         "Tree":
             show adrian happy
             a "Correct! Trees are non-linear data structures."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Queue":
             show adrian sad
             a "Incorrect. Queue is linear."
@@ -1048,7 +1177,7 @@ label chapter_1_quiz_medium:
         "Pop":
             show adrian happy
             a "Correct! Pop removes the top element from a stack."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Push":
             show adrian sad
             a "Incorrect. Push adds an element."
@@ -1065,7 +1194,7 @@ label chapter_1_quiz_medium:
         "First In, First Out":
             show adrian happy
             a "Correct! Queue is FIFO."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Last In, First Out":
             show adrian sad
             a "Incorrect. That's a stack."
@@ -1077,14 +1206,21 @@ label chapter_1_quiz_medium:
             a "Incorrect. That's a tree."
 
     show adrian smiling
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
     a "Great job! You finished the Moderate Quiz. Your total score is [chapter_1_score]."
     jump chapter_1_ending
 
 
 label chapter_1_quiz_easy:
     $ chapter_1_score = 0
+    
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 0.5
+
     show adrian smiling at center
-    a "Welcome to the Easy Quiz! Let's see how much you've learned."
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
     # Question 1
     a "1. Which of the following is a data structure?"
@@ -1092,7 +1228,7 @@ label chapter_1_quiz_easy:
         "Array":
             show adrian happy
             a "Correct! An array is a data structure."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Button":
             show adrian sad
             a "Incorrect. A button is not a data structure."
@@ -1109,7 +1245,7 @@ label chapter_1_quiz_easy:
         "True":
             show adrian happy
             a "Correct! Stack is LIFO."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "False":
             show adrian sad
             a "Incorrect. Stack is LIFO."
@@ -1120,7 +1256,7 @@ label chapter_1_quiz_easy:
         "Queue":
             show adrian happy
             a "Correct! A queue works like a line."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Stack":
             show adrian sad
             a "Incorrect. A stack is not like a line."
@@ -1137,7 +1273,7 @@ label chapter_1_quiz_easy:
         "False":
             show adrian happy
             a "Correct! Algorithms can be used in daily life too."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "True":
             show adrian sad
             a "Incorrect. Algorithms are everywhere!"
@@ -1148,7 +1284,7 @@ label chapter_1_quiz_easy:
         "Ambiguity":
             show adrian happy
             a "Correct! Algorithms should not be ambiguous."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Finiteness":
             show adrian sad
             a "Incorrect. Finiteness is a good characteristic."
@@ -1165,7 +1301,7 @@ label chapter_1_quiz_easy:
         "True":
             show adrian happy
             a "Correct! Queue is FIFO."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "False":
             show adrian sad
             a "Incorrect. Queue is FIFO."
@@ -1176,7 +1312,7 @@ label chapter_1_quiz_easy:
         "Search Algorithm":
             show adrian happy
             a "Correct! Search algorithms help find data."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Sorting Algorithm":
             show adrian sad
             a "Incorrect. Sorting arranges data."
@@ -1193,7 +1329,7 @@ label chapter_1_quiz_easy:
         "True":
             show adrian happy
             a "Correct! Linked lists are dynamic."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "False":
             show adrian sad
             a "Incorrect. Linked lists are flexible."
@@ -1204,7 +1340,7 @@ label chapter_1_quiz_easy:
         "Bubble Sort":
             show adrian happy
             a "Correct! Bubble Sort is a sorting algorithm."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "Binary Search":
             show adrian sad
             a "Incorrect. Binary Search is a search algorithm."
@@ -1221,17 +1357,22 @@ label chapter_1_quiz_easy:
         "True":
             show adrian happy
             a "Correct! That's the main purpose of data structures."
-            $ chapter_1_score += 1
+            call ch1_scoreadd
         "False":
             show adrian sad
             a "Incorrect. Data structures do help organize data."
 
     show adrian smiling
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
     a "Great job! You finished the Easy Quiz. Your total score is [chapter_1_score]."
 
     
     jump chapter_1_ending
-label chapter_1_ending:
+label chapter_1_ending:    
+    $ persistent.chapter_1 = True
+    play sound "sfx/success.mp3"
     a "Your Score is [chapter_1_score]!"
     a "Would You like to test again?"
     menu:
@@ -1241,7 +1382,8 @@ label chapter_1_ending:
             pass
     show adrian happy
     a "You have finished chapter 1. You can continue to Chapter 2!"
+    $ renpy.force_autosave()
+    stop music fadeout 0.5
     jump menu
     
     
-    $ persistent.chapter_1 = True

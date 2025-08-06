@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/chapters/chapter_2.rpy", line 437: Line is indented, but the preceding show statement statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
-    "Yes":
-    ^
+File "game/chapters/chapter_4.rpy", line 186: screen expects a non-empty block.
+    screen ch_3_pop:
+                    ^
+
+File "game/chapters/chapter_4.rpy", line 188: screen expects a non-empty block.
+    screen ch_3_peek:
+                     ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Sat Jun 14 17:31:30 2025
+Mon Aug  4 15:44:31 2025

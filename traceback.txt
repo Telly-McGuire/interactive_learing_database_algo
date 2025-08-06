@@ -1,70 +1,82 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While processing text tag {1, 2} in '{1, 2}, {3, 4}'.:
-  File "game/chapters/chapter_2.rpy", line 882, in script
-    menu:
-Exception: Unknown text tag '1, 2'
+While running game code:
+  File "game/chapters/chapter_4.rpy", line 175, in script call
+    a "Pick an Operation On how stacks work"
+  File "game/chapters/chapter_4.rpy", line 175, in script call
+    a "Pick an Operation On how stacks work"
+  File "game/chapters/chapter_4.rpy", line 175, in script call
+    a "Pick an Operation On how stacks work"
+  File "game/chapters/chapter_4.rpy", line 150, in script
+    hide screen stack_operations
+  File "renpy/common/000statements.rpy", line 682, in execute_hide_screen
+    renpy.hide_screen(name, layer=layer)
+  File "game/chapters/chapter_4.rpy", line 177, in execute
+    screen stack_operations:
+  File "game/chapters/chapter_4.rpy", line 177, in execute
+    screen stack_operations:
+  File "game/chapters/chapter_4.rpy", line 178, in execute
+    frame:
+  File "game/chapters/chapter_4.rpy", line 184, in execute
+    vbox:
+  File "game/chapters/chapter_4.rpy", line 189, in execute
+    hbox:
+  File "game/chapters/chapter_4.rpy", line 208, in execute
+    textbutton "Peek()":
+  File "game/chapters/chapter_4.rpy", line 208, in keywords
+    textbutton "Peek()":
+  File "game/chapters/chapter_4.rpy", line 209, in <module>
+    action call("ch_4_peek")
+NameError: name 'call' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_2.rpy", line 882, in script
-    menu:
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1619, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\menuexports.py", line 134, in menu
-    rv = renpy.store.menu(new_items)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\menuexports.py", line 424, in display_menu
-    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ui.py", line 301, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2188, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2836, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 1354, in draw_screen
-    surftree = renpy.display.render.render_screen(
-  File "render.pyx", line 486, in renpy.display.render.render_screen
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 754, in render
-    child = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 903, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1171, in render
-    surf = render(d, width - x, rh, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\behavior.py", line 974, in render
-    rv = super(Button, self).render(width, height, st, at)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1454, in render
-    surf = render(child,
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 260, in renpy.display.render.render
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 2518, in render
-    virtual_layout = Layout(self, width, height, renders, drawable_res=False, size_only=True)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 703, in __init__
-    self.paragraphs = self.segment(text.tokens, style, renders, text)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 1499, in segment
-    raise Exception("Unknown text tag %r" % text)
-Exception: Unknown text tag '1, 2'
+  File "game/chapters/chapter_4.rpy", line 175, in script call
+    a "Pick an Operation On how stacks work"
+  File "game/chapters/chapter_4.rpy", line 175, in script call
+    a "Pick an Operation On how stacks work"
+  File "game/chapters/chapter_4.rpy", line 175, in script call
+    a "Pick an Operation On how stacks work"
+  File "game/chapters/chapter_4.rpy", line 150, in script
+    hide screen stack_operations
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1974, in execute
+    self.call("execute")
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1953, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\statements.py", line 374, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 682, in execute_hide_screen
+    renpy.hide_screen(name, layer=layer)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 1457, in hide_screen
+    sls.remove(layer, screen.tag, prefix="hide" if not immediately else None)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\scenelists.py", line 597, in remove
+    self.hide_or_replace(layer, remove_index, prefix)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\scenelists.py", line 503, in hide_or_replace
+    if not oldsle.displayable._handles_event(prefix):
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 533, in _handles_event
+    self.update()
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 697, in update
+    self.screen.function(**self.scope)
+  File "game/chapters/chapter_4.rpy", line 177, in execute
+    screen stack_operations:
+  File "game/chapters/chapter_4.rpy", line 177, in execute
+    screen stack_operations:
+  File "game/chapters/chapter_4.rpy", line 178, in execute
+    frame:
+  File "game/chapters/chapter_4.rpy", line 184, in execute
+    vbox:
+  File "game/chapters/chapter_4.rpy", line 189, in execute
+    hbox:
+  File "game/chapters/chapter_4.rpy", line 208, in execute
+    textbutton "Peek()":
+  File "game/chapters/chapter_4.rpy", line 208, in keywords
+    textbutton "Peek()":
+  File "game/chapters/chapter_4.rpy", line 209, in <module>
+    action call("ch_4_peek")
+NameError: name 'call' is not defined
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
-Interactive Learning : Database And Algorithms 1.0
-Sat Jun 14 18:23:16 2025
+Interactive Learning : DataStructures And Algorithms 1.0
+Mon Aug  4 18:34:12 2025

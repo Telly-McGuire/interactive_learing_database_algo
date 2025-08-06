@@ -1,0 +1,17 @@
+Chapter 1 script
+
+Chapter 2 script
+
+Chapter 3 script
+• Linked Lists
+Properties
+* Test 1
+• Item Insertion and
+Deletion
+* Test 2
+• Building Linked Lists
+Linked Lists as ADT’s
+* Test 3
+• Doubly Linked Lists
+* Test 4
+* Story

@@ -1,11 +1,19 @@
 screen chapter_2_introscreen:
-    vbox:
-        spacing 20
+    frame:
         xalign 0.5
-        yalign 0.5
-        text "Chapter 2: Arrays" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+        yalign 0.5  
+        xpadding 60
+        ypadding 60
+        vbox:
+            spacing 20
+            xalign 0.5
+            yalign 0.5
+            text "Chapter 2: Arrays" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 label chapter_2_intro:
+    play sound "sfx/start.mp3"
+    stop music fadeout 1.0
+    
     show black
     pause 1.0
     show screen chapter_2_introscreen
@@ -13,21 +21,32 @@ label chapter_2_intro:
     scene mt tree with dissolve
     pause 1.0
     hide screen chapter_2_introscreen
+    play music "bgm/city-high-life.mp3" fadein 0.5
     show adrian normal at center:
         smaller
     with dissolve
 
-    if persistent.chapter_2:
-        a "Welcome Back"
-        a "Would you like skip to the Quizzes?"
+    if persistent.chapter_2 == True:
+        a "Welcome Back to Chapter 2"
+        a "What would you like to do?"
         menu:
-            "Yes":
-                jump chapter_2_quiz1
-            "no":
+            "Start from the beginning":
                 pass
+            "Would you like to take the quizzes?":
+                jump chapter_2_quiz1
+            "Would you like to review the chapter?":
+                menu:
+                    "Basics of Arrays":
+                        jump chapter_2_basics
+                    "How arrays can be used":
+                        jump chapter_2_examples
+                    "Array Operations":
+                        jump chapter_2_add  
+
+                                        
     else:
         pass
-
+    show screen menu_btn
     a "Welcome to Chapter 2"
     a "In this chapter, we will be learning about arrays"
     a "What is an array?"
@@ -46,6 +65,7 @@ label chapter_2_intro:
 
 define d = Character("Dog", color="#FF0000")
 label chapter_2_puppy:
+    stop music
     play sound "sfx/puppy.mp3"
     show adrian confused at left
     with move 
@@ -67,9 +87,11 @@ label chapter_2_puppy:
     with moveoutright
     pause 1.0
     a "Okay"
-
+    
+    play music "bgm/city-high-life.mp3" fadein 0.5
     jump chapter_2_basics
 
+# Basics of Arrays
 label chapter_2_basics:
     show adrian smiling at center:
         smaller
@@ -145,12 +167,17 @@ label chapter_2_basics:
                     renpy.say("adrian", str(row))
         "Skip creating a 2D array":
             a "Alright, let's move on!"
+
+    window hide dissolve      
     show black with dissolve
+    
     pause 1.0
     show screen array_advantages
     pause 2.0
     hide screen array_advantages
     hide black with dissolve
+    window show dissolve
+    window auto
 
     show adrian smiling
     a "Advantages of using arrays include:"
@@ -175,7 +202,7 @@ screen array_advantages:
         yalign 0.5
         text "Advantages & Disadvantages of Arrays" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
-
+#How arrays can be used
 label chapter_2_examples:
     
     show adrian normal at center:
@@ -184,36 +211,43 @@ label chapter_2_examples:
     a "Let's look at some examples of how arrays can be used in programming"
     a "Arrays can be used to store a list of items, such as a list of numbers, names, or any other type of data"
     
-    show adrian explaining
+    show adrian explaining at left
+    with move
+    show arrex at Position(xpos=0.7, ypos=0.6) 
+    with dissolve
     a "For example, we can use an array to store a list of numbers"
-    python:
-        numbers1 = [1, 2, 3, 4, 5]
-        renpy.say("adrian", f"Here's an array of numbers: {numbers1}")
+    $ numbers1 = [1, 2, 3, 4, 5]
+    a "Here's an array of numbers: [numbers1]"
 
     a "We can access the elements of the array using their index"
-    python:
-        for i in range(len(numbers1)):
-            renpy.say("adrian", f"Element at index {i} is {numbers1[i]}")
-            
+    $ i = 0
+    while i < len(numbers1):
+        a "Element at index [i] is [numbers1[i]]"
+        $ i += 1
+
+    hide arrex
+    with dissolve
+    show adrian explaining at center
+    with move
     a "We can also use arrays to store a list of names"
-    python:
-        names1 = ["Alice", "Bob", "Charlie"]
-        renpy.say("adrian", f"Here's an array of names: {names1}")
+    $ names1 = ["Alice", "Bob", "Charlie"]
+    a "Here's an array of names: [names1]"
 
     a "We can access the elements of the array using their index"
-    python:
-        for i in range(len(names1)):
-            renpy.say("adrian", f"Element at index {i} is {names1[i]}")
+    $ i = 0
+    while i < len(names1):
+        a "Element at index [i] is [names1[i]]"
+        $ i += 1
 
     a "Arrays can also be used to store a list of objects, such as a list of players in a game"
-    python:
-        players = ["Player1", "Player2", "Player3"]
-        renpy.say("adrian", f"Here's an array of players: {players}")
+    $ players = ["Player1", "Player2", "Player3"]
+    a "Here's an array of players: [players]"
 
     a "We can access the elements of the array using their index"
-    python:
-        for i in range(len(players)):
-            renpy.say("adrian", f"Element at index {i} is {players[i]}")
+    $ i = 0
+    while i < len(players):
+        a "Element at index [i] is [players[i]]"
+        $ i += 1
 
     show adrian smiling
     play sound "sfx/bell.mp3"
@@ -222,6 +256,9 @@ label chapter_2_examples:
     jump chapter_2_quiz1
 
 label chapter_2_quiz1:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     $ chapter_2_questions = 0
     show adrian smug
     a "Lets see if you have learned anything"
@@ -334,6 +371,10 @@ label chapter_2_quiz1:
         "An array with only one element":
             show adrian doubt
             a "Incorrect! That is just a single-element array."
+        
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
 
     a "Your score is : [chapter_2_questions]"
 
@@ -355,37 +396,54 @@ screen ch2explode:
         yalign 0.5
         text "Array Operations!!!!" size 150 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
+# Array Operations
 label chapter_2_add:
     
     show adrian smiling
     a "Ok lets see how arrays work"
 
+    window hide
     show black 
     show screen ch2explode 
     play sound "sfx/explode.mp3"
     pause 0.8
     hide black
     hide screen ch2explode
-    
+    window show
+    window auto
     a "Array Operations"
     a "Lets see how we can add in an empty array"
 
-    show adrian explaining
+    show adrian explaining at left 
+    with move
+
+    show arr1 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Let's create an empty array and add elements to it step by step."
 
     #adding
     a "Step 1: We start with an empty array. Imagine you have no boxes yet."
     a "Empty array: [[]"
 
+    hide arr1
+    show arr2 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Step 2: Let's add the number 10 to our array."
     a "Now the array looks like this: [[10]"
 
+    hide arr2
+    show arr3 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Step 3: Let's add the number 20."
     a "Now the array is: [[10, 20]"
 
+    hide arr3
+    show arr4 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Step 4: Let's add the number 30."
     a "Now the array is: [[10, 20, 30]"
 
+    
     show adrian smiling
     a "You can keep adding more elements to the array, just like putting more things into boxes!"
 
@@ -393,32 +451,82 @@ label chapter_2_add:
     show adrian normal
     a "Let's try insert"
     a "Suppose we have our array: [[10, 20, 30]"
+    hide arr4
+    show arr5 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Let's insert the number 15 at index {b}1{/b}."
-    
-    a "To do this, we move the elements after index {b}1{/b} one position to the right."
+    a "To do this, we move the elements after index {b}1{/b} one position down."
+
+    hide arr5
+    show arr6 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "So, 20 moves to index 2, and 30 moves to index 3."
+
+    hide arr6
+    show arr7 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Now we put 15 at index {b}1{/b}."
     a "After inserting 15 at index 1: [[10, 15, 20, 30]"
     a "We just moved the whole section so that we can insert 15"
 
+ 
     #removing
     show adrian explaining
     a "Let's try removing"
     a "Suppose we have our array: [[10, 15, 20, 30]"
+    hide arr7
+    show arr8 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "Let's remove the element at index {b}2{/b}."
+
+    hide arr8
+    show arr9 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "That means we remove 20."
-    a "After removing, the array is: [[10, 15, 30]"    
+
+    hide arr9
+    show arr10 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
+    a "After removing, the array is: [[10, 15, 30]" 
+
+    hide arr10
+    show adrian smiling at center 
+    with move
+    a "Neat Right?"
+    menu:
+        "Yeah":
+            show adrian happy
+            a "Lmao"
+        "No":
+            show adrian nocomment
+            a "Oh Ok"
     
-    show adrian smiling
+    show adrian smiling at left 
+    with move
     a "Here are some common functions you can do with arrays:"
+
+    show arr11 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "{b}append{/b}: Adds an element to the end of the array."
+
+    hide arr11
+    show arr12 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "{b}insert{/b}: Inserts an element at a specific index."
     a "{b}remove{/b}: Removes the first occurrence of a value."
-    a "For example, if you have array = [[1, 2, 3, 2] and you do array.remove(2), the array becomes [[1, 3, 2]."
+
+    hide arr12
+
+    show arr13 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
+    a "For example, if you have array = [[10, 15, 20, 30 ] and you do array.remove(1), the array becomes [[10, 15, 30]."
 
     show adrian normal
     a "{b}NOTE:{/b} It removed based off the {size=+20}index{/size} not the value "
     
+    hide arr13
+    show arr14 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     show adrian explaining
     a "{b}pop{/b}: Removes and returns the element at a given index."
     a "If no index is specified, pop() removes and returns the last item in the list."
@@ -427,8 +535,15 @@ label chapter_2_add:
     a "{b}index{/b}: Returns the index of the first occurrence of a value."
     a "{b}count{/b}: Counts how many times a value appears in the array."
     a "{b}sort{/b}: Sorts the array."
+
+    hide arr14
+    show arr15 at Position(xpos=0.7, ypos=0.75)
+    with dissolve
     a "{b}reverse{/b}: Reverses the order of the array."
-    show adrian happy
+    show adrian happy at center
+    with move
+    
+    hide arr15 with dissolve
     a "These functions help you manage and work with arrays easily!"
 
     show adrian normal
@@ -455,12 +570,15 @@ label chapter_2_add:
             a "Good job!"
        
     show adrian smiling
+    stop music
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
 
     jump chapter_2_quiz2
 
 label chapter_2_quiz2:
+
+    play music "bgm/better-answer.mp3" fadein 0.5
     a "Lets see what you have learned"
 
     show adrian normal
@@ -559,6 +677,9 @@ label chapter_2_quiz2:
             "No":
                 pass
 
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
     jump chapter_2_extra
 
 label chapter_2_extra:
@@ -566,13 +687,11 @@ label chapter_2_extra:
 
 ## add more flavour text
 label chapter_2_restart:
-
-    a "Your score of [chapter_2_questions] will tell how hard your quiz will be"
     if chapter_2_questions >= 8:
         show adrian smiling
         jump chapter_2_quizmed
 
-    elif chapter_1_questions >= 5:
+    if chapter_2_questions >= 4:
         show adrian blush
         jump chapter_2_quizeasy
 
@@ -585,7 +704,7 @@ label chapter_2_quizeasy:
     $ chapter_2_score = 0
 
     show adrian normal
-    a "Welcome to The {size=+20}Easy Chapter Quiz{/size}"
+    a "Welcome to The Chapter Quiz"
 
     a "Question 1: True or False: An array can store more than one value."
     menu:
@@ -650,7 +769,7 @@ label chapter_2_quizeasy:
         "arr[[1]":
             show adrian mad
             a "Incorrect! That is the second element."
-        "arr{0}":
+        "arr{{0}":
             show adrian doubt
             a "Incorrect! Use square brackets."
 
@@ -660,14 +779,14 @@ label chapter_2_quizeasy:
             show adrian mad
             a "Incorrect! Arrays use brackets."
        
-        "{1, 2, 3}":
+        "{{1, 2, 3}":
             show adrian confused
             a "Incorrect! That's not array syntax."
         "[[1, 2, 3]":
             $ chapter_2_score += 1
             show adrian happy
             a "Correct! That's a valid array."
-        "(1, 2, 3)":
+        "((1, 2, 3)":
             show adrian doubt
             a "Incorrect! That's a tuple, not an array."
 
@@ -719,14 +838,17 @@ label chapter_2_quizeasy:
             show adrian confused
             a "Incorrect! insert() adds at a specific index."
 
-        a "Your quiz score is: [chapter_2_score]"
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Your quiz score is: [chapter_2_score]"
     jump chapter_2_ending
 label chapter_2_quizmed:
     
     $ chapter_2_score = 0
 
     show adrian normal
-    a "Welcome to The {size=+20}Medium Chapter Quiz{/size}"
+    a "Welcome to The Chapter Quiz"
 
     # True or False Questions (8)
     a "Question 1: True or False: Arrays can store both numbers and strings in the same array."
@@ -974,6 +1096,9 @@ label chapter_2_quizmed:
         show adrian mad
         a "Incorrect! The answer is count()."
 
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_2_score]"
     jump chapter_2_ending
 
@@ -983,7 +1108,7 @@ label chapter_2_quizhard:
     $ chapter_2_score = 0
 
     show adrian normal
-    a "Welcome to The {size=+20}Medium Chapter Quiz{/size}"
+    a "Welcome to The Chapter Quiz"
 
     # True or False Questions (8)
     show adrian normal
@@ -1354,15 +1479,17 @@ label chapter_2_quizhard:
         show adrian mad
         a "Incorrect! The answer is 2."
 
-
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_2_score]"
     a "{size=+20} OMG Yaaaay!!!"
 
     jump chapter_2_ending
     
 
-label chapter_2_ending:
-    a "Your Score is [chapter_2_score]!"
+label chapter_2_ending:    
+    $ persistent.chapter_2 = True
     a "Would You like to test again?"
     menu:
         "Yes":
@@ -1371,7 +1498,7 @@ label chapter_2_ending:
             pass
     show adrian happy
     a "You have finished chapter 2. You can continue to Chapter 3!"
+    $ renpy.force_autosave()
     jump menu
     
     
-    $ persistent.chapter_2 = True
