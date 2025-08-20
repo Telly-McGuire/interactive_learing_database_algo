@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chapters/chapter_4.rpy", line 186: screen expects a non-empty block.
-    screen ch_3_pop:
-                    ^
-
-File "game/chapters/chapter_4.rpy", line 188: screen expects a non-empty block.
-    screen ch_3_peek:
-                     ^
+File "game/script.rpy", line 62: expected statement.
+    defaul chapter_1_score = 0
+                           ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Mon Aug  4 15:44:31 2025
+Wed Aug 20 15:08:56 2025

@@ -1,82 +1,46 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_4.rpy", line 175, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 175, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 175, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 150, in script
-    hide screen stack_operations
-  File "renpy/common/000statements.rpy", line 682, in execute_hide_screen
-    renpy.hide_screen(name, layer=layer)
-  File "game/chapters/chapter_4.rpy", line 177, in execute
-    screen stack_operations:
-  File "game/chapters/chapter_4.rpy", line 177, in execute
-    screen stack_operations:
-  File "game/chapters/chapter_4.rpy", line 178, in execute
-    frame:
-  File "game/chapters/chapter_4.rpy", line 184, in execute
-    vbox:
-  File "game/chapters/chapter_4.rpy", line 189, in execute
-    hbox:
-  File "game/chapters/chapter_4.rpy", line 208, in execute
-    textbutton "Peek()":
-  File "game/chapters/chapter_4.rpy", line 208, in keywords
-    textbutton "Peek()":
-  File "game/chapters/chapter_4.rpy", line 209, in <module>
-    action call("ch_4_peek")
-NameError: name 'call' is not defined
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 742, in script call
+    a "Queues are used in various applications, such as scheduling tasks and managing resources."
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 759, in script
+    jump chapter_4_quiz_easy
+ScriptError: could not find label 'chapter_4_quiz_easy'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_4.rpy", line 175, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 175, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 175, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 150, in script
-    hide screen stack_operations
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1974, in execute
-    self.call("execute")
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1953, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\statements.py", line 374, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 682, in execute_hide_screen
-    renpy.hide_screen(name, layer=layer)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 1457, in hide_screen
-    sls.remove(layer, screen.tag, prefix="hide" if not immediately else None)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\scenelists.py", line 597, in remove
-    self.hide_or_replace(layer, remove_index, prefix)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\scenelists.py", line 503, in hide_or_replace
-    if not oldsle.displayable._handles_event(prefix):
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 533, in _handles_event
-    self.update()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 697, in update
-    self.screen.function(**self.scope)
-  File "game/chapters/chapter_4.rpy", line 177, in execute
-    screen stack_operations:
-  File "game/chapters/chapter_4.rpy", line 177, in execute
-    screen stack_operations:
-  File "game/chapters/chapter_4.rpy", line 178, in execute
-    frame:
-  File "game/chapters/chapter_4.rpy", line 184, in execute
-    vbox:
-  File "game/chapters/chapter_4.rpy", line 189, in execute
-    hbox:
-  File "game/chapters/chapter_4.rpy", line 208, in execute
-    textbutton "Peek()":
-  File "game/chapters/chapter_4.rpy", line 208, in keywords
-    textbutton "Peek()":
-  File "game/chapters/chapter_4.rpy", line 209, in <module>
-    action call("ch_4_peek")
-NameError: name 'call' is not defined
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 742, in script call
+    a "Queues are used in various applications, such as scheduling tasks and managing resources."
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 707, in script call
+    a "Just press the button to see how queues work"
+  File "game/chapters/chapter_4.rpy", line 759, in script
+    jump chapter_4_quiz_easy
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1699, in execute
+    rv = renpy.game.script.lookup(target)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'chapter_4_quiz_easy'.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Mon Aug  4 18:34:12 2025
+Mon Aug 11 18:31:16 2025

@@ -320,6 +320,8 @@ label chapter_3_linked_list_properties:
     jump ch3_quiz1
 
 label ch3_quiz1:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
     
     $ chapter_3_test = 0
 
@@ -404,7 +406,7 @@ label ch3_quiz1:
     jump chapter_3_linked_list_operation
 
 label chapter_3_linked_list_operation:
-
+    play music "bgm/city-high-life.mp3" fadein 1.0
     show screen chapter_3_Operations
     with fade
     pause 1.0
@@ -515,6 +517,8 @@ label chapter_3_linked_list_remove:
     jump ch3_quiz2
 
 label ch3_quiz2:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
 
     a "Now lets test your knowledge"
  
@@ -593,6 +597,7 @@ label ch3_quiz2:
 
 
 label chapter_3_problems_with_linked_list:
+    play music "bgm/city-high-life.mp3" fadein 1.0
     show screen chapter_3_Problems
     with fade
     pause 1.0
@@ -2353,6 +2358,7 @@ label chapter_3_quiz_hard:
     a "Your quiz score is: [chapter_3_score]"
 
 label chapter_3_ending:
+    play music "bgm/city-high-life.mp3" fadein 1.0
     $ persistent.chapter_3 = True
     a "Would You like to test again?"
     menu:
@@ -2361,7 +2367,7 @@ label chapter_3_ending:
         "No":
             pass
     show adrian happy
-    a "You have finished chapter 2. You can continue to Chapter 3!"
+    a "You have finished chapter 3. You can continue to Chapter 4!"
     jump menu
     
 
