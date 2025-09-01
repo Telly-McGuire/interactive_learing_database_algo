@@ -230,7 +230,11 @@ label chapter_4_stack_operations:
     with dissolve
     show adrian explaining
     a "Stacks are used in various applications, such as function calls, expression evaluation, and backtracking algorithms."
-    a "Now, let's move on to the next topic: Stack Applic-"
+    show adrian normal
+    a "Lets try a minigame"
+    
+    jump stack_minigame
+    
     show adrian smiling
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"

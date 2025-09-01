@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 62: expected statement.
-    defaul chapter_1_score = 0
-                           ^
+File "game/chapters/Minigame/stack1.rpy", line 88: keyword argument 'xalign' is incompatible with 'xpos'.
+    xalign 0.05 yalign 0.05
+          ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Wed Aug 20 15:08:56 2025
+Mon Sep  1 19:49:51 2025

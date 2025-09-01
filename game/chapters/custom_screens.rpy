@@ -45,7 +45,12 @@ screen menu_btn:
         xoffset -30
         yoffset 30
         auto "UI/btn_menu_%s.png"
-        action ShowMenu("warn")
+        action Call("warn_handler")
+
+label warn_handler:
+    call screen warn
+    return
+
 
 screen warn:
     frame:
@@ -64,14 +69,14 @@ screen warn:
                     textbutton "Yes":
                         text_color "#00BFFF"
                         text_hover_color "#FFD700"
-                        action [Jump("menu"), Hide ("menu_btn")]
+                        action [Hide("warn"), Jump("menu")]
                         text_size 28
                         
                 vbox:
                     textbutton "No":
                         text_color "#00BFFF"
                         text_hover_color "#FFD700"
-                        action Return()
+                        action [Return(), Hide("warn")]
                         text_size 28
 
 

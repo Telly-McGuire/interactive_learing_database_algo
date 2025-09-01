@@ -66,7 +66,7 @@ default chapter_4_score = 0
 label start:
     $ persistent.menu = False
     if persistent.menu == False:
-        call user_info
+        call database_user_info
     else:
         pass
 

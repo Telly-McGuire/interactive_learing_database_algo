@@ -1,10 +1,12 @@
 
 label menu:
-    show black 
+    call screen menu_screen
+    show black
     with dissolve
     pause 0.5
     play music "bgm/menu.mp3"
-    call screen menu_screen
+    call hideall
+    
     return
 
 screen menu_screen:
