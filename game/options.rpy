@@ -40,7 +40,7 @@ Educational Program to teach a College Course
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Interactive Learning : DataStructures And Algorithms"
+define build.name = "Interactive Learning : Data-Structures And Algorithms"
 
 
 ## Sounds and music ############################################################
@@ -65,7 +65,7 @@ define config.has_voice = True
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-define config.main_menu_music = "bgm/main-menu-theme-slow.mp3"
+define config.main_menu_music = "bgm/main-menu-theme-retro.mp3"
 
 
 ## Transitions #################################################################
@@ -146,7 +146,7 @@ default preferences.afm_time = 15
 ## This generally should not be changed, and if it is, should always be a
 ## literal string, not an expression.
 
-define config.save_directory = "Interactive Learning DataStructures And Algorithms-1746598181"
+define config.save_directory = "Interactive Learning : Data-Structures And Algorithms-1746598181"
 
 
 ## Icon ########################################################################

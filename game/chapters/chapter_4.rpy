@@ -51,8 +51,7 @@ screen StackQueues:
                 yalign 0.5
                 text "STACKS" size 60 color "#00ff40" outlines [(5, "#000000", 0, 0)]
                 text "How Stack Works" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
-                text "Application" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]                
-                text "Stack Properties & Heap Memory" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+                text "Application, Properties & Heap Memory" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]                
                 text "Stack and Recursion" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
             vbox:
                 spacing 20
@@ -60,8 +59,6 @@ screen StackQueues:
                 yalign 0.5
                 text "QUEUES" size 60 color "#00ff40" outlines [(5, "#000000", 0, 0)]
                 text "How Queue Works" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
-                text "Queue Operation" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
-                text "Queue Application" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 
 label chapter_4_intro:
@@ -82,6 +79,28 @@ label chapter_4_intro:
     show adrian smiling at center:
         smaller 
 
+    if persistent.chapter_4 == True:
+        a "Hi welcome back to chapter 4"
+        a "are you sure you want to go through this chapter again?"
+        menu:
+            "Yes":
+                a "Pick which You Want to Review"
+                menu:
+                    "Stacks":
+                        menu:
+                            "How Stack Works":
+                                jump chapter_4_how_stack_works
+                            "Stack Application, Properties, & Heap Memory":
+                                jump chapter_4_stack_operations
+                            "Stack and Recursion":
+                                jump chapter_4_stack_and_recursion
+                    "Queues":
+                        menu:
+                            "How Queue Works":
+                                jump chapter_4_queues
+
+            "No":
+                jump menu
     show screen menu_btn
     a "Welcome to chapter 4: {size=+20}{b}Stacks & Queues{/b}"
     a "We will be tackling:"
@@ -232,7 +251,7 @@ label chapter_4_stack_operations:
     a "Stacks are used in various applications, such as function calls, expression evaluation, and backtracking algorithms."
     show adrian normal
     a "Lets try a minigame"
-    
+
     jump stack_minigame
     
     show adrian smiling
@@ -755,7 +774,8 @@ label chapter_4_queues_vid:
     
 
 
-    show adrian normal
+    show adrian normal 
+    stop music fadeout 0.5
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
 

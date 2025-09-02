@@ -151,6 +151,25 @@ screen menu_screen_4:
             auto "back_%s"
             action [Hide("menu_screen_4"), Show("menu_screen_3")]
 
+        vbox:
+            yalign 0.5
+            frame:
+                yalign 0.5
+                ypadding 20
+                xpadding 20
+                textbutton "Stack Minigame":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action Jump("stack_minigame2")
+            frame:
+                yalign 0.5
+                ypadding 20
+                xpadding 20
+                textbutton "Stack Minigame":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action Jump("stack_minigame3")
+
         # imagebutton:
         #     auto "chapter_10_%s"
         #     action Jump("chapter_4_intro")

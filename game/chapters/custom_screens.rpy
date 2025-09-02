@@ -12,24 +12,37 @@ screen StatsUI:
         xpadding 200
         ypadding 200
 
-        hbox:
-            spacing 80
+        vbox:
+            spacing 40
+            xalign 0.5
+            yalign 0.1
 
-            vbox:
-                spacing 40
-                text "SCORES" size 40
-                text "Chapter 1: Abstract Data Structures" size 40
-                text "Chapter 2: Arrays" size 40
-                text "Chapter 3: Linked List" size 40
-                text "Chapter 4: Stacks & Ques"
-            
-            vbox:
-                spacing 45
-                text ""
-                text "[chapter_1_score]" size 40
-                text "[chapter_2_score]" size 40
-                text "[chapter_3_score]" size 40
-                text "[chapter_4_score]" size 40
+            hbox:
+                spacing 80
+
+                vbox:
+                    spacing 40
+                    text "SCORES" size 40
+                    text "Chapter 1: Abstract Data Structures" size 40
+                    text "Chapter 2: Arrays" size 40
+                    text "Chapter 3: Linked List" size 40
+                    text "Chapter 4: Stacks & Ques"
+                
+                vbox:
+                    spacing 45
+                    text ""
+                    text "[chapter_1_score]" size 40
+                    text "[chapter_2_score]" size 40
+                    text "[chapter_3_score]" size 40
+                    text "[chapter_4_score]" size 40
+
+            frame:
+                xalign 0.5
+                textbutton "Submit Scores":    
+                    text_size 28
+                    action[Call("")]
+
+
     imagebutton:
         xalign 1.0
         yalign 0.0

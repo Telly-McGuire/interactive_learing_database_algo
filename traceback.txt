@@ -1,34 +1,32 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_4.rpy", line 653, in script call
-    a "Queues are another fundamental data structure that follows the First In, First Out (FIFO) principle."
-  File "game/chapters/chapter_4.rpy", line 234, in script call
-    call stack_minigame
-  File "game/chapters/chapter_4.rpy", line 653, in script call
-    a "Queues are another fundamental data structure that follows the First In, First Out (FIFO) principle."
-  File "game/chapters/chapter_4.rpy", line 234, in script call
-    call stack_minigame
-ScriptError: could not find label 'stack_minigame'.
+  File "game/chapters/chapter_4.rpy", line 649, in script call
+    a "Now, let's move on to the next topic: {b}Queues{/b}"
+  File "game/chapters/Minigame/stack3.rpy", line 231, in script
+    if item == correct_pattern:
+  File "game/chapters/Minigame/stack3.rpy", line 231, in <module>
+    if item == correct_pattern:
+NameError: name 'item' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_4.rpy", line 653, in script call
-    a "Queues are another fundamental data structure that follows the First In, First Out (FIFO) principle."
-  File "game/chapters/chapter_4.rpy", line 234, in script call
-    call stack_minigame
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1414, in execute
-    rv = renpy.game.context().call(label, return_site=self.next.name)
-  File "game/chapters/chapter_4.rpy", line 653, in script call
-    a "Queues are another fundamental data structure that follows the First In, First Out (FIFO) principle."
-  File "game/chapters/chapter_4.rpy", line 234, in script call
-    call stack_minigame
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'stack_minigame'.
+  File "game/chapters/chapter_4.rpy", line 649, in script call
+    a "Now, let's move on to the next topic: {b}Queues{/b}"
+  File "game/chapters/Minigame/stack3.rpy", line 231, in script
+    if item == correct_pattern:
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1843, in execute
+    if renpy.python.py_eval(condition):
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1209, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/chapters/Minigame/stack3.rpy", line 231, in <module>
+    if item == correct_pattern:
+NameError: name 'item' is not defined
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Mon Sep  1 19:41:01 2025
+Tue Sep  2 16:55:16 2025

@@ -1,8 +1,6 @@
-
-
 init python:
     store.stack_items     = []
-    store.correct_pattern = ["21", "19", "12"]
+    store.correct_pattern = ["18", "30", "3", "17", "45"]
     store.stack_status    = "Waiting..."
 
     def handle_stack_drag(drags, drop):
@@ -78,7 +76,7 @@ init python:
         store.stack_items.clear()
         store.stack_status = "Waiting..."
 
-screen stack_demo():
+screen stack_demo2():
     add "bg_blank"
     modal True
     tag stack_demo
@@ -89,12 +87,12 @@ screen stack_demo():
         xalign 0.06 yalign 0.09
 
         frame:
-            xsize 350 ysize 150
+            xsize 500 ysize 150
             xpadding 40 ypadding 40
             text "Status: [store.stack_status]" color "#fff"
 
         frame:
-            xsize 350 ysize 80
+            xsize 500 ysize 80
             xpadding 15 ypadding 15
             text "Pattern: [', '.join(store.correct_pattern)]" color "#fff"
 
@@ -107,7 +105,7 @@ screen stack_demo():
                 
             textbutton "Done":
                 xalign 0.5 yalign 0.95
-                action [Hide("stack_demo"), Jump("after_stack_demo")]
+                action [Hide("stack_demo2"), Jump("after_stack_demo2")]
 
 
 
@@ -132,45 +130,78 @@ screen stack_demo():
                     for item in reversed(store.stack_items):
                         text item color "#fff"
 
-        # Draggable “21”
         drag:
-            xpos 0.4 ypos 0.2
-            drag_name "21"
+            xpos 0.57 ypos 0.2
+            drag_name "18"
             draggable True
             dragged handle_stack_drag
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
-                text "{size=+20}21":
+                text "{size=+20}18":
                     xalign 0.5
                     yalign 0.5
 
-        # Draggable “19”
         drag:
             xpos 0.4 ypos 0.45
-            drag_name "19"
+            drag_name "30"
             draggable True
             dragged handle_stack_drag
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
-                text "{size=+20}19":
+                text "{size=+20}30":
                     xalign 0.5
                     yalign 0.5
 
-        # Draggable “12”
         drag:
-            xpos 0.7 ypos 0.5
-            drag_name "12"
+            xpos 0.8 ypos 0.4
+            drag_name "3"
             draggable True
             dragged handle_stack_drag
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
-                text "{size=+20}12":
+                text "{size=+20}3":
                     xalign 0.5
                     yalign 0.5
 
+        drag:
+            xpos 0.4 ypos 0.2
+            drag_name "7"
+            draggable True
+            dragged handle_stack_drag
+            frame:
+                xsize 200 ysize 150
+                xpadding 10 ypadding 10
+                text "{size=+20}7":
+                    xalign 0.5
+                    yalign 0.5
+
+        drag:
+            xpos 0.7 ypos 0.2
+            drag_name "17"
+            draggable True
+            dragged handle_stack_drag
+            frame:
+                xsize 200 ysize 150
+                xpadding 10 ypadding 10
+                text "{size=+20}17":
+                    xalign 0.5
+                    yalign 0.5
+
+
+        drag:
+            xpos 0.65 ypos 0.4
+            drag_name "45"
+            draggable True
+            dragged handle_stack_drag
+            frame:
+                xsize 200 ysize 150
+                xpadding 10 ypadding 10
+                text "{size=+20}45":
+                    xalign 0.5
+                    yalign 0.5
 
         # Pop Zone (right)
         drag:
@@ -188,15 +219,15 @@ screen stack_demo():
                     if store.stack_items:
                         text "Top: [store.stack_items[-1]]" color "#fff"
 
-label stack_minigame:
-
-    a "Form the stack 21 → 19 → 12 by pushing, and pop from the right."
+label stack_minigame2:
+    window hide
+    show screen stack_demo2
+    a "Form the stack 18 → 30 → 3 → 17 → 45  by pushing, and pop from the right."
     
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
 
-    window hide
-    show screen stack_demo
+    
     window hide
     a "Now, let's switch gears and explore how stacks work."
     a "A stack processes items in reverse order — last in, first out."
@@ -231,13 +262,11 @@ label stack_minigame:
     a "So whether you're coding, designing, or narrating, stacks offer a clean way to manage complexity."
 
 
-label after_stack_demo:
-    $ persistent.stack_completed = True
+label after_stack_demo2:
     window show
     show adrian smiling
     play sound "sfx/success.mp3"
     play music "bgm/city-high-life.mp3" fadein 1.0
     a "Great job! You've completed the stack exercise."
     show adrian normal
-    a "Let's continue our adventure."
-    return
+    jump menu

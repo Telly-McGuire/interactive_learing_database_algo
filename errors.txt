@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chapters/Minigame/stack1.rpy", line 88: keyword argument 'xalign' is incompatible with 'xpos'.
-    xalign 0.05 yalign 0.05
-          ^
+File "game/chapters/custom_screens.rpy", line 35: textbutton expects a non-empty block.
+    textbutton "Submit Scores":
+                               ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Mon Sep  1 19:49:51 2025
+Tue Sep  2 16:32:08 2025

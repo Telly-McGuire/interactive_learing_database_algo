@@ -1,8 +1,16 @@
-
-
 init python:
+    import random
+
+    def generate_random_pattern():
+        return random.sample([str(i) for i in range(1, 51)], 5)
+    
+    def get_shuffled_drag_items():
+        items = list(store.correct_pattern) + ["7", "99", "0"]
+        random.shuffle(items)
+        return items
+
     store.stack_items     = []
-    store.correct_pattern = ["21", "19", "12"]
+    store.correct_pattern = generate_random_pattern()
     store.stack_status    = "Waiting..."
 
     def handle_stack_drag(drags, drop):
@@ -22,7 +30,7 @@ init python:
 
         # Ignore non-stack zones
         if drop.drag_name not in ["stack_zone", "pop_zone"]:
-            return fals
+            return False
 
         # Pushing
         if drop.drag_name == "stack_zone":
@@ -76,9 +84,11 @@ init python:
 
     def reset_stack():
         store.stack_items.clear()
+        store.correct_pattern = generate_random_pattern()
+
         store.stack_status = "Waiting..."
 
-screen stack_demo():
+screen stack_demo3():
     add "bg_blank"
     modal True
     tag stack_demo
@@ -89,12 +99,12 @@ screen stack_demo():
         xalign 0.06 yalign 0.09
 
         frame:
-            xsize 350 ysize 150
+            xsize 500 ysize 150
             xpadding 40 ypadding 40
             text "Status: [store.stack_status]" color "#fff"
 
         frame:
-            xsize 350 ysize 80
+            xsize 500 ysize 80
             xpadding 15 ypadding 15
             text "Pattern: [', '.join(store.correct_pattern)]" color "#fff"
 
@@ -107,7 +117,7 @@ screen stack_demo():
                 
             textbutton "Done":
                 xalign 0.5 yalign 0.95
-                action [Hide("stack_demo"), Jump("after_stack_demo")]
+                action [Hide("stack_demo3"), Jump("after_stack_demo3")]
 
 
 
@@ -132,44 +142,19 @@ screen stack_demo():
                     for item in reversed(store.stack_items):
                         text item color "#fff"
 
-        # Draggable “21”
-        drag:
-            xpos 0.4 ypos 0.2
-            drag_name "21"
-            draggable True
-            dragged handle_stack_drag
-            frame:
-                xsize 200 ysize 150
-                xpadding 10 ypadding 10
-                text "{size=+20}21":
-                    xalign 0.5
-                    yalign 0.5
-
-        # Draggable “19”
-        drag:
-            xpos 0.4 ypos 0.45
-            drag_name "19"
-            draggable True
-            dragged handle_stack_drag
-            frame:
-                xsize 200 ysize 150
-                xpadding 10 ypadding 10
-                text "{size=+20}19":
-                    xalign 0.5
-                    yalign 0.5
-
-        # Draggable “12”
-        drag:
-            xpos 0.7 ypos 0.5
-            drag_name "12"
-            draggable True
-            dragged handle_stack_drag
-            frame:
-                xsize 200 ysize 150
-                xpadding 10 ypadding 10
-                text "{size=+20}12":
-                    xalign 0.5
-                    yalign 0.5
+        for i, item in enumerate(store.correct_pattern + ["7", "99", "0"]):  
+            drag:
+                xpos random.uniform(0.2, 0.7)  
+                ypos random.uniform(0.1, 0.5)
+                drag_name item
+                draggable True
+                dragged handle_stack_drag
+                frame:
+                    xsize 200 ysize 150
+                    xpadding 10 ypadding 10
+                    text "{size=+20}[item]":
+                        xalign 0.5
+                        yalign 0.5
 
 
         # Pop Zone (right)
@@ -188,15 +173,19 @@ screen stack_demo():
                     if store.stack_items:
                         text "Top: [store.stack_items[-1]]" color "#fff"
 
-label stack_minigame:
-
-    a "Form the stack 21 → 19 → 12 by pushing, and pop from the right."
-    
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 1.0
+label stack_minigame3:
 
     window hide
-    show screen stack_demo
+    show screen stack_demo3
+
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    $ stack3_rand = " → ".join(store.correct_pattern)
+    a "Form the stack [stack3_rand] by pushing, and pop from the right."
+
+
+
+
     window hide
     a "Now, let's switch gears and explore how stacks work."
     a "A stack processes items in reverse order — last in, first out."
@@ -229,15 +218,20 @@ label stack_minigame:
     a "Stacks can even model emotional states — the last feeling triggered is the first to be resolved."
     a "In storytelling, stacks help manage nested flashbacks or layered plot reveals."
     a "So whether you're coding, designing, or narrating, stacks offer a clean way to manage complexity."
+    
 
 
-label after_stack_demo:
-    $ persistent.stack_completed = True
+label after_stack_demo3:
     window show
+    hide screen stack_demo3
+
     show adrian smiling
     play sound "sfx/success.mp3"
     play music "bgm/city-high-life.mp3" fadein 1.0
-    a "Great job! You've completed the stack exercise."
-    show adrian normal
-    a "Let's continue our adventure."
-    return
+
+    if store.stack_items == store.correct_pattern:
+        a "Nice push! You're stacking like a pro."
+    else:
+        a "Oops! That doesn't belong on the stack."
+
+    jump menu
