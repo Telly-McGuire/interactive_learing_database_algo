@@ -252,7 +252,7 @@ label chapter_4_stack_operations:
     show adrian normal
     a "Lets try a minigame"
 
-    jump stack_minigame
+    call stack_minigame
     
     show adrian smiling
     play sound "sfx/bell.mp3"
@@ -1362,6 +1362,7 @@ label chapter_4_quiz_medium:
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
+    jump chapter_4_ending
     
 label chapter_4_quiz_hard:
     stop music fadeout 0.5
@@ -2104,6 +2105,8 @@ label chapter_4_quiz_hard:
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
+    jump chapter_4_ending
+    
 
 label chapter_4_ending:
     play sound "sfx/success.mp3"
@@ -2112,7 +2115,7 @@ label chapter_4_ending:
     a "Would You like to test again?"
     menu:
         "Yes":
-            jump ch3_restart
+            jump ch4_restart
         "No":
             pass
     show adrian happy

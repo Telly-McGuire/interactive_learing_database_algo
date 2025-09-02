@@ -1,8 +1,8 @@
 
-label ch1_scoreadd:
-    $ chapter_1_score += 1
-    return
 
+label call_stats:
+    call screen StatsUI
+    return
 
 screen StatsUI:
     add "bg_blank"
@@ -58,7 +58,7 @@ screen menu_btn:
         xoffset -30
         yoffset 30
         auto "UI/btn_menu_%s.png"
-        action Call("warn_handler")
+        action [Hide("menu_btn"),Call("warn_handler")]
 
 label warn_handler:
     call screen warn

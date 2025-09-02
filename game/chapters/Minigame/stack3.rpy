@@ -5,13 +5,13 @@ init python:
         return random.sample([str(i) for i in range(1, 51)], 5)
     
     def get_shuffled_drag_items():
-        items = list(store.correct_pattern) + ["7", "99", "0"]
+        items = list(store.correct_pattern3) + ["7", "99", "0"]
         random.shuffle(items)
         return items
 
-    store.stack_items     = []
-    store.correct_pattern = generate_random_pattern()
-    store.stack_status    = "Waiting..."
+    store.stack_items3     = []
+    store.correct_pattern3 = generate_random_pattern()
+    store.stack_status3    = "Waiting..."
 
     def handle_stack_drag(drags, drop):
         if not drop or not drags or len(drags) != 1:
@@ -49,44 +49,44 @@ init python:
         if not drop or drop.drag_name != "stack_zone":
             return False
 
-        idx      = len(store.stack_items)
-        expected = store.correct_pattern[idx] if idx < len(store.correct_pattern) else None
+        idx      = len(store.stack_items3)
+        expected = store.correct_pattern3[idx] if idx < len(store.correct_pattern3) else None
         item     = drags[0].drag_name
 
         if item == expected:
-            store.stack_items.append(item)
-            _update_stack_status()
+            store.stack_items3.append(item)
+            _update_stack_status3()
             return True
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status3 = "❌ Incorrect"
             return False
 
     def pop_from_stack(drags, drop):
-        if not drop or drop.drag_name != "pop_zone" or not store.stack_items:
+        if not drop or drop.drag_name != "pop_zone" or not store.stack_items3:
             return False
 
         item = drags[0].drag_name
-        if store.stack_items[-1] == item:
-            store.stack_items.pop()
-            _update_stack_status()
+        if store.stack_items3[-1] == item:
+            store.stack_items3.pop()
+            _update_stack_status3()
             return True
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status3 = "❌ Incorrect"
             return False
 
-    def _update_stack_status():
-        if store.stack_items == store.correct_pattern:
-            store.stack_status = "✅ Correct!"
-        elif store.correct_pattern[:len(store.stack_items)] == store.stack_items:
-            store.stack_status = "⏳ Incomplete"
+    def _update_stack_status3():
+        if store.stack_items3 == store.correct_pattern3:
+            store.stack_status3 = "✅ Correct!"
+        elif store.correct_pattern3[:len(store.stack_items3)] == store.stack_items3:
+            store.stack_status3 = "⏳ Incomplete"
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status3 = "❌ Incorrect"
 
     def reset_stack():
-        store.stack_items.clear()
-        store.correct_pattern = generate_random_pattern()
+        store.stack_items3.clear()
+        store.correct_pattern3 = generate_random_pattern()
 
-        store.stack_status = "Waiting..."
+        store.stack_status3 = "Waiting..."
 
 screen stack_demo3():
     add "bg_blank"
@@ -101,12 +101,12 @@ screen stack_demo3():
         frame:
             xsize 500 ysize 150
             xpadding 40 ypadding 40
-            text "Status: [store.stack_status]" color "#fff"
+            text "Status: [store.stack_status3]" color "#fff"
 
         frame:
             xsize 500 ysize 80
             xpadding 15 ypadding 15
-            text "Pattern: [', '.join(store.correct_pattern)]" color "#fff"
+            text "Pattern: [', '.join(store.correct_pattern3)]" color "#fff"
 
         hbox:
             spacing 30
@@ -139,10 +139,10 @@ screen stack_demo3():
                     spacing 5
                     text "Push Zone" color "#fff"
                     text "Drag here in order:" color "#ddd"
-                    for item in reversed(store.stack_items):
+                    for item in reversed(store.stack_items3):
                         text item color "#fff"
 
-        for i, item in enumerate(store.correct_pattern + ["7", "99", "0"]):  
+        for i, item in enumerate(store.correct_pattern3 + ["7", "99", "0"]):  
             drag:
                 xpos random.uniform(0.2, 0.7)  
                 ypos random.uniform(0.1, 0.5)
@@ -170,8 +170,8 @@ screen stack_demo3():
                 vbox:
                     spacing 5
                     text "Pop() Zone" color "#fff"
-                    if store.stack_items:
-                        text "Top: [store.stack_items[-1]]" color "#fff"
+                    if store.stack_items3:
+                        text "Top: [store.stack_items3[-1]]" color "#fff"
 
 label stack_minigame3:
 
@@ -180,7 +180,7 @@ label stack_minigame3:
 
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
-    $ stack3_rand = " → ".join(store.correct_pattern)
+    $ stack3_rand = " → ".join(store.correct_pattern3)
     a "Form the stack [stack3_rand] by pushing, and pop from the right."
 
 
@@ -229,7 +229,7 @@ label after_stack_demo3:
     play sound "sfx/success.mp3"
     play music "bgm/city-high-life.mp3" fadein 1.0
 
-    if store.stack_items == store.correct_pattern:
+    if store.stack_items3 == store.correct_pattern3:
         a "Nice push! You're stacking like a pro."
     else:
         a "Oops! That doesn't belong on the stack."

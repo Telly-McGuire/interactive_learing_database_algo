@@ -1,3 +1,12 @@
+screen menu_select_screen
+screen menu_screen
+screen menu_screen_2
+screen menu_screen_3
+screen menu_screen_4
+screen StatsUI
+screen menu_btn
+screen warn
+
 screen chapter_2_introscreen
 screen array_advantages
 screen ch2explode

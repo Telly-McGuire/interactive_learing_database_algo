@@ -1,4 +1,14 @@
 label hideall:
+    hide screen menu_select_screen
+    hide screen menu_screen
+    hide screen menu_screen_2
+    hide screen menu_screen_3
+    hide screen menu_screen_4
+    hide screen StatsUI
+    hide screen menu_btn
+    hide screen warn
+
+
     hide screen chapter_2_introscreen
     hide screen array_advantages
     hide screen ch2explode

@@ -1,24 +1,91 @@
+label menu_select:
+    call hideall
+    scene bg_blank
+    show screen menu_select_screen
+    
+    with dissolve
+    pause 0.5
+    show adrian normal:
+        xalign 0.3
+        smaller
+    play music "bgm/lets-learn.mp3"
+    hide window
+    while True:
+        $ renpy.pause(0.1, hard=True)
 
+
+    
+    return
+
+
+
+#Chapter Menu Thingy
 label menu:
-    call screen menu_screen
+    call hideall
+    scene black
+    show screen menu_screen
     show black
     with dissolve
     pause 0.5
     play music "bgm/menu.mp3"
-    call hideall
-    
+    hide window
+    while True:
+        $ renpy.pause(0.1, hard=True)
+
     return
+
+
+screen menu_select_screen:
+    frame:
+        xalign 0.85
+        yalign 0.2
+        xpadding 50
+        ypadding 50
+        vbox:
+            xalign 0.5
+            spacing 30
+            text "{size=+10}Select":
+                xalign 0.5
+
+            frame:
+                xalign 0.5
+                xpadding 30
+                textbutton "{size=+5}Chapter Select":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action [Jump("menu"), Hide("menu_select_screen")]
+            frame:
+                xalign 0.5
+                xpadding 110
+                textbutton "{size=+5}Scores":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action [Hide("menu_select_screen"), ShowMenu("StatsUI")]
+
+
 
 screen menu_screen:
     add "bg_menu"
-
-    imagebutton:
+    hbox:
         xalign 1.0
-        yalign 0.0
-        xoffset -30
-        yoffset 30
-        auto "UI/stats_%s.png"
-        action ShowMenu("StatsUI")
+        spacing 20
+
+        imagebutton:
+
+            xoffset -30
+            yoffset 30
+            auto "UI/stats_%s.png"
+            action ShowMenu("StatsUI")
+
+        frame:
+            xoffset -30
+            yoffset 30
+            ypadding 20
+            xpadding 20
+            textbutton "Main Menu":
+                text_color "#00BFFF"
+                text_hover_color "#FFD700"
+                action [Jump("menu_select"), Hide("menu_screen")]
 
     hbox:
         xalign 0.5

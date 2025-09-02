@@ -1,82 +1,76 @@
-
-
 init python:
-    store.stack_items     = []
-    store.correct_pattern = ["21", "19", "12"]
-    store.stack_status    = "Waiting..."
+    store.stack_items1     = []
+    store.correct_pattern1 = ["21", "19", "12"]
+    store.stack_status1    = "Waiting..."
 
-    def handle_stack_drag(drags, drop):
+    def handle_stack_drag1(drags, drop):
         if not drop or not drags or len(drags) != 1:
-            return True  # Prevent screen exit
+            return True
 
         drag = drags[0]
 
         if not drop.droppable or not drag.draggable:
-            return True  # Prevent screen exit
+            return True
 
         if drag == drop:
-            return True  # Prevent screen exit
+            return True
 
         if drag.drag_name is None or drop.drag_name is None:
-            return True  # Prevent screen exit
-
-        # Ignore non-stack zones
-        if drop.drag_name not in ["stack_zone", "pop_zone"]:
-            return fals
-
-        # Pushing
-        if drop.drag_name == "stack_zone":
-            push_to_stack([drag], drop)
             return True
 
-        # Popping
-        if drop.drag_name == "pop_zone":
-            pop_from_stack([drag], drop)
-            return True
-
-        return True  # Fallback to prevent screen exit  # Fallback to prevent screen exit
-
-
-    def push_to_stack(drags, drop):
-        if not drop or drop.drag_name != "stack_zone":
+        if drop.drag_name not in ["stack_zone1", "pop_zone1"]:
             return False
 
-        idx      = len(store.stack_items)
-        expected = store.correct_pattern[idx] if idx < len(store.correct_pattern) else None
+        if drop.drag_name == "stack_zone1":
+            push_to_stack1([drag], drop)
+            return True
+
+        if drop.drag_name == "pop_zone1":
+            pop_from_stack1([drag], drop)
+            return True
+
+        return True
+
+    def push_to_stack1(drags, drop):
+        if not drop or drop.drag_name != "stack_zone1":
+            return False
+
+        idx      = len(store.stack_items1)
+        expected = store.correct_pattern1[idx] if idx < len(store.correct_pattern1) else None
         item     = drags[0].drag_name
 
         if item == expected:
-            store.stack_items.append(item)
-            _update_stack_status()
+            store.stack_items1.append(item)
+            _update_stack_status1()
             return True
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status1 = "❌ Incorrect"
             return False
 
-    def pop_from_stack(drags, drop):
-        if not drop or drop.drag_name != "pop_zone" or not store.stack_items:
+    def pop_from_stack1(drags, drop):
+        if not drop or drop.drag_name != "pop_zone1" or not store.stack_items1:
             return False
 
         item = drags[0].drag_name
-        if store.stack_items[-1] == item:
-            store.stack_items.pop()
-            _update_stack_status()
+        if store.stack_items1[-1] == item:
+            store.stack_items1.pop()
+            _update_stack_status1()
             return True
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status1 = "❌ Incorrect"
             return False
 
-    def _update_stack_status():
-        if store.stack_items == store.correct_pattern:
-            store.stack_status = "✅ Correct!"
-        elif store.correct_pattern[:len(store.stack_items)] == store.stack_items:
-            store.stack_status = "⏳ Incomplete"
+    def _update_stack_status1():
+        if store.stack_items1 == store.correct_pattern1:
+            store.stack_status1 = "✅ Correct!"
+        elif store.correct_pattern1[:len(store.stack_items1)] == store.stack_items1:
+            store.stack_status1 = "⏳ Incomplete"
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status1 = "❌ Incorrect"
 
-    def reset_stack():
-        store.stack_items.clear()
-        store.stack_status = "Waiting..."
+    def reset_stack1():
+        store.stack_items1.clear()
+        store.stack_status1 = "Waiting..."
 
 screen stack_demo():
     add "bg_blank"
@@ -91,19 +85,19 @@ screen stack_demo():
         frame:
             xsize 350 ysize 150
             xpadding 40 ypadding 40
-            text "Status: [store.stack_status]" color "#fff"
+            text "Status: [store.stack_status1]" color "#fff"
 
         frame:
             xsize 350 ysize 80
             xpadding 15 ypadding 15
-            text "Pattern: [', '.join(store.correct_pattern)]" color "#fff"
+            text "Pattern: [', '.join(store.correct_pattern1)]" color "#fff"
 
         hbox:
             spacing 30
 
             textbutton "Reset":
                 background "#444"
-                action Function(reset_stack)
+                action Function(reset_stack1)
                 
             textbutton "Done":
                 xalign 0.5 yalign 0.95
@@ -119,7 +113,7 @@ screen stack_demo():
             xpos 0.05 ypos 0.4
             draggable False
             droppable True
-            drag_name "stack_zone"
+            drag_name "stack_zone1"
             frame:
                 xsize 500 ysize 300
                 xpadding 20 ypadding 10
@@ -129,7 +123,7 @@ screen stack_demo():
                     spacing 5
                     text "Push Zone" color "#fff"
                     text "Drag here in order:" color "#ddd"
-                    for item in reversed(store.stack_items):
+                    for item in reversed(store.stack_items1):
                         text item color "#fff"
 
         # Draggable “21”
@@ -137,7 +131,7 @@ screen stack_demo():
             xpos 0.4 ypos 0.2
             drag_name "21"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag1
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -150,7 +144,7 @@ screen stack_demo():
             xpos 0.4 ypos 0.45
             drag_name "19"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag1
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -163,7 +157,7 @@ screen stack_demo():
             xpos 0.7 ypos 0.5
             drag_name "12"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag1
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -177,7 +171,7 @@ screen stack_demo():
             xpos 0.85 ypos 0.05
             draggable False
             droppable True
-            drag_name "pop_zone"
+            drag_name "pop_zone1"
             frame:
                 xsize 250 ysize 200
                 xpadding 30 ypadding 30
@@ -185,8 +179,8 @@ screen stack_demo():
                 vbox:
                     spacing 5
                     text "Pop() Zone" color "#fff"
-                    if store.stack_items:
-                        text "Top: [store.stack_items[-1]]" color "#fff"
+                    if store.stack_items1:
+                        text "Top: [store.stack_items1[-1]]" color "#fff"
 
 label stack_minigame:
 
@@ -235,6 +229,7 @@ label after_stack_demo:
     $ persistent.stack_completed = True
     window show
     show adrian smiling
+    hide screen stack_demo
     play sound "sfx/success.mp3"
     play music "bgm/city-high-life.mp3" fadein 1.0
     a "Great job! You've completed the stack exercise."

@@ -54,6 +54,7 @@ init python:
             beeps += 1
 
 define a = Character("Adrian", callback=player_speak )
+define silent = Character(None, window=False)
 
 transform smaller:
     zoom 0.5
@@ -80,7 +81,7 @@ label start:
     if persistent.menu:
         a "Welcome Back!"
         a "Nice to see you again"
-        jump menu
+        jump menu_select
         
     else:
         pass
@@ -104,6 +105,7 @@ label start:
     a "Nice to meet you"
 
     $ persistent.menu = True
-    jump menu
+    
+    jump menu_select
 
     return

@@ -1,32 +1,32 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_4.rpy", line 649, in script call
-    a "Now, let's move on to the next topic: {b}Queues{/b}"
-  File "game/chapters/Minigame/stack3.rpy", line 231, in script
-    if item == correct_pattern:
-  File "game/chapters/Minigame/stack3.rpy", line 231, in <module>
-    if item == correct_pattern:
-NameError: name 'item' is not defined
+  File "game/chapters/chapter_4.rpy", line 532, in script call
+    a "so what is the difference between stack memory and heap?"
+  File "game/chapters/menu.rpy", line 33, in script
+    $ renpy.pause(0.1, hard=True)
+ScriptError: could not find label 'chapter_6_intro'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_4.rpy", line 649, in script call
-    a "Now, let's move on to the next topic: {b}Queues{/b}"
-  File "game/chapters/Minigame/stack3.rpy", line 231, in script
-    if item == correct_pattern:
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1843, in execute
-    if renpy.python.py_eval(condition):
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1209, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1202, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/chapters/Minigame/stack3.rpy", line 231, in <module>
-    if item == correct_pattern:
-NameError: name 'item' is not defined
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\bootstrap.py", line 359, in bootstrap
+    renpy.main.main()
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\main.py", line 652, in main
+    run(restart)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\main.py", line 148, in run
+    renpy.execution.run_context(True)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\execution.py", line 958, in run_context
+    context.run()
+  File "game/chapters/chapter_4.rpy", line 532, in script call
+    a "so what is the difference between stack memory and heap?"
+  File "game/chapters/menu.rpy", line 33, in script
+    $ renpy.pause(0.1, hard=True)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'chapter_6_intro'.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Tue Sep  2 16:55:16 2025
+Wed Sep  3 01:40:44 2025

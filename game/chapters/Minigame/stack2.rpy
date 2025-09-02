@@ -1,80 +1,76 @@
 init python:
-    store.stack_items     = []
-    store.correct_pattern = ["18", "30", "3", "17", "45"]
-    store.stack_status    = "Waiting..."
+    store.stack_items2     = []
+    store.correct_pattern2 = ["18", "30", "3", "17", "45"]
+    store.stack_status2    = "Waiting..."
 
-    def handle_stack_drag(drags, drop):
+    def handle_stack_drag2(drags, drop):
         if not drop or not drags or len(drags) != 1:
-            return True  # Prevent screen exit
+            return True
 
         drag = drags[0]
 
         if not drop.droppable or not drag.draggable:
-            return True  # Prevent screen exit
+            return True
 
         if drag == drop:
-            return True  # Prevent screen exit
+            return True
 
         if drag.drag_name is None or drop.drag_name is None:
-            return True  # Prevent screen exit
-
-        # Ignore non-stack zones
-        if drop.drag_name not in ["stack_zone", "pop_zone"]:
-            return fals
-
-        # Pushing
-        if drop.drag_name == "stack_zone":
-            push_to_stack([drag], drop)
             return True
 
-        # Popping
-        if drop.drag_name == "pop_zone":
-            pop_from_stack([drag], drop)
-            return True
-
-        return True  # Fallback to prevent screen exit  # Fallback to prevent screen exit
-
-
-    def push_to_stack(drags, drop):
-        if not drop or drop.drag_name != "stack_zone":
+        if drop.drag_name not in ["stack_zone2", "pop_zone2"]:
             return False
 
-        idx      = len(store.stack_items)
-        expected = store.correct_pattern[idx] if idx < len(store.correct_pattern) else None
+        if drop.drag_name == "stack_zone2":
+            push_to_stack2([drag], drop)
+            return True
+
+        if drop.drag_name == "pop_zone2":
+            pop_from_stack2([drag], drop)
+            return True
+
+        return True
+
+    def push_to_stack2(drags, drop):
+        if not drop or drop.drag_name != "stack_zone2":
+            return False
+
+        idx      = len(store.stack_items2)
+        expected = store.correct_pattern2[idx] if idx < len(store.correct_pattern2) else None
         item     = drags[0].drag_name
 
         if item == expected:
-            store.stack_items.append(item)
-            _update_stack_status()
+            store.stack_items2.append(item)
+            _update_stack_status2()
             return True
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status2 = "❌ Incorrect"
             return False
 
-    def pop_from_stack(drags, drop):
-        if not drop or drop.drag_name != "pop_zone" or not store.stack_items:
+    def pop_from_stack2(drags, drop):
+        if not drop or drop.drag_name != "pop_zone2" or not store.stack_items2:
             return False
 
         item = drags[0].drag_name
-        if store.stack_items[-1] == item:
-            store.stack_items.pop()
-            _update_stack_status()
+        if store.stack_items2[-1] == item:
+            store.stack_items2.pop()
+            _update_stack_status2()
             return True
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status2 = "❌ Incorrect"
             return False
 
-    def _update_stack_status():
-        if store.stack_items == store.correct_pattern:
-            store.stack_status = "✅ Correct!"
-        elif store.correct_pattern[:len(store.stack_items)] == store.stack_items:
-            store.stack_status = "⏳ Incomplete"
+    def _update_stack_status2():
+        if store.stack_items2 == store.correct_pattern2:
+            store.stack_status2 = "✅ Correct!"
+        elif store.correct_pattern2[:len(store.stack_items2)] == store.stack_items2:
+            store.stack_status2 = "⏳ Incomplete"
         else:
-            store.stack_status = "❌ Incorrect"
+            store.stack_status2 = "❌ Incorrect"
 
-    def reset_stack():
-        store.stack_items.clear()
-        store.stack_status = "Waiting..."
+    def reset_stack2():
+        store.stack_items2.clear()
+        store.stack_status2 = "Waiting..."
 
 screen stack_demo2():
     add "bg_blank"
@@ -89,19 +85,19 @@ screen stack_demo2():
         frame:
             xsize 500 ysize 150
             xpadding 40 ypadding 40
-            text "Status: [store.stack_status]" color "#fff"
+            text "Status: [store.stack_status2]" color "#fff"
 
         frame:
             xsize 500 ysize 80
             xpadding 15 ypadding 15
-            text "Pattern: [', '.join(store.correct_pattern)]" color "#fff"
+            text "Pattern: [', '.join(store.correct_pattern2)]" color "#fff"
 
         hbox:
             spacing 30
 
             textbutton "Reset":
                 background "#444"
-                action Function(reset_stack)
+                action Function(reset_stack2)
                 
             textbutton "Done":
                 xalign 0.5 yalign 0.95
@@ -117,7 +113,7 @@ screen stack_demo2():
             xpos 0.05 ypos 0.4
             draggable False
             droppable True
-            drag_name "stack_zone"
+            drag_name "stack_zone2"
             frame:
                 xsize 500 ysize 300
                 xpadding 20 ypadding 10
@@ -127,14 +123,14 @@ screen stack_demo2():
                     spacing 5
                     text "Push Zone" color "#fff"
                     text "Drag here in order:" color "#ddd"
-                    for item in reversed(store.stack_items):
+                    for item in reversed(store.stack_items2):
                         text item color "#fff"
 
         drag:
             xpos 0.57 ypos 0.2
             drag_name "18"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag2
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -146,7 +142,7 @@ screen stack_demo2():
             xpos 0.4 ypos 0.45
             drag_name "30"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag2
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -158,7 +154,7 @@ screen stack_demo2():
             xpos 0.8 ypos 0.4
             drag_name "3"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag2
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -170,7 +166,7 @@ screen stack_demo2():
             xpos 0.4 ypos 0.2
             drag_name "7"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag2
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -182,7 +178,7 @@ screen stack_demo2():
             xpos 0.7 ypos 0.2
             drag_name "17"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag2
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -195,7 +191,7 @@ screen stack_demo2():
             xpos 0.65 ypos 0.4
             drag_name "45"
             draggable True
-            dragged handle_stack_drag
+            dragged handle_stack_drag2
             frame:
                 xsize 200 ysize 150
                 xpadding 10 ypadding 10
@@ -208,7 +204,7 @@ screen stack_demo2():
             xpos 0.85 ypos 0.05
             draggable False
             droppable True
-            drag_name "pop_zone"
+            drag_name "pop_zone2"
             frame:
                 xsize 250 ysize 200
                 xpadding 30 ypadding 30
@@ -216,18 +212,17 @@ screen stack_demo2():
                 vbox:
                     spacing 5
                     text "Pop() Zone" color "#fff"
-                    if store.stack_items:
-                        text "Top: [store.stack_items[-1]]" color "#fff"
+                    if store.stack_items2:
+                        text "Top: [store.stack_items2[-1]]" color "#fff"
 
 label stack_minigame2:
     window hide
     show screen stack_demo2
-    a "Form the stack 18 → 30 → 3 → 17 → 45  by pushing, and pop from the right."
-    
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
-
+    a "Form the stack 18 → 30 → 3 → 17 → 45  by pushing, and pop from the right."
     
+    window hide
     window hide
     a "Now, let's switch gears and explore how stacks work."
     a "A stack processes items in reverse order — last in, first out."
@@ -264,6 +259,7 @@ label stack_minigame2:
 
 label after_stack_demo2:
     window show
+    hide screen stack_demo2
     show adrian smiling
     play sound "sfx/success.mp3"
     play music "bgm/city-high-life.mp3" fadein 1.0

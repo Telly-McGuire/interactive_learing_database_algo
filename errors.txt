@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chapters/custom_screens.rpy", line 35: textbutton expects a non-empty block.
-    textbutton "Submit Scores":
-                               ^
+File "game/chapters/Minigame/stack2.rpy", line 76: invalid syntax
+        store.stack_items2=.clear()
+                            ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Tue Sep  2 16:32:08 2025
+Wed Sep  3 01:23:03 2025
