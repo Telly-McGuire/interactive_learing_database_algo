@@ -62,6 +62,7 @@ screen StackQueues:
 
 
 label chapter_4_intro:
+    call hideall #This is a stupid fix but it works I think
     play audio ("sfx/start.mp3")
     play music "bgm/city-high-life.mp3" fadein 1.0
 

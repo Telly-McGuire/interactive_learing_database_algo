@@ -11,6 +11,7 @@ screen chapter_2_introscreen:
             text "Chapter 2: Arrays" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 label chapter_2_intro:
+    call hideall
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
     

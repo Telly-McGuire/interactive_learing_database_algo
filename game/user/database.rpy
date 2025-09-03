@@ -60,8 +60,8 @@ screen student_input_screen(prompt):
 
 label database_user_info:
     # Input student info
-    $ student_name = get_input("Enter your name:").strip()
-    $ student_id = get_input("Enter your ID number:").strip()
+    $ student_name = renpy.input("Enter your name:").strip()
+    $ student_id = renpy.input("Enter your ID number:").strip()
 
     # Send data directly to Firebase under their ID
     $ result_msg = send_student_data(student_name, student_id)

@@ -154,6 +154,7 @@ screen adv_dis_choice:
 
 
 label chapter_3_intro:
+
     play audio ("sfx/start.mp3")
     play music "bgm/city-high-life.mp3" fadein 1.0
     show black
@@ -166,6 +167,7 @@ label chapter_3_intro:
     with dissolve
     
     show screen menu_btn
+    
     if persistent.chapter_3 == True:
         show adrian smiling at center:
             smaller
@@ -210,7 +212,7 @@ label chapter_3_intro:
     jump chapter_3_linked_list_properties
 
 label chapter_3_linked_list_properties:
-
+    $ persistent.chapter_3 = False
 
     show screen chapter_3_Properties
     with fade

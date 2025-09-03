@@ -10,8 +10,7 @@ label menu_select:
         smaller
     play music "bgm/lets-learn.mp3"
     hide window
-    while True:
-        $ renpy.pause(0.1, hard=True)
+    $ renpy.pause(1000.0)
 
 
     
@@ -29,8 +28,7 @@ label menu:
     pause 0.5
     play music "bgm/menu.mp3"
     hide window
-    while True:
-        $ renpy.pause(0.1, hard=True)
+    $ renpy.pause(1000.0)
 
     return
 
@@ -53,16 +51,59 @@ screen menu_select_screen:
                 textbutton "{size=+5}Chapter Select":
                     text_color "#00BFFF"
                     text_hover_color "#FFD700"
-                    action [Jump("menu"), Hide("menu_select_screen")]
+                    action [Jump("menu"), Hide("menu_select_screen")]            
+            frame:
+                xalign 0.5
+                xpadding 110
+                textbutton "{size=+5}Minigames":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action [ShowMenu("minigame_menu")]
             frame:
                 xalign 0.5
                 xpadding 110
                 textbutton "{size=+5}Scores":
                     text_color "#00BFFF"
                     text_hover_color "#FFD700"
-                    action [Hide("menu_select_screen"), ShowMenu("StatsUI")]
+                    action [ShowMenu("StatsUI")]
+            
 
 
+
+screen minigame_menu:
+    frame:
+        xalign 0.85
+        yalign 0.2
+        xpadding 50
+        ypadding 50
+
+        vbox:
+            xalign 0.5
+            spacing 30
+            text "{size=+10}Minigames":
+                xalign 0.5
+
+            frame:
+                xalign 0.5
+                xpadding 30
+                textbutton "{size=+5}Stack Minigame (2)":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action [Call("stack_minigame2"), Hide("minigame_menu")]
+            frame:
+                xalign 0.5
+                xpadding 30
+                textbutton "{size=+5}Stack Minigame (3)":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action [Call("stack_minigame3"), Hide("minigame_menu")]
+    imagebutton:
+        xalign 1.0
+        yalign 0.0
+        xoffset -30
+        yoffset 30
+        auto "UI/btn_back_%s.png"
+        action Return()
 
 screen menu_screen:
     add "bg_menu"
@@ -95,21 +136,21 @@ screen menu_screen:
 
         imagebutton:
             auto "chapter_0_%s"
-            action Jump("chapter_0")
+            action [Hide("menu_screen"),Jump("chapter_0")]
         
         imagebutton:
             auto "chapter_1_%s"
-            action Jump("chapter_1_intro")
+            action [Hide("menu_screen"),Jump("chapter_1_intro")]
 
         
         imagebutton:
             auto "chapter_2_%s"
-            action Jump("chapter_2_intro")
+            action [Hide("menu_screen"),Jump("chapter_2_intro")]
 
 
         imagebutton:
             auto "chapter_3_%s"
-            action Jump("chapter_3_intro")
+            action [Hide("menu_screen"),Jump("chapter_3_intro")]
 
         imagebutton:
             auto "nextchapter_%s"
@@ -144,12 +185,12 @@ screen menu_screen_2:
         
         imagebutton:
             auto "chapter_5_%s"
-            action Jump("chapter_5_intro")
+            action [Hide("menu_screen_2"),Jump("chapter_5_intro")]
 
         
         imagebutton:
             auto "chapter_6_%s"
-            action Jump("chapter_6_intro")
+            action [Hide("menu_screen_2"),Jump("chapter_6_intro")]
 
 
         imagebutton:
@@ -227,7 +268,7 @@ screen menu_screen_4:
                 textbutton "Stack Minigame":
                     text_color "#00BFFF"
                     text_hover_color "#FFD700"
-                    action Jump("stack_minigame2")
+                    action [Hide("menu_screen_2"),Jump("stack_minigame2")]
             frame:
                 yalign 0.5
                 ypadding 20
@@ -235,7 +276,7 @@ screen menu_screen_4:
                 textbutton "Stack Minigame":
                     text_color "#00BFFF"
                     text_hover_color "#FFD700"
-                    action Jump("stack_minigame3")
+                    action [Hide("menu_screen_2"),Jump("stack_minigame3")]
 
         # imagebutton:
         #     auto "chapter_10_%s"
