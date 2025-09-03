@@ -2,9 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/chapters/Minigame/stack2.rpy", line 76: invalid syntax
-        store.stack_items2=.clear()
-                            ^
+The label ch1_scoreadd is defined twice, at File "game/chapters/chapter_0.rpy", line 2:
+label ch1_scoreadd:
+and File "game/chapters/chapter_1.rpy", line 2:
+label ch1_scoreadd:
+
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Wed Sep  3 01:23:03 2025
+Wed Sep  3 18:26:28 2025

@@ -1,4 +1,7 @@
 
+label ch1_scoreadd:
+    $ chapter_1_score += 1
+    return
 screen chapter_1_introscreen:
     frame:
         xalign 0.5

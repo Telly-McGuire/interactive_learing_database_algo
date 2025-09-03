@@ -40,7 +40,7 @@ screen StatsUI:
                 xalign 0.5
                 textbutton "Submit Scores":    
                     text_size 28
-                    action[Call("")]
+                    action[Call("submit_all_chapter_scores")]
 
 
     imagebutton:
