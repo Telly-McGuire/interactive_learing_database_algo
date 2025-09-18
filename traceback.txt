@@ -1,70 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00gamemenu.rpy", line 174, in script
-    $ ui.interact()
-  File "renpy/common/00gamemenu.rpy", line 174, in <module>
-    $ ui.interact()
-  File "renpy/common/00action_control.rpy", line 131, in __call__
-    renpy.show_screen(self.screen, *self.args, **self.kwargs)
-Exception: Screen stack_minigame2 is not known.
-
+  File "game/chapters/chapter_4.rpy", line 494, in script
+    a "These are the core concepts"
+ScriptError: could not find label 'chapter_5_intro'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00gamemenu.rpy", line 174, in script
-    $ ui.interact()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 821, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1178, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00gamemenu.rpy", line 174, in <module>
-    $ ui.interact()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ui.py", line 301, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2188, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 3232, in interact_core
-    rv = root_widget.event(ev, x, y, 0)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1294, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\transition.py", line 53, in event
-    return self.new_widget.event(ev, x, y, st) # E1101
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1294, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1294, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 793, in event
-    rv = self.child.event(ev, x, y, st)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1294, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1523, in event
-    rv = super(Window, self).event(ev, x, y, st)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 288, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1294, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1523, in event
-    rv = super(Window, self).event(ev, x, y, st)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 288, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\behavior.py", line 1180, in event
-    return handle_click(self.clicked)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\behavior.py", line 1101, in handle_click
-    rv = run(action)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\behavior.py", line 394, in run
-    new_rv = run(i, *args, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\behavior.py", line 401, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_control.rpy", line 131, in __call__
-    renpy.show_screen(self.screen, *self.args, **self.kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 1327, in show_screen
-    raise Exception("Screen %s is not known.\n" % (name[0],))
-Exception: Screen stack_minigame2 is not known.
-
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\bootstrap.py", line 359, in bootstrap
+    renpy.main.main()
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\main.py", line 652, in main
+    run(restart)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\main.py", line 148, in run
+    renpy.execution.run_context(True)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\execution.py", line 958, in run_context
+    context.run()
+  File "game/chapters/chapter_4.rpy", line 494, in script
+    a "These are the core concepts"
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'chapter_5_intro'.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Wed Sep  3 16:32:26 2025
+Thu Sep  4 10:22:56 2025
