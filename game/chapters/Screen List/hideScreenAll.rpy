@@ -8,6 +8,13 @@ label hideall:
     hide screen menu_btn
     hide screen warn
 
+    hide screen chapter_1_introscreen
+    hide screen ch1_data_structure_characteristics_select
+    hide screen ch1_time_complexity
+    hide screen ch1_space_complexity
+    hide screen ch1_correctness
+    hide screen ch1_algorithm_categories
+    hide screen algorithm_cases_screen
 
     hide screen chapter_2_introscreen
     hide screen array_advantages

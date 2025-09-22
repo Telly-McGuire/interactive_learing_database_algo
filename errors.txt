@@ -2,11 +2,9 @@
 errors listed below, and try again.
 
 
-The label ch1_scoreadd is defined twice, at File "game/chapters/chapter_0.rpy", line 2:
-label ch1_scoreadd:
-and File "game/chapters/chapter_1.rpy", line 2:
-label ch1_scoreadd:
-
+File "game/chapters/chapter_1.rpy", line 901: end of line expected.
+    jump chapter_1_resta            "No":
+                                    ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Wed Sep  3 18:26:28 2025
+Mon Sep 22 22:02:07 2025

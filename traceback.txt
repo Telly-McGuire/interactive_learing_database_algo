@@ -1,28 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_4.rpy", line 494, in script
-    a "These are the core concepts"
-ScriptError: could not find label 'chapter_5_intro'.
+  File "game/chapters/chapter_1.rpy", line 45, in script
+    jump chapter_1_explanation1
+ScriptError: could not find label 'chapter_1_explanation1'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\bootstrap.py", line 359, in bootstrap
-    renpy.main.main()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\main.py", line 652, in main
-    run(restart)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\main.py", line 148, in run
-    renpy.execution.run_context(True)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\execution.py", line 958, in run_context
-    context.run()
-  File "game/chapters/chapter_4.rpy", line 494, in script
-    a "These are the core concepts"
+  File "game/chapters/chapter_1.rpy", line 45, in script
+    jump chapter_1_explanation1
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1699, in execute
+    rv = renpy.game.script.lookup(target)
   File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
     raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'chapter_5_intro'.
+ScriptError: could not find label 'chapter_1_explanation1'.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Thu Sep  4 10:22:56 2025
+Mon Sep 22 21:58:03 2025
