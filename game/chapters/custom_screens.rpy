@@ -60,6 +60,35 @@ screen menu_btn:
         auto "UI/btn_menu_%s.png"
         action [Hide("menu_btn"),Call("warn_handler")]
 
+label progress_check:
+    call screen progressUI
+    return
+
+screen progressUI:
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xpadding 200
+        ypadding 200
+        vbox:
+            spacing 40
+            xalign 0.5
+            yalign 0.1
+            text "Chapter Progress" size 40
+            text "Chapter 1 Progress: [chapter_1_progress] / 4" size 40
+            text "Chapter 2 Progress: [chapter_2_progress] / 2" size 40
+            text "Chapter 3 Progress: [chapter_3_progress] / 4" size 40
+            text "Chapter 4 Progress: [chapter_4_progress] / 4" size 40
+            text "Chapter 5 Progress: [chapter_5_progress] / 4" size 40
+
+    imagebutton:
+        xalign 1.0
+        yalign 0.0
+        xoffset -30
+        yoffset 30
+        auto "UI/btn_back_%s.png"
+        action Return()
+
 label warn_handler:
     call screen warn
     return
@@ -91,5 +120,7 @@ screen warn:
                         text_hover_color "#FFD700"
                         action [Return(), Hide("warn")]
                         text_size 28
+    
+
 
 

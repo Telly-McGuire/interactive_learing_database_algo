@@ -1,22 +1,86 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_1.rpy", line 45, in script
-    jump chapter_1_explanation1
-ScriptError: could not find label 'chapter_1_explanation1'.
+  File "game/chapters/chapter_1.rpy", line 830, in script call
+    menu:
+  File "game/chapters/chapter_2.rpy", line 252, in script call
+    a "Let's look at some examples of how arrays can be used in programming"
+  File "game/chapters/chapter_2.rpy", line 475, in script
+    a "Step 1: We start with an empty array. Imagine you have no boxes yet."
+  File "game/chapters/chapter_2.rpy", line 440, in execute
+    screen array_state(arr_img, arr_text):
+  File "game/chapters/chapter_2.rpy", line 440, in execute
+    screen array_state(arr_img, arr_text):
+  File "game/chapters/chapter_2.rpy", line 441, in execute
+    frame:
+  File "game/chapters/chapter_2.rpy", line 446, in execute
+    vbox:
+  File "game/chapters/chapter_2.rpy", line 449, in execute
+    text arr_text size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)] xalign 0.5
+ValueError: expected expression
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_1.rpy", line 45, in script
-    jump chapter_1_explanation1
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1699, in execute
-    rv = renpy.game.script.lookup(target)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'chapter_1_explanation1'.
+  File "game/chapters/chapter_1.rpy", line 830, in script call
+    menu:
+  File "game/chapters/chapter_2.rpy", line 252, in script call
+    a "Let's look at some examples of how arrays can be used in programming"
+  File "game/chapters/chapter_2.rpy", line 475, in script
+    a "Step 1: We start with an empty array. Imagine you have no boxes yet."
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 2572, in execute
+    Say.execute(self)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 615, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\sayexports.py", line 132, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1451, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1102, in do_display
+    display_say(who,
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 799, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ui.py", line 301, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2188, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2705, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 480, in visit_all
+    callback(self)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2705, in <lambda>
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 491, in per_interact
+    self.update()
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 697, in update
+    self.screen.function(**self.scope)
+  File "game/chapters/chapter_2.rpy", line 440, in execute
+    screen array_state(arr_img, arr_text):
+  File "game/chapters/chapter_2.rpy", line 440, in execute
+    screen array_state(arr_img, arr_text):
+  File "game/chapters/chapter_2.rpy", line 441, in execute
+    frame:
+  File "game/chapters/chapter_2.rpy", line 446, in execute
+    vbox:
+  File "game/chapters/chapter_2.rpy", line 449, in execute
+    text arr_text size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)] xalign 0.5
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 1977, in __init__
+    self.set_text(text, scope, substitute) # type: ignore
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 2110, in set_text
+    i, did_sub = renpy.substitutions.substitute(i, scope, substitute) # type: ignore
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 373, in substitute
+    s = interpolate(s, variables) # type: ignore
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 64, in interpolate
+    raise ValueError('expected expression')
+ValueError: expected expression
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Mon Sep 22 21:58:03 2025
+Thu Sep 25 18:44:24 2025

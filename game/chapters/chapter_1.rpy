@@ -4,6 +4,8 @@ default chapter_1_Data_Structures_quiz = 0
 default chapter_1_Characteristics_quiz = 0
 default chapter_1_Algorithms_quiz = 0
 default chapter_1_Good_Programming_quiz = 0
+
+default chapter_1_progress = 0
 label ch1_scoreadd:
     $ chapter_1_score += 1
     return
@@ -18,6 +20,7 @@ screen chapter_1_introscreen:
             xalign 0.5
             yalign 0.5
             text "Chapter 1: Abstract Data Structures" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+
 
 label chapter_1_intro:
     call hideall
@@ -323,6 +326,7 @@ label chapter_1_Data_Structures:
     play sound "sfx/bell.mp3"
     show adrian smiling
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+    $ chapter_1_progress += 1
 
     jump chapter_1_Data_Structures_Quiz
 
@@ -736,6 +740,7 @@ label chapter_1_Characteristics:
 
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+    $ chapter_1_progress += 1
 
     jump chapter_1_Characteristics_Quiz
 
@@ -988,6 +993,7 @@ label chapter_1_Algorithms:
     with move
     play sound "sfx/bell.mp3"
     a "Uh Oh, Theres that sound again. "
+    $ chapter_1_progress += 1
     jump chapter_1_Algorithms_Quiz
 
 init python:
@@ -1384,7 +1390,7 @@ label chapter_1_quiz_hard:
     play sound "sfx/success.mp3"
     a "Great job! You finished the Hard Quiz. Your total score is [chapter_1_score]."
 
-    jump chapter_1_ending
+    jump chapter_1_performance
 
 init python:
     import random
@@ -1639,7 +1645,7 @@ label chapter_1_quiz_medium:
         play music "bgm/city-high-life.mp3" fadein 0.5
         play sound "sfx/success.mp3"
         a "Great job! You finished the Moderate Quiz. Your total score is [chapter_1_score]."
-        jump chapter_1_ending
+        jump chapter_1_performance
 
 
 init python:
@@ -1805,8 +1811,36 @@ label chapter_1_quiz_easy:
     play sound "sfx/success.mp3"
     a "Great job! You finished the Easy Quiz. Your total score is [chapter_1_score]."
 
+    jump chapter_1_performance
+
+label chapter_1_performance:
+    # Data Structures Quiz
+    if chapter_1_Data_Structures_quiz < 2:
+        a "You need to review the Data Structures section."
+        a "Consider revisiting the material to improve your understanding."
+    elif chapter_1_Data_Structures_quiz < 4:
+        a "You did okay in the Data Structures section, but there's room for improvement."
+        a "Reviewing the material could help solidify your knowledge."
+
+    # Characteristics Quiz
+    if chapter_1_Characteristics_quiz < 2:
+        a "You need to review the Characteristics of Algorithms section."
+        a "Focus on understanding the key properties and categories."
+    elif chapter_1_Characteristics_quiz < 4:
+        a "You did okay in the Characteristics section, but there's room for improvement."
+        a "Revisiting the algorithm cases and properties could help reinforce your understanding."
+
+    # Algorithms Quiz
+    if chapter_1_Algorithms_quiz < 2:
+        a "You need to review the Algorithms section."
+        a "Make sure you understand the steps and characteristics of good algorithms."
+    elif chapter_1_Algorithms_quiz < 4:
+        a "You did okay in the Algorithms section, but there's room for improvement."
+        a "Reviewing algorithm-writing and examples could strengthen your grasp."
+
     jump chapter_1_ending
 label chapter_1_ending:    
+    $ chapter_1_progress += 1
     $ persistent.chapter_1 = True
     play sound "sfx/success.mp3"
     a "Your Score is [chapter_1_score]!"

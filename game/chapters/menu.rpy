@@ -66,6 +66,13 @@ screen menu_select_screen:
                     text_color "#00BFFF"
                     text_hover_color "#FFD700"
                     action [ShowMenu("StatsUI")]
+            frame:
+                xalign 0.5
+                xpadding 110
+                textbutton "{size=+5}Progress":
+                    text_color "#00BFFF"
+                    text_hover_color "#FFD700"
+                    action [ShowMenu("progressUI")] 
             
 
 

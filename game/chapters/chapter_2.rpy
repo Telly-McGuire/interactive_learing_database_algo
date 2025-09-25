@@ -1,3 +1,16 @@
+
+default chapter_2_progress = 0
+
+default chapter_2_basics_quiz = 0
+default chapter_2_Operations_Quiz = 0
+
+screen array_advantages:
+    vbox:        
+        spacing 20
+        xalign 0.5
+        yalign 0.5
+        text "Advantages & Disadvantages of Arrays" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+
 screen chapter_2_introscreen:
     frame:
         xalign 0.5
@@ -94,6 +107,7 @@ label chapter_2_puppy:
 
 # Basics of Arrays
 label chapter_2_basics:
+
     show adrian smiling at center:
         smaller
     with move
@@ -141,12 +155,17 @@ label chapter_2_basics:
             a "No problem! Let's continue."
 
 
-    show adrian explaining    
+    show adrian explaining
     a "There are also multidimensional arrays, which are arrays of arrays"
+    show adrian normal
     a "These can be thought of as a table, where each row is an array and each column is an element in that array"
+    show adrian smiling
     a "Here's a simpler way to think about it:"
+    show adrian happy
     a "Imagine you have a row of mailboxes, each with a number on it."
+    show adrian explaining
     a "You can put a letter in each mailbox, and to find a letter, you just look at the mailbox number."
+    show adrian normal
     a "Arrays work the same way in programming!"
     a "Let's create a 2D array (an array of arrays) together!"
     menu:
@@ -179,29 +198,50 @@ label chapter_2_basics:
     hide black with dissolve
     window show dissolve
     window auto
+    screen array_advantages_details:
+        frame:
+            xalign 0.1
+            yalign 0.3
+            xpadding 30
+            ypadding 100
+            hbox:
+                spacing 20
+                vbox:
+                    spacing 20
+                    text "Advantages of Arrays" size 40 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
+                    text "• Random access using indexes " color "#FFFFFF"
+                    text "• Easy to implement and use" color "#FFFFFF"
+                    text "• Fast for storing and accessing data" color "#FFFFFF"
+        frame:
+            xalign 0.9
+            yalign 0.3
+            xpadding 30
+            ypadding 100
+            vbox: 
+                spacing 20
+                text "Disadvantages of Arrays" size 40 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
+                text "• Must know the size at compile-time" color "#FFFFFF"
+                text "• If full, need to create a bigger array and copy values" color "#FFFFFF"
+                text "• Cannot store items of different types" color "#FFFFFF"
 
-    show adrian smiling
-    a "Advantages of using arrays include:"
-    a "We can use random access because of the keys: getItem(int index) will return the value with the given key very fast "
-    a "Very easy to implement and to use"
-    a "Very fast data structure for storing and accessing data"
-    a "We should use arrays in applications when we want to add items over and over again and we want to take items with given indexes!!! "
+        # Optional: Add a button to close the screen
+        frame: 
+            xalign 0.5 yalign 0.7
+            xpadding 50
+            textbutton "Close" action Hide("array_advantages_details") text_size 30 text_color "#00ff62"
 
-    show adrian normal
-    a "The Disadvantages of using arrays include:"
-    a "We have to know the size of the array at compile-time: so it is not so dynamic data structure"
-    a "If it is full: we have to create a bigger array and have to copy the values one by one "
-    a "It is not able to store items with different types."
+    # Example usage in your flow:
+    show screen array_advantages_details
+    pause 2.0
+    a "Here"
+    a "Lmao"
+    hide screen array_advantages_details
+
+    $ chapter_2_progress += 1
 
 
     jump chapter_2_examples
 
-screen array_advantages:
-    vbox:        
-        spacing 20
-        xalign 0.5
-        yalign 0.5
-        text "Advantages & Disadvantages of Arrays" size 40 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 #How arrays can be used
 label chapter_2_examples:
@@ -254,130 +294,102 @@ label chapter_2_examples:
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
 
-    jump chapter_2_quiz1
+    jump chapter_2_basics_quiz  
 
-label chapter_2_quiz1:
+init python:
+    import random
+    chapter_2_basics_question_order = ["q1", "q2", "q3", "q4", "q5"]
+    random.shuffle(chapter_2_basics_question_order)
+
+label chapter_2_basics_quiz:
+    $ chapter_2_basics_quiz = 0
+
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
 
-    $ chapter_2_questions = 0
     show adrian smug
     a "Lets see if you have learned anything"
-    
-    show adrian smiling
-    a "Question 1: "
-    a "What is an index?"
-    menu:
-        "A type of data stored in an array":
-            show adrian doubt
-            a "Not quite. The index is the position, not the data itself."
-        "A position number used to access elements in an array":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Good Job!"
-        "A programming language feature":
-            show adrian confused
-            a "No, an index is not a programming language feature, but a concept used in arrays."
-        "A sorting algorithm":
-            show adrian mad
-            a "No, an index is not a sorting algorithm."
-    
-    show adrian normal
-    a "Question 2: "
-    a "What is an array?"
-    menu:
-        "A programming language":
-            show adrian doubt
-            a "No, again no, its not a programming language. Stop insisting"
-        "A data structure that stores a fixed-size sequence of elements of the same type":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! An array stores a fixed-size sequence of elements of the same type."
-        "A type of loop":
-            show adrian mad
-            a "No, an array is not a type of loop. Ill loop your brains off"
-        "A function that sorts data":
-            show adrian confused
-            a "No, an array is not a function or an algorithm."
-    
-    show adrian normal
-    a "Question 3: "
-    a "True or False: The first index of an array is always 1."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! The first index of an array is 0, not 1. I told you to {b}REMEMBER{/b} that!"
-        "False":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! Arrays start at index 0."
-    
-    show adrian normal
-    a "Question 4: "
-    a "True or False: Arrays can store elements of different types in the same array."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! Arrays can only store elements of the same type."
-        "False":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! Arrays store elements of the same type."
 
-    show adrian normal
-    a "Question 5: "
-    a "True or False: The size of a static array cannot be changed after it is created."
-    menu:
-        "True":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! The size of a static array is fixed."
-        "False":
-            show adrian mad
-            a "Incorrect! Static arrays cannot change size after creation."
+    while chapter_2_basics_question_order:
+        $ current_q = chapter_2_basics_question_order.pop(0)
 
-    # Multiple Choice Question 6
-    show adrian normal
-    a "Question 6: "
-    a "Which of the following is a valid way to access the third element in an array called 'numbers'?"
-    menu:
-        "numbers[[3]":
-            show adrian mad
-            a "Incorrect! That would be the fourth element."
-        "numbers(2)":
-            show adrian confused
-            a "Incorrect! Arrays use square brackets, not parentheses."
-        "numbers[[2]":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! Indexing starts at 0, so the third element is at index 2."
-        "numbers{{2}":
-            show adrian doubt
-            a "Incorrect! Arrays use square brackets, not curly braces."
+        if current_q == "q1":
+            show adrian smiling
+            a "Question 1: What is an index?"
+            menu:
+                "A type of data stored in an array":
+                    show adrian doubt
+                    a "Not quite. The index is the position, not the data itself."
+                "A position number used to access elements in an array":
+                    $ chapter_2_basics_quiz += 1
+                    show adrian happy
+                    a "Good Job!"
+                "A programming language feature":
+                    show adrian confused
+                    a "No, an index is not a programming language feature, but a concept used in arrays."
+                "A sorting algorithm":
+                    show adrian mad
+                    a "No, an index is not a sorting algorithm."
 
-    show adrian normal
-    a "Question 7: "
-    a "What is a multidimensional array?"
-    menu:
-        "A variable that stores multiple data types":
-            show adrian mad
-            a "Incorrect! Arrays store elements of the same type."
-        "An array that contains other arrays as its elements":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! A multidimensional array is an array of arrays. WOW epic"
-        "A function that returns an array":
-            show adrian confused
-            a "Incorrect! That's not what a multidimensional array is."
-        "An array with only one element":
-            show adrian doubt
-            a "Incorrect! That is just a single-element array."
-        
+        elif current_q == "q2":
+            show adrian normal
+            a "Question 2: What is an array?"
+            menu:
+                "A programming language":
+                    show adrian doubt
+                    a "No, again no, its not a programming language. Stop insisting"
+                "A data structure that stores a fixed-size sequence of elements of the same type":
+                    $ chapter_2_basics_quiz += 1
+                    show adrian happy
+                    a "Correct! An array stores a fixed-size sequence of elements of the same type."
+                "A type of loop":
+                    show adrian mad
+                    a "No, an array is not a type of loop. Ill loop your brains off"
+                "A function that sorts data":
+                    show adrian confused
+                    a "No, an array is not a function or an algorithm."
+
+        elif current_q == "q3":
+            show adrian normal
+            a "Question 3: True or False: The first index of an array is always 1."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! The first index of an array is 0, not 1. I told you to {b}REMEMBER{/b} that!"
+                "False":
+                    $ chapter_2_basics_quiz += 1
+                    show adrian happy
+                    a "Correct! Arrays start at index 0."
+
+        elif current_q == "q4":
+            show adrian normal
+            a "Question 4: True or False: Arrays can store elements of different types in the same array."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! Arrays can only store elements of the same type."
+                "False":
+                    $ chapter_2_basics_quiz += 1
+                    show adrian happy
+                    a "Correct! Arrays store elements of the same type."
+
+        elif current_q == "q5":
+            show adrian normal
+            a "Question 5: True or False: The size of a static array cannot be changed after it is created."
+            menu:
+                "True":
+                    $ chapter_2_basics_quiz += 1
+                    show adrian happy
+                    a "Correct! The size of a static array is fixed."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Static arrays cannot change size after creation."
+
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
 
-    a "Your score is : [chapter_2_questions]"
+    a "Your score is : [chapter_2_basics_quiz]"
 
     if persistent.chapter_2:
         a "Would you like to continue with the next quiz?"
@@ -388,7 +400,7 @@ label chapter_2_quiz1:
                 pass
 
     a "Lets move on forward"
-    jump chapter_2_add
+    jump chapter_2_Operations
 
 screen ch2explode:
     vbox:
@@ -398,7 +410,7 @@ screen ch2explode:
         text "Array Operations!!!!" size 150 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 # Array Operations
-label chapter_2_add:
+label chapter_2_Operations:
     
     show adrian smiling
     a "Ok lets see how arrays work"
@@ -422,75 +434,69 @@ label chapter_2_add:
     with dissolve
     a "Let's create an empty array and add elements to it step by step."
 
-    #adding
+    # Array Operations - Visual Steps
     a "Step 1: We start with an empty array. Imagine you have no boxes yet."
-    a "Empty array: [[]"
-
     hide arr1
     show arr2 at Position(xpos=0.7, ypos=0.75)
     with dissolve
     a "Step 2: Let's add the number 10 to our array."
-    a "Now the array looks like this: [[10]"
 
     hide arr2
     show arr3 at Position(xpos=0.7, ypos=0.75)
     with dissolve
     a "Step 3: Let's add the number 20."
-    a "Now the array is: [[10, 20]"
 
     hide arr3
     show arr4 at Position(xpos=0.7, ypos=0.75)
     with dissolve
     a "Step 4: Let's add the number 30."
-    a "Now the array is: [[10, 20, 30]"
-
-    
     show adrian smiling
     a "You can keep adding more elements to the array, just like putting more things into boxes!"
 
-    #INSErt
-    show adrian normal
-    a "Let's try insert"
-    a "Suppose we have our array: [[10, 20, 30]"
-    hide arr4
+    hide arr4 
     show arr5 at Position(xpos=0.7, ypos=0.75)
     with dissolve
+    a "Let's try insert"
+    a "Suppose we have our array: [10, 20, 30]"
     a "Let's insert the number 15 at index {b}1{/b}."
     a "To do this, we move the elements after index {b}1{/b} one position down."
 
+
+    # Insert operation
     hide arr5
     show arr6 at Position(xpos=0.7, ypos=0.75)
     with dissolve
-    a "So, 20 moves to index 2, and 30 moves to index 3."
 
     hide arr6
     show arr7 at Position(xpos=0.7, ypos=0.75)
     with dissolve
+    a "So, 20 moves to index 2, and 30 moves to index 3."
     a "Now we put 15 at index {b}1{/b}."
-    a "After inserting 15 at index 1: [[10, 15, 20, 30]"
+    a "After inserting 15 at index 1: [10, 15, 20, 30]"
     a "We just moved the whole section so that we can insert 15"
 
- 
-    #removing
-    show adrian explaining
-    a "Let's try removing"
-    a "Suppose we have our array: [[10, 15, 20, 30]"
     hide arr7
     show arr8 at Position(xpos=0.7, ypos=0.75)
     with dissolve
+    a "Let's try removing"
+    a "Suppose we have our array: [10, 15, 20, 30]"
     a "Let's remove the element at index {b}2{/b}."
 
+    # Removing
     hide arr8
     show arr9 at Position(xpos=0.7, ypos=0.75)
     with dissolve
     a "That means we remove 20."
-
+    
     hide arr9
     show arr10 at Position(xpos=0.7, ypos=0.75)
     with dissolve
-    a "After removing, the array is: [[10, 15, 30]" 
+    a "After removing, the array is: [10, 15, 30]"
+    hide arr10 
 
-    hide arr10
+    
+    
+
     show adrian smiling at center 
     with move
     a "Neat Right?"
@@ -501,49 +507,50 @@ label chapter_2_add:
         "No":
             show adrian nocomment
             a "Oh Ok"
-    
+
     show adrian smiling at left 
     with move
     a "Here are some common functions you can do with arrays:"
-
     show arr11 at Position(xpos=0.7, ypos=0.75)
     with dissolve
     a "{b}append{/b}: Adds an element to the end of the array."
 
+    # Function highlights
     hide arr11
     show arr12 at Position(xpos=0.7, ypos=0.75)
     with dissolve
     a "{b}insert{/b}: Inserts an element at a specific index."
-    a "{b}remove{/b}: Removes the first occurrence of a value."
 
     hide arr12
-
     show arr13 at Position(xpos=0.7, ypos=0.75)
     with dissolve
-    a "For example, if you have array = [[10, 15, 20, 30 ] and you do array.remove(1), the array becomes [[10, 15, 30]."
-
+    
+    a "{b}remove{/b}: Removes the first occurrence of a value."
+    a "For example, if you have array = [10, 15, 20, 30] and you do array.remove(1), the array becomes [10, 15, 30]."
     show adrian normal
     a "{b}NOTE:{/b} It removed based off the {size=+20}index{/size} not the value "
-    
+
     hide arr13
     show arr14 at Position(xpos=0.7, ypos=0.75)
     with dissolve
-    show adrian explaining
     a "{b}pop{/b}: Removes and returns the element at a given index."
     a "If no index is specified, pop() removes and returns the last item in the list."
     a "Example: my_list.pop(2) removes and returns the item at index 2."
-
+    
     a "{b}index{/b}: Returns the index of the first occurrence of a value."
     a "{b}count{/b}: Counts how many times a value appears in the array."
     a "{b}sort{/b}: Sorts the array."
+    a "{b}reverse{/b}: Reverses the order of the array."
 
     hide arr14
     show arr15 at Position(xpos=0.7, ypos=0.75)
     with dissolve
+    show adrian explaining
     a "{b}reverse{/b}: Reverses the order of the array."
+
     show adrian happy at center
     with move
-    
+
     hide arr15 with dissolve
     a "These functions help you manage and work with arrays easily!"
 
@@ -573,103 +580,99 @@ label chapter_2_add:
     show adrian smiling
     stop music
     play sound "sfx/bell.mp3"
+    $ chapter_2_progress += 1
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
 
-    jump chapter_2_quiz2
 
-label chapter_2_quiz2:
+    jump chapter_2_Operations_Quiz
+
+init python:
+    import random
+    chapter_2_Operations_question_order = ["q1", "q2", "q3", "q4", "q5"]
+    random.shuffle(chapter_2_Operations_question_order)
+
+label chapter_2_Operations_Quiz:
+
+    $ chapter_2_Operations_Quiz = 0
 
     play music "bgm/better-answer.mp3" fadein 0.5
     a "Lets see what you have learned"
 
     show adrian normal
-    a "Question 1: True or False: You can add elements to an array after it is created."
-    menu:
-        "True":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! You can add elements to an array after it is created."
-        "False":
-            show adrian mad
-            a "Incorrect! Arrays can be modified after creation."
 
-    show adrian normal
-    a "Question 2: True or False: Removing an element from an array will automatically shift the remaining elements."
-    menu:
-        "True":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! The elements after the removed one shift left."
-        "False":
-            show adrian mad
-            a "Incorrect! The elements do shift after removal."
+    while chapter_2_Operations_question_order:
+        $ current_q = chapter_2_Operations_question_order.pop(0)
 
-    show adrian normal
-    a "Question 3: True or False: Inserting an element in the middle of an array requires moving other elements."
-    menu:
-        "True":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! Elements after the insertion point must be moved."
-        "False":
-            show adrian mad
-            a "Incorrect! You do need to move elements to insert in the middle."
+        if current_q == "q1":
+            a "Question 1: True or False: You can add elements to an array after it is created."
+            menu:
+                "True":
+                    $ chapter_2_Operations_Quiz += 1
+                    show adrian happy
+                    a "Correct! You can add elements to an array after it is created."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Arrays can be modified after creation."
 
+        elif current_q == "q2":
+            a "Question 2: True or False: Removing an element from an array will automatically shift the remaining elements."
+            menu:
+                "True":
+                    $ chapter_2_Operations_Quiz += 1
+                    show adrian happy
+                    a "Correct! The elements after the removed one shift left."
+                "False":
+                    show adrian mad
+                    a "Incorrect! The elements do shift after removal."
 
-    show adrian normal
-    a "Question 4: What happens if you try to access an index that does not exist in an array?"
-    menu:
-        "You get an error":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! Accessing an invalid index causes an error."
-        "It creates a new element":
-            show adrian doubt
-            a "Incorrect! It does not create a new element."
-        "It ignores the request":
-            show adrian mad
-            a "Incorrect! It will cause an error."
-        "It returns 0":
-            show adrian confused
-            a "Incorrect! It does not return 0."
+        elif current_q == "q3":
+            a "Question 3: True or False: Inserting an element in the middle of an array requires moving other elements."
+            menu:
+                "True":
+                    $ chapter_2_Operations_Quiz += 1
+                    show adrian happy
+                    a "Correct! Elements after the insertion point must be moved."
+                "False":
+                    show adrian mad
+                    a "Incorrect! You do need to move elements to insert in the middle."
 
-    show adrian normal
-    a "Question 5: Which operation adds an element to the end of an array?"
-    menu:
-        "insert":
-            show adrian confused
-            a "Incorrect! Insert adds at a specific index."
-        "append":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! The append operation adds to the end."
-        "remove":
-            show adrian mad
-            a "Incorrect! Remove deletes an element."
-        "pop":
-            show adrian doubt
-            a "Incorrect! Pop removes and returns an element."
+        elif current_q == "q4":
+            a "Question 4: What happens if you try to access an index that does not exist in an array?"
+            menu:
+                "You get an error":
+                    $ chapter_2_Operations_Quiz += 1
+                    show adrian happy
+                    a "Correct! Accessing an invalid index causes an error."
+                "It creates a new element":
+                    show adrian doubt
+                    a "Incorrect! It does not create a new element."
+                "It ignores the request":
+                    show adrian mad
+                    a "Incorrect! It will cause an error."
+                "It returns 0":
+                    show adrian confused
+                    a "Incorrect! It does not return 0."
 
-    show adrian normal
-    a "Question 6: If you have array = [[5, 10, 15], what will array.pop(1) do?"
-    menu:
-        "Remove and return 5":
-            show adrian confused
-            a "Incorrect! 5 is at index 0."       
-        "Remove and return 10":
-            $ chapter_2_questions += 1
-            show adrian happy
-            a "Correct! It removes and returns the element at index 1, which is 10."
-        "Add a new element":
-            show adrian doubt
-            a "Incorrect! Pop removes, not adds."
-        "Remove and return 15":
-            show adrian mad
-            a "Incorrect! 15 is at index 2."
+        elif current_q == "q5":
+            a "Question 5: Which operation adds an element to the end of an array?"
+            menu:
+                "insert":
+                    show adrian confused
+                    a "Incorrect! Insert adds at a specific index."
+                "append":
+                    $ chapter_2_Operations_Quiz += 1
+                    show adrian happy
+                    a "Correct! The append operation adds to the end."
+                "remove":
+                    show adrian mad
+                    a "Incorrect! Remove deletes an element."
+                "pop":
+                    show adrian doubt
+                    a "Incorrect! Pop removes and returns an element."
 
     show adrian happy
     a "{b}OMG GREAT WORK!!!"
-    a "Your current score is : [chapter_2_questions]"
+    a "Your current score is : [chapter_2_Operations_Quiz]"
     if persistent.chapter_2:
         a "Would you like to Continue on to the Chapter Quiz?"
         menu:
@@ -843,7 +846,7 @@ label chapter_2_quizeasy:
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_2_score]"
-    jump chapter_2_ending
+    jump chapter_2_review
 label chapter_2_quizmed:
     
     $ chapter_2_score = 0
@@ -1101,7 +1104,7 @@ label chapter_2_quizmed:
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_2_score]"
-    jump chapter_2_ending
+    jump chapter_2_review
 
 
 label chapter_2_quizhard:
@@ -1486,9 +1489,28 @@ label chapter_2_quizhard:
     a "Your quiz score is: [chapter_2_score]"
     a "{size=+20} OMG Yaaaay!!!"
 
-    jump chapter_2_ending
+    jump chapter_2_review   
     
+    # Chapter 2 Section Review
+    # $ chapter_2_basics_quiz
+    # $ chapter_2_Operations_Quiz
+label chapter_2_review:
+    # Basics of Arrays
+    if chapter_2_basics_quiz < 2:
+        a "You need to review the Basics of Arrays section."
+        a "Consider revisiting the material to improve your understanding."
+    elif chapter_2_basics_quiz < 4:
+        a "You did okay in the Basics of Arrays section, but there's room for improvement."
+        a "Reviewing the material could help solidify your knowledge."
 
+    # Array Operations
+    if chapter_2_Operations_Quiz < 2:
+        a "You need to review the Array Operations section."
+        a "Focus on how to add, remove, and access elements in arrays."
+    elif chapter_2_Operations_Quiz < 4:
+        a "You did okay in the Array Operations section, but there's room for improvement."
+        a "Revisiting common array functions could help reinforce your understanding."
+    jump chapter_2_ending
 label chapter_2_ending:    
     $ persistent.chapter_2 = True
     a "Would You like to test again?"

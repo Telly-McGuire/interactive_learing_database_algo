@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chapters/chapter_1.rpy", line 901: end of line expected.
-    jump chapter_1_resta            "No":
-                                    ^
+File "game/chapters/chapter_2.rpy", line 667: invalid syntax
+    += 1
+     ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Mon Sep 22 22:02:07 2025
+Thu Sep 25 18:40:09 2025

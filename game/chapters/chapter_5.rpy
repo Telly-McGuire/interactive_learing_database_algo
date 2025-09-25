@@ -1,6 +1,7 @@
 # Chapter 5: Binary Trees
 #Binary Search trees
 
+default chapter_5_progress = 0
 label chapter_5_intro:
 
 label chacter_5_Binary_Trees:

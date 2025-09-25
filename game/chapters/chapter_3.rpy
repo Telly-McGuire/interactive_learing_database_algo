@@ -1,3 +1,5 @@
+default chapter_3_progress = 0
+
 screen chapter_3_introscreen:
     frame:
         xalign 0.5

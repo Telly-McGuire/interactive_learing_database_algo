@@ -15,10 +15,26 @@ label hideall:
     hide screen ch1_correctness
     hide screen ch1_algorithm_categories
     hide screen algorithm_cases_screen
+    hide screen algo_prop_1
+    hide screen algo_prop_2
+    hide screen algo_prop_3
+    hide screen algo_prop_4
+    hide screen algo_prop_5
+    hide screen algo_prop_6
+    hide screen algo_prop_7
+    hide screen algo_prop_menu
+    hide screen good_programming_features
+    hide screen algorithm_example_steps
+
 
     hide screen chapter_2_introscreen
     hide screen array_advantages
     hide screen ch2explode
+    hide screen array_advantages_details
+    hide screen array_state
+    hide screen array_step_title
+    hide screen array_func_highlight
+
 
     hide screen chapter_3_introscreen
     hide screen chapter_3_Properties
