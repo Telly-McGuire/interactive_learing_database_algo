@@ -1,5 +1,8 @@
 default chapter_3_progress = 0
 
+default chapter_3_linked_list_quiz = 0
+default chapter_3_linked_list_operation_quiz = 0
+
 screen chapter_3_introscreen:
     frame:
         xalign 0.5
@@ -323,81 +326,90 @@ label chapter_3_linked_list_properties:
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     jump ch3_quiz1
 
-label ch3_quiz1:
+init python:
+    import random
+    chapter_3_linked_list_question_order = ["q1", "q2", "q3", "q4", "q5"]
+    random.shuffle(chapter_3_linked_list_question_order)
+
+label ch3_linked_list_quiz:
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
-    
-    $ chapter_3_test = 0
+
+    $ chapter_3_linked_list_quiz = 0
 
     show adrian explaining
-    a "What is a Node?"
-    menu:
-        "A Type of Linked List":
-            a "Incorrect, A Node is not a type of Linked List"
-        "A Container for Data":
-            a "Correct"
-            $ chapter_3_test += 1
-        "A Type of Algorithm":
-            a "Incorrect, A Node is not an Algorithm"
-        "A Type of Data Structure":
-            a "Incorrect, A Node is not a type of Data Structure"
 
-    a "Next Question"
-    show adrian smiling
-    a "What is the purpose of a Pointer in a Linked List?"
-    menu:
-        "To Store Data":
-            a "Incorrect, A Pointer does not store data"
-        "To Reference the Next Node":
-            a "Correct"
-            $ chapter_3_test += 1
-        "To Store the Previous Node":
-            a "Incorrect, A Pointer does not store the Previous Node"
-        "To Store the Index":
-            a "Incorrect, A Pointer does not store the Index"
-    
-    a "Next Question"
-    a "What is the main advantage of using a Linked List over an array?"
-    menu:
-        "Dynamic Size":
-            a "Correct! Linked Lists can grow and shrink dynamically."
-            $ chapter_3_test += 1
-        "Simpler Structure":
-            a "Incorrect, Linked Lists are more complex than arrays."
-        "Less Memory Usage":
-            a "Incorrect, Linked Lists often use more memory due to pointers."
-        "Faster Access":
-            a "Incorrect, Linked Lists do not have faster access than arrays."
+    while chapter_3_linked_list_question_order:
+        $ current_q = chapter_3_linked_list_question_order.pop(0)
 
-    show adrian explaining
-    a "Next Question"
-    a "Which of the following is a disadvantage of Linked Lists?"
-    menu:
-        "Easy to Reverse Traverse":
-            a "Incorrect, singly Linked Lists are hard to reverse traverse."
-        "Waste Memory":
-            a "Correct! Linked Lists use extra memory for pointers."
-            $ chapter_3_test += 1
-        "Fixed Size":
-            a "Incorrect, Linked Lists are not fixed in size."
-        "Fast Random Access":
-            a "Incorrect, Linked Lists do not support fast random access."
+        if current_q == "q1":
+            a "What is a Node?"
+            menu:
+                "A Type of Linked List":
+                    a "Incorrect, A Node is not a type of Linked List"
+                "A Container for Data":
+                    a "Correct"
+                    $ chapter_3_linked_list_quiz += 1
+                "A Type of Algorithm":
+                    a "Incorrect, A Node is not an Algorithm"
+                "A Type of Data Structure":
+                    a "Incorrect, A Node is not a type of Data Structure"
 
-    show adrian smug
-    a "Next Question"
-    a "What does each node in a Linked List contain?"
+        elif current_q == "q2":
+            show adrian smiling
+            a "What is the purpose of a Pointer in a Linked List?"
+            menu:
+                "To Store Data":
+                    a "Incorrect, A Pointer does not store data"
+                "To Reference the Next Node":
+                    a "Correct"
+                    $ chapter_3_linked_list_quiz += 1
+                "To Store the Previous Node":
+                    a "Incorrect, A Pointer does not store the Previous Node"
+                "To Store the Index":
+                    a "Incorrect, A Pointer does not store the Index"
 
-    menu:
-        "Only Data":
-            a "Incorrect, nodes also contain a pointer."
-        "Data and Pointer":
-            a "Correct! Each node contains data and a pointer to the next node."
-            $ chapter_3_test += 1
-        "Index and Data":
-            a "Incorrect, nodes do not store their index."
-        "Only Pointer":
-            a "Incorrect, nodes also contain data."
-    
+        elif current_q == "q3":
+            a "What is the main advantage of using a Linked List over an array?"
+            menu:
+                "Dynamic Size":
+                    a "Correct! Linked Lists can grow and shrink dynamically."
+                    $ chapter_3_linked_list_quiz += 1
+                "Simpler Structure":
+                    a "Incorrect, Linked Lists are more complex than arrays."
+                "Less Memory Usage":
+                    a "Incorrect, Linked Lists often use more memory due to pointers."
+                "Faster Access":
+                    a "Incorrect, Linked Lists do not have faster access than arrays."
+
+        elif current_q == "q4":
+            show adrian explaining
+            a "Which of the following is a disadvantage of Linked Lists?"
+            menu:
+                "Easy to Reverse Traverse":
+                    a "Incorrect, singly Linked Lists are hard to reverse traverse."
+                "Waste Memory":
+                    a "Correct! Linked Lists use extra memory for pointers."
+                    $ chapter_3_linked_list_quiz += 1
+                "Fixed Size":
+                    a "Incorrect, Linked Lists are not fixed in size."
+                "Fast Random Access":
+                    a "Incorrect, Linked Lists do not support fast random access."
+
+        elif current_q == "q5":
+            show adrian smug
+            a "What does each node in a Linked List contain?"
+            menu:
+                "Only Data":
+                    a "Incorrect, nodes also contain a pointer."
+                "Data and Pointer":
+                    a "Correct! Each node contains data and a pointer to the next node."
+                    $ chapter_3_linked_list_quiz += 1
+                "Index and Data":
+                    a "Incorrect, nodes do not store their index."
+                "Only Pointer":
+                    a "Incorrect, nodes also contain data."
+
     if persistent.chapter_3 == True:
         a "Would you like to continue with the next quiz?"
         menu:
@@ -405,7 +417,6 @@ label ch3_quiz1:
                 jump ch3_quiz2
             "No":
                 pass
-
 
     jump chapter_3_linked_list_operation
 
@@ -520,73 +531,88 @@ label chapter_3_linked_list_remove:
     a "And that is how we remove items from the linked list."
     jump ch3_quiz2
 
-label ch3_quiz2:
+init python:
+    import random
+    chapter_3_linked_list_operation_question_order = ["q1", "q2", "q3", "q4", "q5"]
+    random.shuffle(chapter_3_linked_list_operation_question_order)
+
+label ch3_linked_list_operation_quiz:
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
 
     a "Now lets test your knowledge"
- 
+
+    $ chapter_3_linked_list_operation_quiz = 0
 
     show adrian explaining
-    a "Question 1: What is the time complexity of inserting an item at the beginning of a singly linked list?"
-    menu:
-        "O(n)":
-            a "Incorrect. Inserting at the beginning does not require traversal."
-        "O(log n)":
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(1)":
-            a "Correct! Inserting at the beginning is a constant time operation."
-            $ chapter_3_test += 1
-        "O(n^2)":
-            a "Incorrect. That's way too slow!"
 
-        a "Question 2: What must you update when removing the first node in a singly linked list?"
-    menu:
-        "The tail pointer":
-            a "Incorrect. The tail pointer is only updated if the list becomes empty."
-        "No pointers":
-            a "Incorrect. You must update the head pointer."
-        "All pointers":
-            a "Incorrect. Only the head pointer needs updating."
-        "The head pointer":
-            a "Correct! The head pointer must point to the next node."
-            $ chapter_3_test += 1
+    while chapter_3_linked_list_operation_question_order:
+        $ current_q = chapter_3_linked_list_operation_question_order.pop(0)
 
-        a "Question 3: What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
-    menu:
-        "O(n^2)":
-            a "Incorrect. That's much too slow."
-        "O(1)":
-            a "Incorrect. You need to traverse the list."
-        "O(log n)":
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(n)":
-            a "Correct! You need to traverse the list to find the end."
-            $ chapter_3_test += 1
+        if current_q == "q1":
+            a "Question 1: What is the time complexity of inserting an item at the beginning of a singly linked list?"
+            menu:
+                "O(n)":
+                    a "Incorrect. Inserting at the beginning does not require traversal."
+                "O(log n)":
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(1)":
+                    a "Correct! Inserting at the beginning is a constant time operation."
+                    $ chapter_3_linked_list_operation_quiz += 1
+                "O(n^2)":
+                    a "Incorrect. That's way too slow!"
 
-        a "Question 4: What happens if you remove a node from the middle of a singly linked list?"
-    menu:
-        "No updates needed":
-            a "Incorrect. You must update the previous node's pointer."
-        "You must update the previous node's pointer":
-            a "Correct! The previous node's pointer must skip the removed node."
-            $ chapter_3_test += 1
-        "You must update all nodes":
-            a "Incorrect. Only the previous node's pointer needs updating."
-        "You must update the tail pointer":
-            a "Incorrect, unless you remove the last node."
+        elif current_q == "q2":
+            a "Question 2: What must you update when removing the first node in a singly linked list?"
+            menu:
+                "The tail pointer":
+                    a "Incorrect. The tail pointer is only updated if the list becomes empty."
+                "No pointers":
+                    a "Incorrect. You must update the head pointer."
+                "All pointers":
+                    a "Incorrect. Only the head pointer needs updating."
+                "The head pointer":
+                    a "Correct! The head pointer must point to the next node."
+                    $ chapter_3_linked_list_operation_quiz += 1
 
-        a "Question 5: Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
-    menu:
-        "Insertion at the end":
-            a "Incorrect. Insertion at the end is slower without a tail pointer."
-        "Both are the same":
-            a "Incorrect. They have different time complexities."
-        "Insertion at the beginning":
-            a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
-            $ chapter_3_test += 1
-        "Neither":
-            a "Incorrect. One is faster than the other."
+        elif current_q == "q3":
+            a "Question 3: What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
+            menu:
+                "O(n^2)":
+                    a "Incorrect. That's much too slow."
+                "O(1)":
+                    a "Incorrect. You need to traverse the list."
+                "O(log n)":
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(n)":
+                    a "Correct! You need to traverse the list to find the end."
+                    $ chapter_3_linked_list_operation_quiz += 1
+
+        elif current_q == "q4":
+            a "Question 4: What happens if you remove a node from the middle of a singly linked list?"
+            menu:
+                "No updates needed":
+                    a "Incorrect. You must update the previous node's pointer."
+                "You must update the previous node's pointer":
+                    a "Correct! The previous node's pointer must skip the removed node."
+                    $ chapter_3_linked_list_operation_quiz += 1
+                "You must update all nodes":
+                    a "Incorrect. Only the previous node's pointer needs updating."
+                "You must update the tail pointer":
+                    a "Incorrect, unless you remove the last node."
+
+        elif current_q == "q5":
+            a "Question 5: Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
+            menu:
+                "Insertion at the end":
+                    a "Incorrect. Insertion at the end is slower without a tail pointer."
+                "Both are the same":
+                    a "Incorrect. They have different time complexities."
+                "Insertion at the beginning":
+                    a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
+                    $ chapter_3_linked_list_operation_quiz += 1
+                "Neither":
+                    a "Incorrect. One is faster than the other."
 
     show adrian smiling
     if persistent.chapter_3 == True:
@@ -806,9 +832,10 @@ label chapter_3_problems_with_linked_list:
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     jump ch3_restart
 
-label ch3_restart:    
+label ch3_restart:
+    $ chapter_3_test = chapter_3_linked_list_quiz + chapter_3_linked_list_operation_quiz
     a "Your score is [chapter_3_test]"
-    a "Lets see how well you do in the {size=+20}CHAPTER QUIZ"
+    a "Let's see how well you do in the {size=+20}CHAPTER QUIZ"
     if chapter_3_test <= 4:
         show adrian blush
         jump chapter_3_quiz_easy
@@ -819,1548 +846,1351 @@ label ch3_restart:
         show adrian happy
         jump chapter_3_quiz_hard
 
+init python:
+    import random
+    chapter_3_easy_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"
+    ]
+    random.shuffle(chapter_3_easy_question_order)
+
 label chapter_3_quiz_easy:
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 0.5
     $ chapter_3_score = 0
 
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     show adrian smiling at center
-    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
-    a "What is a Node?"
-    menu:
-        "A Type of Linked List":
-            a "Incorrect, A Node is not a type of Linked List"
-        "A Container for Data":
-            a "Correct"
-            $ chapter_3_score += 1
-        "A Type of Algorithm":
-            a "Incorrect, A Node is not an Algorithm"
-        "A Type of Data Structure":
-            a "Incorrect, A Node is not a type of Data Structure"
+    while chapter_3_easy_question_order:
+        $ current_q = chapter_3_easy_question_order.pop(0)
 
-    a "Next Question"
-    show adrian smiling
-    a "What is the purpose of a Pointer in a Linked List?"
-    menu:
-        "To Store Data":
-            a "Incorrect, A Pointer does not store data"
-        "To Reference the Next Node":
-            a "Correct"
-            $ chapter_3_score += 1
-        "To Store the Previous Node":
-            a "Incorrect, A Pointer does not store the Previous Node"
-        "To Store the Index":
-            a "Incorrect, A Pointer does not store the Index"
-    
-    a "Next Question"
-    a "What is the main advantage of using a Linked List over an array?"
-    menu:
-        "Dynamic Size":
-            a "Correct! Linked Lists can grow and shrink dynamically."
-            $ chapter_3_score += 1
-        "Simpler Structure":
-            a "Incorrect, Linked Lists are more complex than arrays."
-        "Less Memory Usage":
-            a "Incorrect, Linked Lists often use more memory due to pointers."
-        "Faster Access":
-            a "Incorrect, Linked Lists do not have faster access than arrays."
+        if current_q == "q1":
+            a "What is a Node?"
+            menu:
+                "A Type of Linked List":
+                    a "Incorrect, A Node is not a type of Linked List"
+                "A Container for Data":
+                    $ chapter_3_score += 1
+                    a "Correct"
+                "A Type of Algorithm":
+                    a "Incorrect, A Node is not an Algorithm"
+                "A Type of Data Structure":
+                    a "Incorrect, A Node is not a type of Data Structure"
 
-    show adrian explaining
-    a "Next Question"
-    a "Which of the following is a disadvantage of Linked Lists?"
-    menu:
-        "Easy to Reverse Traverse":
-            a "Incorrect, singly Linked Lists are hard to reverse traverse."
-        "Waste Memory":
-            a "Correct! Linked Lists use extra memory for pointers."
-            $ chapter_3_score += 1
-        "Fixed Size":
-            a "Incorrect, Linked Lists are not fixed in size."
-        "Fast Random Access":
-            a "Incorrect, Linked Lists do not support fast random access."
+        elif current_q == "q2":
+            show adrian smiling
+            a "What is the purpose of a Pointer in a Linked List?"
+            menu:
+                "To Store Data":
+                    a "Incorrect, A Pointer does not store data"
+                "To Reference the Next Node":
+                    $ chapter_3_score += 1
+                    a "Correct"
+                "To Store the Previous Node":
+                    a "Incorrect, A Pointer does not store the Previous Node"
+                "To Store the Index":
+                    a "Incorrect, A Pointer does not store the Index"
 
-    show adrian smug
-    a "Next Question"
-    a "What does each node in a Linked List contain?"
+        elif current_q == "q3":
+            a "What is the main advantage of using a Linked List over an array?"
+            menu:
+                "Dynamic Size":
+                    $ chapter_3_score += 1
+                    a "Correct! Linked Lists can grow and shrink dynamically."
+                "Simpler Structure":
+                    a "Incorrect, Linked Lists are more complex than arrays."
+                "Less Memory Usage":
+                    a "Incorrect, Linked Lists often use more memory due to pointers."
+                "Faster Access":
+                    a "Incorrect, Linked Lists do not have faster access than arrays."
 
-    menu:
-        "Only Data":
-            show adrian confused
-            a "Incorrect, nodes also contain a pointer."
-        "Data and Pointer":
-            show adrian happy
-            a "Correct! Each node contains data and a pointer to the next node."
-            $ chapter_3_score += 1
-        "Index and Data":
-            show adrian thinking
-            a "Incorrect, nodes do not store their index."
-        "Only Pointer":
-            show adrian confused
-            a "Incorrect, nodes also contain data."
+        elif current_q == "q4":
+            show adrian explaining
+            a "Which of the following is a disadvantage of Linked Lists?"
+            menu:
+                "Easy to Reverse Traverse":
+                    a "Incorrect, singly Linked Lists are hard to reverse traverse."
+                "Waste Memory":
+                    $ chapter_3_score += 1
+                    a "Correct! Linked Lists use extra memory for pointers."
+                "Fixed Size":
+                    a "Incorrect, Linked Lists are not fixed in size."
+                "Fast Random Access":
+                    a "Incorrect, Linked Lists do not support fast random access."
 
-    show adrian explaining
-    a "Question: What is the time complexity of inserting an item at the beginning of a singly linked list?"
-    menu:
-        "O(n)":
-            show adrian normal
-            a "Incorrect. Inserting at the beginning does not require traversal."
-        "O(log n)":
-            show adrian normal
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(1)":
-            show adrian happy
-            a "Correct! Inserting at the beginning is a constant time operation."
-            $ chapter_3_score += 1
-        "O(n^2)":
-            show adrian surprised
-            a "Incorrect. That's way too slow!"
+        elif current_q == "q5":
+            show adrian smug
+            a "What does each node in a Linked List contain?"
+            menu:
+                "Only Data":
+                    show adrian confused
+                    a "Incorrect, nodes also contain a pointer."
+                "Data and Pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Each node contains data and a pointer to the next node."
+                "Index and Data":
+                    show adrian thinking
+                    a "Incorrect, nodes do not store their index."
+                "Only Pointer":
+                    show adrian confused
+                    a "Incorrect, nodes also contain data."
 
-    show adrian explaining
-    a "Question : What must you update when removing the first node in a singly linked list?"
-    menu:
-        "The tail pointer":
-            show adrian normal
-            a "Incorrect. The tail pointer is only updated if the list becomes empty."
-        "No pointers":
-            show adrian confused
-            a "Incorrect. You must update the head pointer."
-        "All pointers":
-            show adrian thinking
-            a "Incorrect. Only the head pointer needs updating."
-        "The head pointer":
-            show adrian happy
-            a "Correct! The head pointer must point to the next node."
-            $ chapter_3_score += 1
+        elif current_q == "q6":
+            show adrian explaining
+            a "What is the time complexity of inserting an item at the beginning of a singly linked list?"
+            menu:
+                "O(n)":
+                    show adrian normal
+                    a "Incorrect. Inserting at the beginning does not require traversal."
+                "O(log n)":
+                    show adrian normal
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(1)":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Inserting at the beginning is a constant time operation."
+                "O(n^2)":
+                    show adrian surprised
+                    a "Incorrect. That's way too slow!"
 
-    show adrian explaining
-    a "Question : What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
-    menu:
-        "O(n^2)":
-            show adrian surprised
-            a "Incorrect. That's much too slow."
-        "O(1)":
-            show adrian confused
-            a "Incorrect. You need to traverse the list."
-        "O(log n)":
-            show adrian normal
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(n)":
-            show adrian happy
-            a "Correct! You need to traverse the list to find the end."
-            $ chapter_3_score += 1
+        elif current_q == "q7":
+            show adrian explaining
+            a "What must you update when removing the first node in a singly linked list?"
+            menu:
+                "The tail pointer":
+                    show adrian normal
+                    a "Incorrect. The tail pointer is only updated if the list becomes empty."
+                "No pointers":
+                    show adrian confused
+                    a "Incorrect. You must update the head pointer."
+                "All pointers":
+                    show adrian thinking
+                    a "Incorrect. Only the head pointer needs updating."
+                "The head pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! The head pointer must point to the next node."
 
-    show adrian explaining
-    a "Question : What happens if you remove a node from the middle of a singly linked list?"
-    menu:
-        "No updates needed":
-            show adrian confused
-            a "Incorrect. You must update the previous node's pointer."
-        "You must update the previous node's pointer":
-            show adrian happy
-            a "Correct! The previous node's pointer must skip the removed node."
-            $ chapter_3_score += 1
-        "You must update all nodes":
-            show adrian thinking
-            a "Incorrect. Only the previous node's pointer needs updating."
-        "You must update the tail pointer":
-            show adrian normal
-            a "Incorrect, unless you remove the last node."
+        elif current_q == "q8":
+            show adrian explaining
+            a "What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
+            menu:
+                "O(n^2)":
+                    show adrian surprised
+                    a "Incorrect. That's much too slow."
+                "O(1)":
+                    show adrian confused
+                    a "Incorrect. You need to traverse the list."
+                "O(log n)":
+                    show adrian normal
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(n)":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! You need to traverse the list to find the end."
 
-    show adrian explaining
-    a "Question : Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
-    menu:
-        "Insertion at the end":
-            show adrian normal
-            a "Incorrect. Insertion at the end is slower without a tail pointer."
-        "Both are the same":
-            show adrian confused
-            a "Incorrect. They have different time complexities."
-        "Insertion at the beginning":
-            show adrian happy
-            a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
-            $ chapter_3_score += 1
-        "Neither":
-            show adrian thinking
-            a "Incorrect. One is faster than the other."
-    
+        elif current_q == "q9":
+            show adrian explaining
+            a "What happens if you remove a node from the middle of a singly linked list?"
+            menu:
+                "No updates needed":
+                    show adrian confused
+                    a "Incorrect. You must update the previous node's pointer."
+                "You must update the previous node's pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! The previous node's pointer must skip the removed node."
+                "You must update all nodes":
+                    show adrian thinking
+                    a "Incorrect. Only the previous node's pointer needs updating."
+                "You must update the tail pointer":
+                    show adrian normal
+                    a "Incorrect, unless you remove the last node."
+
+        elif current_q == "q10":
+            show adrian explaining
+            a "Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
+            menu:
+                "Insertion at the end":
+                    show adrian normal
+                    a "Incorrect. Insertion at the end is slower without a tail pointer."
+                "Both are the same":
+                    show adrian confused
+                    a "Incorrect. They have different time complexities."
+                "Insertion at the beginning":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
+                "Neither":
+                    show adrian thinking
+                    a "Incorrect. One is faster than the other."
+
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_3_score]"
-
+    jump chapter_3_review
+init python:
+    import random
+    chapter_3_medium_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13", "q14"
+    ]
+    random.shuffle(chapter_3_medium_question_order)
 
 label chapter_3_quiz_medium:
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 0.5
     $ chapter_3_score = 0
 
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     show adrian smiling at center
-    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
-    a "What is a Node?"
-    menu:
-        "A Type of Linked List":
-            a "Incorrect, A Node is not a type of Linked List"
-        "A Container for Data":
-            a "Correct"
-            $ chapter_3_score += 1
-        "A Type of Algorithm":
-            a "Incorrect, A Node is not an Algorithm"
-        "A Type of Data Structure":
-            a "Incorrect, A Node is not a type of Data Structure"
+    while chapter_3_medium_question_order:
+        $ current_q = chapter_3_medium_question_order.pop(0)
 
-    a "Next Question"
-    show adrian smiling
-    a "What is the purpose of a Pointer in a Linked List?"
-    menu:
-        "To Store Data":
-            a "Incorrect, A Pointer does not store data"
-        "To Reference the Next Node":
-            a "Correct"
-            $ chapter_3_score += 1
-        "To Store the Previous Node":
-            a "Incorrect, A Pointer does not store the Previous Node"
-        "To Store the Index":
-            a "Incorrect, A Pointer does not store the Index"
-    
-    a "Next Question"
-    a "What is the main advantage of using a Linked List over an array?"
-    menu:
-        "Dynamic Size":
-            a "Correct! Linked Lists can grow and shrink dynamically."
-            $ chapter_3_score += 1
-        "Simpler Structure":
-            a "Incorrect, Linked Lists are more complex than arrays."
-        "Less Memory Usage":
-            a "Incorrect, Linked Lists often use more memory due to pointers."
-        "Faster Access":
-            a "Incorrect, Linked Lists do not have faster access than arrays."
+        if current_q == "q1":
+            a "What is a Node?"
+            menu:
+                "A Type of Linked List":
+                    a "Incorrect, A Node is not a type of Linked List"
+                "A Container for Data":
+                    $ chapter_3_score += 1
+                    a "Correct"
+                "A Type of Algorithm":
+                    a "Incorrect, A Node is not an Algorithm"
+                "A Type of Data Structure":
+                    a "Incorrect, A Node is not a type of Data Structure"
 
-    show adrian explaining
-    a "Next Question"
-    a "Which of the following is a disadvantage of Linked Lists?"
-    menu:
-        "Easy to Reverse Traverse":
-            a "Incorrect, singly Linked Lists are hard to reverse traverse."
-        "Waste Memory":
-            a "Correct! Linked Lists use extra memory for pointers."
-            $ chapter_3_score += 1
-        "Fixed Size":
-            a "Incorrect, Linked Lists are not fixed in size."
-        "Fast Random Access":
-            a "Incorrect, Linked Lists do not support fast random access."
+        elif current_q == "q2":
+            show adrian smiling
+            a "What is the purpose of a Pointer in a Linked List?"
+            menu:
+                "To Store Data":
+                    a "Incorrect, A Pointer does not store data"
+                "To Reference the Next Node":
+                    $ chapter_3_score += 1
+                    a "Correct"
+                "To Store the Previous Node":
+                    a "Incorrect, A Pointer does not store the Previous Node"
+                "To Store the Index":
+                    a "Incorrect, A Pointer does not store the Index"
 
-    show adrian smug
-    a "Next Question"
-    a "What does each node in a Linked List contain?"
+        elif current_q == "q3":
+            a "What is the main advantage of using a Linked List over an array?"
+            menu:
+                "Dynamic Size":
+                    $ chapter_3_score += 1
+                    a "Correct! Linked Lists can grow and shrink dynamically."
+                "Simpler Structure":
+                    a "Incorrect, Linked Lists are more complex than arrays."
+                "Less Memory Usage":
+                    a "Incorrect, Linked Lists often use more memory due to pointers."
+                "Faster Access":
+                    a "Incorrect, Linked Lists do not have faster access than arrays."
 
-    menu:
-        "Only Data":
-            show adrian confused
-            a "Incorrect, nodes also contain a pointer."
-        "Data and Pointer":
-            show adrian happy
-            a "Correct! Each node contains data and a pointer to the next node."
-            $ chapter_3_score += 1
-        "Index and Data":
-            show adrian thinking
-            a "Incorrect, nodes do not store their index."
-        "Only Pointer":
-            show adrian confused
-            a "Incorrect, nodes also contain data."
+        elif current_q == "q4":
+            show adrian explaining
+            a "Which of the following is a disadvantage of Linked Lists?"
+            menu:
+                "Easy to Reverse Traverse":
+                    a "Incorrect, singly Linked Lists are hard to reverse traverse."
+                "Waste Memory":
+                    $ chapter_3_score += 1
+                    a "Correct! Linked Lists use extra memory for pointers."
+                "Fixed Size":
+                    a "Incorrect, Linked Lists are not fixed in size."
+                "Fast Random Access":
+                    a "Incorrect, Linked Lists do not support fast random access."
 
-    show adrian explaining
-    a "Question: What is the time complexity of inserting an item at the beginning of a singly linked list?"
-    menu:
-        "O(n)":
-            show adrian normal
-            a "Incorrect. Inserting at the beginning does not require traversal."
-        "O(log n)":
-            show adrian normal
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(1)":
-            show adrian happy
-            a "Correct! Inserting at the beginning is a constant time operation."
-            $ chapter_3_score += 1
-        "O(n^2)":
-            show adrian surprised
-            a "Incorrect. That's way too slow!"
+        elif current_q == "q5":
+            show adrian smug
+            a "What does each node in a Linked List contain?"
+            menu:
+                "Only Data":
+                    show adrian confused
+                    a "Incorrect, nodes also contain a pointer."
+                "Data and Pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Each node contains data and a pointer to the next node."
+                "Index and Data":
+                    show adrian thinking
+                    a "Incorrect, nodes do not store their index."
+                "Only Pointer":
+                    show adrian confused
+                    a "Incorrect, nodes also contain data."
 
-    show adrian explaining
-    a "Question : What must you update when removing the first node in a singly linked list?"
-    menu:
-        "The tail pointer":
-            show adrian normal
-            a "Incorrect. The tail pointer is only updated if the list becomes empty."
-        "No pointers":
-            show adrian confused
-            a "Incorrect. You must update the head pointer."
-        "All pointers":
-            show adrian thinking
-            a "Incorrect. Only the head pointer needs updating."
-        "The head pointer":
-            show adrian happy
-            a "Correct! The head pointer must point to the next node."
-            $ chapter_3_score += 1
+        elif current_q == "q6":
+            show adrian explaining
+            a "What is the time complexity of inserting an item at the beginning of a singly linked list?"
+            menu:
+                "O(n)":
+                    show adrian normal
+                    a "Incorrect. Inserting at the beginning does not require traversal."
+                "O(log n)":
+                    show adrian normal
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(1)":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Inserting at the beginning is a constant time operation."
+                "O(n^2)":
+                    show adrian surprised
+                    a "Incorrect. That's way too slow!"
 
-    show adrian explaining
-    a "Question : What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
-    menu:
-        "O(n^2)":
-            show adrian surprised
-            a "Incorrect. That's much too slow."
-        "O(1)":
-            show adrian confused
-            a "Incorrect. You need to traverse the list."
-        "O(log n)":
-            show adrian normal
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(n)":
-            show adrian happy
-            a "Correct! You need to traverse the list to find the end."
-            $ chapter_3_score += 1
+        elif current_q == "q7":
+            show adrian explaining
+            a "What must you update when removing the first node in a singly linked list?"
+            menu:
+                "The tail pointer":
+                    show adrian normal
+                    a "Incorrect. The tail pointer is only updated if the list becomes empty."
+                "No pointers":
+                    show adrian confused
+                    a "Incorrect. You must update the head pointer."
+                "All pointers":
+                    show adrian thinking
+                    a "Incorrect. Only the head pointer needs updating."
+                "The head pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! The head pointer must point to the next node."
 
-    show adrian explaining
-    a "Question : What happens if you remove a node from the middle of a singly linked list?"
-    menu:
-        "No updates needed":
-            show adrian confused
-            a "Incorrect. You must update the previous node's pointer."
-        "You must update the previous node's pointer":
-            show adrian happy
-            a "Correct! The previous node's pointer must skip the removed node."
-            $ chapter_3_score += 1
-        "You must update all nodes":
-            show adrian thinking
-            a "Incorrect. Only the previous node's pointer needs updating."
-        "You must update the tail pointer":
-            show adrian normal
-            a "Incorrect, unless you remove the last node."
+        elif current_q == "q8":
+            show adrian explaining
+            a "What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
+            menu:
+                "O(n^2)":
+                    show adrian surprised
+                    a "Incorrect. That's much too slow."
+                "O(1)":
+                    show adrian confused
+                    a "Incorrect. You need to traverse the list."
+                "O(log n)":
+                    show adrian normal
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(n)":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! You need to traverse the list to find the end."
 
-    show adrian explaining
-    a "Question : Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
-    menu:
-        "Insertion at the end":
-            show adrian normal
-            a "Incorrect. Insertion at the end is slower without a tail pointer."
-        "Both are the same":
-            show adrian confused
-            a "Incorrect. They have different time complexities."
-        "Insertion at the beginning":
-            show adrian happy
-            a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
-            $ chapter_3_score += 1
-        "Neither":
-            show adrian thinking
-            a "Incorrect. One is faster than the other."
+        elif current_q == "q9":
+            show adrian explaining
+            a "What happens if you remove a node from the middle of a singly linked list?"
+            menu:
+                "No updates needed":
+                    show adrian confused
+                    a "Incorrect. You must update the previous node's pointer."
+                "You must update the previous node's pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! The previous node's pointer must skip the removed node."
+                "You must update all nodes":
+                    show adrian thinking
+                    a "Incorrect. Only the previous node's pointer needs updating."
+                "You must update the tail pointer":
+                    show adrian normal
+                    a "Incorrect, unless you remove the last node."
 
+        elif current_q == "q10":
+            show adrian explaining
+            a "Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
+            menu:
+                "Insertion at the end":
+                    show adrian normal
+                    a "Incorrect. Insertion at the end is slower without a tail pointer."
+                "Both are the same":
+                    show adrian confused
+                    a "Incorrect. They have different time complexities."
+                "Insertion at the beginning":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
+                "Neither":
+                    show adrian thinking
+                    a "Incorrect. One is faster than the other."
 
-
-        
-    screen linked_list_quiz1:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q11":
+            screen linked_list_quiz1:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node 1" size 30
-                        text "Data 20" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node 2" size 30
-                        text "Data 40" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node 3" size 30
-                        text "Data 30" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node 4" size 30
-                        text "Data -10" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node 1" size 30
+                                text "Data 20" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node 2" size 30
+                                text "Data 40" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node 3" size 30
+                                text "Data 30" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node 4" size 30
+                                text "Data -10" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        textbutton "Node 1" action [SetVariable("ch3_selected_node1", "Node 1"), Return()]
-                        textbutton "Node 2" action [SetVariable("ch3_selected_node1", "Node 2"), Return()]
-                        textbutton "Node 3" action [SetVariable("ch3_selected_node1", "Node 3"), Return()]
-                        textbutton "Node 4" action [SetVariable("ch3_selected_node1", "Node 4"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node 1" action [SetVariable("ch3_selected_node1", "Node 1"), Return()]
+                                textbutton "Node 2" action [SetVariable("ch3_selected_node1", "Node 2"), Return()]
+                                textbutton "Node 3" action [SetVariable("ch3_selected_node1", "Node 3"), Return()]
+                                textbutton "Node 4" action [SetVariable("ch3_selected_node1", "Node 4"), Return()]
+            show screen linked_list_quiz1
+            a "Which node you have to go through last before arriving at Value -10?"
+            hide screen linked_list_quiz1
+            if ch3_selected_node1 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node1 == "Node 3":
+                $ chapter_3_score += 1
+                a "Correct! Node 3 contains the value 30."
+            else:
+                a "Oops! That's not the right node."
 
-            
-    show screen linked_list_quiz1
-    a "Which node you have to go through last before arriving at Value -10?"
-    hide screen linked_list_quiz1
-    if ch3_selected_node1 is None:
-        a "Please Select an Answer"
-        return
-
-    elif ch3_selected_node1 == "Node 3":
-        $ chapter_3_score += 1
-        a "Correct! Node 3 contains the value 30."
-        pass
-    else:
-        a "Oops! That's not the right node."
-        pass
-
-    screen linked_list_quiz2:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q12":
+            screen linked_list_quiz2:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node A" size 30
-                        text "Data 10" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node B" size 30
-                        text "Data 99" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node C" size 30
-                        text "Data 45" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node D" size 30
-                        text "Data 0" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node A" size 30
+                                text "Data 10" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node B" size 30
+                                text "Data 99" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node C" size 30
+                                text "Data 45" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node D" size 30
+                                text "Data 0" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        textbutton "Node A" action [
-                            SetVariable("ch3_selected_node2", "Node A"),
-                            Return()
-                        ]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node A" action [SetVariable("ch3_selected_node2", "Node A"), Return()]
+                                textbutton "Node B" action [SetVariable("ch3_selected_node2", "Node B"), Return()]
+                                textbutton "Node C" action [SetVariable("ch3_selected_node2", "Node C"), Return()]
+                                textbutton "Node D" action [SetVariable("ch3_selected_node2", "Node D"), Return()]
+            show screen linked_list_quiz2
+            a "Which node contains the value 99?"
+            hide screen linked_list_quiz2
+            if ch3_selected_node2 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node2 == "Node B":
+                $ chapter_3_score += 1
+                a "Correct! Node B contains the value 99."
+            else:
+                a "Oops! That's not the right node."
 
-                        textbutton "Node B" action [
-                            SetVariable("ch3_selected_node2", "Node B"),
-                            Return()
-                        ]
-
-                        textbutton "Node C" action [
-                            SetVariable("ch3_selected_node2", "Node C"),
-                            Return()
-                        ]
-
-                        textbutton "Node D" action [
-                            SetVariable("ch3_selected_node2", "Node D"),
-                            Return()
-                        ]
-
-
-    show screen linked_list_quiz2
-    a "Which node contains the value 99?"
-    hide screen linked_list_quiz2
-
-    if ch3_selected_node2 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node2 == "Node B":
-        $ chapter_3_score += 1
-        a "Correct! Node B contains the value 99."
-        pass
-    else:
-        a "Oops! That's not the right node."
-    
-    
-    screen linked_list_quiz3:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q13":
+            screen linked_list_quiz3:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node W" size 30
-                        text "Data 5" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node X" size 30
-                        text "Data 15" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node Y" size 30
-                        text "Data 25" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node Z" size 30
-                        text "Data 35" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node W" size 30
+                                text "Data 5" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node X" size 30
+                                text "Data 15" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node Y" size 30
+                                text "Data 25" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node Z" size 30
+                                text "Data 35" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node W" action [SetVariable("ch3_selected_node3", "Node W"), Return()]
+                                textbutton "Node X" action [SetVariable("ch3_selected_node3", "Node X"), Return()]
+                                textbutton "Node Y" action [SetVariable("ch3_selected_node3", "Node Y"), Return()]
+                                textbutton "Node Z" action [SetVariable("ch3_selected_node3", "Node Z"), Return()]
+            show screen linked_list_quiz3
+            a "Which node comes immediately after Node X?"
+            hide screen linked_list_quiz3
+            if ch3_selected_node3 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node3 == "Node Y":
+                $ chapter_3_score += 1
+                a "Correct! Node Y follows Node X."
+            else:
+                a "Oops! That's not the right node."
 
-                        textbutton "Node W" action [
-                            SetVariable("ch3_selected_node3", "Node W"),
-                            Return()
-                        ]
-
-                        textbutton "Node X" action [
-                            SetVariable("ch3_selected_node3", "Node X"),
-                            Return()
-                        ]
-
-                        textbutton "Node Y" action [
-                            SetVariable("ch3_selected_node3", "Node Y"),
-                            Return()
-                        ]
-
-                        textbutton "Node Z" action [
-                            SetVariable("ch3_selected_node3", "Node Z"),
-                            Return()
-                        ]
-
-
-    show screen linked_list_quiz3
-    a "Which node comes immediately after Node X?"
-    hide screen linked_list_quiz3
-
-
-    if ch3_selected_node3 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node3 == "Node Y":
-        $ chapter_3_score += 1
-        a "Correct! Node Y follows Node X."
-        pass
-    else:
-        a "Oops! That's not the right node."
-        pass
-
-
-    screen linked_list_quiz4:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q14":
+            screen linked_list_quiz4:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node M" size 30
-                        text "Data 88" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node N" size 30
-                        text "Data 42" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node O" size 30
-                        text "Data 17" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node P" size 30
-                        text "Data 3" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node M" size 30
+                                text "Data 88" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node N" size 30
+                                text "Data 42" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node O" size 30
+                                text "Data 17" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node P" size 30
+                                text "Data 3" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-
-                        textbutton "Node M" action [
-                            SetVariable("ch3_selected_node4", "Node M"),
-                            Return()
-                        ]
-
-                        textbutton "Node N" action [
-                            SetVariable("ch3_selected_node4", "Node N"),
-                            Return()
-                        ]
-
-                        textbutton "Node O" action [
-                            SetVariable("ch3_selected_node4", "Node O"),
-                            Return()
-                        ]
-
-                        textbutton "Node P" action [
-                            SetVariable("ch3_selected_node4", "Node P"),
-                            Return()
-                        ]
-
-    show screen linked_list_quiz4
-    a "Which node contains the smallest value?"
-    hide screen linked_list_quiz4
-
-
-    if ch3_selected_node4 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node4 == "Node P":
-        $ chapter_3_score += 1
-        a "Correct! Node P has the smallest value."
-        pass
-    else:
-        a "Oops! That's not the right node."
-        pass
-
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node M" action [SetVariable("ch3_selected_node4", "Node M"), Return()]
+                                textbutton "Node N" action [SetVariable("ch3_selected_node4", "Node N"), Return()]
+                                textbutton "Node O" action [SetVariable("ch3_selected_node4", "Node O"), Return()]
+                                textbutton "Node P" action [SetVariable("ch3_selected_node4", "Node P"), Return()]
+            show screen linked_list_quiz4
+            a "Which node contains the smallest value?"
+            hide screen linked_list_quiz4
+            if ch3_selected_node4 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node4 == "Node P":
+                $ chapter_3_score += 1
+                a "Correct! Node P has the smallest value."
+            else:
+                a "Oops! That's not the right node."
 
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_3_score]"
+    jump chapter_3_review
+init python:
+    import random
+    chapter_3_hard_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15", "q16", "q17", "q18", "q19", "q20"
+    ]
+    random.shuffle(chapter_3_hard_question_order)
+
 label chapter_3_quiz_hard:
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 0.5
     $ chapter_3_score = 0
 
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     show adrian smiling at center
-    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
-    a "What is a Node?"
-    menu:
-        "A Type of Linked List":
-            a "Incorrect, A Node is not a type of Linked List"
-        "A Container for Data":
-            a "Correct"
-            $ chapter_3_score += 1
-        "A Type of Algorithm":
-            a "Incorrect, A Node is not an Algorithm"
-        "A Type of Data Structure":
-            a "Incorrect, A Node is not a type of Data Structure"
+    while chapter_3_hard_question_order:
+        $ current_q = chapter_3_hard_question_order.pop(0)
 
-    a "Next Question"
-    show adrian smiling
-    a "What is the purpose of a Pointer in a Linked List?"
-    menu:
-        "To Store Data":
-            a "Incorrect, A Pointer does not store data"
-        "To Reference the Next Node":
-            a "Correct"
-            $ chapter_3_score += 1
-        "To Store the Previous Node":
-            a "Incorrect, A Pointer does not store the Previous Node"
-        "To Store the Index":
-            a "Incorrect, A Pointer does not store the Index"
-    
-    a "Next Question"
-    a "What is the main advantage of using a Linked List over an array?"
-    menu:
-        "Dynamic Size":
-            a "Correct! Linked Lists can grow and shrink dynamically."
-            $ chapter_3_score += 1
-        "Simpler Structure":
-            a "Incorrect, Linked Lists are more complex than arrays."
-        "Less Memory Usage":
-            a "Incorrect, Linked Lists often use more memory due to pointers."
-        "Faster Access":
-            a "Incorrect, Linked Lists do not have faster access than arrays."
+        if current_q == "q1":
+            a "What is a Node?"
+            menu:
+                "A Type of Linked List":
+                    a "Incorrect, A Node is not a type of Linked List"
+                "A Container for Data":
+                    $ chapter_3_score += 1
+                    a "Correct"
+                "A Type of Algorithm":
+                    a "Incorrect, A Node is not an Algorithm"
+                "A Type of Data Structure":
+                    a "Incorrect, A Node is not a type of Data Structure"
 
-    show adrian explaining
-    a "Next Question"
-    a "Which of the following is a disadvantage of Linked Lists?"
-    menu:
-        "Easy to Reverse Traverse":
-            a "Incorrect, singly Linked Lists are hard to reverse traverse."
-        "Waste Memory":
-            a "Correct! Linked Lists use extra memory for pointers."
-            $ chapter_3_score += 1
-        "Fixed Size":
-            a "Incorrect, Linked Lists are not fixed in size."
-        "Fast Random Access":
-            a "Incorrect, Linked Lists do not support fast random access."
+        elif current_q == "q2":
+            show adrian smiling
+            a "What is the purpose of a Pointer in a Linked List?"
+            menu:
+                "To Store Data":
+                    a "Incorrect, A Pointer does not store data"
+                "To Reference the Next Node":
+                    $ chapter_3_score += 1
+                    a "Correct"
+                "To Store the Previous Node":
+                    a "Incorrect, A Pointer does not store the Previous Node"
+                "To Store the Index":
+                    a "Incorrect, A Pointer does not store the Index"
 
-    show adrian smug
-    a "Next Question"
-    a "What does each node in a Linked List contain?"
+        elif current_q == "q3":
+            a "What is the main advantage of using a Linked List over an array?"
+            menu:
+                "Dynamic Size":
+                    $ chapter_3_score += 1
+                    a "Correct! Linked Lists can grow and shrink dynamically."
+                "Simpler Structure":
+                    a "Incorrect, Linked Lists are more complex than arrays."
+                "Less Memory Usage":
+                    a "Incorrect, Linked Lists often use more memory due to pointers."
+                "Faster Access":
+                    a "Incorrect, Linked Lists do not have faster access than arrays."
 
-    menu:
-        "Only Data":
-            show adrian confused
-            a "Incorrect, nodes also contain a pointer."
-        "Data and Pointer":
-            show adrian happy
-            a "Correct! Each node contains data and a pointer to the next node."
-            $ chapter_3_score += 1
-        "Index and Data":
-            show adrian thinking
-            a "Incorrect, nodes do not store their index."
-        "Only Pointer":
-            show adrian confused
-            a "Incorrect, nodes also contain data."
+        elif current_q == "q4":
+            show adrian explaining
+            a "Which of the following is a disadvantage of Linked Lists?"
+            menu:
+                "Easy to Reverse Traverse":
+                    a "Incorrect, singly Linked Lists are hard to reverse traverse."
+                "Waste Memory":
+                    $ chapter_3_score += 1
+                    a "Correct! Linked Lists use extra memory for pointers."
+                "Fixed Size":
+                    a "Incorrect, Linked Lists are not fixed in size."
+                "Fast Random Access":
+                    a "Incorrect, Linked Lists do not support fast random access."
 
-    show adrian explaining
-    a "Question: What is the time complexity of inserting an item at the beginning of a singly linked list?"
-    menu:
-        "O(n)":
-            show adrian normal
-            a "Incorrect. Inserting at the beginning does not require traversal."
-        "O(log n)":
-            show adrian normal
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(1)":
-            show adrian happy
-            a "Correct! Inserting at the beginning is a constant time operation."
-            $ chapter_3_score += 1
-        "O(n^2)":
-            show adrian surprised
-            a "Incorrect. That's way too slow!"
+        elif current_q == "q5":
+            show adrian smug
+            a "What does each node in a Linked List contain?"
+            menu:
+                "Only Data":
+                    show adrian confused
+                    a "Incorrect, nodes also contain a pointer."
+                "Data and Pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Each node contains data and a pointer to the next node."
+                "Index and Data":
+                    show adrian thinking
+                    a "Incorrect, nodes do not store their index."
+                "Only Pointer":
+                    show adrian confused
+                    a "Incorrect, nodes also contain data."
 
-    show adrian explaining
-    a "Question : What must you update when removing the first node in a singly linked list?"
-    menu:
-        "The tail pointer":
-            show adrian normal
-            a "Incorrect. The tail pointer is only updated if the list becomes empty."
-        "No pointers":
-            show adrian confused
-            a "Incorrect. You must update the head pointer."
-        "All pointers":
-            show adrian thinking
-            a "Incorrect. Only the head pointer needs updating."
-        "The head pointer":
-            show adrian happy
-            a "Correct! The head pointer must point to the next node."
-            $ chapter_3_score += 1
+        elif current_q == "q6":
+            show adrian explaining
+            a "What is the time complexity of inserting an item at the beginning of a singly linked list?"
+            menu:
+                "O(n)":
+                    show adrian normal
+                    a "Incorrect. Inserting at the beginning does not require traversal."
+                "O(log n)":
+                    show adrian normal
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(1)":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Inserting at the beginning is a constant time operation."
+                "O(n^2)":
+                    show adrian surprised
+                    a "Incorrect. That's way too slow!"
 
-    show adrian explaining
-    a "Question : What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
-    menu:
-        "O(n^2)":
-            show adrian surprised
-            a "Incorrect. That's much too slow."
-        "O(1)":
-            show adrian confused
-            a "Incorrect. You need to traverse the list."
-        "O(log n)":
-            show adrian normal
-            a "Incorrect. Linked lists do not have logarithmic operations."
-        "O(n)":
-            show adrian happy
-            a "Correct! You need to traverse the list to find the end."
-            $ chapter_3_score += 1
+        elif current_q == "q7":
+            show adrian explaining
+            a "What must you update when removing the first node in a singly linked list?"
+            menu:
+                "The tail pointer":
+                    show adrian normal
+                    a "Incorrect. The tail pointer is only updated if the list becomes empty."
+                "No pointers":
+                    show adrian confused
+                    a "Incorrect. You must update the head pointer."
+                "All pointers":
+                    show adrian thinking
+                    a "Incorrect. Only the head pointer needs updating."
+                "The head pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! The head pointer must point to the next node."
 
-    show adrian explaining
-    a "Question : What happens if you remove a node from the middle of a singly linked list?"
-    menu:
-        "No updates needed":
-            show adrian confused
-            a "Incorrect. You must update the previous node's pointer."
-        "You must update the previous node's pointer":
-            show adrian happy
-            a "Correct! The previous node's pointer must skip the removed node."
-            $ chapter_3_score += 1
-        "You must update all nodes":
-            show adrian thinking
-            a "Incorrect. Only the previous node's pointer needs updating."
-        "You must update the tail pointer":
-            show adrian normal
-            a "Incorrect, unless you remove the last node."
+        elif current_q == "q8":
+            show adrian explaining
+            a "What is the time complexity of inserting an item at the end of a singly linked list if you do NOT have a tail pointer?"
+            menu:
+                "O(n^2)":
+                    show adrian surprised
+                    a "Incorrect. That's much too slow."
+                "O(1)":
+                    show adrian confused
+                    a "Incorrect. You need to traverse the list."
+                "O(log n)":
+                    show adrian normal
+                    a "Incorrect. Linked lists do not have logarithmic operations."
+                "O(n)":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! You need to traverse the list to find the end."
 
-    show adrian explaining
-    a "Question : Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
-    menu:
-        "Insertion at the end":
-            show adrian normal
-            a "Incorrect. Insertion at the end is slower without a tail pointer."
-        "Both are the same":
-            show adrian confused
-            a "Incorrect. They have different time complexities."
-        "Insertion at the beginning":
-            show adrian happy
-            a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
-            $ chapter_3_score += 1
-        "Neither":
-            show adrian thinking
-            a "Incorrect. One is faster than the other."
+        elif current_q == "q9":
+            show adrian explaining
+            a "What happens if you remove a node from the middle of a singly linked list?"
+            menu:
+                "No updates needed":
+                    show adrian confused
+                    a "Incorrect. You must update the previous node's pointer."
+                "You must update the previous node's pointer":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! The previous node's pointer must skip the removed node."
+                "You must update all nodes":
+                    show adrian thinking
+                    a "Incorrect. Only the previous node's pointer needs updating."
+                "You must update the tail pointer":
+                    show adrian normal
+                    a "Incorrect, unless you remove the last node."
 
+        elif current_q == "q10":
+            show adrian explaining
+            a "Which operation is generally faster in a singly linked list: insertion at the beginning or at the end (without a tail pointer)?"
+            menu:
+                "Insertion at the end":
+                    show adrian normal
+                    a "Incorrect. Insertion at the end is slower without a tail pointer."
+                "Both are the same":
+                    show adrian confused
+                    a "Incorrect. They have different time complexities."
+                "Insertion at the beginning":
+                    $ chapter_3_score += 1
+                    show adrian happy
+                    a "Correct! Insertion at the beginning is O(1), while at the end is O(n) without a tail pointer."
+                "Neither":
+                    show adrian thinking
+                    a "Incorrect. One is faster than the other."
 
-
-        
-    screen linked_list_quiz1:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q11":
+            screen linked_list_quiz1:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node 1" size 30
-                        text "Data 20" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node 2" size 30
-                        text "Data 40" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node 3" size 30
-                        text "Data 30" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node 4" size 30
-                        text "Data -10" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node 1" size 30
+                                text "Data 20" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node 2" size 30
+                                text "Data 40" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node 3" size 30
+                                text "Data 30" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node 4" size 30
+                                text "Data -10" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        textbutton "Node 1" action [SetVariable("ch3_selected_node1", "Node 1"), Return()]
-                        textbutton "Node 2" action [SetVariable("ch3_selected_node1", "Node 2"), Return()]
-                        textbutton "Node 3" action [SetVariable("ch3_selected_node1", "Node 3"), Return()]
-                        textbutton "Node 4" action [SetVariable("ch3_selected_node1", "Node 4"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node 1" action [SetVariable("ch3_selected_node1", "Node 1"), Return()]
+                                textbutton "Node 2" action [SetVariable("ch3_selected_node1", "Node 2"), Return()]
+                                textbutton "Node 3" action [SetVariable("ch3_selected_node1", "Node 3"), Return()]
+                                textbutton "Node 4" action [SetVariable("ch3_selected_node1", "Node 4"), Return()]
+            show screen linked_list_quiz1
+            a "Which node you have to go through last before arriving at Value -10?"
+            hide screen linked_list_quiz1
+            if ch3_selected_node1 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node1 == "Node 3":
+                $ chapter_3_score += 1
+                show adrian happy
+                a "Correct! Node 3 contains the value 30."
+            else:
+                a "Oops! That's not the right node."
 
-            
-    show screen linked_list_quiz1
-    a "Which node you have to go through last before arriving at Value -10?"
-    hide screen linked_list_quiz1
-
-    if ch3_selected_node1 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node1 == "Node 3":
-        $ chapter_3_score += 1
-        show adrian happy
-        a "Correct! Node 3 contains the value 30."
-        pass
-    else:
-        a "Oops! That's not the right node."
-        pass
-
-    screen linked_list_quiz2:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q12":
+            screen linked_list_quiz2:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node A" size 30
-                        text "Data 10" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node B" size 30
-                        text "Data 99" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node C" size 30
-                        text "Data 45" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node D" size 30
-                        text "Data 0" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node A" size 30
+                                text "Data 10" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node B" size 30
+                                text "Data 99" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node C" size 30
+                                text "Data 45" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node D" size 30
+                                text "Data 0" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        textbutton "Node A" action [
-                            SetVariable("ch3_selected_node2", "Node A"),
-                            Return()
-                        ]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node A" action [SetVariable("ch3_selected_node2", "Node A"), Return()]
+                                textbutton "Node B" action [SetVariable("ch3_selected_node2", "Node B"), Return()]
+                                textbutton "Node C" action [SetVariable("ch3_selected_node2", "Node C"), Return()]
+                                textbutton "Node D" action [SetVariable("ch3_selected_node2", "Node D"), Return()]
+            show screen linked_list_quiz2
+            a "Which node contains the value 99?"
+            hide screen linked_list_quiz2
+            if ch3_selected_node2 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node2 == "Node B":
+                $ chapter_3_score += 1
+                a "Correct! Node B contains the value 99."
+            else:
+                a "Oops! That's not the right node."
 
-                        textbutton "Node B" action [
-                            SetVariable("ch3_selected_node2", "Node B"),
-                            Return()
-                        ]
-
-                        textbutton "Node C" action [
-                            SetVariable("ch3_selected_node2", "Node C"),
-                            Return()
-                        ]
-
-                        textbutton "Node D" action [
-                            SetVariable("ch3_selected_node2", "Node D"),
-                            Return()
-                        ]
-
-
-    show screen linked_list_quiz2
-    a "Which node contains the value 99?"
-    hide screen linked_list_quiz2
-
-    if ch3_selected_node2 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node2 == "Node B":
-        $ chapter_3_score += 1
-        a "Correct! Node B contains the value 99."
-        pass
-    else:
-        a "Oops! That's not the right node."
-    
-    
-    screen linked_list_quiz3:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q13":
+            screen linked_list_quiz3:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node W" size 30
-                        text "Data 5" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node X" size 30
-                        text "Data 15" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node Y" size 30
-                        text "Data 25" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node Z" size 30
-                        text "Data 35" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node W" size 30
+                                text "Data 5" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node X" size 30
+                                text "Data 15" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node Y" size 30
+                                text "Data 25" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node Z" size 30
+                                text "Data 35" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node W" action [SetVariable("ch3_selected_node3", "Node W"), Return()]
+                                textbutton "Node X" action [SetVariable("ch3_selected_node3", "Node X"), Return()]
+                                textbutton "Node Y" action [SetVariable("ch3_selected_node3", "Node Y"), Return()]
+                                textbutton "Node Z" action [SetVariable("ch3_selected_node3", "Node Z"), Return()]
+            show screen linked_list_quiz3
+            a "Which node comes immediately after Node X?"
+            hide screen linked_list_quiz3
+            if ch3_selected_node3 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node3 == "Node Y":
+                $ chapter_3_score += 1
+                a "Correct! Node Y follows Node X."
+            else:
+                a "Oops! That's not the right node."
 
-                        textbutton "Node W" action [
-                            SetVariable("ch3_selected_node3", "Node W"),
-                            Return()
-                        ]
-
-                        textbutton "Node X" action [
-                            SetVariable("ch3_selected_node3", "Node X"),
-                            Return()
-                        ]
-
-                        textbutton "Node Y" action [
-                            SetVariable("ch3_selected_node3", "Node Y"),
-                            Return()
-                        ]
-
-                        textbutton "Node Z" action [
-                            SetVariable("ch3_selected_node3", "Node Z"),
-                            Return()
-                        ]
-
-
-    show screen linked_list_quiz3
-    a "Which node comes immediately after Node X?"
-    hide screen linked_list_quiz3
-
-    if ch3_selected_node3 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node3 == "Node Y":
-        $ chapter_3_score += 1
-        a "Correct! Node Y follows Node X."
-        pass
-    else:
-        a "Oops! That's not the right node."
-        pass
-
-
-    screen linked_list_quiz4:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q14":
+            screen linked_list_quiz4:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node M" size 30
-                        text "Data 88" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node N" size 30
-                        text "Data 42" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node O" size 30
-                        text "Data 17" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node P" size 30
-                        text "Data 3" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node M" size 30
+                                text "Data 88" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node N" size 30
+                                text "Data 42" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node O" size 30
+                                text "Data 17" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node P" size 30
+                                text "Data 3" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node M" action [SetVariable("ch3_selected_node4", "Node M"), Return()]
+                                textbutton "Node N" action [SetVariable("ch3_selected_node4", "Node N"), Return()]
+                                textbutton "Node O" action [SetVariable("ch3_selected_node4", "Node O"), Return()]
+                                textbutton "Node P" action [SetVariable("ch3_selected_node4", "Node P"), Return()]
+            show screen linked_list_quiz4
+            a "Which node contains the smallest value?"
+            hide screen linked_list_quiz4
+            if ch3_selected_node4 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node4 == "Node P":
+                $ chapter_3_score += 1
+                a "Correct! Node P has the smallest value."
+            else:
+                a "Oops! That's not the right node."
 
-                        textbutton "Node M" action [
-                            SetVariable("ch3_selected_node4", "Node M"),
-                            Return()
-                        ]
-
-                        textbutton "Node N" action [
-                            SetVariable("ch3_selected_node4", "Node N"),
-                            Return()
-                        ]
-
-                        textbutton "Node O" action [
-                            SetVariable("ch3_selected_node4", "Node O"),
-                            Return()
-                        ]
-
-                        textbutton "Node P" action [
-                            SetVariable("ch3_selected_node4", "Node P"),
-                            Return()
-                        ]
-
-    show screen linked_list_quiz4
-    a "Which node contains the smallest value?"
-    hide screen linked_list_quiz4
-
-    if ch3_selected_node4 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node4 == "Node P":
-        $ chapter_3_score += 1
-        a "Correct! Node P has the smallest value."
-        pass
-    else:
-        a "Oops! That's not the right node."
-        pass
-
-    screen linked_list_quiz5:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q15":
+            screen linked_list_quiz5:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-
-                        text "Node A" size 30
-                        text "Data 105" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node B" size 30
-                        text "Data 12" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node C" size 30
-                        text "Data 67" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node D" size 30
-                        text "Data 88" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-                        text "Node E" size 30
-                        text "Data 33" size 20 color "#00FF00"
-                        text "→" size 25 color "#FFD700"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node A" size 30
+                                text "Data 105" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node B" size 30
+                                text "Data 12" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node C" size 30
+                                text "Data 67" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node D" size 30
+                                text "Data 88" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                                text "Node E" size 30
+                                text "Data 33" size 20 color "#00FF00"
+                                text "→" size 25 color "#FFD700"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-                        textbutton "Node A" action [SetVariable("ch3_selected_node5", "Node A"), Return()]
-                        textbutton "Node B" action [SetVariable("ch3_selected_node5", "Node B"), Return()]
-                        textbutton "Node C" action [SetVariable("ch3_selected_node5", "Node C"), Return()]
-                        textbutton "Node D" action [SetVariable("ch3_selected_node5", "Node D"), Return()]
-                        textbutton "Node E" action [SetVariable("ch3_selected_node5", "Node E"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node A" action [SetVariable("ch3_selected_node5", "Node A"), Return()]
+                                textbutton "Node B" action [SetVariable("ch3_selected_node5", "Node B"), Return()]
+                                textbutton "Node C" action [SetVariable("ch3_selected_node5", "Node C"), Return()]
+                                textbutton "Node D" action [SetVariable("ch3_selected_node5", "Node D"), Return()]
+                                textbutton "Node E" action [SetVariable("ch3_selected_node5", "Node E"), Return()]
+            show screen linked_list_quiz5
+            a "Which node contains the **second smallest** value?"
+            hide screen linked_list_quiz5
+            if ch3_selected_node5 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node5 == "Node E":
+                $ chapter_3_score += 1
+                a "Correct! Node E has the second smallest value after Node B."
+            else:
+                a "Not quite. Remember to compare all values carefully."
 
-
-    show screen linked_list_quiz5
-    a "Which node contains the **second smallest** value?"
-    hide screen linked_list_quiz5
-
-
-    if ch3_selected_node5 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node5 == "Node E":
-        $ chapter_3_score += 1
-        a "Correct! Node E has the second smallest value after Node B."
-    else:
-        a "Not quite. Remember to compare all values carefully."
-
-        pass
-
-    screen linked_list_quiz6:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q16":
+            screen linked_list_quiz6:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node A" size 30
-                        text "→" size 25
-                        text "Node B" size 30
-                        text "→" size 25
-                        text "Node C" size 30
-                        text "→" size 25
-                        text "Node D" size 30
-                        text "→" size 25
-                        text "Node E" size 30
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node A" size 30
+                                text "→" size 25
+                                text "Node B" size 30
+                                text "→" size 25
+                                text "Node C" size 30
+                                text "→" size 25
+                                text "Node D" size 30
+                                text "→" size 25
+                                text "Node E" size 30
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-                        textbutton "Node A" action [SetVariable("ch3_selected_node6", "Node A"), Return()]
-                        textbutton "Node B" action [SetVariable("ch3_selected_node6", "Node B"), Return()]
-                        textbutton "Node D" action [SetVariable("ch3_selected_node6", "Node D"), Return()]
-                        textbutton "Node E" action [SetVariable("ch3_selected_node6", "Node E"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node A" action [SetVariable("ch3_selected_node6", "Node A"), Return()]
+                                textbutton "Node B" action [SetVariable("ch3_selected_node6", "Node B"), Return()]
+                                textbutton "Node D" action [SetVariable("ch3_selected_node6", "Node D"), Return()]
+                                textbutton "Node E" action [SetVariable("ch3_selected_node6", "Node E"), Return()]
+            show screen linked_list_quiz6
+            a "Which node comes directly after Node C?"
+            hide screen linked_list_quiz6
+            if ch3_selected_node6 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node6 == "Node D":
+                $ chapter_3_score += 1
+                a "Correct! Node D follows Node C."
+            else:
+                a "Incorrect. Trace the arrows carefully."
 
-    show screen linked_list_quiz6
-    a "Which node comes directly after Node C?"
-    hide screen linked_list_quiz6
-
-    if ch3_selected_node6 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node6 == "Node D":
-        $ chapter_3_score += 1
-        a "Correct! Node D follows Node C."
-    else:
-        a "Incorrect. Trace the arrows carefully."
-
-    screen linked_list_quiz7:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q17":
+            screen linked_list_quiz7:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node F" size 30
-                        text "Data 23" size 20
-                        text "→" size 25
-                        text "Node G" size 30
-                        text "Data 91" size 20
-                        text "→" size 25
-                        text "Node H" size 30
-                        text "Data 45" size 20
-                        text "→" size 25
-                        text "Node I" size 30
-                        text "Data 67" size 20
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node F" size 30
+                                text "Data 23" size 20
+                                text "→" size 25
+                                text "Node G" size 30
+                                text "Data 91" size 20
+                                text "→" size 25
+                                text "Node H" size 30
+                                text "Data 45" size 20
+                                text "→" size 25
+                                text "Node I" size 30
+                                text "Data 67" size 20
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-                        textbutton "Node F" action [SetVariable("ch3_selected_node7", "Node F"), Return()]
-                        textbutton "Node G" action [SetVariable("ch3_selected_node7", "Node G"), Return()]
-                        textbutton "Node H" action [SetVariable("ch3_selected_node7", "Node H"), Return()]
-                        textbutton "Node I" action [SetVariable("ch3_selected_node7", "Node I"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node F" action [SetVariable("ch3_selected_node7", "Node F"), Return()]
+                                textbutton "Node G" action [SetVariable("ch3_selected_node7", "Node G"), Return()]
+                                textbutton "Node H" action [SetVariable("ch3_selected_node7", "Node H"), Return()]
+                                textbutton "Node I" action [SetVariable("ch3_selected_node7", "Node I"), Return()]
+            show screen linked_list_quiz7
+            a "Which node contains the highest value?"
+            hide screen linked_list_quiz7
+            if ch3_selected_node7 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node7 == "Node G":
+                $ chapter_3_score += 1
+                a "Correct! Node G has the highest value: 91."
+            else:
+                a "Not quite. Scan the data values carefully."
 
-    show screen linked_list_quiz7
-    a "Which node contains the highest value?"
-    hide screen linked_list_quiz7
-
-    if ch3_selected_node7 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node7 == "Node G":
-        $ chapter_3_score += 1
-        a "Correct! Node G has the highest value: 91."
-    else:
-        a "Not quite. Scan the data values carefully."
-
-    screen linked_list_quiz8:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q18":
+            screen linked_list_quiz8:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node F → Node G → Node H → Node I"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node F → Node G → Node H → Node I"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-                        textbutton "Node F" action [SetVariable("ch3_selected_node8", "Node F"), Return()]
-                        textbutton "Node G" action [SetVariable("ch3_selected_node8", "Node G"), Return()]
-                        textbutton "Node H" action [SetVariable("ch3_selected_node8", "Node H"), Return()]
-                        textbutton "Node I" action [SetVariable("ch3_selected_node8", "Node I"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node F" action [SetVariable("ch3_selected_node8", "Node F"), Return()]
+                                textbutton "Node G" action [SetVariable("ch3_selected_node8", "Node G"), Return()]
+                                textbutton "Node H" action [SetVariable("ch3_selected_node8", "Node H"), Return()]
+                                textbutton "Node I" action [SetVariable("ch3_selected_node8", "Node I"), Return()]
+            show screen linked_list_quiz8
+            a "If Node G points directly to Node I, which node is skipped?"
+            hide screen linked_list_quiz8
+            if ch3_selected_node8 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node8 == "Node H":
+                $ chapter_3_score += 1
+                a "Correct! Node H is skipped in the new pointer structure."
+            else:
+                a "Incorrect. Think about the pointer redirection."
 
-    show screen linked_list_quiz8
-    a "If Node G points directly to Node I, which node is skipped?"
-    hide screen linked_list_quiz8
-
-    if ch3_selected_node8 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node8 == "Node H":
-        $ chapter_3_score += 1
-        a "Correct! Node H is skipped in the new pointer structure."
-    else:
-        a "Incorrect. Think about the pointer redirection."
-
-    screen linked_list_quiz9:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q19":
+            screen linked_list_quiz9:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node J → Node K → Node L → Node M → Node N"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node J → Node K → Node L → Node M → Node N"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-                        textbutton "Node J" action [SetVariable("ch3_selected_node9", "Node J"), Return()]
-                        textbutton "Node K" action [SetVariable("ch3_selected_node9", "Node K"), Return()]
-                        textbutton "Node L" action [SetVariable("ch3_selected_node9", "Node L"), Return()]
-                        textbutton "Node M" action [SetVariable("ch3_selected_node9", "Node M"), Return()]
-                        textbutton "Node N" action [SetVariable("ch3_selected_node9", "Node N"), Return()]
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node J" action [SetVariable("ch3_selected_node9", "Node J"), Return()]
+                                textbutton "Node K" action [SetVariable("ch3_selected_node9", "Node K"), Return()]
+                                textbutton "Node L" action [SetVariable("ch3_selected_node9", "Node L"), Return()]
+                                textbutton "Node M" action [SetVariable("ch3_selected_node9", "Node M"), Return()]
+                                textbutton "Node N" action [SetVariable("ch3_selected_node9", "Node N"), Return()]
+            show screen linked_list_quiz9
+            a "Which node is the third in the sequence?"
+            hide screen linked_list_quiz9
+            if ch3_selected_node9 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node9 == "Node L":
+                $ chapter_3_score += 1
+                a "Correct! Node L is third in the linked list."
+            else:
+                a "Nope. Count the arrows carefully."
 
-    show screen linked_list_quiz9
-    a "Which node is the third in the sequence?"
-    hide screen linked_list_quiz9
-
-    if ch3_selected_node9 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node9 == "Node L":
-        $ chapter_3_score += 1
-        a "Correct! Node L is third in the linked list."
-    else:
-        a "Nope. Count the arrows carefully."
-
-    screen linked_list_quiz10:
-        frame:
-            xalign 0.2
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Linked List Representation" size 40
-
-                hbox:
-                    spacing 20
+        elif current_q == "q20":
+            screen linked_list_quiz10:
+                frame:
+                    xalign 0.2
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 5
-                        text "Node A → Node B → Node C → Node D → Node E"
-
-                        text "Pointer override: Node A → Node C → Node E"
-
-        frame:
-            xalign 0.7
-            yalign 0.3
-            xpadding 30
-            ypadding 30
-            vbox:
-                spacing 20
-                xalign 0.5
-                yalign 0.5
-
-                text "Pick Your Answer" size 40
-
-                hbox:
-                    spacing 20
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Linked List Representation" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                spacing 5
+                                text "Node A → Node B → Node C → Node D → Node E"
+                                text "Pointer override: Node A → Node C → Node E"
+                frame:
+                    xalign 0.7
+                    yalign 0.3
+                    xpadding 30
+                    ypadding 30
                     vbox:
-                        spacing 10
-                        textbutton "Node B" action [SetVariable("ch3_selected_node10", "Node B"), Return()]
-                        textbutton "Node C" action [SetVariable("ch3_selected_node10", "Node C"), Return()]
-                        textbutton "Node D" action [SetVariable("ch3_selected_node10", "Node D"), Return()]
-                        textbutton "Node E" action [SetVariable("ch3_selected_node10", "Node E"), Return()]
-
-    show screen linked_list_quiz10
-    a "If Node A points to Node C and Node C points to Node E, which node becomes unreachable?"
-    hide screen linked_list_quiz10
-
-    if ch3_selected_node10 is None:
-        a "Please Select an Answer"
-        return
-    elif ch3_selected_node10 == "Node B":
-        $ chapter_3_score += 1
-        a "Correct! Node B is skipped entirely in the new structure."
-    else:
-        a "Incorrect. Consider which node is no longer part of the traversal."
+                        spacing 20
+                        xalign 0.5
+                        yalign 0.5
+                        text "Pick Your Answer" size 40
+                        hbox:
+                            spacing 20
+                            vbox:
+                                textbutton "Node B" action [SetVariable("ch3_selected_node10", "Node B"), Return()]
+                                textbutton "Node C" action [SetVariable("ch3_selected_node10", "Node C"), Return()]
+                                textbutton "Node D" action [SetVariable("ch3_selected_node10", "Node D"), Return()]
+                                textbutton "Node E" action [SetVariable("ch3_selected_node10", "Node E"), Return()]
+            show screen linked_list_quiz10
+            a "If Node A points to Node C and Node C points to Node E, which node becomes unreachable?"
+            hide screen linked_list_quiz10
+            if ch3_selected_node10 is None:
+                a "Please Select an Answer"
+                return
+            elif ch3_selected_node10 == "Node B":
+                $ chapter_3_score += 1
+                a "Correct! Node B is skipped entirely in the new structure."
+            else:
+                a "Incorrect. Consider which node is no longer part of the traversal."
 
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_3_score]"
+    jump chapter_3_review
 
+label chapter_2_review:
+    # Basics of Arrays
+    if chapter_2_basics_quiz < 2:
+        a "You need to review the Basics of Arrays section."
+        a "Consider revisiting the material to improve your understanding."
+    elif chapter_2_basics_quiz < 4:
+        a "You did okay in the Basics of Arrays section, but there's room for improvement."
+        a "Reviewing the material could help solidify your knowledge."
+
+    # Array Operations
+    if chapter_2_Operations_Quiz < 2:
+        a "You need to review the Array Operations section."
+        a "Focus on how to add, remove, and access elements in arrays."
+    elif chapter_2_Operations_Quiz < 4:
+        a "You did okay in the Array Operations section, but there's room for improvement."
+        a "Revisiting common array functions could help reinforce your understanding."
+    jump chapter_2_ending
 label chapter_3_ending:
     play music "bgm/city-high-life.mp3" fadein 1.0
     $ persistent.chapter_3 = True

@@ -691,18 +691,24 @@ label chapter_2_extra:
 
 ## add more flavour text
 label chapter_2_restart:
-    if chapter_2_questions >= 8:
-        show adrian smiling
-        jump chapter_2_quizmed
-
-    if chapter_2_questions >= 4:
+    $ chapter_2_test = chapter_2_basics_quiz + chapter_2_Operations_Quiz
+    a "Your score is [chapter_2_test]"
+    a "Let's see how well you do in the {size=+20}CHAPTER QUIZ"
+    if chapter_2_test <= 8:
         show adrian blush
         jump chapter_2_quizeasy
-
+    elif chapter_2_test <= 14:
+        show adrian smiling
+        jump chapter_2_quizmed
     else:
         show adrian happy
         jump chapter_2_quizhard
         
+
+init python:
+    import random
+    chapter_2_easy_question_order = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"]
+    random.shuffle(chapter_2_easy_question_order)
 
 label chapter_2_quizeasy:
     $ chapter_2_score = 0
@@ -710,395 +716,434 @@ label chapter_2_quizeasy:
     show adrian normal
     a "Welcome to The Chapter Quiz"
 
-    a "Question 1: True or False: An array can store more than one value."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays can store multiple values."
-        "False":
-            show adrian mad
-            a "Incorrect! Arrays can store more than one value."
+    while chapter_2_easy_question_order:
+        $ current_q = chapter_2_easy_question_order.pop(0)
 
-    a "Question 2: True or False: The first index of an array is always 0."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays start at index 0."
-        "False":
-            show adrian mad
-            a "Incorrect! Arrays start at index 0."
+        if current_q == "q1":
+            a "Question 1: True or False: An array can store more than one value."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays can store multiple values."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Arrays can store more than one value."
 
-    a "Question 3: True or False: Arrays can only store numbers."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! Arrays can store any data type."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays can store numbers, strings, and more."
+        elif current_q == "q2":
+            a "Question 2: True or False: The first index of an array is always 0."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays start at index 0."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Arrays start at index 0."
 
-    a "Question 4: True or False: You can change the value of an element in an array."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! You can change values in an array."
-        "False":
-            show adrian mad
-            a "Incorrect! You can change values in an array."
+        elif current_q == "q3":
+            a "Question 3: True or False: Arrays can only store numbers."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! Arrays can store any data type."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays can store numbers, strings, and more."
 
-    a "Question 5: True or False: Arrays are useful for storing lists of data."
-    menu:
-        "False":
-            show adrian mad
-            a "Incorrect! Arrays are made for storing lists."
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays are great for lists of data."
+        elif current_q == "q4":
+            a "Question 4: True or False: You can change the value of an element in an array."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! You can change values in an array."
+                "False":
+                    show adrian mad
+                    a "Incorrect! You can change values in an array."
 
-    show adrian normal
-    a "Question 6: What is the correct way to access the first element of an array called 'arr'?"
-    menu:
-        "arr(first)":
-            show adrian confused
-            a "Incorrect! Use square brackets and index numbers."
-        "arr[[0]":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! The first element is at index 0."
-        "arr[[1]":
-            show adrian mad
-            a "Incorrect! That is the second element."
-        "arr{{0}":
-            show adrian doubt
-            a "Incorrect! Use square brackets."
+        elif current_q == "q5":
+            a "Question 5: True or False: Arrays are useful for storing lists of data."
+            menu:
+                "False":
+                    show adrian mad
+                    a "Incorrect! Arrays are made for storing lists."
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays are great for lists of data."
 
-    a "Question 7: Which of these is a valid array?"
-    menu:
-        "1, 2, 3":
-            show adrian mad
-            a "Incorrect! Arrays use brackets."
-       
-        "{{1, 2, 3}":
-            show adrian confused
-            a "Incorrect! That's not array syntax."
-        "[[1, 2, 3]":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! That's a valid array."
-        "((1, 2, 3)":
-            show adrian doubt
-            a "Incorrect! That's a tuple, not an array."
+        elif current_q == "q6":
+            a "Question 6: What is the correct way to access the first element of an array called 'arr'?"
+            menu:
+                "arr(first)":
+                    show adrian confused
+                    a "Incorrect! Use square brackets and index numbers."
+                "arr[0]":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! The first element is at index 0."
+                "arr[1]":
+                    show adrian mad
+                    a "Incorrect! That is the second element."
+                "arr{0}":
+                    show adrian doubt
+                    a "Incorrect! Use square brackets."
 
-    a "Question 8: What does arr.append(4) do to the array arr = [[1, 2, 3]?"
-    menu:
-        "Removes 4":
-            show adrian mad
-            a "Incorrect! It adds, not removes."
-        "Adds 4 to the end":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! 4 is added to the end."
-        "Sorts the array":
-            show adrian doubt
-            a "Incorrect! It does not sort."
-        "Replaces the first element with 4":
-            show adrian confused
-            a "Incorrect! It adds to the end."
+        elif current_q == "q7":
+            a "Question 7: Which of these is a valid array?"
+            menu:
+                "1, 2, 3":
+                    show adrian mad
+                    a "Incorrect! Arrays use brackets."
+                "{1, 2, 3}":
+                    show adrian confused
+                    a "Incorrect! That's not array syntax."
+                "[1, 2, 3]":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! That's a valid array."
+                "(1, 2, 3)":
+                    show adrian doubt
+                    a "Incorrect! That's a tuple, not an array."
 
-    a "Question 9: What is the length of the array [[5, 6, 7, 8]?"
-    menu:
-        "5":
-            show adrian confused
-            a "Incorrect! There are 4 elements."
-        "4":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! There are 4 elements."
-        "8":
-            show adrian doubt
-            a "Incorrect! That's just a value in the array."
-        "3":
-            show adrian mad
-            a "Incorrect! There are 4 elements."
+        elif current_q == "q8":
+            a "Question 8: What does arr.append(4) do to the array arr = [1, 2, 3]?"
+            menu:
+                "Removes 4":
+                    show adrian mad
+                    a "Incorrect! It adds, not removes."
+                "Adds 4 to the end":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! 4 is added to the end."
+                "Sorts the array":
+                    show adrian doubt
+                    a "Incorrect! It does not sort."
+                "Replaces the first element with 4":
+                    show adrian confused
+                    a "Incorrect! It adds to the end."
 
-    a "Question 10: Which operation removes the last element from an array?"
-    menu:
-        "count()":
-            show adrian doubt
-            a "Incorrect! count() counts elements."
-        "append()":
-            show adrian mad
-            a "Incorrect! append() adds an element."
-        "pop()":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! pop() removes the last element."
-        "insert()":
-            show adrian confused
-            a "Incorrect! insert() adds at a specific index."
+        elif current_q == "q9":
+            a "Question 9: What is the length of the array [5, 6, 7, 8]?"
+            menu:
+                "5":
+                    show adrian confused
+                    a "Incorrect! There are 4 elements."
+                "4":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! There are 4 elements."
+                "8":
+                    show adrian doubt
+                    a "Incorrect! That's just a value in the array."
+                "3":
+                    show adrian mad
+                    a "Incorrect! There are 4 elements."
+
+        elif current_q == "q10":
+            a "Question 10: Which operation removes the last element from an array?"
+            menu:
+                "count()":
+                    show adrian doubt
+                    a "Incorrect! count() counts elements."
+                "append()":
+                    show adrian mad
+                    a "Incorrect! append() adds an element."
+                "pop()":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! pop() removes the last element."
+                "insert()":
+                    show adrian confused
+                    a "Incorrect! insert() adds at a specific index."
 
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_2_score]"
     jump chapter_2_review
+init python:
+    import random
+    chapter_2_med_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15", "q16", "q17", "q18", "q19", "q20"
+    ]
+    random.shuffle(chapter_2_med_question_order)
+
 label chapter_2_quizmed:
-    
+
     $ chapter_2_score = 0
 
+    play music "bgm/better-answer.mp3" fadein 0.5
     show adrian normal
     a "Welcome to The Chapter Quiz"
 
-    # True or False Questions (8)
-    a "Question 1: True or False: Arrays can store both numbers and strings in the same array."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! Arrays should store elements of the same type."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays store elements of the same type."
+    while chapter_2_med_question_order:
+        $ current_q = chapter_2_med_question_order.pop(0)
 
-    a "Question 2: True or False: The length of an array can be found using the len() function."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! len() gives the number of elements."
-        "False":
-            show adrian mad
-            a "Incorrect! Use len() to get the length."
+        if current_q == "q1":
+            a "Question 1: True or False: Arrays can store both numbers and strings in the same array."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! Arrays should store elements of the same type."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays store elements of the same type."
 
-    a "Question 3: True or False: You can use a for loop to go through all elements in an array."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! For loops are great for arrays."
-        "False":
-            show adrian mad
-            a "Incorrect! For loops are commonly used with arrays."
+        elif current_q == "q2":
+            a "Question 2: True or False: The length of an array can be found using the len() function."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! len() gives the number of elements."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Use len() to get the length."
 
-    a "Question 4: True or False: The pop() function removes the first element of an array by default."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! pop() removes the last element by default."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! pop() removes the last element unless you specify an index."
+        elif current_q == "q3":
+            a "Question 3: True or False: You can use a for loop to go through all elements in an array."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! For loops are great for arrays."
+                "False":
+                    show adrian mad
+                    a "Incorrect! For loops are commonly used with arrays."
 
-    a "Question 5: True or False: Arrays can be sorted using the sort() function."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! sort() arranges elements in order."
-        "False":
-            show adrian mad
-            a "Incorrect! Use sort() to sort arrays."
+        elif current_q == "q4":
+            a "Question 4: True or False: The pop() function removes the first element of an array by default."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! pop() removes the last element by default."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! pop() removes the last element unless you specify an index."
 
-    a "Question 6: True or False: The index of the last element in an array of length 5 is 5."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! The last index is length minus one."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! The last index is 4."
+        elif current_q == "q5":
+            a "Question 5: True or False: Arrays can be sorted using the sort() function."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! sort() arranges elements in order."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Use sort() to sort arrays."
 
-    a "Question 7: True or False: Arrays can be used to store a list of student names."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays are perfect for lists like names."
-        "False":
-            show adrian mad
-            a "Incorrect! Arrays can store names."
+        elif current_q == "q6":
+            a "Question 6: True or False: The index of the last element in an array of length 5 is 5."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! The last index is length minus one."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! The last index is 4."
 
-    a "Question 8: True or False: The remove() function deletes all occurrences of a value in an array."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! remove() deletes only the first occurrence."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Only the first occurrence is removed."
+        elif current_q == "q7":
+            a "Question 7: True or False: Arrays can be used to store a list of student names."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays are perfect for lists like names."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Arrays can store names."
 
-    # Multiple Choice Questions (7)
-    a "Question 9: What is the correct way to add an element to the end of an array called arr?"
-    menu:
-        "arr.add(5)":
-            show adrian mad
-            a "Incorrect! Use append() to add."
-        "arr.append(5)":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! append() adds to the end."
-        "arr.insert(5)":
-            show adrian confused
-            a "Incorrect! insert() needs an index."
-        "arr.push(5)":
-            show adrian doubt
-            a "Incorrect! push() is not used in Python arrays."
+        elif current_q == "q8":
+            a "Question 8: True or False: The remove() function deletes all occurrences of a value in an array."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! remove() deletes only the first occurrence."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Only the first occurrence is removed."
 
-    a "Question 10: What is the index of the first element in an array?"
-    menu:
-        "1":
-            show adrian mad
-            a "Incorrect! Indexing starts at 0."
-        "0":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! The first index is 0."
-        "2":
-            show adrian confused
-            a "Incorrect! That's the third element."
-        "-1":
-            show adrian doubt
-            a "Incorrect! -1 is the last element."
+        elif current_q == "q9":
+            a "Question 9: What is the correct way to add an element to the end of an array called arr?"
+            menu:
+                "arr.add(5)":
+                    show adrian mad
+                    a "Incorrect! Use append() to add."
+                "arr.append(5)":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! append() adds to the end."
+                "arr.insert(5)":
+                    show adrian confused
+                    a "Incorrect! insert() needs an index."
+                "arr.push(5)":
+                    show adrian doubt
+                    a "Incorrect! push() is not used in Python arrays."
 
-    a "Question 11: Which function returns the number of times a value appears in an array?"
-    menu:
-        "count()":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! count() counts occurrences."
-        "index()":
-            show adrian mad
-            a "Incorrect! index() gives the position."
-        "append()":
-            show adrian confused
-            a "Incorrect! append() adds elements."
-        "sort()":
-            show adrian doubt
-            a "Incorrect! sort() arranges elements."
+        elif current_q == "q10":
+            a "Question 10: What is the index of the first element in an array?"
+            menu:
+                "1":
+                    show adrian mad
+                    a "Incorrect! Indexing starts at 0."
+                "0":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! The first index is 0."
+                "2":
+                    show adrian confused
+                    a "Incorrect! That's the third element."
+                "-1":
+                    show adrian doubt
+                    a "Incorrect! -1 is the last element."
 
-    a "Question 12: If arr = [[2, 4, 6], what does arr[[1] return?"
-    menu:
-        "2":
-            show adrian mad
-            a "Incorrect! That's arr[0]."
-        "4":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! arr[1] is 4."
-        "6":
-            show adrian confused
-            a "Incorrect! That's arr[2]."
-        "1":
-            show adrian doubt
-            a "Incorrect! That's the index, not the value."
+        elif current_q == "q11":
+            a "Question 11: Which function returns the number of times a value appears in an array?"
+            menu:
+                "count()":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! count() counts occurrences."
+                "index()":
+                    show adrian mad
+                    a "Incorrect! index() gives the position."
+                "append()":
+                    show adrian confused
+                    a "Incorrect! append() adds elements."
+                "sort()":
+                    show adrian doubt
+                    a "Incorrect! sort() arranges elements."
 
-    a "Question 13: Which operation reverses the order of elements in an array?"
-    menu:
+        elif current_q == "q12":
+            a "Question 12: If arr = [2, 4, 6], what does arr[1] return?"
+            menu:
+                "2":
+                    show adrian mad
+                    a "Incorrect! That's arr[0]."
+                "4":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! arr[1] is 4."
+                "6":
+                    show adrian confused
+                    a "Incorrect! That's arr[2]."
+                "1":
+                    show adrian doubt
+                    a "Incorrect! That's the index, not the value."
 
-        "sort()":
-            show adrian mad
-            a "Incorrect! sort() arranges in order."
-        "append()":
-            show adrian confused
-            a "Incorrect! append() adds elements."
-        "remove()":
-            show adrian doubt
-            a "Incorrect! remove() deletes elements."        
-        "reverse()":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! reverse() flips the array."
+        elif current_q == "q13":
+            a "Question 13: Which operation reverses the order of elements in an array?"
+            menu:
+                "sort()":
+                    show adrian mad
+                    a "Incorrect! sort() arranges in order."
+                "append()":
+                    show adrian confused
+                    a "Incorrect! append() adds elements."
+                "remove()":
+                    show adrian doubt
+                    a "Incorrect! remove() deletes elements."
+                "reverse()":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! reverse() flips the array."
 
-    a "Question 14: What does arr.insert(1, 99) do to arr = [[10, 20, 30]?"
-    menu:
-        "Adds 99 at the end":
-            show adrian mad
-            a "Incorrect! It adds at index 1."
-        "Adds 99 at index 1":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! 99 goes at index 1."
-        "Removes 99":
-            show adrian confused
-            a "Incorrect! insert() adds, not removes."
-        "Replaces value at index 1 with 99":
-            show adrian doubt
-            a "Incorrect! It inserts, not replaces."
+        elif current_q == "q14":
+            a "Question 14: What does arr.insert(1, 99) do to arr = [10, 20, 30]?"
+            menu:
+                "Adds 99 at the end":
+                    show adrian mad
+                    a "Incorrect! It adds at index 1."
+                "Adds 99 at index 1":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! 99 goes at index 1."
+                "Removes 99":
+                    show adrian confused
+                    a "Incorrect! insert() adds, not removes."
+                "Replaces value at index 1 with 99":
+                    show adrian doubt
+                    a "Incorrect! It inserts, not replaces."
 
-    a "Question 15: Which of the following is a valid 2D array?"
-    menu:
-        "[[1, 2], [[3, 4]":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! That's a 2D array."
-        "[[1, 2, 3, 4]":
-            show adrian mad
-            a "Incorrect! That's a 1D array."
-        "{{1, 2}, {{3, 4}":
-            show adrian confused
-            a "Incorrect! That's not array syntax."
-        "(1, 2), (3, 4)":
-            show adrian doubt
-            a "Incorrect! That's a tuple, not an array."
+        elif current_q == "q15":
+            a "Question 15: Which of the following is a valid 2D array?"
+            menu:
+                "[[1, 2], [3, 4]]":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! That's a 2D array."
+                "[1, 2, 3, 4]":
+                    show adrian mad
+                    a "Incorrect! That's a 1D array."
+                "{1, 2}, {3, 4}":
+                    show adrian confused
+                    a "Incorrect! That's not array syntax."
+                "(1, 2), (3, 4)":
+                    show adrian doubt
+                    a "Incorrect! That's a tuple, not an array."
 
-    # Identification Questions (5)
-    a "Question 16: Identify the function used to find the position of a value in an array."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "index" or answer == "index()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! index() finds the position."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is index()."
+        elif current_q == "q16":
+            a "Question 16: Identify the function used to find the position of a value in an array."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "index" or answer == "index()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! index() finds the position."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is index()."
 
-    a "Question 17: Identify the function that adds an element at a specific position."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "insert" or answer == "insert()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! insert() adds at a position."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is insert()."
+        elif current_q == "q17":
+            a "Question 17: Identify the function that adds an element at a specific position."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "insert" or answer == "insert()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! insert() adds at a position."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is insert()."
 
-    a "Question 18: Identify the function that removes and returns the last element."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "pop" or answer == "pop()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! pop() removes and returns the last element."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is pop()."
+        elif current_q == "q18":
+            a "Question 18: Identify the function that removes and returns the last element."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "pop" or answer == "pop()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! pop() removes and returns the last element."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is pop()."
 
-    a "Question 19: Identify the function that arranges elements in ascending order."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "sort" or answer == "sort()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! sort() arranges elements."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is sort()."
+        elif current_q == "q19":
+            a "Question 19: Identify the function that arranges elements in ascending order."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "sort" or answer == "sort()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! sort() arranges elements."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is sort()."
 
-    a "Question 20: Identify the function that counts how many times a value appears."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "count" or answer == "count()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! count() counts occurrences."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is count()."
+        elif current_q == "q20":
+            a "Question 20: Identify the function that counts how many times a value appears."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "count" or answer == "count()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! count() counts occurrences."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is count()."
 
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
@@ -1106,382 +1151,398 @@ label chapter_2_quizmed:
     a "Your quiz score is: [chapter_2_score]"
     jump chapter_2_review
 
+
+init python:
+    import random
+    chapter_2_hard_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15", "q16", "q17", "q18", "q19", "q20",
+        "q21", "q22", "q23", "q24", "q25", "q26", "q27", "q28", "q29", "q30"
+    ]
+    random.shuffle(chapter_2_hard_question_order)
 
 label chapter_2_quizhard:
-    
+
     $ chapter_2_score = 0
 
+    play music "bgm/better-answer.mp3" fadein 0.5
     show adrian normal
     a "Welcome to The Chapter Quiz"
 
-    # True or False Questions (8)
-    show adrian normal
-    a "Question 1: True or False: Arrays can store both numbers and strings in the same array."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! Arrays should store elements of the same type."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays store elements of the same type."
+    while chapter_2_hard_question_order:
+        $ current_q = chapter_2_hard_question_order.pop(0)
 
-    show adrian normal
-    a "Question 2: True or False: The length of an array can be found using the len() function."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! len() gives the number of elements."
-        "False":
-            show adrian mad
-            a "Incorrect! Use len() to get the length."
+        if current_q == "q1":
+            a "Question 1: True or False: Arrays can store both numbers and strings in the same array."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! Arrays should store elements of the same type."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays store elements of the same type."
 
-    show adrian normal
-    a "Question 3: True or False: You can use a for loop to go through all elements in an array."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! For loops are great for arrays."
-        "False":
-            show adrian mad
-            a "Incorrect! For loops are commonly used with arrays."
+        elif current_q == "q2":
+            a "Question 2: True or False: The length of an array can be found using the len() function."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! len() gives the number of elements."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Use len() to get the length."
 
-    show adrian normal
-    a "Question 4: True or False: The pop() function removes the first element of an array by default."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! pop() removes the last element by default."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! pop() removes the last element unless you specify an index."
+        elif current_q == "q3":
+            a "Question 3: True or False: You can use a for loop to go through all elements in an array."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! For loops are great for arrays."
+                "False":
+                    show adrian mad
+                    a "Incorrect! For loops are commonly used with arrays."
 
-    show adrian normal
-    a "Question 5: True or False: Arrays can be sorted using the sort() function."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! sort() arranges elements in order."
-        "False":
-            show adrian mad
-            a "Incorrect! Use sort() to sort arrays."
+        elif current_q == "q4":
+            a "Question 4: True or False: The pop() function removes the first element of an array by default."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! pop() removes the last element by default."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! pop() removes the last element unless you specify an index."
 
-    show adrian normal
-    a "Question 6: True or False: The index of the last element in an array of length 5 is 5."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! The last index is length minus one."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! The last index is 4."
+        elif current_q == "q5":
+            a "Question 5: True or False: Arrays can be sorted using the sort() function."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! sort() arranges elements in order."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Use sort() to sort arrays."
 
-    show adrian normal
-    a "Question 7: True or False: Arrays can be used to store a list of student names."
-    menu:
-        "True":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Arrays are perfect for lists like names."
-        "False":
-            show adrian mad
-            a "Incorrect! Arrays can store names."
+        elif current_q == "q6":
+            a "Question 6: True or False: The index of the last element in an array of length 5 is 5."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! The last index is length minus one."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! The last index is 4."
 
-    show adrian normal
-    a "Question 8: True or False: The remove() function deletes all occurrences of a value in an array."
-    menu:
-        "True":
-            show adrian mad
-            a "Incorrect! remove() deletes only the first occurrence."
-        "False":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! Only the first occurrence is removed."
-    
-    show adrian normal
-    a "Question 9: What is the correct way to add an element to the end of an array called arr?"
-    menu:
-        "arr.add(5)":
-            show adrian mad
-            a "Incorrect! Use append() to add."
-        "arr.append(5)":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! append() adds to the end."
-        "arr.insert(5)":
-            show adrian confused
-            a "Incorrect! insert() needs an index."
-        "arr.push(5)":
-            show adrian doubt
-            a "Incorrect! push() is not used in Python arrays."
+        elif current_q == "q7":
+            a "Question 7: True or False: Arrays can be used to store a list of student names."
+            menu:
+                "True":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Arrays are perfect for lists like names."
+                "False":
+                    show adrian mad
+                    a "Incorrect! Arrays can store names."
 
-    show adrian normal
-    a "Question 10: What is the index of the first element in an array?"
-    menu:
-        "1":
-            show adrian mad
-            a "Incorrect! Indexing starts at 0."
-        "0":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! The first index is 0."
-        "2":
-            show adrian confused
-            a "Incorrect! That's the third element."
-        "-1":
-            show adrian doubt
-            a "Incorrect! -1 is the last element."
+        elif current_q == "q8":
+            a "Question 8: True or False: The remove() function deletes all occurrences of a value in an array."
+            menu:
+                "True":
+                    show adrian mad
+                    a "Incorrect! remove() deletes only the first occurrence."
+                "False":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! Only the first occurrence is removed."
 
-    show adrian normal
-    a "Question 11: Which function returns the number of times a value appears in an array?"
-    menu:
-        "count()":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! count() counts occurrences."
-        "index()":
-            show adrian mad
-            a "Incorrect! index() gives the position."
-        "append()":
-            show adrian confused
-            a "Incorrect! append() adds elements."
-        "sort()":
-            show adrian doubt
-            a "Incorrect! sort() arranges elements."
+        elif current_q == "q9":
+            a "Question 9: What is the correct way to add an element to the end of an array called arr?"
+            menu:
+                "arr.add(5)":
+                    show adrian mad
+                    a "Incorrect! Use append() to add."
+                "arr.append(5)":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! append() adds to the end."
+                "arr.insert(5)":
+                    show adrian confused
+                    a "Incorrect! insert() needs an index."
+                "arr.push(5)":
+                    show adrian doubt
+                    a "Incorrect! push() is not used in Python arrays."
 
-    show adrian normal
-    a "Question 12: If arr = [[2, 4, 6], what does arr[[1] return?"
-    menu:
-        "2":
-            show adrian mad
-            a "Incorrect! That's arr[[0]."
-        "4":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! arr[[1] is 4."
-        "6":
-            show adrian confused
-            a "Incorrect! That's arr[[2]."
-        "1":
-            show adrian doubt
-            a "Incorrect! That's the index, not the value."
+        elif current_q == "q10":
+            a "Question 10: What is the index of the first element in an array?"
+            menu:
+                "1":
+                    show adrian mad
+                    a "Incorrect! Indexing starts at 0."
+                "0":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! The first index is 0."
+                "2":
+                    show adrian confused
+                    a "Incorrect! That's the third element."
+                "-1":
+                    show adrian doubt
+                    a "Incorrect! -1 is the last element."
 
-    show adrian normal
-    a "Question 13: Which operation reverses the order of elements in an array?"
-    menu:
+        elif current_q == "q11":
+            a "Question 11: Which function returns the number of times a value appears in an array?"
+            menu:
+                "count()":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! count() counts occurrences."
+                "index()":
+                    show adrian mad
+                    a "Incorrect! index() gives the position."
+                "append()":
+                    show adrian confused
+                    a "Incorrect! append() adds elements."
+                "sort()":
+                    show adrian doubt
+                    a "Incorrect! sort() arranges elements."
 
-        "sort()":
-            show adrian mad
-            a "Incorrect! sort() arranges in order."
-        "append()":
-            show adrian confused
-            a "Incorrect! append() adds elements."
-        "remove()":
-            show adrian doubt
-            a "Incorrect! remove() deletes elements."        
-        "reverse()":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! reverse() flips the array."
+        elif current_q == "q12":
+            a "Question 12: If arr = [2, 4, 6], what does arr[1] return?"
+            menu:
+                "2":
+                    show adrian mad
+                    a "Incorrect! That's arr[0]."
+                "4":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! arr[1] is 4."
+                "6":
+                    show adrian confused
+                    a "Incorrect! That's arr[2]."
+                "1":
+                    show adrian doubt
+                    a "Incorrect! That's the index, not the value."
 
-    show adrian normal
-    a "Question 14: What does arr.insert(1, 99) do to arr = [[10, 20, 30]?"
-    menu:
-        "Adds 99 at the end":
-            show adrian mad
-            a "Incorrect! It adds at index 1."
-        "Adds 99 at index 1":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! 99 goes at index 1."
-        "Removes 99":
-            show adrian confused
-            a "Incorrect! insert() adds, not removes."
-        "Replaces value at index 1 with 99":
-            show adrian doubt
-            a "Incorrect! It inserts, not replaces."
+        elif current_q == "q13":
+            a "Question 13: Which operation reverses the order of elements in an array?"
+            menu:
+                "sort()":
+                    show adrian mad
+                    a "Incorrect! sort() arranges in order."
+                "append()":
+                    show adrian confused
+                    a "Incorrect! append() adds elements."
+                "remove()":
+                    show adrian doubt
+                    a "Incorrect! remove() deletes elements."
+                "reverse()":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! reverse() flips the array."
 
-    show adrian normal
-    a "Question 15: Which of the following is a valid 2D array?"
-    menu:
-        "[[1, 2], [[3, 4]":
-            $ chapter_2_score += 1
-            show adrian happy
-            a "Correct! That's a 2D array."
-        "[[1, 2, 3, 4]":
-            show adrian mad
-            a "Incorrect! That's a 1D array."
-        "{{1, 2}, {{3, 4}":
-            show adrian confused
-            a "Incorrect! That's not array syntax."
-        "(1, 2), (3, 4)":
-            show adrian doubt
-            a "Incorrect! That's a tuple, not an array."
+        elif current_q == "q14":
+            a "Question 14: What does arr.insert(1, 99) do to arr = [10, 20, 30]?"
+            menu:
+                "Adds 99 at the end":
+                    show adrian mad
+                    a "Incorrect! It adds at index 1."
+                "Adds 99 at index 1":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! 99 goes at index 1."
+                "Removes 99":
+                    show adrian confused
+                    a "Incorrect! insert() adds, not removes."
+                "Replaces value at index 1 with 99":
+                    show adrian doubt
+                    a "Incorrect! It inserts, not replaces."
 
-    show adrian normal
-    a "Question 16: Identify the function used to find the position of a value in an array."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "index" or answer == "index()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! index() finds the position."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is index()."
+        elif current_q == "q15":
+            a "Question 15: Which of the following is a valid 2D array?"
+            menu:
+                "[[1, 2], [3, 4]]":
+                    $ chapter_2_score += 1
+                    show adrian happy
+                    a "Correct! That's a 2D array."
+                "[1, 2, 3, 4]":
+                    show adrian mad
+                    a "Incorrect! That's a 1D array."
+                "{1, 2}, {3, 4}":
+                    show adrian confused
+                    a "Incorrect! That's not array syntax."
+                "(1, 2), (3, 4)":
+                    show adrian doubt
+                    a "Incorrect! That's a tuple, not an array."
 
-    show adrian normal
-    a "Question 17: Identify the function that adds an element at a specific position."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "insert" or answer == "insert()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! insert() adds at a position."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is insert()."
+        elif current_q == "q16":
+            a "Question 16: Identify the function used to find the position of a value in an array."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "index" or answer == "index()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! index() finds the position."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is index()."
 
-    show adrian normal
-    a "Question 18: Identify the function that removes and returns the last element."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "pop" or answer == "pop()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! pop() removes and returns the last element."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is pop()."
+        elif current_q == "q17":
+            a "Question 17: Identify the function that adds an element at a specific position."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "insert" or answer == "insert()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! insert() adds at a position."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is insert()."
 
-    show adrian normal
-    a "Question 19: Identify the function that arranges elements in ascending order."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "sort" or answer == "sort()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! sort() arranges elements."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is sort()."
+        elif current_q == "q18":
+            a "Question 18: Identify the function that removes and returns the last element."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "pop" or answer == "pop()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! pop() removes and returns the last element."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is pop()."
 
-    show adrian normal
-    a "Question 20: Identify the function that counts how many times a value appears."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "count" or answer == "count()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! count() counts occurrences."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is count()."
+        elif current_q == "q19":
+            a "Question 19: Identify the function that arranges elements in ascending order."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "sort" or answer == "sort()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! sort() arranges elements."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is sort()."
 
-    show adrian normal
-    a "Question 21: Identify the function that removes the first occurrence of a value from an array."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "remove" or answer == "remove()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! remove() deletes the first occurrence."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is remove()."
+        elif current_q == "q20":
+            a "Question 20: Identify the function that counts how many times a value appears."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "count" or answer == "count()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! count() counts occurrences."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is count()."
 
-    show adrian normal
-    a "Question 22: Identify the function that returns the number of elements in an array."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "len" or answer == "len()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! len() returns the length."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is len()."
+        elif current_q == "q21":
+            a "Question 21: Identify the function that removes the first occurrence of a value from an array."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "remove" or answer == "remove()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! remove() deletes the first occurrence."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is remove()."
 
-    show adrian normal
-    a "Question 23: Identify the function that adds an element to the end of an array."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "append" or answer == "append()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! append() adds to the end."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is append()."
+        elif current_q == "q22":
+            a "Question 22: Identify the function that returns the number of elements in an array."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "len" or answer == "len()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! len() returns the length."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is len()."
 
-    show adrian normal
-    a "Question 24: Identify the function that sorts the array in reverse order."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "sort(reverse=true)" or answer == "sort(reverse=true)":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! sort(reverse=True) sorts in reverse order."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is sort(reverse=True)."
+        elif current_q == "q23":
+            a "Question 23: Identify the function that adds an element to the end of an array."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "append" or answer == "append()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! append() adds to the end."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is append()."
 
-    show adrian normal
-    a "Question 25: Identify the function that creates a shallow copy of an array."
-    $ answer = renpy.input("Your answer:").strip().lower()
-    if answer == "copy" or answer == "copy()":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! copy() creates a shallow copy."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is copy()."
+        elif current_q == "q24":
+            a "Question 24: Identify the function that sorts the array in reverse order."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "sort(reverse=true)" or answer == "sort(reverse=true)":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! sort(reverse=True) sorts in reverse order."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is sort(reverse=True)."
 
-    a "Question 26: What will be the result of the following code? \narr = [[2, 4, 6] \narr.append(8) \nWhat is arr now?"
-    $ answer = renpy.input("Your answer:").strip().replace(" ", "")
-    if answer == "[2,4,6,8]" or answer == "2,4,6,8" or answer "2468":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! arr is now [[2, 4, 6, 8]."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is [[2, 4, 6, 8]."
+        elif current_q == "q25":
+            a "Question 25: Identify the function that creates a shallow copy of an array."
+            $ answer = renpy.input("Your answer:").strip().lower()
+            if answer == "copy" or answer == "copy()":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! copy() creates a shallow copy."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is copy()."
 
-    a "Question 27: Given arr = [[5, 10, 15, 20], what does arr.pop(2) return?"
-    $ answer = renpy.input("Your answer:").strip()
-    if answer == "15":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! arr.pop(2) returns 15."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is 15."
+        elif current_q == "q26":
+            a "Question 26: What will be the result of the following code? \narr = [2, 4, 6] \narr.append(8) \nWhat is arr now?"
+            $ answer = renpy.input("Your answer:").strip().replace(" ", "")
+            if answer == "[2,4,6,8]" or answer == "2,4,6,8" or answer == "2468":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! arr is now [2, 4, 6, 8]."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is [2, 4, 6, 8]."
 
-    a "Question 28: If arr = [[1, 2, 3, 4], what is the result of arr.insert(1, 99)?"
-    $ answer = renpy.input("Your answer:").strip().replace(" ", "")
-    if answer == "[1,99,2,3,4]" or answer == "1,99,2,3,4":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! arr becomes [[1, 99, 2, 3, 4]."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is [[1, 99, 2, 3, 4]."
+        elif current_q == "q27":
+            a "Question 27: Given arr = [5, 10, 15, 20], what does arr.pop(2) return?"
+            $ answer = renpy.input("Your answer:").strip()
+            if answer == "15":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! arr.pop(2) returns 15."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is 15."
 
-    a "Question 29: What is the output of len([[7, 8, 9, 10, 11])?"
-    $ answer = renpy.input("Your answer:").strip()
-    if answer == "5":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! The length is 5."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is 5."
+        elif current_q == "q28":
+            a "Question 28: If arr = [1, 2, 3, 4], what is the result of arr.insert(1, 99)?"
+            $ answer = renpy.input("Your answer:").strip().replace(" ", "")
+            if answer == "[1,99,2,3,4]" or answer == "1,99,2,3,4":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! arr becomes [1, 99, 2, 3, 4]."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is [1, 99, 2, 3, 4]."
 
-    a "Question 30: If arr = [[3, 6, 9, 6], what does arr.count(6) return?"
-    $ answer = renpy.input("Your answer:").strip()
-    if answer == "2":
-        $ chapter_2_score += 1
-        show adrian happy
-        a "Correct! 6 appears twice."
-    else:
-        show adrian mad
-        a "Incorrect! The answer is 2."
+        elif current_q == "q29":
+            a "Question 29: What is the output of len([7, 8, 9, 10, 11])?"
+            $ answer = renpy.input("Your answer:").strip()
+            if answer == "5":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! The length is 5."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is 5."
+
+        elif current_q == "q30":
+            a "Question 30: If arr = [3, 6, 9, 6], what does arr.count(6) return?"
+            $ answer = renpy.input("Your answer:").strip()
+            if answer == "2":
+                $ chapter_2_score += 1
+                show adrian happy
+                a "Correct! 6 appears twice."
+            else:
+                show adrian mad
+                a "Incorrect! The answer is 2."
 
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
@@ -1489,11 +1550,7 @@ label chapter_2_quizhard:
     a "Your quiz score is: [chapter_2_score]"
     a "{size=+20} OMG Yaaaay!!!"
 
-    jump chapter_2_review   
-    
-    # Chapter 2 Section Review
-    # $ chapter_2_basics_quiz
-    # $ chapter_2_Operations_Quiz
+    jump chapter_2_review
 label chapter_2_review:
     # Basics of Arrays
     if chapter_2_basics_quiz < 2:
