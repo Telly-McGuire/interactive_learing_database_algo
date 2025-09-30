@@ -1,5 +1,7 @@
 default chapter_4_progress = 0
 
+default chapter_4_stack_operations_quiz = 0
+default chapter_4_stack_recursion_quiz = 0
 
 screen chapter_4_introscreen:
     frame:
@@ -261,79 +263,93 @@ label chapter_4_stack_operations:
     show adrian smiling
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+    $ chapter_4_progress =+ 1
     jump ch4_quiz1
 
-label ch4_quiz1:
-    
-    $ chapter_4_test = 0
+init python:
+    import random
+    chapter_4_stack_operations_order = [
+        "q1", "q2", "q3", "q4", "q5"
+    ]
+    random.shuffle(chapter_4_stack_operations_order)
+
+label ch4_stack_operations_quiz:
+    $ chapter_4_stack_operations_quiz = 0
 
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    a "What is the main principle of a stack data structure?"
-    menu:
-        "First In, First Out (FIFO)":
+    while chapter_4_stack_operations_order:
+        $ current_q = chapter_4_stack_operations_order.pop(0)
 
-            a "Incorrect! The correct answer is Last In, First Out (LIFO)."
-        "Last In, First Out (LIFO)":
-            $ chapter_4_test += 1
-            a "Correct! Stacks follow the LIFO principle."
-        "Random Access":
-            a "Incorrect! Stacks do not allow random access to elements."
-    
-    show adrian doubt
-    a "Next question!"
-    a "Which operation is used to add an element to the top of a stack?"
-    menu:
-        "Pop()":
-            a "Incorrect! Pop() removes the top element from the stack."
-        "Peek()":
-            a "Incorrect! Peek() retrieves the top element without removing it."
-        "Push()":
-            $ chapter_4_test += 1
-            a "Correct! Push() adds an element to the top of the stack."
-    
+        if current_q == "q1":
+            a "What is the main principle of a stack data structure?"
+            menu:
+                "First In, First Out (FIFO)":
+                    a "Incorrect! The correct answer is Last In, First Out (LIFO)."
+                "Last In, First Out (LIFO)":
+                    $ chapter_4_stack_operations_quiz += 1
+                    a "Correct! Stacks follow the LIFO principle."
+                "Random Access":
+                    a "Incorrect! Stacks do not allow random access to elements."
+
+        elif current_q == "q2":
+            show adrian doubt
+            a "Which operation is used to add an element to the top of a stack?"
+            menu:
+                "Pop()":
+                    a "Incorrect! Pop() removes the top element from the stack."
+                "Peek()":
+                    a "Incorrect! Peek() retrieves the top element without removing it."
+                "Push()":
+                    $ chapter_4_stack_operations_quiz += 1
+                    a "Correct! Push() adds an element to the top of the stack."
+
+        elif current_q == "q3":
+            show adrian happy
+            a "What is the time complexity of the push() and pop() operations in a stack?"
+            menu:
+                "O(1)":
+                    $ chapter_4_stack_operations_quiz += 1
+                    a "Correct! Both push() and pop() operations have a time complexity of O(1)."
+                "O(n)":
+                    a "Incorrect! O(n) is not the correct time complexity for these operations."
+                "O(log n)":
+                    a "Incorrect! O(log n) is not the correct time complexity for these operations."
+
+        elif current_q == "q4":
+            show adrian normal
+            a "What are the two main operations of a stack?"
+            menu:
+                "Enqueue() and Dequeue()":
+                    a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
+                "Push() and Pop()":
+                    $ chapter_4_stack_operations_quiz += 1
+                    a "Correct! Push() adds an element, and Pop() removes the top element."
+                "Insert() and Remove()":
+                    a "Incorrect! Insert() and Remove() are not specific to stacks."
+
+        elif current_q == "q5":
+            show adrian smug
+            a "Which of the following is NOT a valid application of stacks?"
+            menu:
+                "Function call management":
+                    a "Incorrect! Stacks are used for managing function calls."
+                "Expression evaluation":
+                    a "Incorrect! Stacks are used in expression evaluation."
+                "Memory allocation":
+                    $ chapter_4_stack_operations_quiz += 1
+                    a "Correct! Memory allocation is not a typical application of stacks."
+
     show adrian happy
-    a "Next question!"
-    a "What is the time complexity of the push() and pop() operations in a stack?"
-    menu:
-        "O(1)":
-            $ chapter_4_test += 1
-            a "Correct! Both push() and pop() operations have a time complexity of O(1)."
-        "O(n)":
-            a "Incorrect! O(n) is not the correct time complexity for these operations."
-        "O(log n)":
-            a "Incorrect! O(log n) is not the correct time complexity for these operations."
-    
-    show adrian normal
-    a "Next question!"
-    a "what are the two main operations of a stack?"
-    menu:
-        
-        "Enqueue() and Dequeue()":
-            a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
-        "Push() and Pop()":
-            $ chapter_4_test += 1
-            a "Correct! Push() adds an element, and Pop() removes the top element."
-        "Insert() and Remove()":
-            a "Incorrect! Insert() and Remove() are not specific to stacks."
-        
-    show adrian smug
-    a "Next Question"
-    a "Which of the following is NOT a valid application of stacks?"
-    menu:
-        "Function call management":
-            a "Incorrect! Stacks are used for managing function calls."
-        "Expression evaluation":
-            a "Incorrect! Stacks are used in expression evaluation."
-        "Memory allocation":
-            $ chapter_4_test += 1
-            a "Correct! Memory allocation is not a typical application of stacks."
-    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+
     a "Congratulations!"
-    a "Your current score is [chapter_4_test]"
-    a "Lets continue"
+    a "Your current score is [chapter_4_stack_operations_quiz]"
+    a "Let's continue"
 
     jump chapter_4_stack_properties
 
@@ -541,6 +557,7 @@ label chapter_4_stack_properties:
     show adrian happy
     a "Take time to read through it :3"
     hide screen ch_4_StackVsHeap
+    $ chapter_4_progress =+ 1
     jump chapter_4_stack_and_recursion
 
 
@@ -565,79 +582,95 @@ label chapter_4_stack_and_recursion:
     show adrian happy
     a "This is how recursion works"
     show adrian smiling
+    $ chapter_4_progress =+ 1
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     jump ch4_quiz2
 
-label ch4_quiz2:
+init python:
+    import random
+    chapter_4_stack_recursion_order = [
+        "q1", "q2", "q3", "q4", "q5"
+    ]
+    random.shuffle(chapter_4_stack_recursion_order)
 
+label ch4_stack_recursion_quiz:
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
+    $ chapter_4_stack_recursion_quiz = 0
 
-    a "What is recursion in programming?"
-    menu:
-        "A technique where a function calls itself":
-            $ chapter_4_test += 1
-            a "Correct! Recursion involves a function calling itself."
-        "A method to optimize memory usage":
-            a "Incorrect! Recursion is not primarily about memory optimization."
-        "A way to sort data":
-            a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+    while chapter_4_stack_recursion_order:
+        $ current_q = chapter_4_stack_recursion_order.pop(0)
 
-    show adrian doubt
-    a "Next question!"
-    a "What is the base case in recursion?"
-    menu:
-        "The condition that stops the recursion":
-            $ chapter_4_test += 1
-            a "Correct! The base case prevents infinite recursion."
-        "The maximum depth of recursion":
-            a "Incorrect! The base case is not about depth."
-        "The first recursive call":
-            a "Incorrect! The base case is not the first call."
+        if current_q == "q1":
+            a "What is recursion in programming?"
+            menu:
+                "A technique where a function calls itself":
+                    $ chapter_4_stack_recursion_quiz += 1
+                    a "Correct! Recursion involves a function calling itself."
+                "A method to optimize memory usage":
+                    a "Incorrect! Recursion is not primarily about memory optimization."
+                "A way to sort data":
+                    a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+
+        elif current_q == "q2":
+            show adrian doubt
+            a "What is the base case in recursion?"
+            menu:
+                "The condition that stops the recursion":
+                    $ chapter_4_stack_recursion_quiz += 1
+                    a "Correct! The base case prevents infinite recursion."
+                "The maximum depth of recursion":
+                    a "Incorrect! The base case is not about depth."
+                "The first recursive call":
+                    a "Incorrect! The base case is not the first call."
+
+        elif current_q == "q3":
+            show adrian happy
+            a "What happens if there is no base case in recursion?"
+            menu:
+                "The program runs indefinitely":
+                    $ chapter_4_stack_recursion_quiz += 1
+                    a "Correct! Without a base case, recursion leads to infinite loops."
+                "The program terminates immediately":
+                    a "Incorrect! The program will not terminate without a base case."
+                "The program runs faster":
+                    a "Incorrect! Lack of base case does not improve performance."
+
+        elif current_q == "q4":
+            show adrian normal
+            a "Which of the following is an example of recursion?"
+            menu:
+                "Calculating factorial using iteration":
+                    a "Incorrect! This is an iterative approach, not recursive."
+                "Calculating Fibonacci numbers using recursion":
+                    $ chapter_4_stack_recursion_quiz += 1
+                    a "Correct! Fibonacci can be calculated recursively."
+                "Sorting an array using bubble sort":
+                    a "Incorrect! Bubble sort is an iterative algorithm."
+
+        elif current_q == "q5":
+            show adrian smug
+            a "What is the time complexity of a recursive function with a base case?"
+            menu:
+                "O(1)":
+                    a "Incorrect! O(1) is constant time complexity."
+                "O(n)":
+                    $ chapter_4_stack_recursion_quiz += 1
+                    a "Correct! The time complexity depends on the number of recursive calls."
+                "O(n^2)":
+                    a "Incorrect! O(n^2) is not the correct time complexity for recursion."
 
     show adrian happy
-    a "Next question!"
-    a "What happens if there is no base case in recursion?"
-    menu:
-        "The program runs indefinitely":
-            $ chapter_4_test += 1
-            a "Correct! Without a base case, recursion leads to infinite loops."
-        "The program terminates immediately":
-            a "Incorrect! The program will not terminate without a base case."
-        "The program runs faster":
-            a "Incorrect! Lack of base case does not improve performance."
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
 
-    show adrian normal
-    a "Next question!"
-    a "Which of the following is an example of recursion?"
-    menu:
-        "Calculating factorial using iteration":
-            a "Incorrect! This is an iterative approach, not recursive."
-        "Calculating Fibonacci numbers using recursion":
-            $ chapter_4_test += 1
-            a "Correct! Fibonacci can be calculated recursively."
-        "Sorting an array using bubble sort":
-            a "Incorrect! Bubble sort is an iterative algorithm."
-    
-    show adrian smug
-    a "Next Question"
-    a "What is the time complexity of a recursive function with a base case?"
-    menu:
-        "O(1)":
-            a "Incorrect! O(1) is constant time complexity."
-        "O(n)":
-            $ chapter_4_test += 1
-            a "Correct! The time complexity depends on the number of recursive calls."
-        "O(n^2)":
-            a "Incorrect! O(n^2) is not the correct time complexity for recursion."
-    show adrian happy
     a "Congratulations!"
-    a "Your current score is [chapter_4_test]"
-    a "Lets continue"
+    a "Your current score is [chapter_4_stack_recursion_quiz]"
+    a "Let's continue"
     jump chapter_4_queues
-
 
 label chapter_4_queues:
     play music "bgm/city-high-life.mp3" fadein 1.0
@@ -683,6 +716,7 @@ label chapter_4_queues:
     show adrian smiling at center
     with move
     "Queues are used in various applications, such as scheduling tasks and managing resources."
+    $ chapter_4_progress =+ 1
     jump chapter_4_queues_vid
 
 
@@ -781,11 +815,13 @@ label chapter_4_queues_vid:
     show adrian normal 
     stop music fadeout 0.5
     play sound "sfx/bell.mp3"
+    $ chapter_4_progress =+ 1
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
 
 label ch4_restart:
+    $ chapter_4_test = chapter_4_stack_operations_quiz + chapter_4_stack_recursion_quiz
     a "Your score is [chapter_4_test]"
-    a "Lets see how well you do in the {size=+20}CHAPTER QUIZ"
+    a "Let's see how well you do in the {size=+20}CHAPTER QUIZ"
     if chapter_4_test <= 4:
         show adrian blush
         jump chapter_4_quiz_easy
@@ -796,268 +832,288 @@ label ch4_restart:
         show adrian happy
         jump chapter_4_quiz_hard
         
-label chapter_4_quiz_easy:
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 0.5
+init python:
+    import random
+    chapter_4_easy_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"
+    ]
+    random.shuffle(chapter_4_easy_question_order)
 
+label chapter_4_quiz_easy:
     $ chapter_4_score = 0
 
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     show adrian smiling at center
-    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
-    a "What is the main principle of a stack data structure?"
-    menu:
-        "First In, First Out (FIFO)":
+    while chapter_4_easy_question_order:
+        $ current_q = chapter_4_easy_question_order.pop(0)
 
-            a "Incorrect! The correct answer is Last In, First Out (LIFO)."
-        "Last In, First Out (LIFO)":
-            $ chapter_4_score += 1
-            a "Correct! Stacks follow the LIFO principle."
-        "Random Access":
-            a "Incorrect! Stacks do not allow random access to elements."
-    
-    show adrian doubt
-    a "Next question!"
-    a "Which operation is used to add an element to the top of a stack?"
-    menu:
-        "Pop()":
-            a "Incorrect! Pop() removes the top element from the stack."
-        "Peek()":
-            a "Incorrect! Peek() retrieves the top element without removing it."
-        "Push()":
-            $ chapter_4_score += 1
-            a "Correct! Push() adds an element to the top of the stack."
-    
-    show adrian happy
-    a "Next question!"
-    a "What is the time complexity of the push() and pop() operations in a stack?"
-    menu:
-        "O(1)":
-            $ chapter_4_score += 1
-            a "Correct! Both push() and pop() operations have a time complexity of O(1)."
-        "O(n)":
-            a "Incorrect! O(n) is not the correct time complexity for these operations."
-        "O(log n)":
-            a "Incorrect! O(log n) is not the correct time complexity for these operations."
-    
-    show adrian normal
-    a "Next question!"
-    a "what are the two main operations of a stack?"
-    menu:
-        
-        "Enqueue() and Dequeue()":
-            a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
-        "Push() and Pop()":
-            $ chapter_4_score += 1
-            a "Correct! Push() adds an element, and Pop() removes the top element."
-        "Insert() and Remove()":
-            a "Incorrect! Insert() and Remove() are not specific to stacks."
-        
-    show adrian smug
-    a "Next Question"
-    a "Which of the following is NOT a valid application of stacks?"
-    menu:
-        "Function call management":
-            a "Incorrect! Stacks are used for managing function calls."
-        "Expression evaluation":
-            a "Incorrect! Stacks are used in expression evaluation."
-        "Memory allocation":
-            $ chapter_4_score += 1
-            a "Correct! Memory allocation is not a typical application of stacks."
-    
-    show adrian happy
-    a "What is recursion in programming?"
-    menu:
-        "A technique where a function calls itself":
-            $ chapter_4_score += 1
-            a "Correct! Recursion involves a function calling itself."
-        "A method to optimize memory usage":
-            a "Incorrect! Recursion is not primarily about memory optimization."
-        "A way to sort data":
-            a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+        if current_q == "q1":
+            a "What is the main principle of a stack data structure?"
+            menu:
+                "First In, First Out (FIFO)":
+                    a "Incorrect! The correct answer is Last In, First Out (LIFO)."
+                "Last In, First Out (LIFO)":
+                    $ chapter_4_score += 1
+                    a "Correct! Stacks follow the LIFO principle."
+                "Random Access":
+                    a "Incorrect! Stacks do not allow random access to elements."
 
-    show adrian doubt
-    a "Next question!"
-    a "What is the base case in recursion?"
-    menu:
-        "The condition that stops the recursion":
-            $ chapter_4_score += 1
-            a "Correct! The base case prevents infinite recursion."
-        "The maximum depth of recursion":
-            a "Incorrect! The base case is not about depth."
-        "The first recursive call":
-            a "Incorrect! The base case is not the first call."
+        elif current_q == "q2":
+            show adrian doubt
+            a "Which operation is used to add an element to the top of a stack?"
+            menu:
+                "Pop()":
+                    a "Incorrect! Pop() removes the top element from the stack."
+                "Peek()":
+                    a "Incorrect! Peek() retrieves the top element without removing it."
+                "Push()":
+                    $ chapter_4_score += 1
+                    a "Correct! Push() adds an element to the top of the stack."
 
-    show adrian happy
-    a "Next question!"
-    a "What happens if there is no base case in recursion?"
-    menu:
-        "The program runs indefinitely":
-            $ chapter_4_score += 1
-            a "Correct! Without a base case, recursion leads to infinite loops."
-        "The program terminates immediately":
-            a "Incorrect! The program will not terminate without a base case."
-        "The program runs faster":
-            a "Incorrect! Lack of base case does not improve performance."
+        elif current_q == "q3":
+            show adrian happy
+            a "What is the time complexity of the push() and pop() operations in a stack?"
+            menu:
+                "O(1)":
+                    $ chapter_4_score += 1
+                    a "Correct! Both push() and pop() operations have a time complexity of O(1)."
+                "O(n)":
+                    a "Incorrect! O(n) is not the correct time complexity for these operations."
+                "O(log n)":
+                    a "Incorrect! O(log n) is not the correct time complexity for these operations."
 
-    show adrian normal
-    a "Next question!"
-    a "Which of the following is an example of recursion?"
-    menu:
-        "Calculating factorial using iteration":
-            a "Incorrect! This is an iterative approach, not recursive."
-        "Calculating Fibonacci numbers using recursion":
-            $ chapter_4_score += 1
-            a "Correct! Fibonacci can be calculated recursively."
-        "Sorting an array using bubble sort":
-            a "Incorrect! Bubble sort is an iterative algorithm."
-    
-    show adrian smug
-    a "Next Question"
-    a "What is the time complexity of a recursive function with a base case?"
-    menu:
-        "O(1)":
-            a "Incorrect! O(1) is constant time complexity."
-        "O(n)":
-            $ chapter_4_score += 1
-            a "Correct! The time complexity depends on the number of recursive calls."
-        "O(n^2)":
-            a "Incorrect! O(n^2) is not the correct time complexity for recursion."
-    
+        elif current_q == "q4":
+            show adrian normal
+            a "What are the two main operations of a stack?"
+            menu:
+                "Enqueue() and Dequeue()":
+                    a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
+                "Push() and Pop()":
+                    $ chapter_4_score += 1
+                    a "Correct! Push() adds an element, and Pop() removes the top element."
+                "Insert() and Remove()":
+                    a "Incorrect! Insert() and Remove() are not specific to stacks."
+
+        elif current_q == "q5":
+            show adrian smug
+            a "Which of the following is NOT a valid application of stacks?"
+            menu:
+                "Function call management":
+                    a "Incorrect! Stacks are used for managing function calls."
+                "Expression evaluation":
+                    a "Incorrect! Stacks are used in expression evaluation."
+                "Memory allocation":
+                    $ chapter_4_score += 1
+                    a "Correct! Memory allocation is not a typical application of stacks."
+
+        elif current_q == "q6":
+            show adrian happy
+            a "What is recursion in programming?"
+            menu:
+                "A technique where a function calls itself":
+                    $ chapter_4_score += 1
+                    a "Correct! Recursion involves a function calling itself."
+                "A method to optimize memory usage":
+                    a "Incorrect! Recursion is not primarily about memory optimization."
+                "A way to sort data":
+                    a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+
+        elif current_q == "q7":
+            show adrian doubt
+            a "What is the base case in recursion?"
+            menu:
+                "The condition that stops the recursion":
+                    $ chapter_4_score += 1
+                    a "Correct! The base case prevents infinite recursion."
+                "The maximum depth of recursion":
+                    a "Incorrect! The base case is not about depth."
+                "The first recursive call":
+                    a "Incorrect! The base case is not the first call."
+
+        elif current_q == "q8":
+            show adrian happy
+            a "What happens if there is no base case in recursion?"
+            menu:
+                "The program runs indefinitely":
+                    $ chapter_4_score += 1
+                    a "Correct! Without a base case, recursion leads to infinite loops."
+                "The program terminates immediately":
+                    a "Incorrect! The program will not terminate without a base case."
+                "The program runs faster":
+                    a "Incorrect! Lack of base case does not improve performance."
+
+        elif current_q == "q9":
+            show adrian normal
+            a "Which of the following is an example of recursion?"
+            menu:
+                "Calculating factorial using iteration":
+                    a "Incorrect! This is an iterative approach, not recursive."
+                "Calculating Fibonacci numbers using recursion":
+                    $ chapter_4_score += 1
+                    a "Correct! Fibonacci can be calculated recursively."
+                "Sorting an array using bubble sort":
+                    a "Incorrect! Bubble sort is an iterative algorithm."
+
+        elif current_q == "q10":
+            show adrian smug
+            a "What is the time complexity of a recursive function with a base case?"
+            menu:
+                "O(1)":
+                    a "Incorrect! O(1) is constant time complexity."
+                "O(n)":
+                    $ chapter_4_score += 1
+                    a "Correct! The time complexity depends on the number of recursive calls."
+                "O(n^2)":
+                    a "Incorrect! O(n^2) is not the correct time complexity for recursion."
+
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
 
-    jump chapter_4_ending
+    jump chapter_4_review
+
+init python:
+    import random
+    chapter_4_medium_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"
+    ]
+    random.shuffle(chapter_4_medium_question_order)
 
 label chapter_4_quiz_medium:
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 0.5
-
     $ chapter_4_score = 0
 
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     show adrian smiling at center
-    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
-    
-    a "What is the main principle of a stack data structure?"
-    menu:
-        "First In, First Out (FIFO)":
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
-            a "Incorrect! The correct answer is Last In, First Out (LIFO)."
-        "Last In, First Out (LIFO)":
-            $ chapter_4_score += 1
-            a "Correct! Stacks follow the LIFO principle."
-        "Random Access":
-            a "Incorrect! Stacks do not allow random access to elements."
-    
-    show adrian doubt
-    a "Next question!"
-    a "Which operation is used to add an element to the top of a stack?"
-    menu:
-        "Pop()":
-            a "Incorrect! Pop() removes the top element from the stack."
-        "Peek()":
-            a "Incorrect! Peek() retrieves the top element without removing it."
-        "Push()":
-            $ chapter_4_score += 1
-            a "Correct! Push() adds an element to the top of the stack."
-    
-    show adrian happy
-    a "Next question!"
-    a "What is the time complexity of the push() and pop() operations in a stack?"
-    menu:
-        "O(1)":
-            $ chapter_4_score += 1
-            a "Correct! Both push() and pop() operations have a time complexity of O(1)."
-        "O(n)":
-            a "Incorrect! O(n) is not the correct time complexity for these operations."
-        "O(log n)":
-            a "Incorrect! O(log n) is not the correct time complexity for these operations."
-    
-    show adrian normal
-    a "Next question!"
-    a "what are the two main operations of a stack?"
-    menu:
-        
-        "Enqueue() and Dequeue()":
-            a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
-        "Push() and Pop()":
-            $ chapter_4_score += 1
-            a "Correct! Push() adds an element, and Pop() removes the top element."
-        "Insert() and Remove()":
-            a "Incorrect! Insert() and Remove() are not specific to stacks."
-        
-    show adrian smug
-    a "Next Question"
-    a "Which of the following is NOT a valid application of stacks?"
-    menu:
-        "Function call management":
-            a "Incorrect! Stacks are used for managing function calls."
-        "Expression evaluation":
-            a "Incorrect! Stacks are used in expression evaluation."
-        "Memory allocation":
-            $ chapter_4_score += 1
-            a "Correct! Memory allocation is not a typical application of stacks."
-    
-    show adrian happy
-    a "What is recursion in programming?"
-    menu:
-        "A technique where a function calls itself":
-            $ chapter_4_score += 1
-            a "Correct! Recursion involves a function calling itself."
-        "A method to optimize memory usage":
-            a "Incorrect! Recursion is not primarily about memory optimization."
-        "A way to sort data":
-            a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+    while chapter_4_medium_question_order:
+        $ current_q = chapter_4_medium_question_order.pop(0)
 
-    show adrian doubt
-    a "Next question!"
-    a "What is the base case in recursion?"
-    menu:
-        "The condition that stops the recursion":
-            $ chapter_4_score += 1
-            a "Correct! The base case prevents infinite recursion."
-        "The maximum depth of recursion":
-            a "Incorrect! The base case is not about depth."
-        "The first recursive call":
-            a "Incorrect! The base case is not the first call."
+        if current_q == "q1":
+            a "What is the main principle of a stack data structure?"
+            menu:
+                "First In, First Out (FIFO)":
+                    a "Incorrect! The correct answer is Last In, First Out (LIFO)."
+                "Last In, First Out (LIFO)":
+                    $ chapter_4_score += 1
+                    a "Correct! Stacks follow the LIFO principle."
+                "Random Access":
+                    a "Incorrect! Stacks do not allow random access to elements."
 
-    show adrian happy
-    a "Next question!"
-    a "What happens if there is no base case in recursion?"
-    menu:
-        "The program runs indefinitely":
-            $ chapter_4_score += 1
-            a "Correct! Without a base case, recursion leads to infinite loops."
-        "The program terminates immediately":
-            a "Incorrect! The program will not terminate without a base case."
-        "The program runs faster":
-            a "Incorrect! Lack of base case does not improve performance."
+        elif current_q == "q2":
+            show adrian doubt
+            a "Which operation is used to add an element to the top of a stack?"
+            menu:
+                "Pop()":
+                    a "Incorrect! Pop() removes the top element from the stack."
+                "Peek()":
+                    a "Incorrect! Peek() retrieves the top element without removing it."
+                "Push()":
+                    $ chapter_4_score += 1
+                    a "Correct! Push() adds an element to the top of the stack."
 
-    show adrian normal
-    a "Next question!"
-    a "Which of the following is an example of recursion?"
-    menu:
-        "Calculating factorial using iteration":
-            a "Incorrect! This is an iterative approach, not recursive."
-        "Calculating Fibonacci numbers using recursion":
-            $ chapter_4_score += 1
-            a "Correct! Fibonacci can be calculated recursively."
-        "Sorting an array using bubble sort":
-            a "Incorrect! Bubble sort is an iterative algorithm."
-    
-    show adrian smug
-    a "Next Question"
-    a "What is the time complexity of a recursive function with a base case?"
-    menu:
-        "O(1)":
-            a "Incorrect! O(1) is constant time complexity."
-        "O(n)":
-            $ chapter_4_score += 1
-            a "Correct! The time complexity depends on the number of recursive calls."
-        "O(n^2)":
-            a "Incorrect! O(n^2) is not the correct time complexity for recursion."
+        elif current_q == "q3":
+            show adrian happy
+            a "What is the time complexity of the push() and pop() operations in a stack?"
+            menu:
+                "O(1)":
+                    $ chapter_4_score += 1
+                    a "Correct! Both push() and pop() operations have a time complexity of O(1)."
+                "O(n)":
+                    a "Incorrect! O(n) is not the correct time complexity for these operations."
+                "O(log n)":
+                    a "Incorrect! O(log n) is not the correct time complexity for these operations."
+
+        elif current_q == "q4":
+            show adrian normal
+            a "What are the two main operations of a stack?"
+            menu:
+                "Enqueue() and Dequeue()":
+                    a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
+                "Push() and Pop()":
+                    $ chapter_4_score += 1
+                    a "Correct! Push() adds an element, and Pop() removes the top element."
+                "Insert() and Remove()":
+                    a "Incorrect! Insert() and Remove() are not specific to stacks."
+
+        elif current_q == "q5":
+            show adrian smug
+            a "Which of the following is NOT a valid application of stacks?"
+            menu:
+                "Function call management":
+                    a "Incorrect! Stacks are used for managing function calls."
+                "Expression evaluation":
+                    a "Incorrect! Stacks are used in expression evaluation."
+                "Memory allocation":
+                    $ chapter_4_score += 1
+                    a "Correct! Memory allocation is not a typical application of stacks."
+
+        elif current_q == "q6":
+            show adrian happy
+            a "What is recursion in programming?"
+            menu:
+                "A technique where a function calls itself":
+                    $ chapter_4_score += 1
+                    a "Correct! Recursion involves a function calling itself."
+                "A method to optimize memory usage":
+                    a "Incorrect! Recursion is not primarily about memory optimization."
+                "A way to sort data":
+                    a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+
+        elif current_q == "q7":
+            show adrian doubt
+            a "What is the base case in recursion?"
+            menu:
+                "The condition that stops the recursion":
+                    $ chapter_4_score += 1
+                    a "Correct! The base case prevents infinite recursion."
+                "The maximum depth of recursion":
+                    a "Incorrect! The base case is not about depth."
+                "The first recursive call":
+                    a "Incorrect! The base case is not the first call."
+
+        elif current_q == "q8":
+            show adrian happy
+            a "What happens if there is no base case in recursion?"
+            menu:
+                "The program runs indefinitely":
+                    $ chapter_4_score += 1
+                    a "Correct! Without a base case, recursion leads to infinite loops."
+                "The program terminates immediately":
+                    a "Incorrect! The program will not terminate without a base case."
+                "The program runs faster":
+                    a "Incorrect! Lack of base case does not improve performance."
+
+        elif current_q == "q9":
+            show adrian normal
+            a "Which of the following is an example of recursion?"
+            menu:
+                "Calculating factorial using iteration":
+                    a "Incorrect! This is an iterative approach, not recursive."
+                "Calculating Fibonacci numbers using recursion":
+                    $ chapter_4_score += 1
+                    a "Correct! Fibonacci can be calculated recursively."
+                "Sorting an array using bubble sort":
+                    a "Incorrect! Bubble sort is an iterative algorithm."
+
+        elif current_q == "q10":
+            show adrian smug
+            a "What is the time complexity of a recursive function with a base case?"
+            menu:
+                "O(1)":
+                    a "Incorrect! O(1) is constant time complexity."
+                "O(n)":
+                    $ chapter_4_score += 1
+                    a "Correct! The time complexity depends on the number of recursive calls."
+                "O(n^2)":
+                    a "Incorrect! O(n^2) is not the correct time complexity for recursion."
 
     screen queue_quiz1:
         frame:
@@ -1366,136 +1422,145 @@ label chapter_4_quiz_medium:
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
-    jump chapter_4_ending
+    jump chapter_4_review
     
-label chapter_4_quiz_hard:
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 0.5
+init python:
+    import random
+    chapter_4_hard_question_order = [
+        "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"
+    ]
+    random.shuffle(chapter_4_hard_question_order)
 
+label chapter_4_quiz_hard:
     $ chapter_4_score = 0
 
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
     show adrian smiling at center
-    a "Welcome to the {b}Quiz!{/b}Let's see how much you've learned."
-    
-    a "What is the main principle of a stack data structure?"
-    menu:
-        "First In, First Out (FIFO)":
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
-            a "Incorrect! The correct answer is Last In, First Out (LIFO)."
-        "Last In, First Out (LIFO)":
-            $ chapter_4_score += 1
-            a "Correct! Stacks follow the LIFO principle."
-        "Random Access":
-            a "Incorrect! Stacks do not allow random access to elements."
-    
-    show adrian doubt
-    a "Next question!"
-    a "Which operation is used to add an element to the top of a stack?"
-    menu:
-        "Pop()":
-            a "Incorrect! Pop() removes the top element from the stack."
-        "Peek()":
-            a "Incorrect! Peek() retrieves the top element without removing it."
-        "Push()":
-            $ chapter_4_score += 1
-            a "Correct! Push() adds an element to the top of the stack."
-    
-    show adrian happy
-    a "Next question!"
-    a "What is the time complexity of the push() and pop() operations in a stack?"
-    menu:
-        "O(1)":
-            $ chapter_4_score += 1
-            a "Correct! Both push() and pop() operations have a time complexity of O(1)."
-        "O(n)":
-            a "Incorrect! O(n) is not the correct time complexity for these operations."
-        "O(log n)":
-            a "Incorrect! O(log n) is not the correct time complexity for these operations."
-    
-    show adrian normal
-    a "Next question!"
-    a "what are the two main operations of a stack?"
-    menu:
-        
-        "Enqueue() and Dequeue()":
-            a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
-        "Push() and Pop()":
-            $ chapter_4_score += 1
-            a "Correct! Push() adds an element, and Pop() removes the top element."
-        "Insert() and Remove()":
-            a "Incorrect! Insert() and Remove() are not specific to stacks."
-        
-    show adrian smug
-    a "Next Question"
-    a "Which of the following is NOT a valid application of stacks?"
-    menu:
-        "Function call management":
-            a "Incorrect! Stacks are used for managing function calls."
-        "Expression evaluation":
-            a "Incorrect! Stacks are used in expression evaluation."
-        "Memory allocation":
-            $ chapter_4_score += 1
-            a "Correct! Memory allocation is not a typical application of stacks."
-    
-    show adrian happy
-    a "What is recursion in programming?"
-    menu:
-        "A technique where a function calls itself":
-            $ chapter_4_score += 1
-            a "Correct! Recursion involves a function calling itself."
-        "A method to optimize memory usage":
-            a "Incorrect! Recursion is not primarily about memory optimization."
-        "A way to sort data":
-            a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+    while chapter_4_hard_question_order:
+        $ current_q = chapter_4_hard_question_order.pop(0)
 
-    show adrian doubt
-    a "Next question!"
-    a "What is the base case in recursion?"
-    menu:
-        "The condition that stops the recursion":
-            $ chapter_4_score += 1
-            a "Correct! The base case prevents infinite recursion."
-        "The maximum depth of recursion":
-            a "Incorrect! The base case is not about depth."
-        "The first recursive call":
-            a "Incorrect! The base case is not the first call."
+        if current_q == "q1":
+            a "What is the main principle of a stack data structure?"
+            menu:
+                "First In, First Out (FIFO)":
+                    a "Incorrect! The correct answer is Last In, First Out (LIFO)."
+                "Last In, First Out (LIFO)":
+                    $ chapter_4_score += 1
+                    a "Correct! Stacks follow the LIFO principle."
+                "Random Access":
+                    a "Incorrect! Stacks do not allow random access to elements."
 
-    show adrian happy
-    a "Next question!"
-    a "What happens if there is no base case in recursion?"
-    menu:
-        "The program runs indefinitely":
-            $ chapter_4_score += 1
-            a "Correct! Without a base case, recursion leads to infinite loops."
-        "The program terminates immediately":
-            a "Incorrect! The program will not terminate without a base case."
-        "The program runs faster":
-            a "Incorrect! Lack of base case does not improve performance."
+        elif current_q == "q2":
+            show adrian doubt
+            a "Which operation is used to add an element to the top of a stack?"
+            menu:
+                "Pop()":
+                    a "Incorrect! Pop() removes the top element from the stack."
+                "Peek()":
+                    a "Incorrect! Peek() retrieves the top element without removing it."
+                "Push()":
+                    $ chapter_4_score += 1
+                    a "Correct! Push() adds an element to the top of the stack."
 
-    show adrian normal
-    a "Next question!"
-    a "Which of the following is an example of recursion?"
-    menu:
-        "Calculating factorial using iteration":
-            a "Incorrect! This is an iterative approach, not recursive."
-        "Calculating Fibonacci numbers using recursion":
-            $ chapter_4_score += 1
-            a "Correct! Fibonacci can be calculated recursively."
-        "Sorting an array using bubble sort":
-            a "Incorrect! Bubble sort is an iterative algorithm."
-    
-    show adrian smug
-    a "Next Question"
-    a "What is the time complexity of a recursive function with a base case?"
-    menu:
-        "O(1)":
-            a "Incorrect! O(1) is constant time complexity."
-        "O(n)":
-            $ chapter_4_score += 1
-            a "Correct! The time complexity depends on the number of recursive calls."
-        "O(n^2)":
-            a "Incorrect! O(n^2) is not the correct time complexity for recursion."
+        elif current_q == "q3":
+            show adrian happy
+            a "What is the time complexity of the push() and pop() operations in a stack?"
+            menu:
+                "O(1)":
+                    $ chapter_4_score += 1
+                    a "Correct! Both push() and pop() operations have a time complexity of O(1)."
+                "O(n)":
+                    a "Incorrect! O(n) is not the correct time complexity for these operations."
+                "O(log n)":
+                    a "Incorrect! O(log n) is not the correct time complexity for these operations."
 
+        elif current_q == "q4":
+            show adrian normal
+            a "What are the two main operations of a stack?"
+            menu:
+                "Enqueue() and Dequeue()":
+                    a "Incorrect! Enqueue() and Dequeue() are operations of a queue, not a stack."
+                "Push() and Pop()":
+                    $ chapter_4_score += 1
+                    a "Correct! Push() adds an element, and Pop() removes the top element."
+                "Insert() and Remove()":
+                    a "Incorrect! Insert() and Remove() are not specific to stacks."
+
+        elif current_q == "q5":
+            show adrian smug
+            a "Which of the following is NOT a valid application of stacks?"
+            menu:
+                "Function call management":
+                    a "Incorrect! Stacks are used for managing function calls."
+                "Expression evaluation":
+                    a "Incorrect! Stacks are used in expression evaluation."
+                "Memory allocation":
+                    $ chapter_4_score += 1
+                    a "Correct! Memory allocation is not a typical application of stacks."
+
+        elif current_q == "q6":
+            show adrian happy
+            a "What is recursion in programming?"
+            menu:
+                "A technique where a function calls itself":
+                    $ chapter_4_score += 1
+                    a "Correct! Recursion involves a function calling itself."
+                "A method to optimize memory usage":
+                    a "Incorrect! Recursion is not primarily about memory optimization."
+                "A way to sort data":
+                    a "Incorrect! Recursion can be used in sorting algorithms, but it is not its main purpose."
+
+        elif current_q == "q7":
+            show adrian doubt
+            a "What is the base case in recursion?"
+            menu:
+                "The condition that stops the recursion":
+                    $ chapter_4_score += 1
+                    a "Correct! The base case prevents infinite recursion."
+                "The maximum depth of recursion":
+                    a "Incorrect! The base case is not about depth."
+                "The first recursive call":
+                    a "Incorrect! The base case is not the first call."
+
+        elif current_q == "q8":
+            show adrian happy
+            a "What happens if there is no base case in recursion?"
+            menu:
+                "The program runs indefinitely":
+                    $ chapter_4_score += 1
+                    a "Correct! Without a base case, recursion leads to infinite loops."
+                "The program terminates immediately":
+                    a "Incorrect! The program will not terminate without a base case."
+                "The program runs faster":
+                    a "Incorrect! Lack of base case does not improve performance."
+
+        elif current_q == "q9":
+            show adrian normal
+            a "Which of the following is an example of recursion?"
+            menu:
+                "Calculating factorial using iteration":
+                    a "Incorrect! This is an iterative approach, not recursive."
+                "Calculating Fibonacci numbers using recursion":
+                    $ chapter_4_score += 1
+                    a "Correct! Fibonacci can be calculated recursively."
+                "Sorting an array using bubble sort":
+                    a "Incorrect! Bubble sort is an iterative algorithm."
+
+        elif current_q == "q10":
+            show adrian smug
+            a "What is the time complexity of a recursive function with a base case?"
+            menu:
+                "O(1)":
+                    a "Incorrect! O(1) is constant time complexity."
+                "O(n)":
+                    $ chapter_4_score += 1
+                    a "Correct! The time complexity depends on the number of recursive calls."
+                "O(n^2)":
+                    a "Incorrect! O(n^2) is not the correct time complexity for recursion."
     screen queue_quiz1:
         frame:
             xalign 0.2
@@ -2109,9 +2174,26 @@ label chapter_4_quiz_hard:
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
-    jump chapter_4_ending
+    jump chapter_4_review
     
+label chapter_4_review:
+    # Stack Operations
+    if chapter_4_stack_operations_quiz < 2:
+        a "You need to review the Stack Operations section."
+        a "Focus on how elements are pushed, popped, and how the stack behaves in different scenarios."
+    elif chapter_4_stack_operations_quiz < 4:
+        a "You did okay in the Stack Operations section, but there's room for improvement."
+        a "Revisiting the core stack functions could help reinforce your understanding."
 
+    # Stack Recursion
+    if chapter_4_stack_recursion_quiz < 2:
+        a "You need to review the Stack Recursion section."
+        a "Pay attention to how recursive calls use the call stack and how base cases are handled."
+    elif chapter_4_stack_recursion_quiz < 4:
+        a "You did okay in the Stack Recursion section, but there's room for improvement."
+        a "Reviewing recursion flow and stack frames could help clarify the concept."
+
+    jump chapter_4_ending
 label chapter_4_ending:
     play sound "sfx/success.mp3"
     play music "bgm/city-high-life.mp3" fadein 1.0

@@ -87,5 +87,14 @@ label hideall:
     hide screen stack_quiz2
     hide screen stack_quiz3
 
+    hide screen chapter_5_BinaryTreeIntro
+    hide screen chapyer_5_BinaryTee_Info
+    hide screen ch5_BST_Info
+    hide screen bst_visual
+    hide screen bst_operations
+    hide screen ch5_Traversal_Info
+    hide screen traversal_ascii
+    hide screen traversal_ascii_quiz
+
 
     return

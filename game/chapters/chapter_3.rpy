@@ -324,7 +324,8 @@ label chapter_3_linked_list_properties:
     show adrian smiling
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
-    jump ch3_quiz1
+    $ chapter_3_progress =+ 1
+    jump ch3_linked_list_quiz
 
 init python:
     import random
@@ -529,7 +530,8 @@ label chapter_3_linked_list_remove:
     window auto
 
     a "And that is how we remove items from the linked list."
-    jump ch3_quiz2
+    $ chapter_3_progress =+ 1
+    jump ch3_linked_list_operation_quiz
 
 init python:
     import random
@@ -830,6 +832,7 @@ label chapter_3_problems_with_linked_list:
 
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+    $ chapter_3_progress =+ 1
     jump ch3_restart
 
 label ch3_restart:
@@ -2174,7 +2177,7 @@ label chapter_3_quiz_hard:
     a "Your quiz score is: [chapter_3_score]"
     jump chapter_3_review
 
-label chapter_2_review:
+label chapter_3_review:
     # Basics of Arrays
     if chapter_2_basics_quiz < 2:
         a "You need to review the Basics of Arrays section."
