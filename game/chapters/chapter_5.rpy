@@ -705,8 +705,29 @@ label chapter_5_restart:
         jump chapter_5_quiz_hard
 
 label chapter_5_quiz_easy:
+    $ chapter_5_score = 0
+
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
+    show adrian smiling at center
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 label chapter_5_quiz_medium:
+    $ chapter_5_score = 0
+
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
+    show adrian smiling at center
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 label chapter_5_quiz_hard:
+    $ chapter_5_score = 0
+
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+
+    show adrian smiling at center
+    a "Welcome to the {b}Quiz!{/b} Let's see how much you've learned."
 
 label chapter_5_quiz_end:
     a "Your total score is [chapter_5_test] out of 20"

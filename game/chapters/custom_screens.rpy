@@ -26,7 +26,8 @@ screen StatsUI:
                     text "Chapter 1: Abstract Data Structures" size 40
                     text "Chapter 2: Arrays" size 40
                     text "Chapter 3: Linked List" size 40
-                    text "Chapter 4: Stacks & Ques"
+                    text "Chapter 4: Stacks & Queues"
+                    text "Chapter 5: Trees" size 40
                 
                 vbox:
                     spacing 45
@@ -35,6 +36,7 @@ screen StatsUI:
                     text "[chapter_2_score]" size 40
                     text "[chapter_3_score]" size 40
                     text "[chapter_4_score]" size 40
+                    text "[chapter_5_score]" size 40
 
             frame:
                 xalign 0.5
@@ -77,9 +79,10 @@ screen progressUI:
             text "Chapter Progress" size 40
             text "Chapter 1 Progress: [chapter_1_progress] / 4" size 40
             text "Chapter 2 Progress: [chapter_2_progress] / 2" size 40
-            text "Chapter 3 Progress: [chapter_3_progress] / 4" size 40
-            text "Chapter 4 Progress: [chapter_4_progress] / 4" size 40
+            text "Chapter 3 Progress: [chapter_3_progress] / 3" size 40
+            text "Chapter 4 Progress: [chapter_4_progress] / 5" size 40
             text "Chapter 5 Progress: [chapter_5_progress] / 4" size 40
+            text "Chapter 6 Progress: [chapter_6_progress] / 5" size 40
 
     imagebutton:
         xalign 1.0
