@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/user/database.rpy", line 16: invalid syntax
-                    "Chapter 5: Trees": 0
-                     ^
+File "game/user/database.rpy", line 42: invalid syntax
+                        "Chapter 5: Trees": chapter_5_score
+                         ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Tue Sep 30 22:13:38 2025
+Wed Oct  1 09:47:47 2025

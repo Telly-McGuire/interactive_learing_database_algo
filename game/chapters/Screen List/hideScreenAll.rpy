@@ -96,5 +96,10 @@ label hideall:
     hide screen traversal_ascii
     hide screen traversal_ascii_quiz
 
-
+    hide screen ch6_AVL_Info
+    hide screen ch6_AVLOps_Menu
+    hide screen ch6_AVLOps_Insert
+    hide screen ch6_AVLOps_Delete
+    hide screen ch6_AVLOps_Rotations
+    hide screen ch6_AVLOps_Search
     return

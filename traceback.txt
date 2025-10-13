@@ -3,43 +3,24 @@
 While running game code:
   File "game/chapters/chapter_1.rpy", line 830, in script call
     menu:
-  File "game/chapters/chapter_5.rpy", line 695, in script
-    a "Your score is [chapter_5_test]"
-NameError: name 'chapter_5_test' is not defined
+  File "game/chapters/chapter_6.rpy", line 488, in script
+    jump chapter_6_Balanced_Trees_quiz
+ScriptError: could not find label 'chapter_6_Balanced_Trees_quiz'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/chapters/chapter_1.rpy", line 830, in script call
     menu:
-  File "game/chapters/chapter_5.rpy", line 695, in script
-    a "Your score is [chapter_5_test]"
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 2572, in execute
-    Say.execute(self)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 615, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\sayexports.py", line 132, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1436, in __call__
-    what = self.prefix_suffix("what", self.what_prefix, what, self.what_suffix)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1350, in prefix_suffix
-    return (sub(prefix) + sub(body) + sub(suffix))
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1330, in sub
-    return renpy.substitutions.substitute(s, scope=scope, force=force, translate=translate)[0]
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 373, in substitute
-    s = interpolate(s, variables) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 86, in interpolate
-    raise e
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 78, in interpolate
-    value = renpy.python.py_eval(code, {}, scope)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1209, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1202, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "<none>", line 1, in <module>
-NameError: name 'chapter_5_test' is not defined
+  File "game/chapters/chapter_6.rpy", line 488, in script
+    jump chapter_6_Balanced_Trees_quiz
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1699, in execute
+    rv = renpy.game.script.lookup(target)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'chapter_6_Balanced_Trees_quiz'.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Tue Sep 30 22:10:49 2025
+Mon Oct 13 12:45:22 2025

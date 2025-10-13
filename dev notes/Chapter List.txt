@@ -66,12 +66,11 @@ Chapter 7: Binary
 Search Trees(Red-Black
 Trees)
 • The logic of RedBlack trees
+* Operations 
 • Re-coloring and
 Rotation cases
-• Red-black tree
-illustrations
-• Comparison of Redblack trees and AVL
-trees
+
+
 
 Chapter 8: Heaps
 • Introduction to
@@ -105,7 +104,7 @@ Algorithms
 overview
 • Adjacency matrix
 and adjacency list
-• Applicatio
+• Application
 
 Chapter 11: Graph
 Traversal Algorithms

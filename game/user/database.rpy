@@ -12,7 +12,7 @@ init python:
                 "Chapter 1: Abstract Data Structures": 0,
                 "Chapter 2: Arrays": 0,
                 "Chapter 3: Linked List": 0,
-                "Chapter 4: Stack & Queues": 0
+                "Chapter 4: Stack & Queues": 0,
                 "Chapter 5: Trees": 0
             }
         }
@@ -38,7 +38,7 @@ init python:
                     "Chapter 1: Abstract Data Structures": chapter_1_score,
                     "Chapter 2: Arrays": chapter_2_score,
                     "Chapter 3: Linked List": chapter_3_score,
-                    "Chapter 4: Stack & Queues": chapter_4_score
+                    "Chapter 4: Stack & Queues": chapter_4_score,
                     "Chapter 5: Trees": chapter_5_score
                 }
             }

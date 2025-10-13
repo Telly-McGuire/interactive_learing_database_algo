@@ -18,25 +18,29 @@ screen chapter_5_BinaryTreeIntro:
             yalign 0.5
             text "Binary Tree" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 label chapter_5_intro:
-
-label chacter_5_Binary_Trees:
-    call hideall #This is a stupid fix but it works I think
-    play audio ("sfx/start.mp3")
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    
+    call hideall
+    play sound "sfx/start.mp3"
+    stop music fadeout 1.0
+    
+    scene black
+    pause 1.0
 
     show screen chapter_5_BinaryTreeIntro
     with dissolve
     scene mt tree with dissolve
     pause 2.0
     hide screen chapter_5_BinaryTreeIntro
-    with dissolve
-
+    
+    show screen menu_btn
+    
+    play music "bgm/city-high-life.mp3" fadein 1.0
     show adrian smiling at center:
         smaller
+    with dissolve
 
-    show screen menu_btn
+label chacter_5_Binary_Trees:
     show adrian happy
-    a "Nice to see you again!"
 
     show adrian explaining
     a "So what is a Binary Tree?"

@@ -4,22 +4,133 @@
 # - Operations
 # - Re-coloring and Rotation cases
 
+default chapter_7_progress = 0
+
+default chapter_7_RB_Logic_quiz = 0
+default chapter_7_RB_Operations_quiz = 0
+default chapter_7_Recoloring_Rotation_quiz = 0
+
 label chapter_7_intro:
 
+    call hideall
+    play sound "sfx/start.mp3"
+    stop music fadeout 1.0
+    
+    scene black
+    pause 1.0
+
+    show screen chapter_
+    scene mt tree with dissolve
+    pause 2.0
+    hide screen chapter_
+    
+    show screen menu_btn
+    
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    show adrian smiling at center:
+        smaller
+    with dissolve
+    
+    show adrian nocomment
+    a "Here Have this Honey"
+    a "Shhh dont tell anyone I have this"
+    a "I took it from a bear"
+
+    show adrian smiling
+    a "Welcome to Chapter 7: Red-Black Trees"
+
 label chapter_7_RB_Logic:
+    
+    a "So what are Red-Black Trees"
+    a "Theyre just different"
+    a "Red-Black Trees are a type of self-balancing binary search tree"
+    a "They ensure that the tree remains approximately balanced during insertions and deletions"
+    a "This balance is crucial for maintaining efficient search, insertion, and deletion operations"
+    a "Red-Black Trees have the following properties:"
+    a "1. Each node is either red or black"
+    a "2. The root is always black"
+    a "3. All leaves (NIL nodes) are black"
+    a "4. If a red node has children, then both children must be black"
+    a "5. Every path from a node to its descendant NIL nodes must have the same number of black nodes"
+
+    $ chapter_7_progress =+ 1
+    show adrian smiling
+    play sound "sfx/bell.mp3"
+    a "Alright, let’s see what you’ve learned. Time for a quick quiz!"
+    jump chapter_7_RB_Logic_Quiz
+
 label chapter_7_RB_Logic_Quiz:
     #5POINTS
     $ chapter_7_RB_Logic_quiz = 0
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    show adrian normal
+
+
+    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job!"
+    a "Your score for this quiz is [chapter_7_RB_Logic_quiz] out of 5."
+    jump chapter_7_RB_Operations
 
 label chapter_7_RB_Operations:
+    a "Red-Black Trees support standard binary search tree operations such as {b}insertion, deletion, and search{/b}"
+    a ""
+
+    $ chapter_7_progress =+ 1
+    show adrian smiling
+    play sound "sfx/bell.mp3"
+    a "Alright, let’s see what you’ve learned. Time for a quick quiz!"
+    jump chapter_7_RB_Operations_Quiz
+
+
+
+
 label chapter_7_RB_Operations_Quiz:
     #5POINTS
     $ chapter_7_RB_Operations_quiz = 0
+    
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    show adrian normal
+
+
+    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job!"
+    a "Your score for this quiz is [chapter_7_RB_Operations_quiz] out of 5."
+    jump chapter_7_Recoloring_Rotation
 
 label chapter_7_Recoloring_Rotation:
+
+
+
+    $ chapter_7_progress =+ 1
+    show adrian smiling
+    play sound "sfx/bell.mp3"
+    a "Alright, let’s see what you’ve learned. Time for a quick quiz!"
+    jump chapter_7_Recoloring_Rotation_Quiz
+
 label chapter_7_Recoloring_Rotation_Quiz:
     #5POINTS
     $ chapter_7_Recoloring_Rotation_quiz = 0
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    show adrian normal
+
+
+    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job!"
+    a "Your score for this quiz is [chapter_7_Recoloring_Rotation_quiz] out of 5."
+
+    jump chapter_7_restart
 
 label chapter_7_restart:
     $ chapter_7_test = (
@@ -42,11 +153,44 @@ label chapter_7_restart:
         jump chapter_7_quiz_hard
 
 label chapter_7_quiz_easy:
-label chapter_7_quiz_medium:
-label chapter_7_quiz_hard:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    show adrian normal
 
-label chapter_7_quiz_end:
-    a "Your total score is [chapter_7_test] out of 15"
+
+    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job!"
+
+    jump chapter_7_performance
+    
+label chapter_7_quiz_medium:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    show adrian normal
+
+
+    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job!"
+    
+    jump chapter_7_performance
+
+label chapter_7_quiz_hard:
+    stop music fadeout 0.5
+    play music "bgm/better-answer.mp3" fadein 1.0
+    show adrian normal
+
+
+    show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+    a "Great job!"
     jump chapter_7_performance
 
 label chapter_7_performance:
