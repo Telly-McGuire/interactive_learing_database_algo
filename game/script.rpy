@@ -66,6 +66,11 @@ default chapter_3_score = 0
 default chapter_4_score = 0
 default chapter_5_score = 0
 default chapter_6_score = 0
+default chapter_7_score = 0
+default chapter_8_score = 0
+default chapter_9_score = 0
+default chapter_10_score = 0
+default chapter_11_score = 0
 
 label start:
     $ persistent.menu = False

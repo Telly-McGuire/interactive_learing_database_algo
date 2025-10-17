@@ -13,7 +13,13 @@ init python:
                 "Chapter 2: Arrays": 0,
                 "Chapter 3: Linked List": 0,
                 "Chapter 4: Stack & Queues": 0,
-                "Chapter 5: Trees": 0
+                "Chapter 5: Trees": 0,
+                "Chapter 6: AVL Trees": 0,
+                "Chapter 7: Binary Search Trees": 0,
+                "Chapter 8: Heaps": 0,
+                "Chapter 9: Associative Arrays": 0,
+                "Chapter 10: Graph Algorithms": 0,
+                "Chapter 11: Graph Traversal Algorithms": 0
             }
         }
         try:
@@ -39,7 +45,13 @@ init python:
                     "Chapter 2: Arrays": chapter_2_score,
                     "Chapter 3: Linked List": chapter_3_score,
                     "Chapter 4: Stack & Queues": chapter_4_score,
-                    "Chapter 5: Trees": chapter_5_score
+                    "Chapter 5: Trees": chapter_5_score,
+                    "Chapter 6: AVL Trees": chapter_6_score,
+                    "Chapter 7: Binary Search Trees": chapter_7_score,
+                    "Chapter 8: Heaps": chapter_8_score,
+                    "Chapter 9: Associative Arrays": chapter_9_score,
+                    "Chapter 10: Graph Algorithms": chapter_10_score,
+                    "Chapter 11: Graph Traversal Algorithms": chapter_11_score,
                 }
             }
             

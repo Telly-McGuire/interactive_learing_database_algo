@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/user/database.rpy", line 42: invalid syntax
-                        "Chapter 5: Trees": chapter_5_score
-                         ^
+File "game/chapters/custom_screens.rpy", line 29: expected a keyword argument, colon, or end of line.
+    text "Chapter 4: Stacks & Queues" 40
+                                      ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Wed Oct  1 09:47:47 2025
+Fri Oct 17 11:05:48 2025

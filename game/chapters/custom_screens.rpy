@@ -9,8 +9,8 @@ screen StatsUI:
     frame:
         xalign 0.5
         yalign 0.5
-        xpadding 200
-        ypadding 200
+        xpadding 300
+        ypadding 50
 
         vbox:
             spacing 40
@@ -21,22 +21,34 @@ screen StatsUI:
                 spacing 80
 
                 vbox:
-                    spacing 40
+                    spacing 20
                     text "SCORES" size 40
                     text "Chapter 1: Abstract Data Structures" size 40
                     text "Chapter 2: Arrays" size 40
                     text "Chapter 3: Linked List" size 40
-                    text "Chapter 4: Stacks & Queues"
+                    text "Chapter 4: Stacks & Queues" size 40
                     text "Chapter 5: Trees" size 40
+                    text "Chapter 6: AVL Trees" size 40
+                    text "Chapter 7: Binary Search Trees" size 40
+                    text "Chapter 8: Heaps" size 40
+                    text "Chapter 9: Associative Arrays" size 40
+                    text "Chapter 10: Graph Algorithms" size 40
+                    text "Chapter 11: Graph Traversal Algorithms" size 40
                 
                 vbox:
-                    spacing 45
+                    spacing 20
                     text ""
                     text "[chapter_1_score]" size 40
                     text "[chapter_2_score]" size 40
                     text "[chapter_3_score]" size 40
                     text "[chapter_4_score]" size 40
                     text "[chapter_5_score]" size 40
+                    text "[chapter_6_score]" size 40
+                    text "[chapter_7_score]" size 40
+                    text "[chapter_8_score]" size 40
+                    text "[chapter_9_score]" size 40
+                    text "[chapter_10_score]" size 40
+                    text "[chapter_11_score]" size 40
 
             frame:
                 xalign 0.5
@@ -83,6 +95,11 @@ screen progressUI:
             text "Chapter 4 Progress: [chapter_4_progress] / 5" size 40
             text "Chapter 5 Progress: [chapter_5_progress] / 4" size 40
             text "Chapter 6 Progress: [chapter_6_progress] / 5" size 40
+            text "Chapter 7 Progress: [chapter_7_progress] / 4" size 40
+            text "Chapter 8 Progress: [chapter_8_progress] / 3" size 40
+            text "Chapter 9 Progress: [chapter_9_progress] / 4" size 40
+            text "Chapter 10 Progress: [chapter_10_progress] / 5" size 40
+            text "Chapter 11 Progress: [chapter_11_progress] / 4" size 40
 
     imagebutton:
         xalign 1.0
