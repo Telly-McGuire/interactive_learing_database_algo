@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chapters/custom_screens.rpy", line 29: expected a keyword argument, colon, or end of line.
-    text "Chapter 4: Stacks & Queues" 40
-                                      ^
+File "game/chapters/chapter_7.rpy", line 409: end of line expected.
+    show adrian at ypos 0.3
+                        ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Fri Oct 17 11:05:48 2025
+Tue Oct 21 20:56:23 2025

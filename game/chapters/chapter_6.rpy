@@ -45,8 +45,34 @@ label chapter_6_intro:
     show adrian normal at center:
         smaller
     
+    if persistent.chapter_6 == False:
+        a "Hi welcome back to chapter 6!"
+        a "are you sure you want to go through this chapter again?"
+        menu:
+            "Yes":
+                a "Pick a topic"
+                menu:
+                    "AVL Tree Properties":
+                        jump chapter_6_AVL_Properties
+                    "AVL Tree Operations":
+                        jump chapter_6_AVL_Operations
+                    "Balanced Trees":
+                        jump chapter_6_Balanced_Trees
+                    "Rotations":
+                        jump chapter_6_Rotations 
+
+            "No":
+                jump menu
+    else:
+        pass
+
+
     a "Hey there! Whats up aligator."
     a "Welcome to Chapter 6: AVL Trees."
+    show adrian nocomment
+    a "..."
+    a "What you expected an aligator to pop out or something?"
+    a "Nah"
 
 
     jump chapter_6_AVL_Properties
@@ -58,6 +84,7 @@ label chapter_6_AVL_Properties:
     show adrian explaining:
         smaller
     a "AVL Trees are a type of self-balancing Binary Search Tree."
+    a "They have to be Balanced to be called AVL Trees."
 
     screen ch6_AVL_Info:
         frame:
@@ -77,6 +104,7 @@ label chapter_6_AVL_Properties:
                 text "2. Balance factor ∈ -1, 0, +1" size 40 color "#FFFFFF" outlines [(3, "#000000", 0, 0)]
                 text "3. Rotations restore balance after insert/delete" size 40 color "#FFFFFF" outlines [(3, "#000000", 0, 0)]
                 text "4. Guarantees O(log n) search, insert, delete" size 40 color "#FFFFFF" outlines [(3, "#000000", 0, 0)]
+                
 
     show adrian explaining at left
     with move
@@ -202,8 +230,8 @@ label chapter_6_AVL_Operations:
 
     screen ch6_AVLOps_Menu():
         frame:
-            xalign 0.5
-            yalign 0.5
+            xalign 0.8
+            yalign 0.3
             xpadding 80
             ypadding 80
 
@@ -279,7 +307,8 @@ label chapter_6_AVL_Operations:
                 text "• Balanced height ensures fast lookup" size 40
                 textbutton "Back" action Hide("ch6_AVLOps_Search") text_size 30
 
-    show adrian neutral
+    show adrian normal at left
+    with move
     a "These rotations are lightweight and localized—they don’t rebuild the whole tree, just tweak the structure where needed."
 
     show adrian smiling
@@ -288,6 +317,8 @@ label chapter_6_AVL_Operations:
     hide screen ch6_AVLOps_Menu
    
     show adrian smiling at center
+    with move
+
     $ chapter_6_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
@@ -387,16 +418,17 @@ label chapter_6_Balanced_Trees:
     show adrian explaining
     a "Balanced trees are the backbone of efficient data structures. They keep operations fast even if as data {b}grows."
 
-    show adrian happy
-    a "Tap on a concept below to explore how balance is maintained."
+    show adrian happy at right
+    with move
+    a "Tap on a concept to explore how balance is maintained."
 
     show screen ch6_BalancedTree_Menu
     screen ch6_BalancedTree_Menu():
         frame:
-            xalign 0.5
-            yalign 0.5
-            xpadding 80
-            ypadding 80
+            xalign 0.1
+            yalign 0.3
+            xpadding 40
+            ypadding 150
 
             vbox:
                 spacing 30
@@ -574,6 +606,20 @@ label chapter_6_Balanced_Trees_Quiz:
 label chapter_6_Rotations:
     # Rotation I, II, III, IV
                                 # VISUALS NEEDED
+    show adrian
+    a "Now, let’s get into the nitty-gritty of rotations in AVL Trees."
+
+    show adrian explaining
+    a "Rotations are the key operations that restore balance in AVL Trees after insertions or deletions."
+
+    #add visuals for each rotation type
+        
+    $ chapter_6_progress += 1
+    show adrian smiling
+    play sound "sfx/bell.mp3"
+    a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+    jump chapter_6_Rotations_Quiz
+    
 init python:
     import random
     chapter_6_rotations_order = [
@@ -582,6 +628,7 @@ init python:
     random.shuffle(chapter_6_rotations_order)
 
 label chapter_6_Rotations_Quiz:
+
     #5POINTS
     $ chapter_6_Rotations_quiz = 0
 
@@ -724,14 +771,19 @@ label chapter_6_performance:
         a "You did okay in Rotations, but there's room for improvement."
         a "Practice visualizing rotation steps."
 
-# Applications
-    if chapter_6_Applications_quiz < 2:
-        a "You need to review Applications of AVL Trees."
-        a "Think about real-world use cases like databases and indexing."
-    elif chapter_6_Applications_quiz < 3:
-        a "You did okay in Applications, but there's room for improvement."
-        a "Explore how AVL Trees compare with other data structures in practice."
-
     jump chapter_6_end
 
 label chapter_6_end:
+    play sound "sfx/success.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    $ persistent.chapter_6 = True
+    a "Would You like to test again?"
+    menu:
+        "Yes":
+            jump ch6_restart
+        "No":
+            pass
+    show adrian happy
+    a "You have finished chapter 6. You can continue to Chapter 7!"
+    jump menu
+       

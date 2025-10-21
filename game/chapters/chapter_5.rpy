@@ -35,9 +35,47 @@ label chapter_5_intro:
     show screen menu_btn
     
     play music "bgm/city-high-life.mp3" fadein 1.0
-    show adrian smiling at center:
+    show adrian normal at center:
         smaller
     with dissolve
+
+    if persistent.chapter_5 == True:
+        a "Hi welcome back to chapter 5"
+        a "are you sure you want to go through this chapter again?"
+        menu:
+            "Yes":
+                a "Which topic you want to go to?"
+                menu:
+                    "Binary Trees":
+                        jump chacter_5_Binary_Trees
+                    "Binary Search Trees":
+                        jump chapter_5_Binary_Search_Trees
+                    "BST Functions":
+                        jump chapter_5_Functions
+                    "Tree Traversals":
+                        jump chapter_5_Traversal
+            "No":
+                jump menu
+    else:
+        pass
+
+    a "Welcome to Chapter 5: Trees!"
+    show adrian explaining
+    a "Plants, Bushes, People...dogs?"
+    a "All of them have arms"
+    show adrian nocomment
+    a "Well I dont know about about dogs though"
+    a "What do they have?"
+    a "{cps=10}...Legs?"
+    show adrian normal
+    a "{color=#6B8E23}Anyways{/color}, {color=#228B22}Trees{/color}, {color=#8B4513}Branches{/color}, {color=#808080}whatever{/color}."
+    a "In computer science, trees are a fundamental data structure that organizes data hierarchically."
+    a "What does that mean?"
+    show adrian smug
+    a "Who knows"
+    show adrian normal
+    a "Lmao"
+    
 
 label chacter_5_Binary_Trees:
     show adrian happy
@@ -75,16 +113,46 @@ label chacter_5_Binary_Trees:
 
     show adrian explaining
     a "Traversals are how we explore trees. Inorder traversal gives sorted output in BSTs. Preorder and Postorder are great for copying or deleting trees."
+    hide screen ch5_BinaryTree_Info
+    image kahoy = "assets/kahoy.png"
+    show kahoy at right:
+        zoom 0.4
 
-    a "And it’s not just theory—binary trees power decision-making in AI, syntax parsing in compilers, and even file system hierarchies."
+
+    a "And it’s not just theory—binary trees power decision-making in AI, syntax parsing- "
+    show adrian shock
+    a "{cps=50}Whoa... where did that tree come from?{nw}"
+    a "{cps=50}Is that a... kahoy?{nw}"
+    a "{cps=50}I swear that wasn't here a second ago.{nw}"
+    a "{cps=50}Did that branch just move?{nw}"
+    a "{cps=50}Okay, something's off. Trees don't do that.{nw}"
+    a "{cps=50}Was that... a bug?{nw}"
+    a "{cps=50}Nope. Not normal. Definitely not normal.{nw}"
+
+    a "{cps=50}Is it... growing sideways?{nw}"
+    a "{cps=50}That bark looks like it's breathing.{nw}"
+    a "{cps=50}Okay, now it's humming. Trees don't hum.{nw}"
+    a "{cps=50}Why does it smell like mint and regret?{nw}"
+    a "{cps=50}I think that leaf just winked at me.{nw}"
+    a "{cps=50}There's moss... but it's moving.{nw}"
+    a "{cps=50}That knot looks suspiciously like an eye.{nw}"
+    a "{cps=50}I'm not touching it. You touch it.{nw}"
+    a "{cps=50}Is it... pulsing? Trees don't pulse.{nw}"
+    show adrian nocomment
+    a "Ahem"
+    a "Sorry"
+    a "Abra kadabra alakazam"
+    play sound "sfx/explode.mp3"
+    hide kahoy
 
     show adrian smiling
     a "Once you understand how trees grow and branch, you’ll see them everywhere in computer science."
 
+    
 
     show adrian smiling at center
     with move
-    hide screen ch5_BinaryTree_Info
+    
     with dissolve
     $ chapter_5_progress =+ 1    
     show adrian smiling
@@ -168,8 +236,11 @@ label chapter_5_Binary_Tree_quiz:
                     a "Incorrect! That’s not the correct BST rule."
                 "All nodes must be equal":
                     a "Incorrect! BSTs require ordered relationships."
-
     show adrian happy
+    stop music fadeout 0.5
+    play music "bgm/city-high-life.mp3" fadein 0.5
+    play sound "sfx/success.mp3"
+
     a "Great job!"
     a "Your score for this quiz is [chapter_5_Binary_Tree_quiz] out of 5."
     jump chapter_5_Binary_Search_Trees
@@ -182,7 +253,9 @@ label chapter_5_Binary_Search_Trees:
     show adrian normal
     a "{color=#ff0000}That's{/color} {color=#ff7f00}kinda{/color} {color=#ffff00}gay{/color}{w=0.3}{color=#00ff00}.{w=0.3}.{w=0.3}.{color=#0000ff}🌈{/color}"
     a "The Root is at the Top, and the Leaves hang below."
-    
+    show adrian nocomment
+    a "{cps=5}Ignore the...trees..."
+    play sound "sfx/ting.mp3"
     show screen ch5_BST_Info
     with dissolve
 
@@ -235,10 +308,11 @@ label chapter_5_Binary_Search_Trees:
                 text "      50      " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
                 text "     /  \\     " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
                 text "   30    70   " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
-                text "  / \\    / \\ " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
+                text "  / \\       / \\ " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
                 text "20 40  60 80" size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
-    a "{color=#ffcc00}{size=+15}{fast}Ooooh{/fast} {color=#00ffcc}{size=+20}{b}Fancy ASCII Art!{/b}{/size}{/color}"
- 
+    a "{cps=15}{color=#ffcc00}{size=+15}{fast}Ooooh{/fast} {color=#00ffcc}{size=+20}{b}Fancy ASCII Art!{/b}{/size}{/color}"
+    a "Totally not because my creator is lazy and couldn't make actual graphics."
+    "Shhhhh..."
     hide screen bst_visual
 
     a "lmao"
@@ -251,7 +325,6 @@ label chapter_5_Binary_Search_Trees:
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     jump chapter_5_Binary_Search_Tree_Quiz
-
 
 label chapter_5_Binary_Search_Tree_Quiz:
     #5POINTS
@@ -296,7 +369,7 @@ label chapter_5_Binary_Search_Tree_Quiz:
                     a "Incorrect! Postorder ends with the root."
 
         elif current_q == "q3":
-            show adrian thinking
+            show adrian normal
             a "What’s the time complexity of searching in a balanced BST?"
             menu:
                 "O(n)":
@@ -338,13 +411,16 @@ label chapter_5_Binary_Search_Tree_Quiz:
     a "Great job!"
     a "Your score for this quiz is [chapter_5_Binary_Search_Tree_quiz] out of 5."
     jump chapter_5_Functions
+
+
+image ch_5_fn_1 = Movie(play="images/videos/chapter_5_insert.webm", loop=False)
 label ch_5_insert:
-    # hide screen bst_operations
-    # window hide
-    # show ch_5_fn_1 at truecenter #PLACEHOLDER FOR INSERTION ANIMATION
-    # pause 9.0
-    # hide ch_5_fn_1
-    # window auto
+    hide screen bst_operations
+    window hide
+    show ch_5_fn_1 at truecenter #PLACEHOLDER FOR INSERTION ANIMATION
+    pause 25.0
+    hide ch_5_fn_1
+    window auto
     jump chapter_5_Functions
 
 label ch_5_find:
@@ -776,3 +852,16 @@ label chapter_5_performance:
     jump chapter_5_end  
 
 label chapter_5_end:
+    play sound "sfx/success.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    $ persistent.chapter_5 = True
+    a "Would You like to test again?"
+    menu:
+        "Yes":
+            jump ch5_restart
+        "No":
+            pass
+    show adrian happy
+    a "You have finished chapter 5. You can continue to Chapter 6!"
+    jump menu
+       

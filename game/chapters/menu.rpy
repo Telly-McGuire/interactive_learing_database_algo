@@ -225,19 +225,19 @@ screen menu_screen_3:
             auto "back_%s"
             action [Hide("menu_screen_3"), Show("menu_screen_2")]
 
-        # imagebutton:
-        #     auto "chapter_7_%s"
-        #     action Jump("chapter_4_intro")
+        imagebutton:
+            auto "chapter_7_%s"
+            action Jump("chapter_7_intro")
 
         
-        # imagebutton:
-        #     auto "chapter_8_%s"
-        #     action Jump("chapter_5_intro")
+        imagebutton:
+            auto "chapter_8_%s"
+            action Jump("chapter_8_intro")
 
         
-        # imagebutton:
-        #     auto "chapter_9_%s"
-        #     action Jump("chapter_6_intro")
+        imagebutton:
+            auto "chapter_9_%s"
+            action Jump("chapter_9_intro")
 
 
         imagebutton:
@@ -266,33 +266,33 @@ screen menu_screen_4:
             auto "back_%s"
             action [Hide("menu_screen_4"), Show("menu_screen_3")]
 
-        vbox:
-            yalign 0.5
-            frame:
-                yalign 0.5
-                ypadding 20
-                xpadding 20
-                textbutton "Stack Minigame":
-                    text_color "#00BFFF"
-                    text_hover_color "#FFD700"
-                    action [Hide("menu_screen_2"),Jump("stack_minigame2")]
-            frame:
-                yalign 0.5
-                ypadding 20
-                xpadding 20
-                textbutton "Stack Minigame":
-                    text_color "#00BFFF"
-                    text_hover_color "#FFD700"
-                    action [Hide("menu_screen_2"),Jump("stack_minigame3")]
+        # vbox:
+        #     yalign 0.5
+        #     frame:
+        #         yalign 0.5
+        #         ypadding 20
+        #         xpadding 20
+        #         textbutton "Stack Minigame":
+        #             text_color "#00BFFF"
+        #             text_hover_color "#FFD700"
+        #             action [Hide("menu_screen_2"),Jump("stack_minigame2")]
+        #     frame:
+        #         yalign 0.5
+        #         ypadding 20
+        #         xpadding 20
+        #         textbutton "Stack Minigame":
+        #             text_color "#00BFFF"
+        #             text_hover_color "#FFD700"
+        #             action [Hide("menu_screen_2"),Jump("stack_minigame3")]
 
-        # imagebutton:
-        #     auto "chapter_10_%s"
-        #     action Jump("chapter_4_intro")
+        imagebutton:
+            auto "chapter_10_%s"
+            action Jump("chapter_10_intro")
 
         
-        # imagebutton:
-        #     auto "chapter_11_%s"
-        #     action Jump("chapter_5_intro")
+        imagebutton:
+            auto "chapter_11_%s"
+            action Jump("chapter_11_intro")
 
         
         # imagebutton:

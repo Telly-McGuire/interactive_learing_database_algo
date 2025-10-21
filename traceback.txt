@@ -3,24 +3,38 @@
 While running game code:
   File "game/chapters/chapter_1.rpy", line 830, in script call
     menu:
-  File "game/chapters/chapter_6.rpy", line 488, in script
-    jump chapter_6_Balanced_Trees_quiz
-ScriptError: could not find label 'chapter_6_Balanced_Trees_quiz'.
+  File "game/chapters/chapter_6.rpy", line 312, in script call
+    a "These rotations are lightweight and localized—they don’t rebuild the whole tree, just tweak the structure where needed."
+  File "game/chapters/chapter_7.rpy", line 409, in script
+    show adrian at position(xalign=0.1, yalign=0.5)
+  File "game/chapters/chapter_7.rpy", line 409, in <module>
+    show adrian at position(xalign=0.1, yalign=0.5)
+TypeError: __new__() got an unexpected keyword argument 'xalign'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/chapters/chapter_1.rpy", line 830, in script call
     menu:
-  File "game/chapters/chapter_6.rpy", line 488, in script
-    jump chapter_6_Balanced_Trees_quiz
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1699, in execute
-    rv = renpy.game.script.lookup(target)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'chapter_6_Balanced_Trees_quiz'.
+  File "game/chapters/chapter_6.rpy", line 312, in script call
+    a "These rotations are lightweight and localized—they don’t rebuild the whole tree, just tweak the structure where needed."
+  File "game/chapters/chapter_7.rpy", line 409, in script
+    show adrian at position(xalign=0.1, yalign=0.5)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1111, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1070, in show_imspec
+    at_list = [ renpy.python.py_eval(i) for i in at_list ]
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1070, in <listcomp>
+    at_list = [ renpy.python.py_eval(i) for i in at_list ]
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1209, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/chapters/chapter_7.rpy", line 409, in <module>
+    show adrian at position(xalign=0.1, yalign=0.5)
+TypeError: __new__() got an unexpected keyword argument 'xalign'
 
-Windows-10-10.0.26100 AMD64
+Windows-10-10.0.26200 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Mon Oct 13 12:45:22 2025
+Tue Oct 21 20:59:01 2025

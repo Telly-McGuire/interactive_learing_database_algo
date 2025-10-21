@@ -102,4 +102,14 @@ label hideall:
     hide screen ch6_AVLOps_Delete
     hide screen ch6_AVLOps_Rotations
     hide screen ch6_AVLOps_Search
+    hide screen ch6_BalancedTree_Menu
+    hide screen ch6_BalancedTree_Factor
+    hide screen ch6_BalancedTree_Types
+    hide screen ch6_BalancedTree_Why
+
+    hide screen chapter_7_RBIntro
+    hide screen ch_7_RedBlackTrees
+    hide screen ch_7_RB_Operations
+    hide screen ch_7_Recoloring_Rotation
+
     return
