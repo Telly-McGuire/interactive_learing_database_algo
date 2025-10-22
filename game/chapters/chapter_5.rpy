@@ -858,7 +858,7 @@ label chapter_5_end:
     a "Would You like to test again?"
     menu:
         "Yes":
-            jump ch5_restart
+            jump chapter_5_restart
         "No":
             pass
     show adrian happy

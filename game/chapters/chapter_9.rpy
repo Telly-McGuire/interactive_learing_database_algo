@@ -10,6 +10,18 @@ default chapter_9_Associative_Arrays_quiz = 0
 default chapter_9_Collisions_quiz = 0
 default chapter_9_Dynamic_Resizing_quiz = 0
 
+screen chapter_9_AAIntro:  # Associative Arrays Intro
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xpadding 200
+        ypadding 60
+        vbox:
+            spacing 20
+            xalign 0.5
+            yalign 0.5
+            text "Associative Arrays" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
+
 label chapter_9_intro:
 
     call hideall
@@ -19,10 +31,10 @@ label chapter_9_intro:
     scene black
     pause 1.0
 
-    show screen chapter_
+    show screen chapter_9_AAIntro
     scene mt tree with dissolve
     pause 2.0
-    hide screen chapter_
+    hide screen chapter_9_AAIntro
 
     show screen menu_btn
 
@@ -31,25 +43,111 @@ label chapter_9_intro:
         smaller
     with dissolve
 
-    show adrian nocomment
-    a "Ready to unlock the power of key-value pairs?"
-    a "Let's dive into associative arrays and hash tables."
+    show adrian normal
+    a "Do you have a partner?"
+
+    menu:
+        "Yes":
+            a "Aww, that's great!"
+        "No":
+            show adrian nocomment
+            a "Oh..."
+            a "Thats kinda sad."
+            a "Lmao it's okay though, I'm here with you!"
+
+    show adrian normal
+    a "I'm asking you that cuz were talking about partnering"
+    a "Connecting things to another"
+    a "Like how Associative Arrays connect keys to values!"
+
+    show shrimple onlayer overlay:
+        zoom 0.2
+        xpos 0.4
+        ypos 0.8
+    show adrian smiling
+    a "As shrimple as that" 
+
     show adrian smiling
     a "Welcome to Chapter 9: Associative Arrays"
+
+screen chapter_9_dict_display():
+    frame:
+        xalign 0.5
+        yalign 0.6
+        xpadding 50
+        ypadding 50
+        vbox:
+            spacing 8
+            text "Associative Array — Live Demo" size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
+            text "Current entries:" size 20 color "#FFFFFF" outlines [(1, "#000000", 0, 0)]
+            # Show the dictionary as a compact, readable list.
+            text "[', '.join([f'{k}: {v}' for k, v in demo_dict.items()])]" size 20 color "#FFFFCC" outlines [(1, "#000000", 0, 0)]
+            hbox:
+                spacing 12
+                textbutton "Add entry" action Return("add")
+                textbutton "Lookup" action Return("lookup")
+                textbutton "Close" action Return("close")
+
+init python:
+    # Demo dictionary for the interactive screen. Kept simple so players can experiment.
+    try:
+        demo_dict
+    except NameError:
+        demo_dict = {"alice": "Phone: 555-0123", "bob": "Phone: 555-0456"}
 
 label chapter_9_Associative_Arrays:
 
     a "Let’s explore a powerful data structure: {b}Associative Arrays{/b}, also known as {b}dictionaries{/b}."
     a "Unlike regular arrays that use numeric indices, associative arrays store data as {b}key-value pairs{/b}."
 
-    a "This means you can access a value directly by its key—like looking up a contact by name in a phonebook, or retrieving a student’s grade using their ID."
+    a "Think of it like a phonebook: you look up a name (the {i}key{/i}) to get the phone number (the {i}value{/i})."
+    a "Keys must be {i}unique{/i} — two people can't occupy the same exact phonebook entry."
 
-    a "Keys in a dictionary must be {i}unique{/i}, and they act as labels that point to specific values."
-    a "This structure allows for extremely fast lookups, insertions, and deletions—often in constant time."
+    a "They're everywhere: configuration maps, caches, game state, and more."
 
-    a "Associative arrays are widely used in real-world applications, from databases and configuration files to caching systems and game state management."
+    show screen chapter_9_dict_display
 
-    a "They’re especially useful when you need to organize data in a way that’s easy to search and update."
+    # Interactive loop: let the player add or lookup entries to see how keys map to values.
+    $ _continue_demo = True
+    while _continue_demo:
+        # Show the demo screen and wait for a button result.
+        $ result = ui.interact()  # allow screen to return a value via Return()
+
+        if result == "add":
+            $ name = renpy.input("Enter the key (e.g. a name):").strip()
+            if name == "":
+                a "No key entered — cancelled."
+            else:
+                $ value = renpy.input("Enter the value for [name]:").strip()
+                if value == "":
+                    a "No value entered — cancelled."
+                else:
+                    $ demo_dict[name] = value
+                    play sound "sfx/confirm.mp3"
+                    a "Added [name] : [value] to the associative array."
+                    # Refresh the screen by re-showing it (ui.interact will re-render)
+        elif result == "lookup":
+            $ key = renpy.input("Lookup which key?").strip()
+            if key == "":
+                a "No key entered — cancelled."
+            else:
+                $ found = demo_dict.get(key, None)
+                if found is None:
+                    play sound "sfx/error.mp3"
+                    a "No entry for '[key]' was found."
+                else:
+                    play sound "sfx/confirm.mp3"
+                    a "Found: [key] -> [found]"
+        else:
+            # close or any other
+            $ _continue_demo = False
+
+    hide screen chapter_9_dict_display
+
+    a "You just experimented with inserting and looking up key-value pairs."
+    a "Behind the scenes, many associative arrays use {b}hash tables{/b} to convert keys into indices for fast access."
+    a "Pretty Cool right?"
+
 
     $ chapter_9_progress += 1
     show adrian smiling
@@ -137,22 +235,199 @@ label chapter_9_Associative_Arrays_Quiz:
     a "Great job!"
     a "Your score for this quiz is [chapter_9_Associative_Arrays_quiz] out of 5."
     jump chapter_9_Collisions
+init python:
+    # Interactive collisions demo globals and helpers defined at init/top-level so the screen can access them.
+    try:
+        collision_table_size
+    except NameError:
+        collision_table_size = 8
+        collision_method = "chaining"  # or "open"
+        # Initialize a chaining table (list of lists). Open-addressing uses list of None.
+        collision_table = [[] for _ in range(collision_table_size)]
+
+    def simple_hash(key):
+        return sum(ord(c) for c in key) % collision_table_size
+
+    def table_display():
+        if collision_method == "chaining":
+            return ", ".join([f"{i}: [{' | '.join(collision_table[i])}]" for i in range(collision_table_size)])
+        else:
+            return ", ".join([f"{i}: {collision_table[i] if collision_table[i] is not None else '-'}" for i in range(collision_table_size)])
+
+screen chapter_9_collision_display():
+
+    frame:
+        xalign 0.5
+        yalign 0.6
+        xpadding 100
+        ypadding 100
+        vbox:
+            spacing 10
+            text "Hash Table Collisions — Live Demo" size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
+            text "Method: [collision_method]" size 20 color "#FFFFCC" outlines [(1, "#000000", 0, 0)]
+            text "Table (slot: contents):" size 20 color "#FFFFFF" outlines [(1, "#000000", 0, 0)]
+            text "[table_display()]" size 18 color "#CCFFEE" outlines [(1, "#000000", 0, 0)]
+            hbox:
+                spacing 10
+                textbutton "Insert key" action Return("insert")
+                textbutton "Random key" action Return("random")
+                textbutton "Switch method" action Return("switch")
+                textbutton "Clear table" action Return("clear")
+                textbutton "Close" action Return("close")
+
 label chapter_9_Collisions:
+    
+    a "So, Collisions."
+    a "What are they?"
+    # Interactive collisions demo: lets the player insert keys and switch between chaining/open addressing.
 
-    a "Let’s talk about one of the key challenges in hash tables: {b}collisions{/b}."
-    a "Hash tables use a {b}hash function{/b} to convert keys into array indices, allowing for fast data access."
+    a "Collisions happen when two keys map to the same slot." 
+    a "Try inserting keys and watch how the table handles them."
+    show screen chapter_9_collision_display
 
-    a "But sometimes, two different keys produce the same index. This situation is called a {b}collision{/b}."
-    a "Collisions are inevitable, especially when the number of keys grows or the hash function isn’t perfectly uniform."
+    python:
+        import ui
 
-    a "To handle collisions, we use strategies that preserve access speed and data integrity."
+        def collision_demo():
+            # Use the globals established at init/top-level.
+            global collision_table_size, collision_method, collision_table
 
-    a "One common method is {b}chaining{/b}, where each index holds a list of entries. If multiple keys hash to the same index, they’re stored in that list."
-    a "Another approach is {b}open addressing{/b}, where the algorithm searches for the next available slot in the array using techniques like linear probing or quadratic probing."
+            _continue = True
+            while _continue:
+                # Wait for the screen buttons to Return() a value.
+                result = ui.interact()
 
-    a "Each method has its trade-offs in terms of speed, memory usage, and complexity, but both are designed to keep hash tables efficient even when collisions occur."
+                if result == "insert":
+                    key = renpy.input("Enter a key to insert (e.g. alice):").strip()
+                    if not key:
+                        renpy.say(None, "Cancelled.")
+                    else:
+                        h = simple_hash(key)
+                        if collision_method == "chaining":
+                            if key in collision_table[h]:
+                                renpy.sound.play("sfx/error.mp3")
+                                renpy.say(None, "Key '{}' already exists in slot {}.".format(key, h))
+                            else:
+                                collision_table[h].append(key)
+                                renpy.sound.play("sfx/ting.mp3")
+                                renpy.say(None, "Inserted '{}' into slot {} (chaining).".format(key, h))
+                        else:
+                            # open addressing (linear probing)
+                            placed = False
+                            idx = None
+                            start = h
+                            for i in range(collision_table_size):
+                                idx = (start + i) % collision_table_size
+                                if collision_table[idx] is None:
+                                    collision_table[idx] = key
+                                    placed = True
+                                    break
+                                elif collision_table[idx] == key:
+                                    placed = True
+                                    break
 
-    a "Understanding how collisions are handled is essential for designing robust and scalable data systems."
+                            if placed:
+                                if collision_table[idx] == key:
+                                    renpy.sound.play("sfx/error.mp3")
+                                    renpy.say(None, "Key '{}' was already present at slot {}.".format(key, idx))
+                                else:
+                                    renpy.sound.play("sfx/ting.mp3")
+                                    renpy.say(None, "Inserted '{}' at slot {} after probing (open addressing).".format(key, idx))
+                            else:
+                                renpy.sound.play("sfx/error.mp3")
+                                renpy.say(None, "Table is full — insertion failed.")
+
+                elif result == "random":
+                    import random, string
+                    key = "".join(random.choice(string.ascii_lowercase[:6]) for _ in range(3))
+                    h = simple_hash(key)
+                    if collision_method == "chaining":
+                        collision_table[h].append(key)
+                        renpy.sound.play("sfx/confirm.mp3")
+                        renpy.say(None, "Random key '{}' inserted into slot {} (chaining).".format(key, h))
+                    else:
+                        placed = False
+                        idx = None
+                        start = h
+                        for i in range(collision_table_size):
+                            idx = (start + i) % collision_table_size
+                            if collision_table[idx] is None:
+                                collision_table[idx] = key
+                                placed = True
+                                break
+                        if placed:
+                            renpy.sound.play("sfx/confirm.mp3")
+                            renpy.say(None, "Random key '{}' placed at slot {} after probing.".format(key, idx))
+                        else:
+                            renpy.sound.play("sfx/error.mp3")
+                            renpy.say(None, "Table is full — random insertion failed.")
+
+                elif result == "switch":
+                    if collision_method == "chaining":
+                        # Convert chaining -> open addressing
+                        new_table = [None] * collision_table_size
+                        failed = False
+                        for i in range(collision_table_size):
+                            for k in collision_table[i]:
+                                h = simple_hash(k)
+                                placed = False
+                                for probe in range(collision_table_size):
+                                    idx = (h + probe) % collision_table_size
+                                    if new_table[idx] is None:
+                                        new_table[idx] = k
+                                        placed = True
+                                        break
+                                if not placed:
+                                    failed = True
+                                    break
+                            if failed:
+                                break
+                        if failed:
+                            renpy.sound.play("sfx/error.mp3")
+                            renpy.say(None, "Conversion failed: not enough space to place all keys with open addressing.")
+                        else:
+                            collision_table = new_table
+                            collision_method = "open"
+                            renpy.sound.play("sfx/confirm.mp3")
+                            renpy.say(None, "Switched to open addressing (keys reinserted with probing).")
+                    else:
+                        # open -> chaining
+                        new_table = [[] for _ in range(collision_table_size)]
+                        for i in range(collision_table_size):
+                            if collision_table[i] is not None:
+                                h = simple_hash(collision_table[i])
+                                new_table[h].append(collision_table[i])
+                        collision_table = new_table
+                        collision_method = "chaining"
+                        renpy.sound.play("sfx/confirm.mp3")
+                        renpy.say(None, "Switched to chaining (each slot is now a list).")
+
+                elif result == "clear":
+                    if collision_method == "chaining":
+                        collision_table = [[] for _ in range(collision_table_size)]
+                    else:
+                        collision_table = [None] * collision_table_size
+                    renpy.sound.play("sfx/error.mp3")
+                    renpy.say(None, "Table cleared.")
+
+                else:
+                    # close or any other
+                    _continue = False
+
+        # Call the demo function so the interactive loop runs while this label is active.
+        collision_demo()
+
+    show adrian explaining
+    a "It is intersting to see something like this"
+    a "Should we avoid collisions?"
+    a "Not necessarily! Collisions are a normal part of hash table operation."
+    a "With good hash functions and collision resolution strategies" 
+    a "performance remains efficient even with some collisions."
+    hide screen chapter_9_collision_display
+
+    a "You explored collision handling interactively."
+    a "Chaining keeps multiple items per slot; open addressing probes for an empty slot."
+    a "Notice how collisions affect where keys end up and why a good hash function and resizing matter."
 
     $ chapter_9_progress += 1
     show adrian smiling
@@ -240,28 +515,119 @@ label chapter_9_Collisions_Quiz:
     a "Great job!"
     a "Your score for this quiz is [chapter_9_Collisions_quiz] out of 5."
     jump chapter_9_Dynamic_Resizing
+
+# --- Screen definition (UI only) ---
+screen chapter_9_resizing_display():
+    frame:
+        xalign 0.1
+        yalign 0.1
+        xpadding 80
+        ypadding 60
+        vbox:
+            spacing 10
+            text "Dynamic Resizing — Demo" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
+            text "[resizing_status()]" size 18 color "#FFFFCC"
+            text "[display_table()]" size 16 color "#CCFFEE"
+            hbox:
+                spacing 8
+                textbutton "Insert" action Return("insert")
+                textbutton "Random" action Return("random")
+                textbutton "Reset" action Return("reset")
+                textbutton "Close" action Return("close")
+init python:
+    def resizing_status():
+        return f"Size: {table_size}  Items: {item_count}  Threshold: {int(threshold * 100)}%"
+
+init python:
+    import random, string
+
+    table_size = 8
+    table = [[] for _ in range(table_size)]
+    item_count = 0
+    threshold = 0.7
+
+    def hash_key(key):
+        return sum(ord(c) for c in key) % table_size
+
+    def display_table():
+        return "\n".join([f"{i}: {' | '.join(bucket)}" for i, bucket in enumerate(table)])
+
+
 label chapter_9_Dynamic_Resizing:
 
-    a "Let’s talk about how hash tables stay efficient as they grow."
-    a "As you add more key-value pairs, the table can start to fill up—and when that happens, performance may drop."
+    show adrian happy
+    a "Let's see how a hash table can grow to keep lookups fast."
+    a "We'll use a tiny table and insert keys. When it gets crowded, we'll double it."
 
-    a "Why? Because more collisions occur, and resolving them takes extra time."
+    show screen chapter_9_resizing_display
 
-    a "To fix this, hash tables use a technique called {b}dynamic resizing{/b}."
-    a "When the load factor—the ratio of stored elements to table size—gets too high, the table automatically increases its size."
+    python:
+        global table_size, table, item_count, threshold
 
-    a "But resizing isn’t just about making room. It also involves {b}rehashing{/b} every key."
-    a "That means recalculating each key’s position based on the new table size, so the data stays evenly distributed."
+        _continue = True
+        while _continue:
+            result = renpy.ui.interact()
 
-    a "This process helps maintain fast lookup, insertion, and deletion times—even as the dataset grows."
+            if result == "insert":
+                key = renpy.input("Enter a key to insert:").strip()
+                if not key:
+                    renpy.say(None, "Cancelled.")
+                    continue
+                h = hash_key(key)
+                if key in table[h]:
+                    renpy.sound.play("sfx/error.mp3")
+                    renpy.say(None, f"Key '{key}' already exists in slot {h}.")
+                else:
+                    table[h].append(key)
+                    item_count += 1
+                    renpy.sound.play("sfx/ting.mp3")
+                    renpy.say(None, f"Inserted '{key}' into slot {h}.")
 
-    a "Dynamic resizing is a key reason why hash tables are so powerful in real-world systems like databases, caches, and compilers."
+            elif result == "random":
+                key = "".join(random.choice(string.ascii_lowercase) for _ in range(4))
+                h = hash_key(key)
+                table[h].append(key)
+                item_count += 1
+                renpy.sound.play("sfx/confirm.mp3")
+                renpy.say(None, f"Random key '{key}' inserted into slot {h}.")
+
+            elif result == "reset":
+                table_size = 8
+                table = [[] for _ in range(table_size)]
+                item_count = 0
+                renpy.sound.play("sfx/error.mp3")
+                renpy.say(None, "Table reset to size 8.")
+
+            else:
+                _continue = False
+
+            # Check load factor and resize if needed
+            if item_count / float(table_size) > threshold:
+                renpy.say(None, "Load factor exceeded — resizing now.")
+                old_table = table
+                old_size = table_size
+                table_size *= 2
+                table = [[] for _ in range(table_size)]
+                for bucket in old_table:
+                    for k in bucket:
+                        table[hash_key(k)].append(k)
+                renpy.sound.play("sfx/confirm.mp3")
+                renpy.say(None, f"Resized table from {old_size} to {table_size}.")
+
+    show adrian explaining
+    a "Nice! You watched a tiny hash table double when it got crowded."
+    hide screen chapter_9_resizing_display
+
+    a "Doubling and rehashing is a simple strategy to keep lookups fast without complicated logic."
+    a "Of course, real-world hash tables have more optimizations, but this captures the core idea."
 
     $ chapter_9_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
     a "Quiz time: Dynamic resizing!"
     jump chapter_9_Dynamic_Resizing_Quiz
+
+
 init python:
     import random
     chapter_9_Dynamic_Resizing_order = [

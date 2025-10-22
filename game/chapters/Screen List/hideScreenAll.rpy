@@ -112,4 +112,8 @@ label hideall:
     hide screen ch_7_RB_Operations
     hide screen ch_7_Recoloring_Rotation
 
+    hide screen chapter_9_dict_display
+    hide screen chapter_9_collision_display
+    hide screen chapter_9_resizing_display
+
     return

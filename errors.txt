@@ -2,9 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/chapters/chapter_7.rpy", line 409: end of line expected.
-    show adrian at ypos 0.3
-                        ^
+File "game/chapters/chapter_7.rpy", line 723: Indentation mismatch.
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Tue Oct 21 20:56:23 2025
+Wed Oct 22 16:13:20 2025

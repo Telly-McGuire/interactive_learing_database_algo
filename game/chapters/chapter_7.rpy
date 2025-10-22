@@ -42,6 +42,24 @@ label chapter_7_intro:
     show adrian smiling at center:
         smaller
     with dissolve
+
+    if persistent.chapter_7 == True:
+        a "Hi welcome back to chapter 7"
+        a "are you sure you want to go through this chapter again?"
+        menu:
+            "Yes":
+                a "Pick a topic"
+                menu:
+                    "The Logic of Red-Black Trees":
+                        jump chapter_7_RB_Logic
+                    "Operations":
+                        jump chapter_7_RB_Operations
+                    "Re-coloring and Rotation Cases":
+                        jump chapter_7_Recoloring_Rotation
+            "No":
+                jump menu
+    else:
+        pass
     
     image honey = "assets/honey.png"
 
@@ -701,3 +719,16 @@ label chapter_7_performance:
     jump chapter_7_end
 
 label chapter_7_end:
+    play sound "sfx/success.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    $ persistent.chapter_7 = True
+    a "Would You like to test again?"
+    menu:
+        "Yes":
+            jump chapter_7_restart
+        "No":
+            pass
+    show adrian happy
+    a "You have finished chapter 7. You can continue to Chapter 8!"
+    jump menu
+       

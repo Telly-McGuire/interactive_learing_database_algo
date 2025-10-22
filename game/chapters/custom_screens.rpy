@@ -72,7 +72,7 @@ screen menu_btn:
         xoffset -30
         yoffset 30
         auto "UI/btn_menu_%s.png"
-        action [Hide("menu_btn"),Call("warn_handler")]
+        action [Call("warn_handler")]
 
 label progress_check:
     call screen progressUI

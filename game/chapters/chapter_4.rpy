@@ -80,7 +80,8 @@ label chapter_4_intro:
     hide screen chapter_4_introscreen
 
     with dissolve
-    
+        
+    show screen menu_btn
             
     show adrian smiling at center:
         smaller 
