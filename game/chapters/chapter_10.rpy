@@ -10,6 +10,18 @@ default chapter_10_Graph_Theory_quiz = 0
 default chapter_10_Adjacency_Representation_quiz = 0
 default chapter_10_Applications_quiz = 0
 
+
+screen chapter_10_GAintro:  
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xpadding 200
+        ypadding 60
+        vbox:
+            spacing 20
+            xalign 0.5
+            yalign 0.5
+            text "Graph Algorithms" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 label chapter_10_intro:
 
     call hideall
@@ -19,10 +31,10 @@ label chapter_10_intro:
     scene black
     pause 1.0
 
-    show screen chapter_
+    show screen chapter_10_GAintro
     scene mt tree with dissolve
     pause 2.0
-    hide screen chapter_
+    hide screen chapter_10_GAintro
 
     show screen menu_btn
 
@@ -31,45 +43,133 @@ label chapter_10_intro:
         smaller
     with dissolve
 
-    show adrian nocomment
+    show adrian normal
     a "Welcome to Chapter 10: Graph Algorithms"
     a "You like chess? I like chess"
-    a "I like chest-{nw}"
-    a "I mean graphs, whatever Im tired"
-    show adrian explaining
-    a "In this chapter, we'll explore the fascinating world of graphs."
-    a "What are Graphs? I dont know, ask your mom."
     show adrian smug
+    a "I like chest-{nw}"
+    show adrian nocomment
+    a "I mean graphs"
+    a "Just like the grids in chess, graphs are made up of nodes and edges connecting them."
+    show adrian explaining
+    a "In this chapter, we'll explore graphs."
+    a "What are Graphs?"
+    show adrian happy
+    a "{cps=5}IDK"
+    show adrian smiling
     a "Lmao"
     a "Graphs are mathematical structures used to model pairwise relations between objects."
-    show adrian normal
-    a "So you know chest right?"
-    a "Graphs are kinda like that, but with nodes and edges"
+
     $ chapter_10_progress += 1
     show adrian smiling
-    play sound "sfx/bell.mp3"
-    a "Let's start with Graph Theory!"
     jump chapter_10_Graph_Theory
+
 
 label chapter_10_Graph_Theory:
 
+    image g_example = "assets/g_example.png"
+
+    show adrian explaining 
     a "Let’s begin our journey into {b}Graph Theory{/b}, a fundamental area of computer science and mathematics."
     a "Graph Theory explores how objects—called {b}nodes{/b} or {b}vertices{/b}—are connected by {b}edges{/b}."
+    show adrian smiling at left
+    with move
+
+    transform graphs:
+        zoom 0.4
+        yalign 0.5
+        xalign 0.75
+
+    show g_example:
+        graphs
+    with dissolve
+
+    a "Here’s a simple graph example:"
+    a "{b}Nodes{/b} are the individual points, while edges are the lines that link them together."
+    a "{b}Edges{/b} are the connections between nodes."
+
+    hide g_example
 
     a "Graphs come in many forms:"
+
+    image directed = "assets/g_directed.png"
+    image undirected = "assets/g_undirected.png"
+    image weighted = "assets/g_weighted.png"
+
+    show adrian at left
+    with move
+    show directed:
+        graphs
+    with dissolve
     a "- {b}Directed graphs{/b} have edges with direction, like one-way streets."
+    hide directed
+
+    show undirected:
+        graphs
+    with dissolve   
     a "- {b}Undirected graphs{/b} have edges that go both ways, like mutual friendships."
+    hide undirected
+
+    show weighted:
+        graphs
+    with dissolve
     a "- {b}Weighted graphs{/b} assign values to edges, useful for measuring cost, distance, or time."
+    hide weighted
+
+    show undirected:
+        graphs
+    with dissolve   
     a "- {b}Unweighted graphs{/b} treat all connections equally."
+    hide undirected
+
+    image motherboard = "assets/motherboard.png"
+    image social_network = "assets/social_network.png"
+    image transport_network = "assets/train_network.png"
+    image purble = "assets/purble.png"
+
+
+
+    show adrian explaining at center
+    with move
+
+    pause 0.5
+    show motherboard at top_left:
+        smaller
+    with dissolve
+    pause 0.2
+
+    show social_network at top_right:
+        smaller
+    with dissolve
+    pause 0.2
+
+    show transport_network at bottom_left:
+        even_smaller
+    with dissolve
+    pause 0.2
+
+    show purble at bottom_right
+    with dissolve
 
     a "These structures are used everywhere—from modeling computer networks and transportation systems to analyzing social media connections and solving puzzles."
+    a "Understanding graph theory is essential for designing efficient algorithms and data structures."
+    show adrian nocomment
+    a "..."
+    a "Yeah I know that PNG Is too {size=+100}{cps=3}big"
+    show adrian smiling
+    a "But hey, it looks cool right?"
+    hide motherboard
+    hide social_network
+    hide transport_network
+    hide purble
 
-    a "Understanding graphs helps us design efficient algorithms for searching, optimizing, and navigating complex systems."
 
     $ chapter_10_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
     a "Let's check your understanding with a quick quiz!"
+
+
     jump chapter_10_Graph_Theory_Quiz
 
 init python:
@@ -154,16 +254,183 @@ label chapter_10_Graph_Theory_Quiz:
     jump chapter_10_Adjacency_Representation
 label chapter_10_Adjacency_Representation:
 
+    show adrian normal
     a "Now that you understand what graphs are, let’s explore how they’re represented in code."
+
+    show adrian explaining
     a "There are two common ways to represent graphs: {b}adjacency matrices{/b} and {b}adjacency lists{/b}."
 
     a "An {b}adjacency matrix{/b} uses a 2D array where each cell indicates whether a connection exists between two nodes."
-    a "If the graph has {i}n{/i} nodes, the matrix is {i}n × n{/i}, and each entry at position [i][j] shows whether there’s an edge from node i to node j."
+    a "So basically its a grid of relationships"
+
+    show adrian normal
+    a "Its as simple as that"
+    a "Let us borrow some images from {color=#00aa00}{a=https://www.geeksforgeeks.org/dsa/adjacency-matrix/#1-adjacency-matrix-for-undirected-and-unweighted-graph}GeeksforGeeks{/a}{/color}. Thats an actual Link btw, you can click it"
+    
+    a "For example"
+
+
+    image am1 = "assets/am_dud.png"
+    image am2 = "assets/am_unuw.png"
+    image am3 = "assets/am_dw.png"
+    image am4 = "assets/am_unw.png"
+    image monke = "assets/le_monke.png"
+
+
+    show adrian at left
+    with move
+    show am1 at right:
+        matrices
+    with dissolve
+    a "{b}Adjacency Matrix for Undirected and Unweighted Graph "
+    show adrian explaining
+    a "An adjacency matrix is a 2D array used to represent a graph." 
+    a "Each cell [[i][[j] contains a 1 if there's an edge between node i and node j, and 0 otherwise."
+    a "Since the graph is undirected, the matrix is symmetric." 
+    a "And because it's unweighted, all edges are represented by 1s instead of weights."
+    hide am1
+
+    show am2 at right:
+        matrices
+    with dissolve
+    show adrian normal
+    a"{b}Adjacency Matrix for Undirected and Weighted Graph"
+    show adrian explaining
+    a "In this type of graph, the adjacency matrix stores the weights of the edges between nodes."
+    a "If there's an edge between node i and node j, the cell [[i][[j] contains the weight of that edge."
+    a "Since the graph is undirected, the matrix is symmetric: [[i][[j] equals [[j][[i]."
+    a "If there's no edge between two nodes, the corresponding cell typically contains 0 or a special value like ∞ to indicate no connection."
+    hide am2
+
+    show am3 at right:
+        matrices
+    with dissolve
+    show adrian normal
+    a "{b}Adjacency Matrix for Directed and Unweighted Graph"
+    show adrian explaining
+    a "In a directed graph, edges have direction—going from one node to another."
+    a "The adjacency matrix uses 1s to indicate the presence of an edge from node i to node j."
+    a "Unlike undirected graphs, the matrix is not symmetric: [[i][[j] may be 1 while [[j][[i] is 0."
+    a "Since it's unweighted, all edges are represented by 1s, and 0s indicate no edge."
+    hide am3
+
+    show monke at right:
+        matrices
+    with dissolve
+    show adrian normal
+    a "{b}Adjacency Matrix for Directed-{nw}"
+    show adrian shock
+    a "{b}{cps=30}{size=+50}MONKE?"
+    "Banan"
+    show adrian nocomment
+    a "..."
+    a "We dont...have a banana"
+    
+    "..."
+    "..."
+    "..."
+
+    a "Were kinda busy here"
+
+    "Banan"
+    play sound "sfx/cave_sound.mp3"
+    hide monke
+    with dissolve
+    a "I...I dont know what that was"
+    a "Anyways"
+
+    show am4 at right:
+        matrices
+    with dissolve
+    show adrian normal
+    a "As I was saying"
+    a "{b}Adjacency Matrix for Directed and Weighted Graph"
+    show adrian explaining
+    a "In this graph type, edges have direction and carry weights."
+    a "The adjacency matrix stores the weight of the edge from node i to node j in cell [[i][[j]."
+    a "If there's no edge from {b}{i}i to j{/b}{/i}, the cell typically contains 0 or ∞ to indicate no connection."
+    a "Because the graph is directed, [[i][[j] and [[j][[i] can hold different values, making the matrix asymmetric."
+    hide am4
+
+
+    show adrian happy at center
+    with move
     a "This method is great for dense graphs where most nodes are connected."
 
+    image al_dg1 = "assets/al_dg1.png"
+    image al_dg2 = "assets/al_dg2.png"
+    image al_dg3 = "assets/al_dg3.png"
+    image al_dg4 = "assets/al_dg4.png"
+
+    show adrian normal
     a "An {b}adjacency list{/b}, on the other hand, stores a list for each node that contains its neighbors."
     a "It’s more memory-efficient for sparse graphs, where many node pairs aren’t connected."
 
+    a "Here is an example of an Adjency List"
+    show adrian at left 
+    with move
+    show al_dg1 at right:
+        matrices
+    with dissolve
+    a "{b}Adjacency List for Directed Graph"
+    a "Here is the relationship of it"
+    a "An example of the relationship between them"
+    hide al_dg1 
+
+    show al_dg2 at right:
+        matrices
+    with dissolve 
+    a "Like since 1 goes to 0 and 2 it reflects that as well"
+    hide al_dg2
+    
+    show al_dg3 at right:
+        matrices
+    with dissolve
+    hide al_dg3
+
+    show al_dg4 at right:
+        matrices
+    with dissolve
+    a "And you can see the relationship with all of it"
+    a "Got it?"
+    hide al_dg4
+    with dissolve
+
+    image al_ug1 = "assets/al_ug1.png"
+    image al_ug2 = "assets/al_ug2.png"
+    image al_ug3 = "assets/al_ug3.png"  
+    image al_ug4 = "assets/al_ug4.png"
+
+    a "How would Undirected Graphs would act?"
+    show al_ug1 at right:
+        matrices
+    with dissolve
+    a "{b}Adjacency List for Undirected Graph"
+    a "Since there is no direct connection to it, it has a wider range for relationships"
+    hide al_ug1
+
+    show al_ug2 at right:
+        matrices
+    with dissolve 
+    a "Like 1 goes to 0 and 1 goes to 0 as well"
+    hide al_ug2
+    
+    show al_ug3 at right:
+        matrices
+    with dissolve
+    hide al_ug3
+
+    show al_ug4 at right:
+        matrices
+    with dissolve
+    a "And you can see the relationship with all of it"
+    a "Pretty Intersting if you dive deeper into it"
+    hide al_ug4
+    with dissolve
+
+
+    show adrian at center
+    with move
     a "Choosing the right representation depends on the graph’s structure and the operations you need—like checking connections or iterating through neighbors."
 
     a "Understanding both formats is key to building efficient graph algorithms."
@@ -256,18 +523,41 @@ label chapter_10_Adjacency_Representation_Quiz:
     jump chapter_10_Applications
 
 label chapter_10_Applications:
+    image gmap = "assets/g_map.png"
+    image dependency = "assets/dependency.png"
+
 
     a "Now that you understand how graphs work, let’s explore where they’re used in the real world."
     a "Graphs are incredibly versatile—they show up in {b}routing systems{/b}, {b}social networks{/b}, {b}dependency tracking{/b}, and much more."
 
-    a "For example, in navigation apps, graphs represent cities and roads. Algorithms like Dijkstra’s or A* help find the shortest path from one location to another."
-    a "In social media platforms, graphs model users as nodes and friendships or follows as edges—making it easy to analyze connections and suggest new friends."
+    show adrian at left
+    with move
+    show gmap at right:
+        gmap
 
+    with dissolve
+    a "For example, in navigation apps, graphs represent cities and roads. Algorithms like Dijkstra’s or A* help find the shortest path from one location to another."
+    hide gmap
+
+    show social_network at right:
+        matrices
+    with dissolve
+    a "In social media platforms, graphs model users as nodes and friendships or follows as edges—making it easy to analyze connections and suggest new friends."
+    hide social_network
+    
+    show dependency at right:
+        matrices
+    with dissolve
     a "Graphs also help track dependencies in software projects, where tasks or modules rely on others being completed first."
+
 
     a "To work with these graphs, we use algorithms like {b}Breadth-First Search (BFS){/b} and {b}Depth-First Search (DFS){/b}."
     a "These algorithms allow us to explore networks, detect cycles, find paths, and even solve puzzles like mazes or word ladders."
+    hide dependency
+    with dissolve
 
+    show adrian at center
+    with move
     a "Understanding graph applications helps you design smarter systems—from efficient logistics to intelligent recommendation engines."
 
     $ chapter_10_progress += 1

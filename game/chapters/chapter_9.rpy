@@ -43,6 +43,26 @@ label chapter_9_intro:
         smaller
     with dissolve
 
+
+    if persistent.chapter_9 == True:
+        a "Welcome back to Chapter 9"
+        a "Are you sure you want to go through this chapter again?"
+        menu:
+            "Yes":
+                a "Pick a topic to review!"
+                menu:
+                    "Associative Arrays":
+                        jump chapter_9_Associative_Arrays
+                    "Collisions":
+                        jump chapter_9_Collisions
+                    "Dynamic Resizing":
+                        jump chapter_9_Dynamic_Resizing
+            "No":
+                jump menu
+    else:
+        pass 
+
+
     show adrian normal
     a "Do you have a partner?"
 
@@ -800,3 +820,15 @@ label chapter_9_performance:
     jump chapter_9_end
 
 label chapter_9_end:
+    play sound "sfx/success.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    $ persistent.chapter_9 = True
+    a "Would You like to test again?"
+    menu:
+        "Yes":
+            jump chapter_9_restart
+        "No":
+            pass
+    show adrian happy
+    a "You have finished chapter 9. You can continue to Chapter 10!"
+    jump menu

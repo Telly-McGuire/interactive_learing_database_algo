@@ -1,67 +1,27 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_9.rpy", line 564, in script
-    python:
-  File "game/chapters/chapter_9.rpy", line 569, in <module>
-    result = renpy.ui.interact()
-  File "game/chapters/chapter_9.rpy", line 520, in execute
-    screen chapter_9_resizing_display():
-  File "game/chapters/chapter_9.rpy", line 520, in execute
-    screen chapter_9_resizing_display():
-  File "game/chapters/chapter_9.rpy", line 521, in execute
-    frame:
-  File "game/chapters/chapter_9.rpy", line 526, in execute
-    vbox:
-  File "game/chapters/chapter_9.rpy", line 529, in execute
-    text "Size: [table_size]  Items: [item_count]  Threshold: [int(threshold*100)]%" size 18 color "#FFFFCC"
-NameError: Name 'int' is not defined.
+  File "game/chapters/chapter_10.rpy", line 299, in script
+    a "If there's an edge between node i and node j, the cell [i][j] contains the weight of that edge."
+NameError: name 'i' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_9.rpy", line 564, in script
-    python:
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 821, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1178, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/chapters/chapter_9.rpy", line 569, in <module>
-    result = renpy.ui.interact()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ui.py", line 301, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2188, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2705, in interact_core
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 480, in visit_all
-    callback(self)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2705, in <lambda>
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 491, in per_interact
-    self.update()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 697, in update
-    self.screen.function(**self.scope)
-  File "game/chapters/chapter_9.rpy", line 520, in execute
-    screen chapter_9_resizing_display():
-  File "game/chapters/chapter_9.rpy", line 520, in execute
-    screen chapter_9_resizing_display():
-  File "game/chapters/chapter_9.rpy", line 521, in execute
-    frame:
-  File "game/chapters/chapter_9.rpy", line 526, in execute
-    vbox:
-  File "game/chapters/chapter_9.rpy", line 529, in execute
-    text "Size: [table_size]  Items: [item_count]  Threshold: [int(threshold*100)]%" size 18 color "#FFFFCC"
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 1977, in __init__
-    self.set_text(text, scope, substitute) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\text\text.py", line 2110, in set_text
-    i, did_sub = renpy.substitutions.substitute(i, scope, substitute) # type: ignore
+  File "game/chapters/chapter_10.rpy", line 299, in script
+    a "If there's an edge between node i and node j, the cell [i][j] contains the weight of that edge."
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 2572, in execute
+    Say.execute(self)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 615, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\sayexports.py", line 132, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1436, in __call__
+    what = self.prefix_suffix("what", self.what_prefix, what, self.what_suffix)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1350, in prefix_suffix
+    return (sub(prefix) + sub(body) + sub(suffix))
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1330, in sub
+    return renpy.substitutions.substitute(s, scope=scope, force=force, translate=translate)[0]
   File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 373, in substitute
     s = interpolate(s, variables) # type: ignore
   File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 86, in interpolate
@@ -73,11 +33,9 @@ Full traceback:
   File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1202, in py_eval_bytecode
     return eval(bytecode, globals, locals)
   File "<none>", line 1, in <module>
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 313, in __getitem__
-    raise NameError("Name '{}' is not defined.".format(key))
-NameError: Name 'int' is not defined.
+NameError: name 'i' is not defined
 
 Windows-10-10.0.26200 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Wed Oct 22 16:43:12 2025
+Thu Oct 23 12:48:43 2025

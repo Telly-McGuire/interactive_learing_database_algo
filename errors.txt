@@ -2,7 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chapters/chapter_7.rpy", line 723: Indentation mismatch.
+File "game/chapters/chapter_10.rpy", line 263: end of line expected.
+    a "Let us borrow some images from {color=#00aa00}{a=https://www.geeksforgeeks.org/dsa/adjacency-matrix/#1-adjacency-matrix-for-undirected-and-unweighted-graph}GeeksforGeeks{/a}{/color}."R
+                                                                                                                                                                                              ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Wed Oct 22 16:13:20 2025
+Thu Oct 23 12:31:42 2025
