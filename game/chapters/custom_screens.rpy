@@ -5,6 +5,7 @@ label call_stats:
     return
 
 screen StatsUI:
+    modal True
     add "bg_blank"
     frame:
         xalign 0.5
@@ -79,6 +80,7 @@ label progress_check:
     return
 
 screen progressUI:
+    modal True
     frame:
         xalign 0.5
         yalign 0.5
@@ -115,6 +117,7 @@ label warn_handler:
 
 
 screen warn:
+    modal True
     frame:
         xalign 0.5
         yalign 0.5

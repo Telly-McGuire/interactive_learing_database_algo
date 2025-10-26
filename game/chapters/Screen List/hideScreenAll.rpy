@@ -112,8 +112,26 @@ label hideall:
     hide screen ch_7_RB_Operations
     hide screen ch_7_Recoloring_Rotation
 
+    hide screen chapter_8_HeapsIntro
+    hide screen chapter_8_scheduler
+    hide screen chapter_8_heap_demo_0
+    hide screen chapter_8_heap_demo_1    
+    hide screen chapter_8_heap_demo_2
+    hide screen chapter_8_heap_demo_3
+    hide screen chapter_8_heap_demo_4
+    hide screen chapter_8_array_demo
+    hide screen chapter_8_remove_demo_0
+    hide screen chapter_8_remove_demo_1
+    hide screen chapter_8_remove_demo_2
+    hide screen chapter_8_remove_demo_3
+    hide screen chapter_8_heap_sort_choice
+    hide screen chapter_8_heap_sort_demo
+
     hide screen chapter_9_dict_display
     hide screen chapter_9_collision_display
     hide screen chapter_9_resizing_display
+
+    hide screen graph_info
+    hide screen graph_info
 
     return

@@ -43,6 +43,23 @@ label chapter_10_intro:
         smaller
     with dissolve
 
+    if persistent.chapter_10 == True:
+        a "Welcome Back to Chapter 10"
+        a "Would you to like to go over the topics again?"
+        menu:
+            "Yes":
+                a "Please pick a topic"
+                menu:
+                    "Graph Theory":
+                        jump chapter_10_Graph_Theory
+                    "Adjancency Representation":
+                        jump chapter_10_Adjacency_Representation
+                    "Applications":
+                        jump chapter_10_Applications
+            "No":
+                pass
+
+
     show adrian normal
     a "Welcome to Chapter 10: Graph Algorithms"
     a "You like chess? I like chess"
@@ -737,3 +754,15 @@ label chapter_10_performance:
     jump chapter_10_end
 
 label chapter_10_end:
+    play sound "sfx/success.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    $ persistent.chapter_10 = True
+    a "Would You like to test again?"
+    menu:
+        "Yes":
+            jump chapter_10_restart
+        "No":
+            pass
+    show adrian happy
+    a "You have finished chapter 10. You can continue to Chapter 11!"
+    jump menu

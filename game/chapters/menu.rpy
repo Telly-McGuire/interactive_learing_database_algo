@@ -34,6 +34,7 @@ label menu:
 
 
 screen menu_select_screen:
+    modal True
     frame:
         xalign 0.85
         yalign 0.2
@@ -78,6 +79,7 @@ screen menu_select_screen:
 
 
 screen minigame_menu:
+    modal True
     frame:
         xalign 0.85
         yalign 0.2
@@ -113,6 +115,7 @@ screen minigame_menu:
         action Return()
 
 screen menu_screen:
+    modal True
     add "bg_menu"
     hbox:
         xalign 1.0
@@ -165,6 +168,7 @@ screen menu_screen:
             
 
 screen menu_screen_2:
+    modal True
     add "bg_menu"
 
     imagebutton:
@@ -205,6 +209,7 @@ screen menu_screen_2:
             action [Hide("menu_screen"), Show("menu_screen_3")]
 
 screen menu_screen_3:
+    modal True
     add "bg_menu"
 
     imagebutton:
@@ -245,7 +250,7 @@ screen menu_screen_3:
             action [Hide("menu_screen_3"), Show("menu_screen_4")]
 
 screen menu_screen_4:
-
+    modal True
     add "bg_menu"
 
     imagebutton:

@@ -1,41 +1,42 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/chapters/chapter_10.rpy", line 299, in script
-    a "If there's an edge between node i and node j, the cell [i][j] contains the weight of that edge."
-NameError: name 'i' is not defined
+  File "renpy/common/00start.rpy", line 216, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 551, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 551, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 562, in _execute_python_hide
+    renpy.load(renpy.session["_reload_slot"])
+AttributeError: Can't get attribute 'sift_down' on <renpy.python.StoreModule object at 0x0000000004067ca0>
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/chapters/chapter_10.rpy", line 299, in script
-    a "If there's an edge between node i and node j, the cell [i][j] contains the weight of that edge."
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 2572, in execute
-    Say.execute(self)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 615, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\sayexports.py", line 132, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1436, in __call__
-    what = self.prefix_suffix("what", self.what_prefix, what, self.what_suffix)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1350, in prefix_suffix
-    return (sub(prefix) + sub(body) + sub(suffix))
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1330, in sub
-    return renpy.substitutions.substitute(s, scope=scope, force=force, translate=translate)[0]
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 373, in substitute
-    s = interpolate(s, variables) # type: ignore
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 86, in interpolate
-    raise e
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\substitutions.py", line 78, in interpolate
-    value = renpy.python.py_eval(code, {}, scope)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1209, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1202, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "<none>", line 1, in <module>
-NameError: name 'i' is not defined
+  File "renpy/common/00start.rpy", line 216, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 551, in script
+    python hide:
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 821, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 551, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 562, in _execute_python_hide
+    renpy.load(renpy.session["_reload_slot"])
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\loadsave.py", line 828, in load
+    roots, log = loads(log_data)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\compat\pickle.py", line 104, in loads
+    return load(io.BytesIO(s))
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\compat\pickle.py", line 101, in load
+    return up.load()
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\compat\pickle.py", line 97, in find_class
+    return super().find_class(module, name)
+AttributeError: Can't get attribute 'sift_down' on <renpy.python.StoreModule object at 0x0000000004067ca0>
 
 Windows-10-10.0.26200 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Thu Oct 23 12:48:43 2025
+Sun Oct 26 15:50:23 2025
