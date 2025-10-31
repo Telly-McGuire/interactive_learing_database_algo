@@ -1186,7 +1186,7 @@ label chapter_11_quiz_easy:
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_11_score]"
 
     if chapter_11_score >= 8:
         a "Excellent — you clearly understand the topics."
@@ -1384,7 +1384,7 @@ label chapter_11_quiz_medium:
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_11_score]"
     jump chapter_11_performance
 
 init python:
@@ -1620,7 +1620,7 @@ label chapter_11_quiz_hard:
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_11_score]"
     jump chapter_11_performance
 
 label chapter_11_performance:

@@ -683,46 +683,583 @@ label chapter_10_restart:
         show adrian confident
         jump chapter_10_quiz_hard
 
+init python:
+    import random
+    chapter_10_easy_question_order = [
+        "q1","q2","q3","q4","q5",
+        "q6","q7","q8","q9","q10"
+    ]
+    random.shuffle(chapter_10_easy_question_order)
+
 label chapter_10_quiz_easy:
+    $ chapter_10_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert easy quiz questions here)
+    show adrian smiling at center
+    a "Welcome to the {b}Graph Theory Quiz{/b}! Topics: graphs, adjacency matrices, and applications."
+
+    while chapter_10_easy_question_order:
+        $ current_q = chapter_10_easy_question_order.pop(0)
+
+        if current_q == "q1":
+            a "What is a graph in computer science?"
+            menu:
+                "A collection of nodes (vertices) and edges connecting pairs of nodes":
+                    $ chapter_10_score += 1
+                    a "Correct! Graphs model relationships between items using vertices and edges."
+                "A strictly hierarchical tree structure with no cycles":
+                    a "Incorrect. That's a tree, which is a special kind of graph."
+                "A sorted list of numbers":
+                    a "Incorrect. That is not a graph."
+
+        elif current_q == "q2":
+            a "What does an adjacency matrix represent for a graph with n vertices?"
+            menu:
+                "An n×n matrix where entry (i,j) indicates presence (and possibly weight) of edge i→j":
+                    $ chapter_10_score += 1
+                    a "Correct! Adjacency matrices store edge existence or weights in an n×n grid."
+                "A list of edges as pairs only":
+                    a "Incorrect. That's an edge list, not a matrix."
+                "A queue of BFS levels":
+                    a "Incorrect. BFS levels are traversal output, not an adjacency matrix."
+
+        elif current_q == "q3":
+            a "What is the space complexity of using an adjacency matrix for a graph with n vertices?"
+            menu:
+                "O(n^2)":
+                    $ chapter_10_score += 1
+                    a "Correct! Adjacency matrices always use O(n^2) space."
+                "O(n + m) where m is number of edges":
+                    a "Incorrect. That's adjacency list space, not matrix."
+                "O(log n)":
+                    a "Incorrect. Matrices need substantially more space."
+
+        elif current_q == "q4":
+            a "Which graph representation is usually better for sparse graphs (few edges relative to n)?"
+            menu:
+                "Adjacency list (or edge list)":
+                    $ chapter_10_score += 1
+                    a "Correct! Adjacency lists store only existing edges and save space for sparse graphs."
+                "Adjacency matrix":
+                    a "Incorrect. Matrices waste space when edges are few."
+                "Full distance matrix for all-pairs shortest paths":
+                    a "Incorrect. That's heavy and unnecessary for sparse graphs."
+
+        elif current_q == "q5":
+            a "In an adjacency matrix for an unweighted, undirected graph, what values appear at positions (i,j) and (j,i) for an edge between i and j?"
+            menu:
+                "Both entries are 1 (or true) and the matrix is symmetric":
+                    $ chapter_10_score += 1
+                    a "Correct! Undirected edges create symmetric matrix entries."
+                "They are always 0 for undirected graphs":
+                    a "Incorrect. 0 means no edge."
+                "One is 1 and the other is 0":
+                    a "Incorrect. That would indicate a directed edge, not undirected."
+
+        elif current_q == "q6":
+            a "Which algorithm benefits from adjacency matrices by allowing O(1) edge-existence checks between any two vertices?"
+            menu:
+                "Algorithms that need constant-time edge queries, e.g., some dynamic programming over vertex pairs":
+                    $ chapter_10_score += 1
+                    a "Correct! Matrices give O(1) adjacency checks useful for pairwise DP and dense graphs."
+                "BFS on very sparse graphs for performance and memory reasons":
+                    a "Incorrect. BFS on sparse graphs benefits more from adjacency lists."
+                "Counting sort":
+                    a "Incorrect. Counting sort is unrelated to graph representations."
+
+        elif current_q == "q7":
+            a "Which real-world application is naturally modeled as a graph?"
+            menu:
+                "Road networks, with intersections as vertices and roads as edges":
+                    $ chapter_10_score += 1
+                    a "Correct! Transportation, social networks, web links, and many more are modeled as graphs."
+                "A single scalar temperature reading over time":
+                    a "Incorrect. That's a time series, not a graph."
+                "A flat file containing unrelated records":
+                    a "Incorrect. Flat files don't inherently form graph relationships."
+
+        elif current_q == "q8":
+            a "What is the difference between directed and undirected graphs?"
+            menu:
+                "Directed graphs have edges with direction (ordered pairs); undirected edges have no direction (unordered pairs)":
+                    $ chapter_10_score += 1
+                    a "Correct! Direction on edges matters for reachability and traversal in directed graphs."
+                "Undirected graphs always have weights; directed graphs never do":
+                    a "Incorrect. Both can be weighted or unweighted."
+                "Directed graphs cannot have cycles":
+                    a "Incorrect. Directed graphs can have cycles."
+
+        elif current_q == "q9":
+            a "Which adjacency representation allows efficient iteration over a vertex's neighbors proportional to its degree?"
+            menu:
+                "Adjacency list":
+                    $ chapter_10_score += 1
+                    a "Correct! Adjacency lists iterate neighbors in O(deg(v)) time."
+                "Adjacency matrix always, since it's a matrix":
+                    a "Incorrect. Matrix iteration would scan n entries even for few neighbors."
+                "Edge list sorted by weight only":
+                    a "Incorrect. Edge lists require filtering to find a vertex's neighbors."
+
+        elif current_q == "q10":
+            a "Which graph algorithm finds the shortest paths from a single source in weighted graphs with nonnegative weights?"
+            menu:
+                "Dijkstra's algorithm":
+                    $ chapter_10_score += 1
+                    a "Correct! Dijkstra finds shortest paths when edge weights are nonnegative."
+                "Prim's algorithm":
+                    a "Incorrect. Prim finds minimum spanning trees, not shortest paths specifically."
+                "Kahn's algorithm":
+                    a "Incorrect. Kahn's is for topological sorting of DAGs."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_10_score]"
     jump chapter_10_performance
+
+init python:
+    import random
+    chapter_10_medium_question_order = [
+        "q1","q2","q3","q4","q5",
+        "q6","q7","q8","q9","q10",
+        "q11","q12","q13","q14","q15"
+    ]
+    random.shuffle(chapter_10_medium_question_order)
 
 label chapter_10_quiz_medium:
+    $ chapter_10_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert medium quiz questions here)
+    show adrian smiling at center
+    a "Welcome to the Graphs quiz. These questions cover graph theory, adjacency matrices, and real-world applications."
+
+    while chapter_10_medium_question_order:
+        $ current_q = chapter_10_medium_question_order.pop(0)
+
+        if current_q == "q1":
+            a "Which matrix operation on the adjacency matrix A of an unweighted graph gives the number of distinct length-2 walks between vertices i and j?"
+            menu:
+                "Entry (i,j) of A^2 (square of adjacency matrix)":
+                    $ chapter_10_score += 1
+                    a "Correct! (A^2)[i,j] counts length-2 walks between i and j."
+                "Entry (i,j) of A transposed":
+                    a "Incorrect. A^T just flips directions in directed graphs."
+                "Trace of A":
+                    a "Incorrect. Trace sums diagonal entries, not length-2 walks."
+
+        elif current_q == "q2":
+            a "What is the cost (time complexity) to check edge existence between two vertices in an adjacency matrix for n vertices?"
+            menu:
+                "O(1)":
+                    $ chapter_10_score += 1
+                    a "Correct! Matrix lookup is constant time."
+                "O(n)":
+                    a "Incorrect. That's typical for adjacency lists if you scan neighbors."
+                "O(log n)":
+                    a "Incorrect. Matrix lookup is direct, not logarithmic."
+
+        elif current_q == "q3":
+            a "For sparse graphs with n vertices and m edges (m << n^2), which representation is usually more space-efficient?"
+            menu:
+                "Adjacency list (O(n + m))":
+                    $ chapter_10_score += 1
+                    a "Correct! Adjacency lists use O(n + m) space and suit sparse graphs."
+                "Adjacency matrix (O(n^2))":
+                    a "Incorrect. Matrix wastes space when m is small."
+                "Edge incidence matrix (O(n + m))":
+                    a "Incorrect. Incidence matrices are often bigger than lists and less convenient."
+
+        elif current_q == "q4":
+            a "How can you modify an adjacency matrix to store weighted edges?"
+            menu:
+                "Replace boolean entries with weight values (e.g., INF or 0 for no edge)":
+                    $ chapter_10_score += 1
+                    a "Correct! Use numeric weights and a sentinel (INF or None) for absent edges."
+                "Use negative entries for weights always":
+                    a "Incorrect. Negative numbers can represent weights but need careful handling in algorithms."
+                "Store weights outside the matrix only":
+                    a "Incorrect. That loses constant-time edge weight lookup."
+
+        elif current_q == "q5":
+            a "Which graph algorithm is typically more efficient with adjacency lists than with adjacency matrices on sparse graphs?"
+            menu:
+                "Breadth-first search (BFS) and Dijkstra with binary heap":
+                    $ chapter_10_score += 1
+                    a "Correct! BFS and many shortest-path algorithms run faster with adjacency lists on sparse graphs."
+                "Matrix exponentiation for counting paths":
+                    a "Incorrect. That uses matrices by design and can be efficient for dense graphs."
+                "Constant-time edge weight lookup":
+                    a "Incorrect. That's an adjacency matrix advantage, not a list one."
+
+        elif current_q == "q6":
+            a "Which application commonly models relationships as a graph and uses adjacency matrices for dense connectivity?"
+            menu:
+                "Social networks with millions of sparse connections":
+                    a "Incorrect. Social networks are usually sparse and use lists or edge indices."
+                "Small dense networks like connectivity in circuit design or chemistry interaction matrices":
+                    $ chapter_10_score += 1
+                    a "Correct! Dense small networks often use adjacency matrices for convenience."
+                "Streaming logs processing with evolving edges":
+                    a "Incorrect. Streaming edges favor dynamic list-based structures."
+
+        elif current_q == "q7":
+            a "If you compute A^k (power of adjacency matrix) for a graph, what does entry (i,j) represent (for unweighted graphs)?"
+            menu:
+                "Number of distinct walks of length k from i to j":
+                    $ chapter_10_score += 1
+                    a "Correct! Powers of A count walks of corresponding length."
+                "Minimum path length between i and j":
+                    a "Incorrect. That requires shortest-path algorithms, not plain matrix powers."
+                "Whether there is a cycle in the graph":
+                    a "Incorrect. Cycles relate to traces of powers but not directly to a single entry."
+
+        elif current_q == "q8":
+            a "Which trick speeds up memory when storing adjacency matrices for very large sparse graphs?"
+            menu:
+                "Use a sparse matrix representation (CSR/CSC) that stores only nonzero entries":
+                    $ chapter_10_score += 1
+                    a "Correct! Compressed sparse row/column formats store only edges and keep matrix semantics."
+                "Store full dense matrix but compress with run-length encoding always":
+                    a "Incorrect. RLE rarely matches adjacency sparsity patterns well."
+                "Convert the graph to a tree first":
+                    a "Incorrect. You can't always convert arbitrary graphs to trees."
+
+        elif current_q == "q9":
+            a "In graph applications, what does edge weighting enable you to model that unweighted graphs cannot?"
+            menu:
+                "Costs, capacities, distances, or strengths of relationships":
+                    $ chapter_10_score += 1
+                    a "Correct! Weighted edges model magnitudes like cost, capacity, or similarity."
+                "Presence or absence of nodes only":
+                    a "Incorrect. Presence/absence is captured even by unweighted graphs."
+                "Automatic acyclicity":
+                    a "Incorrect. Weights don't enforce acyclicity."
+
+        elif current_q == "q10":
+            a "Which algorithm uses adjacency matrices directly for all-pairs shortest paths and runs in O(n^3) time?"
+            menu:
+                "Floyd-Warshall algorithm":
+                    $ chapter_10_score += 1
+                    a "Correct! Floyd-Warshall works naturally with adjacency/weight matrices for all-pairs shortest paths."
+                "Dijkstra with heap":
+                    a "Incorrect. Dijkstra finds single-source shortest paths and uses adjacency lists often."
+                "Kahn's topological sort":
+                    a "Incorrect. Kahn's is for DAG topological ordering."
+
+        elif current_q == "q11":
+            a "Which matrix property helps detect whether a directed graph has a path from every vertex to every other vertex (strong connectivity) when using matrix powers?"
+            menu:
+                "If some power A^k has all positive entries for k ≤ n, the graph is strongly connected":
+                    $ chapter_10_score += 1
+                    a "Correct! Powers of adjacency matrix revealing nonzero entries can indicate reachability and strong connectivity."
+                "If A is symmetric":
+                    a "Incorrect. Symmetry only indicates undirectedness, not strong connectivity."
+                "If determinant of A is zero":
+                    a "Incorrect. Determinant isn't a direct connectivity test."
+
+        elif current_q == "q12":
+            a "Which real-world application uses graph representations and adjacency matrices to compute centrality or influence scores via eigenvectors?"
+            menu:
+                "PageRank and spectral centrality methods (web link analysis, influence networks)":
+                    $ chapter_10_score += 1
+                    a "Correct! PageRank uses adjacency/transition matrices and eigenvector centrality ideas."
+                "Sorting numbers in an array":
+                    a "Incorrect. Sorting isn't a graph spectral task."
+                "Simple key-value lookups":
+                    a "Incorrect. Lookups are not adjacency-based algorithms."
+
+        elif current_q == "q13":
+            a "When representing a multigraph (multiple edges between same vertices) using a matrix, what modification is natural?"
+            menu:
+                "Store counts or summed weights in matrix entries (integers or weights >1)":
+                    $ chapter_10_score += 1
+                    a "Correct! Matrix entries can hold multiplicities or aggregated weights."
+                "Use boolean entries only":
+                    a "Incorrect. Booleans lose multiplicity information."
+                "Use adjacency lists only; matrices are impossible":
+                    a "Incorrect. Matrices can represent multiplicities with numeric entries."
+
+        elif current_q == "q14":
+            a "Which algorithmic task benefits from converting an adjacency matrix to an adjacency list beforehand for large sparse graphs?"
+            menu:
+                "Running BFS/DFS or Dijkstra where iterating neighbors should be proportional to degree":
+                    $ chapter_10_score += 1
+                    a "Correct! Converting to lists avoids scanning n columns per vertex and speeds neighbor iteration."
+                "Computing matrix determinants":
+                    a "Incorrect. Determinants require matrix form."
+                "Counting exact number of length-n walks using dense linear algebra only":
+                    a "Incorrect. That task uses matrix algebra, not lists."
+
+        elif current_q == "q15":
+            a "Which graph application frequently uses adjacency matrices and spectral methods to cluster nodes (community detection)?"
+            menu:
+                "Spectral clustering or graph Laplacian-based community detection (image segmentation, social networks)":
+                    $ chapter_10_score += 1
+                    a "Correct! Spectral methods use matrices like adjacency or Laplacian to find clusters."
+                "Simple breadth-first traversal only":
+                    a "Incorrect. BFS isn't a spectral clustering technique."
+                "Counting sort for arrays":
+                    a "Incorrect. Counting sort is unrelated."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_10_score]"
     jump chapter_10_performance
 
+init python:
+    import random
+    chapter_10_hard_question_order = [
+        "q1","q2","q3","q4","q5",
+        "q6","q7","q8","q9","q10",
+        "q11","q12","q13","q14","q15",
+        "q16","q17","q18","q19","q20"
+    ]
+    random.shuffle(chapter_10_hard_question_order)
+
 label chapter_10_quiz_hard:
+    $ chapter_10_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert hard quiz questions here)
+    show adrian smiling at center
+    a "Welcome to the Graphs challenge. These questions explore deeper graph theory, adjacency-matrix techniques, and real-world applications."
+
+    while chapter_10_hard_question_order:
+        $ current_q = chapter_10_hard_question_order.pop(0)
+
+        if current_q == "q1":
+            a "What does the entry (i,j) of A^k (A is adjacency matrix) represent in an unweighted graph?"
+            menu:
+                "Whether there exists a path of length ≤ k between i and j":
+                    a "Incorrect. That's reachability up to k, but entry counts exact-length walks."
+                "The number of distinct walks of length exactly k from i to j":
+                    $ chapter_10_score += 1
+                    a "Correct! Powers of A count walks of exact length k between vertices."
+                "The shortest path length between i and j":
+                    a "Incorrect. Matrix powers count walks, not shortest distances."
+
+        elif current_q == "q2":
+            a "Which complexity describes computing A^k for an n×n adjacency matrix by repeated multiplication (naive)?"
+            menu:
+                "O(n^3 log k) using repeated squaring with naive multiplication":
+                    $ chapter_10_score += 1
+                    a "Correct! Naive matrix multiplication is O(n^3); with exponentiation by squaring you get O(n^3 log k)."
+                "O(n^2) regardless of k":
+                    a "Incorrect. Matrix multiplication is costlier than quadratic for dense matrices."
+                "O(k n) linear in n and k":
+                    a "Incorrect. Multiplication costs depend on n^3 per multiply."
+
+        elif current_q == "q3":
+            a "How can you test strong connectivity of a directed graph G efficiently using adjacency representations?"
+            menu:
+                "Run DFS/BFS from an arbitrary node; then run another DFS/BFS on the reversed graph; both must reach all nodes":
+                    $ chapter_10_score += 1
+                    a "Correct! Kosaraju's idea; two full reachability checks detect strong connectivity."
+                "Compute determinant of adjacency matrix":
+                    a "Incorrect. Determinant isn't a connectivity test."
+                "Check A^n for zero diagonal only":
+                    a "Incorrect. A^n entries relate to walks but it's not the standard efficient test."
+
+        elif current_q == "q4":
+            a "Which matrix-derived structure is useful to analyze diffusion or centrality and involves degree-normalized adjacency?"
+            menu:
+                "Graph Laplacian (L = D − A) and normalized Laplacian or transition matrix D^−1 A":
+                    $ chapter_10_score += 1
+                    a "Correct! Laplacian and normalized adjacency/transition matrices underpin diffusion and spectral centrality."
+                "Incidence matrix only":
+                    a "Incorrect. Incidence matrices are useful but degree-normalized adjacency is central for diffusion."
+                "Adjacency list with edge lists sorted":
+                    a "Incorrect. Lists help storage but don't define spectral diffusion operators."
+
+        elif current_q == "q5":
+            a "Which algorithm finds all-pairs shortest paths in weighted graphs (including negative weights but no negative cycles) using matrix-like dynamic programming?"
+            menu:
+                "Bellman-Ford repeated from every source":
+                    a "Incorrect. That works but is O(n*m) per source and less clean than Floyd-Warshall for dense cases."
+                "Floyd-Warshall algorithm (dynamic programming over triply nested loops)":
+                    $ chapter_10_score += 1
+                    a "Correct! Floyd-Warshall handles negative edge weights without negative cycles in O(n^3)."
+                "Dijkstra with Fibonacci heap for negative weights":
+                    a "Incorrect. Dijkstra requires nonnegative weights."
+
+        elif current_q == "q6":
+            a "In spectral clustering, why do we use the graph Laplacian's eigenvectors rather than the adjacency matrix's?"
+            menu:
+                "Laplacian normalizes by degree and reveals community structure via low-frequency eigenvectors, making clusters clearer":
+                    $ chapter_10_score += 1
+                    a "Correct! The Laplacian encodes cuts and smoothness; its eigenvectors capture cluster structure robustly."
+                "Adjacency matrix has no eigenvectors":
+                    a "Incorrect. Adjacency has eigenvectors but they are less suitable for normalized cuts."
+                "Laplacian is always diagonal so it's faster":
+                    a "Incorrect. Laplacian is not diagonal in general."
+
+        elif current_q == "q7":
+            a "Which sparse matrix format is best when you need fast row-iteration and efficient matrix-vector multiply for graphs?"
+            menu:
+                "Compressed Sparse Row (CSR)":
+                    $ chapter_10_score += 1
+                    a "Correct! CSR stores rows compactly and makes row traversal and mat-vec fast for sparse graphs."
+                "Dense row-major matrix":
+                    a "Incorrect. Dense wastes space and is slow for sparse graphs."
+                "Edge list without indexing":
+                    a "Incorrect. Edge lists are flexible but less efficient for repeated row operations."
+
+        elif current_q == "q8":
+            a "How can you use adjacency matrices to count triangles (3-cycles) in an undirected simple graph?"
+            menu:
+                "Compute trace(A^3) and divide by 6":
+                    $ chapter_10_score += 1
+                    a "Correct! For undirected simple graphs, number of triangles = trace(A^3) / 6."
+                "Compute determinant of A":
+                    a "Incorrect. Determinant doesn't count triangles."
+                "Count nonzero entries of A^2":
+                    a "Incorrect. A^2 entries count 2-length walks, not triangles directly."
+
+        elif current_q == "q9":
+            a "What is the main drawback of using adjacency matrices for very large sparse graphs?"
+            menu:
+                "Matrices lose edge order information":
+                    a "Incorrect. They can store weights but loss of order isn't main issue."
+                "Memory usage O(n^2) becomes prohibitive; matrix ops become expensive despite sparsity":
+                    $ chapter_10_score += 1
+                    a "Correct! Dense storage blows up for large sparse graphs and many algorithms become inefficient."
+                "They cannot represent directed graphs":
+                    a "Incorrect. Matrices represent directed graphs naturally."
+
+        elif current_q == "q10":
+            a "Which algorithmic trick speeds up repeated reachability queries on a static graph?"
+            menu:
+                "Precompute reachability via transitive closure (e.g., warshall) or index structures (e.g., 2-hop labeling) to answer queries quickly":
+                    $ chapter_10_score += 1
+                    a "Correct! Precomputation like transitive closure or indexing trades preprocessing for fast queries."
+                "Always run BFS per query; it's always optimal":
+                    a "Incorrect. Per-query BFS is fine for few queries but costly for many."
+                "Use randomized sampling of vertices only":
+                    a "Incorrect. Sampling doesn't guarantee exact reachability answers."
+
+        elif current_q == "q11":
+            a "Which statement about graph isomorphism detection via adjacency matrices is true in practice?"
+            menu:
+                "Comparing adjacency matrices directly works because node order is canonical":
+                    a "Incorrect. Node ordering breaks direct matrix comparisons; isomorphism needs relabeling."
+                "Graph isomorphism is nontrivial; practical methods use canonical labeling, invariants, and heuristics rather than naive matrix equality":
+                    $ chapter_10_score += 1
+                    a "Correct! GI uses canonical forms and heuristics; worst-case complexity is subtle."
+                "Determinant of adjacency matrix uniquely identifies isomorphism classes":
+                    a "Incorrect. Determinant is not unique to isomorphism class."
+
+        elif current_q == "q12":
+            a "Which approach helps compute shortest paths on giant sparse graphs where n is huge but m is modest?"
+            menu:
+                "Use adjacency matrices and dense linear algebra exclusively":
+                    a "Incorrect. Dense algebra is infeasible for huge n."
+                "Use adjacency lists with algorithms like Dijkstra (with appropriate heap) or BFS for unweighted graphs, possibly with heuristics (A*) or contraction hierarchies":
+                    $ chapter_10_score += 1
+                    a "Correct! Sparse representations with specialized algorithms and preprocessing scale better."
+                "Convert graph to complete graph to simplify":
+                    a "Incorrect. That destroys sparsity and is impractical."
+
+        elif current_q == "q13":
+            a "In spectral graph theory, what does the second-smallest eigenvalue of the Laplacian (the Fiedler value) indicate?"
+            menu:
+                "It measures the number of triangles exactly":
+                    a "Incorrect. Triangle counts relate to A^3 traces."
+                "It indicates algebraic connectivity; higher value means better connectedness and larger spectral gap":
+                    $ chapter_10_score += 1
+                    a "Correct! The Fiedler value quantifies connectivity and relates to cut quality."
+                "It gives the maximum degree in the graph":
+                    a "Incorrect. Eigenvalues do not directly equal max degree."
+
+        elif current_q == "q14":
+            a "How can you handle weighted multigraphs in a matrix representation efficiently?"
+            menu:
+                "Store adjacency matrix entries as sums of edge weights or counts (numeric entries) and use sparse numeric matrix formats":
+                    $ chapter_10_score += 1
+                    a "Correct! Numeric entries capture multiplicity/weights and sparse formats save space."
+                "Use boolean adjacency matrix only and ignore weights":
+                    a "Incorrect. That loses weight information."
+                "Represent each parallel edge as a separate row":
+                    a "Incorrect. That breaks square matrix structure and complicates algorithms."
+
+        elif current_q == "q15":
+            a "Which application most naturally leverages adjacency matrices and linear algebra for large-scale problems?"
+            menu:
+                "PageRank and spectral recommendation systems that use eigenvectors and power iteration on (normalized) adjacency/transition matrices":
+                    $ chapter_10_score += 1
+                    a "Correct! Web ranking and spectral methods use matrix operations on adjacency-derived matrices."
+                "Simple BFS on social networks with billions of nodes":
+                    a "Incorrect. BFS on huge sparse graphs prefers adjacency lists and streaming methods."
+                "Sorting huge lists of numbers":
+                    a "Incorrect. Sorting isn't a matrix-spectral problem."
+
+        elif current_q == "q16":
+            a "What optimization reduces work for multiplying a sparse adjacency matrix by a dense vector?"
+            menu:
+                "Use compressed sparse formats (CSR/CSC) to iterate nonzeros only, achieving O(n + m) time for mat-vec":
+                    $ chapter_10_score += 1
+                    a "Correct! Sparse mat-vec multiplies cost proportional to nonzeros, not n^2."
+                "Convert sparse matrix to dense first":
+                    a "Incorrect. Conversion loses sparsity benefits."
+                "Use naive triple-loop dense multiplication":
+                    a "Incorrect. Naive dense multiply is costly for sparse matrices."
+
+        elif current_q == "q17":
+            a "Which approach helps count number of simple paths between two nodes (not walks) — a generally hard problem — in practice?"
+            menu:
+                "Use adjacency matrix powers and read A^k entries for sufficiently large k":
+                    a "Incorrect. Powers count walks, not necessarily simple paths, and can overcount."
+                "Apply backtracking with pruning, dynamic programming on DAGs, or use inclusion-exclusion/parameterized algorithms for special graph classes":
+                    $ chapter_10_score += 1
+                    a "Correct! Counting simple paths is hard generally but tractable with DP on DAGs or specialized algorithms."
+                "Compute determinant of Laplacian":
+                    a "Incorrect. Determinant of Laplacian relates to spanning trees, not simple path counts."
+
+        elif current_q == "q18":
+            a "What is an efficient matrix-based method to compute reachability transitive closure for medium-sized graphs?"
+            menu:
+                "Repeatedly compute matrix powers up to n and OR them; optimized using repeated squaring and boolean algebra (Warshall)":
+                    $ chapter_10_score += 1
+                    a "Correct! Warshall or repeated squaring with boolean operations computes transitive closure efficiently for medium n."
+                "Run BFS from every node without optimization":
+                    a "Incorrect. That is simple but may be slower than matrix-based methods for dense graphs."
+                "Compute shortest paths with Dijkstra for reachability":
+                    a "Incorrect. Dijkstra focuses on weights and is overkill for unweighted reachability."
+
+        elif current_q == "q19":
+            a "In practical large-scale graph systems, what technique helps process graphs that don't fit in memory?"
+            menu:
+                "Use out-of-core processing, streaming graph algorithms, graph partitioning, and distributed frameworks (e.g., Pregel, GraphX)":
+                    $ chapter_10_score += 1
+                    a "Correct! Partitioning, streaming, and distributed processing handle out-of-core graphs."
+                "Forcefully allocate a dense adjacency matrix in memory and swap frequently":
+                    a "Incorrect. That is inefficient and often infeasible."
+                "Refuse to process graphs larger than RAM":
+                    a "Incorrect. Practical systems must handle larger-than-memory graphs."
+
+        elif current_q == "q20":
+            a "Which matrix concept helps regularize graphs for noisy spectral methods and improves numerical stability?"
+            menu:
+                "Add small self-loop weights (e.g., add ε to diagonal) or use normalized Laplacian; apply damping like PageRank's teleportation":
+                    $ chapter_10_score += 1
+                    a "Correct! Diagonal regularization, normalization, and damping stabilize spectral computations in noisy graphs."
+                "Zero out diagonal entries always":
+                    a "Incorrect. Zero diagonal is standard but adding small values can help numerics."
+                "Randomly permute rows and columns before eigen-computation only":
+                    a "Incorrect. Permutation doesn't regularize or stabilize eigenproblems."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_10_score]"
     jump chapter_10_performance
 
 label chapter_10_performance:

@@ -749,48 +749,581 @@ label chapter_9_restart:
         show adrian confident
         jump chapter_9_quiz_hard
 
+init python:
+    import random
+    chapter_9_easy_question_order = [
+        "q1","q2","q3","q4","q5",
+        "q6","q7","q8","q9","q10"
+    ]
+    random.shuffle(chapter_9_easy_question_order)
+
 label chapter_9_quiz_easy:
+    $ chapter_9_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert easy quiz questions here)
+    show adrian smiling at center
+    a "Welcome to the associative arrays quiz. Let's cover keys, hashing, collisions, and common uses."
+
+    while chapter_9_easy_question_order:
+        $ current_q = chapter_9_easy_question_order.pop(0)
+
+        if current_q == "q1":
+            a "What is an associative array?"
+            menu:
+                "A data structure that maps keys to values (also called a map or dictionary)":
+                    $ chapter_9_score += 1
+                    a "Correct! Associative arrays store key→value pairs for fast lookup."
+                "An array that maintains insertion order only":
+                    a "Incorrect. That's an ordered list concept, not the mapping behavior."
+                "A fixed-size numeric array":
+                    a "Incorrect. That's a basic array, not an associative mapping."
+
+        elif current_q == "q2":
+            a "Which common implementation gives average-case O(1) lookup time for associative arrays?"
+            menu:
+                "Binary search tree":
+                    a "Incorrect. BSTs give O(log n) lookups, not O(1) average."
+                "Hash table (using hashing and buckets)":
+                    $ chapter_9_score += 1
+                    a "Correct! Hash tables provide average O(1) lookups with a good hash function and load factor."
+                "Linked list of all entries":
+                    a "Incorrect. Linked lists require O(n) scan for lookup."
+
+        elif current_q == "q3":
+            a "What is a collision in the context of hash tables?"
+            menu:
+                "When a key is missing from the table":
+                    a "Incorrect. That's a miss, not a collision."
+                "When the hash function returns negative values only":
+                    a "Incorrect. Negative outputs can be normalized; collision is about same index."
+                "When two distinct keys produce the same hash index and map to the same bucket":
+                    $ chapter_9_score += 1
+                    a "Correct! Collisions happen when different keys hash to the same slot."
+
+        elif current_q == "q4":
+            a "Which strategy resolves collisions by storing multiple items per bucket?"
+            menu:
+                "Chaining (store a list of entries per bucket)":
+                    $ chapter_9_score += 1
+                    a "Correct! Chaining keeps a bucket list for all keys hashing to that index."
+                "Open addressing with probing":
+                    a "Incorrect. Open addressing places entries in other empty slots instead of lists."
+                "Sorting the keys globally":
+                    a "Incorrect. Sorting is unrelated to collision resolution."
+
+        elif current_q == "q5":
+            a "What does load factor (α) measure for a hash table?"
+            menu:
+                "The maximum key length allowed":
+                    a "Incorrect. Load factor is about occupancy, not key size."
+                "The ratio of number of stored elements to number of buckets (n / buckets)":
+                    $ chapter_9_score += 1
+                    a "Correct! Load factor guides when to resize to keep performance."
+                "The time to compute the hash function":
+                    a "Incorrect. That's hash cost, not load factor."
+
+        elif current_q == "q6":
+            a "Which open addressing probe sequence is commonly used for simplicity and clustering avoidance?"
+            menu:
+                "Quadratic probing or double hashing to reduce clustering":
+                    $ chapter_9_score += 1
+                    a "Correct! Quadratic probing and double hashing mitigate clustering issues."
+                "Linear probing only":
+                    a "Incorrect. Linear probing is simple but suffers primary clustering."
+                "Storing collisions in external database":
+                    a "Incorrect. External DB isn't a typical in-memory probe strategy."
+
+        elif current_q == "q7":
+            a "Why do most hash-table implementations resize (grow) when load factor exceeds a threshold?"
+            menu:
+                "To reorder keys alphabetically":
+                    a "Incorrect. Resizing is for performance, not ordering."
+                "To free memory permanently":
+                    a "Incorrect. Growing expands capacity; shrinking may free memory later."
+                "To keep average lookup, insert, and delete operations fast by reducing collisions":
+                    $ chapter_9_score += 1
+                    a "Correct! Resizing (rehashing) lowers load factor and reduces collision cost."
+
+        elif current_q == "q8":
+            a "Which property must keys generally have to be used in a hash-based associative array?"
+            menu:
+                "They must always be integers":
+                    a "Incorrect. Many types can be hashed, not just integers."
+                "They must be hashable and comparable for equality":
+                    $ chapter_9_score += 1
+                    a "Correct! Keys need a deterministic hash and equality test to locate entries."
+                "They must be unique strings only":
+                    a "Incorrect. Any hashable, unique key type is fine."
+
+        elif current_q == "q9":
+            a "Which real-world application commonly uses associative arrays?"
+            menu:
+                "Implementing symbol tables in compilers, caches, configuration maps, and databases":
+                    $ chapter_9_score += 1
+                    a "Correct! Maps are used widely for name→value lookups and fast indexing."
+                "Rendering 3D meshes exclusively":
+                    a "Incorrect. Mesh rendering uses other structures; maps may still appear for resources."
+                "Only for sorting large arrays":
+                    a "Incorrect. Sorting is not the primary use of associative arrays."
+
+        elif current_q == "q10":
+            a "What is an OrderedDict or map that preserves insertion order compared to a plain hash table?"
+            menu:
+                "A map that forbids deletions":
+                    a "Incorrect. Ordered maps still allow deletes; they maintain order of remaining keys."
+                "A map that preserves insertion order while offering map semantics (keys → values)":
+                    $ chapter_9_score += 1
+                    a "Correct! Many languages provide ordered map variants that remember insertion order."
+                "A variant that always sorts keys by value":
+                    a "Incorrect. Ordered maps preserve insertion order, not sort by value."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_9_score]"
     jump chapter_9_performance
+
+init python:
+    import random
+    chapter_9_quiz_medium_order = [
+        "q1", "q2", "q3", "q4", "q5",
+        "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15"
+    ]
+    random.shuffle(chapter_9_quiz_medium_order)
 
 label chapter_9_quiz_medium:
+    $ chapter_9_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert medium quiz questions here)
+    a "Welocme to the Chapter Quiz!"
+    while chapter_9_quiz_medium_order:
+        $ current_q = chapter_9_quiz_medium_order.pop(0)
+
+        if current_q == "q1":
+            a "Which data structure is commonly used to implement associative arrays?"
+            menu:
+                "Linked list":
+                    a "Incorrect. Linked lists are not efficient for key-based access."
+                "Hash table":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Hash tables provide fast key-value lookups."
+                "Binary tree":
+                    a "Incorrect. Trees can be used, but hash tables are more common."
+
+        elif current_q == "q2":
+            a "What is the primary advantage of associative arrays?"
+            menu:
+                "They store data sequentially":
+                    a "Incorrect. Associative arrays are not about sequence."
+                "They allow fast access via keys":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Keys enable quick retrieval of values."
+                "They use less memory than arrays":
+                    a "Incorrect. Memory usage depends on implementation."
+
+        elif current_q == "q3":
+            a "In associative arrays, what must be unique?"
+            menu:
+                "Values":
+                    a "Incorrect. Values can be duplicated."
+                "Keys":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Each key must be unique to avoid ambiguity."
+                "Indexes":
+                    a "Incorrect. Indexes are not used in associative arrays."
+
+        elif current_q == "q4":
+            a "Which operation is typically fastest in a hash-based associative array?"
+            menu:
+                "Searching by key":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Hashing allows near-constant time lookup."
+                "Sorting values":
+                    a "Incorrect. Sorting is not a primary feature."
+                "Iterating through values":
+                    a "Incorrect. Iteration is linear and not the fastest operation."
+
+        elif current_q == "q5":
+            a "What happens if two keys hash to the same index?"
+            menu:
+                "The second key is discarded":
+                    a "Incorrect. That would cause data loss."
+                "A collision occurs and must be resolved":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Collisions are handled using techniques like chaining or probing."
+                "The table resizes immediately":
+                    a "Incorrect. Resizing is based on load factor, not collisions."
+
+        elif current_q == "q6":
+            a "Which of the following is a valid key in most associative arrays?"
+            menu:
+                "A list":
+                    a "Incorrect. Lists are mutable and usually not hashable."
+                "A string":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Strings are immutable and commonly used as keys."
+                "A dictionary":
+                    a "Incorrect. Dictionaries are mutable and not hashable."
+
+        elif current_q == "q7":
+            a "What is a common method to resolve hash collisions?"
+            menu:
+                "Binary search":
+                    a "Incorrect. Binary search is not used for collisions."
+                "Chaining":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Chaining stores multiple items at the same index."
+                "Sorting the table":
+                    a "Incorrect. Sorting doesn’t resolve collisions."
+
+        elif current_q == "q8":
+            a "Which of these best describes a hash function?"
+            menu:
+                "A function that sorts keys":
+                    a "Incorrect. Sorting is not its purpose."
+                "A function that maps keys to indices":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! It determines where to store each key-value pair."
+                "A function that encrypts data":
+                    a "Incorrect. Hashing is not encryption."
+
+        elif current_q == "q9":
+            a "What is the typical time complexity for inserting into a hash table (without collisions)?"
+            menu:
+                "O(n)":
+                    a "Incorrect. That would be inefficient."
+                "O(1)":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Constant time is the goal of hashing."
+                "O(log n)":
+                    a "Incorrect. That’s typical for balanced trees."
+
+        elif current_q == "q10":
+            a "Which scenario might trigger dynamic resizing in a hash table?"
+            menu:
+                "When the load factor exceeds a threshold":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Resizing helps maintain performance."
+                "When a key is accessed":
+                    a "Incorrect. Access doesn’t trigger resizing."
+                "When a collision occurs":
+                    a "Incorrect. Collisions are handled separately."
+
+        elif current_q == "q11":
+            a "What is the load factor in a hash table?"
+            menu:
+                "Ratio of stored elements to table size":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! It helps measure how full the table is."
+                "Size of each key":
+                    a "Incorrect. Key size doesn’t define load factor."
+                "Number of collisions":
+                    a "Incorrect. That’s a separate metric."
+
+        elif current_q == "q12":
+            a "Which of the following is NOT a typical use case for associative arrays?"
+            menu:
+                "Counting word frequencies":
+                    a "Incorrect. That’s a common use."
+                "Storing pixel data in images":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Pixel data is usually stored in arrays, not key-value pairs."
+                "Mapping usernames to user IDs":
+                    a "Incorrect. That’s a classic use case."
+
+        elif current_q == "q13":
+            a "Which of these is a disadvantage of hash tables?"
+            menu:
+                "They are slow to access":
+                    a "Incorrect. They are fast for access."
+                "They require sorted keys":
+                    a "Incorrect. Sorting is not required."
+                "They can have poor performance with many collisions":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Too many collisions can degrade performance."
+
+        elif current_q == "q14":
+            a "What does it mean if a key is not found in an associative array?"
+            menu:
+                "The key maps to a null value":
+                    a "Incorrect. It means the key doesn’t exist."
+                "The key was deleted":
+                    a "Incorrect. Not necessarily—it may never have existed."
+                "The key is not present in the structure":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! A missing key simply isn’t stored."
+
+        elif current_q == "q15":
+            a "Which of the following languages has built-in support for associative arrays?"
+            menu:
+                "Python":  # Correct
+                    $ chapter_9_score += 1
+                    a "Correct! Python’s dictionaries are associative arrays."
+                "Assembly":
+                    a "Incorrect. Assembly doesn’t have high-level data structures."
+                "C without libraries":
+                    a "Incorrect. C requires manual implementation."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_9_score]"
     jump chapter_9_performance
+
+init python:
+    import random
+    chapter_9_quiz_hard_order = [
+        "q1", "q2", "q3", "q4", "q5",
+        "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15",
+        "q16", "q17", "q18", "q19", "q20"
+    ]
+    random.shuffle(chapter_9_quiz_hard_order)
 
 label chapter_9_quiz_hard:
+    $ chapter_9_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert hard quiz questions here)
+    a "Let's dive into a deeper challenge. These questions will test your understanding of associative arrays from multiple angles. Take your time and think carefully."
+
+    while chapter_9_quiz_hard_order:
+        $ current_q = chapter_9_quiz_hard_order.pop(0)
+
+        if current_q == "q1":
+            a "Which hashing technique minimizes clustering in open addressing?"
+            menu:
+                "Quadratic probing":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! Quadratic probing reduces clustering by spreading probes."
+                "Linear probing":
+                    a "Incorrect. Linear probing can cause primary clustering."
+                "Separate chaining":
+                    a "Incorrect. Chaining is not an open addressing method."
+
+        elif current_q == "q2":
+            a "What is the worst-case time complexity for searching in a hash table with chaining?"
+            menu:
+                "O(1)":
+                    a "Incorrect. That’s the best case."
+                "O(n)":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! In the worst case, all elements may hash to the same bucket."
+                "O(log n)":
+                    a "Incorrect. That applies to balanced trees, not hash chains."
+
+        elif current_q == "q3":
+            a "Which property must a good hash function satisfy?"
+            menu:
+                "It must be reversible":
+                    a "Incorrect. Hash functions are not meant to be reversible."
+                "It must sort the keys":
+                    a "Incorrect. Sorting is unrelated to hashing."
+                "It must distribute keys uniformly":  # Correct (bottom)
+                    $ chapter_9_score += 1
+                    a "Correct! Uniform distribution reduces collisions."
+
+        elif current_q == "q4":
+            a "What does rehashing involve?"
+            menu:
+                "Recomputing hashes and resizing the table":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! Rehashing redistributes keys in a larger table."
+                "Changing the hash function":
+                    a "Incorrect. Rehashing usually keeps the same function."
+                "Deleting all keys and starting over":
+                    a "Incorrect. That would lose data."
+
+        elif current_q == "q5":
+            a "Which scenario causes the most performance degradation in hash tables?"
+            menu:
+                "Low load factor":
+                    a "Incorrect. Low load factor improves performance."
+                "High collision rate":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! Collisions slow down access and insertion."
+                "Using numeric keys":
+                    a "Incorrect. Numeric keys are fine if hashed properly."
+
+        elif current_q == "q6":
+            a "Which of the following is true about associative arrays in Python?"
+            menu:
+                "They automatically sort keys":
+                    a "Incorrect. Sorting must be done manually."
+                "They require keys to be integers":
+                    a "Incorrect. Keys can be any hashable type."
+                "They preserve insertion order":  # Correct (bottom)
+                    $ chapter_9_score += 1
+                    a "Correct! Since Python 3.7, dictionaries preserve order."
+
+        elif current_q == "q7":
+            a "What is double hashing?"
+            menu:
+                "Using two hash functions to resolve collisions":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! Double hashing spreads out probes more effectively."
+                "Using two hash tables":
+                    a "Incorrect. It’s not about multiple tables."
+                "Hashing keys twice for security":
+                    a "Incorrect. That’s more relevant to cryptography."
+
+        elif current_q == "q8":
+            a "Which of these is a disadvantage of separate chaining?"
+            menu:
+                "It cannot handle collisions":
+                    a "Incorrect. Chaining is designed for collisions."
+                "It uses extra memory for linked lists":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! Each bucket may store a list of entries."
+                "It requires keys to be sorted":
+                    a "Incorrect. Sorting is not required."
+
+        elif current_q == "q9":
+            a "What is the amortized cost of insertion in a dynamic hash table?"
+            menu:
+                "O(log n)":
+                    a "Incorrect. That applies to tree structures."
+                "O(n)":
+                    a "Incorrect. That’s the worst-case during resizing."
+                "O(1)":  # Correct (bottom)
+                    $ chapter_9_score += 1
+                    a "Correct! Most insertions are constant time."
+
+        elif current_q == "q10":
+            a "Which of these key types is invalid in most associative arrays?"
+            menu:
+                "List":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! Lists are mutable and not hashable."
+                "Tuple":
+                    a "Incorrect. Tuples are immutable and valid."
+                "Integer":
+                    a "Incorrect. Integers are commonly used."
+
+        elif current_q == "q11":
+            a "Which structure is best for implementing an associative array with ordered keys?"
+            menu:
+                "Hash table":
+                    a "Incorrect. Hash tables don’t maintain order."
+                "Binary search tree":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! BSTs maintain sorted order of keys."
+                "Stack":
+                    a "Incorrect. Stacks are not key-based."
+
+        elif current_q == "q12":
+            a "What does the term 'bucket' refer to in hashing?"
+            menu:
+                "A backup table for overflow":
+                    a "Incorrect. That’s not standard terminology."
+                "A temporary storage for deleted keys":
+                    a "Incorrect. Buckets store active entries."
+                "A slot in the hash table where keys map":  # Correct (bottom)
+                    $ chapter_9_score += 1
+                    a "Correct! Buckets hold key-value pairs."
+
+        elif current_q == "q13":
+            a "Which of these is most likely to cause clustering?"
+            menu:
+                "Linear probing":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! Linear probing can cause primary clustering."
+                "Separate chaining":
+                    a "Incorrect. Chaining avoids clustering."
+                "Double hashing":
+                    a "Incorrect. Double hashing reduces clustering."
+
+        elif current_q == "q14":
+            a "What is the purpose of a sentinel value in associative arrays?"
+            menu:
+                "To store default values":
+                    a "Incorrect. Defaults are handled differently."
+                "To mark deleted entries":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! Sentinels help manage deletions in open addressing."
+                "To sort the keys":
+                    a "Incorrect. Sorting doesn’t use sentinels."
+
+        elif current_q == "q15":
+            a "Which of these operations is not typically supported by associative arrays?"
+            menu:
+                "Key-based lookup":
+                    a "Incorrect. That’s the core feature."
+                "Key insertion":
+                    a "Incorrect. Insertion is supported."
+                "Value-based deletion":  # Correct (bottom)
+                    $ chapter_9_score += 1
+                    a "Correct! Deletion is usually key-based."
+
+        elif current_q == "q16":
+            a "What does 'hashable' mean in Python?"
+            menu:
+                "The object has a fixed hash value":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! Hashable objects must be immutable and consistent."
+                "The object can be sorted":
+                    a "Incorrect. Sorting is unrelated."
+                "The object is encrypted":
+                    a "Incorrect. Hashing is not encryption."
+
+        elif current_q == "q17":
+            a "Which of these is true about resizing a hash table?"
+            menu:
+                "It deletes half the keys":
+                    a "Incorrect. Keys are preserved."
+                "It improves performance by reducing collisions":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! A larger table lowers the load factor."
+                "It sorts the keys":
+                    a "Incorrect. Sorting is not involved."
+
+        elif current_q == "q18":
+            a "Which of these is a valid reason to use associative arrays?"
+            menu:
+                "To perform matrix multiplication":
+                    a "Incorrect. That’s not their purpose."
+                "To store sequential data":
+                    a "Incorrect. Arrays are better for that."
+                "To map identifiers to values":  # Correct (bottom)
+                    $ chapter_9_score += 1
+                    a "Correct! Associative arrays excel at key-value mapping."
+
+        elif current_q == "q19":
+            a "When using open addressing, what must you do when deleting an entry to keep lookups correct?"
+            menu:
+                "Mark the slot with a special deleted sentinel":  # Correct (top)
+                    $ chapter_9_score += 1
+                    a "Correct! A sentinel preserves probe chains for existing keys."
+                "Set the slot to empty and stop":
+                    a "Incorrect. Clearing it outright breaks probes."
+                "Immediately rehash the entire table":
+                    a "Incorrect. Rehashing on every delete is unnecessary."
+
+        elif current_q == "q20":
+            a "Which metric directly influences when many implementations trigger a resize?"
+            menu:
+                "The number of buckets":
+                    a "Incorrect. Bucket count is a table property, not the trigger."
+                "Load factor (ratio of elements to buckets)":  # Correct (middle)
+                    $ chapter_9_score += 1
+                    a "Correct! Load factor thresholds prompt resizing to maintain performance."
+                "Average key length":
+                    a "Incorrect. Key length doesn't typically trigger resizing."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_9_score]"
     jump chapter_9_performance
-
 label chapter_9_performance:
 
 # Associative Arrays

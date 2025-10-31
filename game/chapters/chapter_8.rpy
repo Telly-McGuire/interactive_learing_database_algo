@@ -1033,46 +1033,574 @@ label chapter_8_restart:
         show adrian excited
         jump chapter_8_quiz_hard
 
+init python:
+    import random
+    chapter_8_quiz_easy_order = [
+        "q1", "q2", "q3", "q4", "q5",
+        "q6", "q7", "q8", "q9", "q10"
+    ]
+    random.shuffle(chapter_8_quiz_easy_order)
+
 label chapter_8_quiz_easy:
+    $ chapter_8_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert easy quiz questions here)
+    while chapter_8_quiz_easy_order:
+        $ current_q = chapter_8_quiz_easy_order.pop(0)
+
+        if current_q == "q1":
+            a "What property defines a max-heap?"
+            menu:
+                "Every parent node is greater than or equal to its children":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! In a max-heap parents are >= children."
+                "All leaves are at the same depth":
+                    a "Incorrect. That's a property of complete trees, not the heap value relation."
+                "Children are always sorted":
+                    a "Incorrect. Children are not required to be sorted relative to each other."
+
+        elif current_q == "q2":
+            a "Which data structure is commonly used to implement a heap efficiently?"
+            menu:
+                "Array":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Heaps are typically stored in arrays using index math."
+                "Linked list":
+                    a "Incorrect. Linked lists are not efficient for random access used by heaps."
+                "Hash table":
+                    a "Incorrect. Hash tables are for key-value lookup, not heap order."
+
+        elif current_q == "q3":
+            a "What is the time complexity to insert an element into a binary heap (n is number of elements)?"
+            menu:
+                "O(n)":
+                    a "Incorrect. That would be too slow for heaps."
+                "O(log n)":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Insert uses sift-up which is logarithmic."
+                "O(1)":
+                    a "Incorrect. Only the initial append is O(1); restoring heap order costs O(log n)."
+
+        elif current_q == "q4":
+            a "Which operation retrieves the largest element from a max-heap?"
+            menu:
+                "Pop or extract-max":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Extract-max removes and returns the root in a max-heap."
+                "Peek-min":
+                    a "Incorrect. Peek-min is for min-priority retrievals."
+                "In-order traversal":
+                    a "Incorrect. Traversal doesn’t directly give the max quickly."
+
+        elif current_q == "q5":
+            a "What is the usual time complexity to build a heap from an unsorted array using the heapify method?"
+            menu:
+                "O(n log n)":
+                    a "Incorrect. That’s the cost if you insert each element individually."
+                "O(n)":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! The bottom-up heapify method runs in linear time."
+                "O(log n)":
+                    a "Incorrect. Building is more expensive than a single log n."
+
+        elif current_q == "q6":
+            a "In array representation of a binary heap, for a node at index i (0-based), what is index of its left child?"
+            menu:
+                "2*i + 1":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Left child index is 2*i + 1 in 0-based arrays."
+                "i // 2":
+                    a "Incorrect. That gives the parent in 1-based indexing."
+                "i + 1":
+                    a "Incorrect. That's not the child index formula."
+
+        elif current_q == "q7":
+            a "Which of these is a valid use case for a heap?"
+            menu:
+                "Implementing a priority queue":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Heaps are commonly used to implement priority queues."
+                "Fast exact string matching":
+                    a "Incorrect. That's typically done with specialized string algorithms."
+                "Hash-based unique storage":
+                    a "Incorrect. Hash tables handle unique key storage better."
+
+        elif current_q == "q8":
+            a "What happens to the heap after extracting the root?"
+            menu:
+                "Replace root with last element then sift-down":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! That restores heap order after removal."
+                "Replace root with a random element":
+                    a "Incorrect. A random replacement would break heap order."
+                "Do nothing; heap stays valid":
+                    a "Incorrect. Removing the root requires rebalancing."
+
+        elif current_q == "q9":
+            a "Which heap variant always keeps the smallest element at the root?"
+            menu:
+                "Min-heap":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Min-heaps have the minimum at the root."
+                "Max-heap":
+                    a "Incorrect. Max-heaps keep the largest element at the root."
+                "Median-heap":
+                    a "Incorrect. Median-heap is not a standard single-heap variant."
+
+        elif current_q == "q10":
+            a "What is the space complexity to store n elements in a binary heap?"
+            menu:
+                "O(n)":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Heaps stored in arrays require linear space."
+                "O(log n)":
+                    a "Incorrect. That's not enough to hold all elements."
+                "O(1)":
+                    a "Incorrect. Constant space cannot store n elements."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
-    play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_8_score]"
     jump chapter_8_performance
+init python:
+    import random
+    chapter_8_quiz_medium_order = [
+        "q1", "q2", "q3", "q4", "q5",
+        "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15"
+    ]
+    random.shuffle(chapter_8_quiz_medium_order)
 
 label chapter_8_quiz_medium:
+    $ chapter_8_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert medium quiz questions here)
+    a "This quiz will check your practical understanding of heaps and common heap operations."
+
+    while chapter_8_quiz_medium_order:
+        $ current_q = chapter_8_quiz_medium_order.pop(0)
+
+        if current_q == "q1":
+            a "Which heap operation restores heap property by moving a node up?"
+            menu:
+                "Sift-up (bubble-up)":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Sift-up moves a node upward until the heap property is restored."
+                "Sift-down (bubble-down)":
+                    a "Incorrect. Sift-down moves a node down."
+                "Heapify-down":
+                    a "Incorrect. Not the usual name for moving a node up."
+
+        elif current_q == "q2":
+            a "What is the time complexity to remove the root from a binary heap containing n elements?"
+            menu:
+                "O(1)":
+                    a "Incorrect. Removal requires reheapifying."
+                "O(log n)":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Removing root uses sift-down, which is logarithmic."
+                "O(n)":
+                    a "Incorrect. Only worst-case repeated operations would be O(n)."
+
+        elif current_q == "q3":
+            a "Which of these is true about heap sort using a binary heap?"
+            menu:
+                "It is unstable and runs in O(n log n)":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Heap sort is typically unstable and O(n log n)."
+                "It uses O(1) extra space and is stable":
+                    a "Incorrect. Heap sort is not stable in its usual form."
+                "It runs in O(n^2) on average":
+                    a "Incorrect. Average time is O(n log n)."
+
+        elif current_q == "q4":
+            a "When building a heap from an unsorted array using bottom-up heapify, what is the first index you start sifting from (0-based)?"
+            menu:
+                "n//2 - 1":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Start sifting from the last non-leaf node at index n//2 - 1."
+                "0":
+                    a "Incorrect. Starting at 0 would be too early for bottom-up heapify."
+                "n - 1":
+                    a "Incorrect. n - 1 is the last leaf."
+
+        elif current_q == "q5":
+            a "Which of these best describes a binary heap?"
+            menu:
+                "A complete binary tree that satisfies the heap-order property":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Heaps are complete and satisfy parent-child order constraints."
+                "A balanced binary search tree":
+                    a "Incorrect. Heaps are not BSTs and do not support ordered search."
+                "A linked list of sorted elements":
+                    a "Incorrect. Heaps are tree-based structures."
+
+        elif current_q == "q6":
+            a "If you use a 1-based array for a heap, what is the parent index of node at i?"
+            menu:
+                "i // 2":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! In 1-based indexing parent is at i // 2."
+                "2*i + 1":
+                    a "Incorrect. That formula is for left child in 0-based indexing."
+                "i - 1":
+                    a "Incorrect. That's not the parent formula."
+
+        elif current_q == "q7":
+            a "Which heap variant supports finding the median efficiently when combined (two heaps)?"
+            menu:
+                "A max-heap for lower half and a min-heap for upper half":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Two heaps (max + min) let you maintain the median online."
+                "A Fibonacci heap alone":
+                    a "Incorrect. Fibonacci heaps are for different amortized costs."
+                "A binomial heap for both halves":
+                    a "Incorrect. Binomial heaps don't give that median trick directly."
+
+        elif current_q == "q8":
+            a "What is a common use-case for a min-heap?"
+            menu:
+                "Dijkstra's priority queue for shortest paths":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Min-heaps are commonly used as PQs in Dijkstra's algorithm."
+                "Maintaining LRU caches":
+                    a "Incorrect. LRU caches use linked lists and hash maps."
+                "Fast substring search":
+                    a "Incorrect. That's unrelated."
+
+        elif current_q == "q9":
+            a "How do you convert a max-heap to a min-heap most efficiently for an array of size n?"
+            menu:
+                "Build a new heap using bottom-up heapify on negated keys":
+                    a "Incorrect. Negation trick works but building directly is better described below."
+                "Run bottom-up heapify to build a min-heap from the array":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Rebuild with bottom-up heapify in O(n)."
+                "Insert all elements one-by-one into a min-heap":
+                    a "Incorrect. That costs O(n log n)."
+
+        elif current_q == "q10":
+            a "What happens to the complexity of heap operations if the heap becomes very skewed (not complete)?"
+            menu:
+                "Operations may degrade toward O(n) because height increases":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! If completeness is lost, height can grow and operations slow."
+                "Operations stay O(1)":
+                    a "Incorrect. They are not constant time."
+                "Operations become O(log log n)":
+                    a "Incorrect. There's no general log-log improvement."
+
+        elif current_q == "q11":
+            a "Which of these statements about Fibonacci heaps is true?"
+            menu:
+                "They have better amortized decrease-key than binary heaps":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Fibonacci heaps have better amortized decrease-key complexities."
+                "They are always faster in practice for all operations":
+                    a "Incorrect. High constant factors often make them slower in practice."
+                "They require elements to be unique integers":
+                    a "Incorrect. They work with generic keys."
+
+        elif current_q == "q12":
+            a "When performing extract-max on a max-heap, which two steps are required after removing the root?"
+            menu:
+                "Replace root with last element, then sift-down":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Replacement and sift-down restore the heap property."
+                "Swap root with left child, then pop left child":
+                    a "Incorrect. That doesn't correctly restore heap structure."
+                "Sort the array and return the last element":
+                    a "Incorrect. Sorting is unnecessary and inefficient."
+
+        elif current_q == "q13":
+            a "Which operation is typically more expensive in a binary heap than in a balanced BST?"
+            menu:
+                "Searching for an arbitrary key":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Heaps don't support fast arbitrary-key search; BSTs do."
+                "Finding min or max by priority":
+                    a "Incorrect. Heaps are optimized for min/max access."
+                "Insertion by priority":
+                    a "Incorrect. Both support logarithmic insertion."
+
+        elif current_q == "q14":
+            a "Which is a valid optimization to reduce memory churn when repeatedly inserting and removing in an array-backed heap?"
+            menu:
+                "Preallocate capacity and reuse the array":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! Preallocating avoids frequent reallocations."
+                "Convert array to linked list for faster removes":
+                    a "Incorrect. Linked lists worsen random access costs."
+                "Always rebuild heap from scratch after each remove":
+                    a "Incorrect. That is inefficient."
+
+        elif current_q == "q15":
+            a "Why might one choose a pairing heap or Fibonacci heap for a priority queue in graphs?"
+            menu:
+                "Because decrease-key operations are frequent and these heaps are efficient for them":  # Correct
+                    $ chapter_8_score += 1
+                    a "Correct! These heaps have better amortized decrease-key, useful in many graph algorithms."
+                "Because they use less memory than binary heaps":
+                    a "Incorrect. They often use more memory or pointers."
+                "Because they guarantee worst-case O(1) extract-min":
+                    a "Incorrect. Worst-case bounds differ; amortized bounds are the advantage."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_8_score]"
     jump chapter_8_performance
 
+init python:
+    import random
+    chapter_8_quiz_hard_order = [
+        "q1", "q2", "q3", "q4", "q5",
+        "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15",
+        "q16", "q17", "q18", "q19", "q20"
+    ]
+    random.shuffle(chapter_8_quiz_hard_order)
+
 label chapter_8_quiz_hard:
+    $ chapter_8_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert hard quiz questions here)
+    a "Ready for a thorough challenge. These questions dig into implementation details, complexities, and trade-offs for heaps."
+
+    while chapter_8_quiz_hard_order:
+        $ current_q = chapter_8_quiz_hard_order.pop(0)
+
+        if current_q == "q1":
+            a "Which heap operation has amortized O(1) complexity in a Fibonacci heap but O(log n) in a binary heap?"
+            menu:
+                "Decrease-key":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! Fibonacci heaps give amortized O(1) decrease-key."
+                "Extract-min":
+                    a "Incorrect. Extract-min is O(log n) amortized in Fibonacci heaps."
+                "Insert":
+                    a "Incorrect. Insert is O(1) in both structures."
+
+        elif current_q == "q2":
+            a "When using 0-based array indexing for a binary heap, which formula gives the parent index of node i?"
+            menu:
+                "i // 2":
+                    a "Incorrect. That's for 1-based indexing."
+                "2*i + 1":
+                    a "Incorrect. That's the left child formula."
+                "(i - 1) // 2":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Parent of i in 0-based arrays is (i - 1) // 2."
+
+        elif current_q == "q3":
+            a "What is the worst-case time complexity of delete arbitrary element (given pointer/index) in a binary heap of size n?"
+            menu:
+                "O(1)":
+                    a "Incorrect. Removing requires reheapifying."
+                "O(log n)":  # Correct (bottom)
+                    $ chapter_8_score += 1
+                    a "Correct! Replace with last element then sift-up or sift-down, O(log n)."
+
+        elif current_q == "q4":
+            a "Which heap variant provides good practical performance with simpler implementation than Fibonacci heaps for decrease-key heavy workloads?"
+            menu:
+                "Pairing heap":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! Pairing heaps often give good practical decrease-key performance."
+                "Binary heap":
+                    a "Incorrect. Binary heaps have worse amortized decrease-key."
+                "D-ary heap":
+                    a "Incorrect. D-ary heaps can help some ops but pairing heaps are known for practice."
+
+        elif current_q == "q5":
+            a "If a binary heap is not maintained as a complete tree, what property most directly breaks?"
+            menu:
+                "Heap-order property":
+                    a "Incorrect. Heap-order could still hold locally."
+                "Complete tree shape":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Heaps rely on the complete binary tree shape for array representation and bounds."
+                "Binary-search property":
+                    a "Incorrect. Heap is not a BST to begin with."
+
+        elif current_q == "q6":
+            a "What is the tight time complexity to build a heap from n elements using bottom-up heapify?"
+            menu:
+                "O(n log n)":
+                    a "Incorrect. That’s for repeated insertions."
+                "O(n)":  # Correct (bottom)
+                    $ chapter_8_score += 1
+                    a "Correct! Bottom-up heapify runs in linear time."
+                "O(log n)":
+                    a "Incorrect. Building the heap is more expensive than a single log factor."
+
+        elif current_q == "q7":
+            a "Which of these is a reason to choose a d-ary heap (d>2) over a binary heap?"
+            menu:
+                "Smaller height yields fewer decrease-key steps at cost of slower sift-down":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! Increasing d reduces height but increases branching cost for sift-down."
+                "It makes decrease-key asymptotically O(1)":
+                    a "Incorrect. Decrease-key remains logarithmic in height, though constants change."
+                "It uses less memory":
+                    a "Incorrect. Memory is still O(n), pointer/array layout differs."
+
+        elif current_q == "q8":
+            a "Which of the following is true about heap sort implemented with an in-place binary heap?"
+            menu:
+                "It is stable and uses O(1) extra space":
+                    a "Incorrect. Heap sort is not stable in its usual form."
+                "It uses O(n) extra space and is stable":
+                    a "Incorrect. Standard in-place heap sort uses O(1) extra space."
+                "It is in-place and runs in O(n log n) time":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Standard heap sort is in-place and O(n log n)."
+
+        elif current_q == "q9":
+            a "What is the main disadvantage of using binary heaps for implementing a priority queue in Dijkstra's algorithm?"
+            menu:
+                "Insert operations are too slow":
+                    a "Incorrect. Insert is O(log n) and acceptable."
+                "Decrease-key operations are O(log n) rather than better amortized bounds":  # Correct (bottom)
+                    $ chapter_8_score += 1
+                    a "Correct! Decrease-key drives the asymptotic cost; Fibonacci heaps improve that amortized."
+                "Extract-min is O(1) in binary heap":
+                    a "Incorrect. Extract-min is O(log n)."
+
+        elif current_q == "q10":
+            a "Which approach preserves the heap property after removing the root in an array-backed heap?"
+            menu:
+                "Swap root with last element, remove last, then sift-down":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! This restores heap-order efficiently."
+                "Replace root with null and leave a hole":
+                    a "Incorrect. Leaving a hole breaks completeness and ordering."
+                "Swap root with second element, then sift-up":
+                    a "Incorrect. That doesn't correctly restore the heap."
+
+        elif current_q == "q11":
+            a "In a concurrent environment, which issue is most critical when multiple threads operate on a shared array-backed heap?"
+            menu:
+                "Hash collisions":
+                    a "Incorrect. Hash collisions are irrelevant to heaps."
+                "Indexing arithmetic":
+                    a "Incorrect. Index math is simple; concurrency is the real issue."
+                "Race conditions causing corrupt heap structure":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Concurrent modifications can violate completeness or heap-order without synchronization."
+
+        elif current_q == "q12":
+            a "Which of the following best describes the space complexity of storing a binary heap plus an auxiliary index map for fast arbitrary deletions?"
+            menu:
+                "O(1)":
+                    a "Incorrect. Additional map adds storage."
+                "O(n) extra space for the map":  # Correct (bottom)
+                    $ chapter_8_score += 1
+                    a "Correct! An index map requires O(n) extra space."
+                "O(log n) extra space":
+                    a "Incorrect. Map storage is linear in number of elements."
+
+        elif current_q == "q13":
+            a "Why might you use a tombstone (deleted sentinel) rather than removing and compacting immediately in some heap implementations?"
+            menu:
+                "To reduce memory usage immediately":
+                    a "Incorrect. Tombstones use space temporarily."
+                "To preserve probe/relink invariants in alternative addressing schemes":
+                    a "Incorrect. That reason applies to hash tables, not heaps."
+                "To avoid expensive immediate reheapify cost when lazy deletions are acceptable":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! Lazy deletion defers work, useful when deletions are many and amortization helps."
+
+        elif current_q == "q14":
+            a "What effect does increasing the branching factor d have on the asymptotic height of a d-ary heap storing n elements?"
+            menu:
+                "Height becomes O(log_d n) which decreases as d increases":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Height decreases with larger d, since log base d is smaller."
+                "Height becomes O(d log n) increasing linearly with d":
+                    a "Incorrect. Height depends on branching, not multiplicative with d."
+                "Height is unaffected by d":
+                    a "Incorrect. Branching factor directly changes height."
+
+        elif current_q == "q15":
+            a "Which of the following is a true statement about implicit (array) vs explicit (pointer-based) heap representations?"
+            menu:
+                "Array-backed heaps use less per-node overhead and better cache locality":  # Correct (bottom)
+                    $ chapter_8_score += 1
+                    a "Correct! Arrays avoid pointers and often have better locality."
+                "Pointer-based heaps always use less memory than arrays":
+                    a "Incorrect. Pointers typically add overhead."
+                "Arrays make decrease-key O(1) automatically":
+                    a "Incorrect. Decrease-key costs depend on position and structure."
+
+        elif current_q == "q16":
+            a "Which algorithmic trick yields O(n) worst-case build-heap from an array?"
+            menu:
+                "Repeatedly insert elements into an initially empty heap":
+                    a "Incorrect. That is O(n log n)."
+                "Bottom-up heapify starting from last non-leaf node":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! Bottom-up heapify achieves linear time."
+                "Sorting then taking middle elements":
+                    a "Incorrect. Sorting is O(n log n)."
+
+        elif current_q == "q17":
+            a "If you want faster extract-min at the cost of slower insert, which heap parameter or variant might you adjust?"
+            menu:
+                "Use a thinner heap with smaller branching factor":
+                    a "Incorrect. Smaller branching increases height and extract cost."
+                "Use a larger branching factor (d-ary with bigger d) to reduce height":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Larger d lowers height and can speed extract at cost of slower sift-up/insert."
+                "Switch to binary search tree":
+                    a "Incorrect. BSTs have different trade-offs for ordered operations."
+
+        elif current_q == "q18":
+            a "Which statement about pairing heaps is accurate in practical implementations?"
+            menu:
+                "They are simple to implement and often fast in practice for decrease-key":  # Correct (bottom)
+                    $ chapter_8_score += 1
+                    a "Correct! Pairing heaps are simple and perform well heuristically."
+                "They guarantee better worst-case bounds than Fibonacci heaps":
+                    a "Incorrect. Worst-case bounds are not strictly better."
+                "They have worse amortized insert than binary heaps":
+                    a "Incorrect. Inserts are typically O(1) amortized."
+
+        elif current_q == "q19":
+            a "When merging two heaps, which heap type offers the most efficient merge operation asymptotically?"
+            menu:
+                "Binary heap":
+                    a "Incorrect. Binary heaps do not merge efficiently."
+                "Fibonacci heap or binomial heap":  # Correct (top)
+                    $ chapter_8_score += 1
+                    a "Correct! Fibonacci and binomial heaps support efficient meld/merge operations."
+                "Array-backed fixed-size heap":
+                    a "Incorrect. Fixed arrays do not support efficient melds."
+
+        elif current_q == "q20":
+            a "Which metric best predicts when to reallocate the underlying array of an array-backed heap to reduce amortized cost?"
+            menu:
+                "Current load factor of the heap array relative to capacity":  # Correct (middle)
+                    $ chapter_8_score += 1
+                    a "Correct! Resize when size approaches capacity thresholds to amortize reallocations."
+                "Average value of keys":
+                    a "Incorrect. Key values don't dictate resizing."
+                "Number of sift operations performed so far":
+                    a "Incorrect. That doesn't directly indicate capacity needs."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
-    a "Great job!"
+    a "Your quiz score is: [chapter_8_score]"
     jump chapter_8_performance
 
 label chapter_8_performance:
