@@ -1,42 +1,57 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "renpy/common/00start.rpy", line 216, in script call
-    call _load_reload_game from _call__load_reload_game_1
-  File "renpy/common/00keymap.rpy", line 551, in script
-    python hide:
-  File "renpy/common/00keymap.rpy", line 551, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 562, in _execute_python_hide
-    renpy.load(renpy.session["_reload_slot"])
-AttributeError: Can't get attribute 'sift_down' on <renpy.python.StoreModule object at 0x0000000004067ca0>
+While processing the padding property of anonymous style:
+  File "game/chapters/chapter_11.rpy", line 884, in script
+    a "It did this by always choosing the next step that looked most promising—balancing what it knows and what it predicts."
+TypeError: 'int' object is not subscriptable
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00start.rpy", line 216, in script call
-    call _load_reload_game from _call__load_reload_game_1
-  File "renpy/common/00keymap.rpy", line 551, in script
-    python hide:
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 821, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\python.py", line 1178, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00keymap.rpy", line 551, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 562, in _execute_python_hide
-    renpy.load(renpy.session["_reload_slot"])
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\loadsave.py", line 828, in load
-    roots, log = loads(log_data)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\compat\pickle.py", line 104, in loads
-    return load(io.BytesIO(s))
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\compat\pickle.py", line 101, in load
-    return up.load()
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\compat\pickle.py", line 97, in find_class
-    return super().find_class(module, name)
-AttributeError: Can't get attribute 'sift_down' on <renpy.python.StoreModule object at 0x0000000004067ca0>
+  File "game/chapters/chapter_11.rpy", line 884, in script
+    a "It did this by always choosing the next step that looked most promising—balancing what it knows and what it predicts."
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 2572, in execute
+    Say.execute(self)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 615, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\exports\sayexports.py", line 132, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1451, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 1102, in do_display
+    display_say(who,
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\character.py", line 799, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ui.py", line 301, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2188, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\core.py", line 2705, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\screen.py", line 485, in visit_all
+    self.child.visit_all(callback, seen=None)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\displayable.py", line 424, in visit_all
+    for d in self.visit():
+  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\display\layout.py", line 1373, in visit
+    self.style._visit_window(rv.append)
+  File "style.pyx", line 541, in renpy.style.StyleCore._visit_window
+  File "style.pyx", line 528, in renpy.style.StyleCore._get_unoffset
+  File "style.pyx", line 493, in renpy.style.StyleCore._get
+  File "style.pyx", line 717, in renpy.style.build_style
+  File "style.pyx", line 714, in renpy.style.build_style
+  File "gen3-static/style_functions.pyx", line 1573, in style_functions.padding_property
+  File "include/style_common.pxi", line 30, in style_functions.index_0
+TypeError: 'int' object is not subscriptable
 
 Windows-10-10.0.26200 AMD64
 Ren'Py 8.3.0.24082114
 Interactive Learning : DataStructures And Algorithms 1.0
-Sun Oct 26 15:50:23 2025
+Fri Oct 31 14:35:55 2025

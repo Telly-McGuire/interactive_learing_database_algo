@@ -2,9 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/chapters/chapter_8.rpy", line 887: 'chapter_8_heap_sort_index' is not a keyword argument or valid child of the textbutton statement.
-    textbutton "Prev" action Return("prev")  chapter_8_heap_sort_index <= 0
-                                                                      ^
+The label chapter_11_A_Star is defined twice, at File "game/chapters/chapter_11.rpy", line 865:
+label chapter_11_A_Star:
+and File "game/chapters/chapter_11.rpy", line 904:
+label chapter_11_A_Star:
+
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Sun Oct 26 15:39:06 2025
+Fri Oct 31 14:33:48 2025

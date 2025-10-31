@@ -131,6 +131,11 @@ label hideall:
     hide screen chapter_9_collision_display
     hide screen chapter_9_resizing_display
 
+    hide screen chapter_10_GAintro
+
+    hide screen chapter_11_Algointro
+    hide screen chapter_11_astar_result
+
     hide screen graph_info
     hide screen graph_info
 

@@ -77,7 +77,7 @@ label chapter_8_intro:
     menu:
         "Yes":
             a "Ew. Ok"
-        "No"
+        "No":
             show adrian smiling
             a "Yeah me too, its exhausting" 
 
@@ -679,9 +679,8 @@ label chapter_8_Remove_Operation:
     with move
     show screen chapter_8_remove_demo_0
     a "Let’s make removing the root from a heap feel like a tiny action movie — step-by-step and visual."
-    a "We’ll remove the root from this max-heap and watch how the structure repairs itself to keep the largest value at the top."
 
-    a "Step 0 — Here’s our starting heap. The root is 60, the largest value."
+    a "Step 0  Here’s our starting heap. The root is 60, the largest value."
     a "We’ll remove it and prepare to rebuild the heap."
     hide screen chapter_8_remove_demo_0
     

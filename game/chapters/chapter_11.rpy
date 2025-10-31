@@ -15,8 +15,19 @@ default chapter_11_Web_Crawlers_quiz = 0
 default chapter_11_DFS_quiz = 0
 default chapter_11_Uniform_Cost_quiz = 0
 default chapter_11_A_Star_quiz = 0
-default chapter_11_Iterative_Deepening_quiz = 0
-default chapter_11_Memory_Management_quiz = 0
+
+
+screen chapter_11_Algointro:  
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xpadding 200
+        ypadding 60
+        vbox:
+            spacing 20
+            xalign 0.5
+            yalign 0.5
+            text "Algorithms" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 label chapter_11_intro:
 
@@ -27,10 +38,10 @@ label chapter_11_intro:
     scene black
     pause 1.0
 
-    show screen chapter_
+    show screen chapter_11_Algointro
     scene mt tree with dissolve
     pause 2.0
-    hide screen chapter_
+    hide screen chapter_11_Algointro
 
     show screen menu_btn
 
@@ -38,6 +49,26 @@ label chapter_11_intro:
     show adrian smiling at center:
         smaller
     with dissolve
+    if persistent.chapter_11 == True:
+        a "Welcome Back to Chapter 11!"
+        a "Would you like to go over this chapter again?"
+        menu: 
+            "Yes":
+                a "Pick a topic"
+                menu:
+                    "Breadth First Search":
+                        jump chapter_11_BFS
+                    "Web Crawlers":
+                        jump chapter_11_Web_Crawlers
+                    "Depth First Search":
+                        jump chapter_11_DFS
+                    "Uniform Cost":
+                        jump chapter_11_Uniform_Cost
+                    "A* Star Algorithm":
+                        jump chapter_11_A_Star
+            "No":
+                jump menu
+
 
     a "Welcome to Chapter 11: Graph Traversal Algorithms!"
     show adrian sad
@@ -67,7 +98,7 @@ label chapter_11_intro:
     a "..."
     "You got honey?"
     a "Cuz you're a bear? {nw}"
-    "No cuz I'm a monkey"
+    "{cps=50}No cuz I'm a monkey{nw}"
     "{size=+30 }YES BECAUSE I'M A BEAR"
     "Plus my kids are hungry and I'm hungry and I'm very sleepy"
     "And not to mention my wife is mad at me"
@@ -90,21 +121,70 @@ label chapter_11_intro:
 
     jump chapter_11_BFS
 label chapter_11_BFS:
+    image maze1 = "assets/maze_1.png"
 
-    a "First up in graph traversal algorithms is {b}Breadth-First Search (BFS){/b}."
-    a "BFS explores a graph level by level, starting from a chosen node and visiting all its neighbors before moving deeper."
+    image maze5 = "assets/maze_5.png"
+    image maze6 = "assets/maze_6.png"
+    image maze7 = "assets/maze_7.png"
 
-    a "It uses a {b}queue{/b} to keep track of which nodes to visit next, ensuring that the closest nodes are processed first."
-    a "This makes BFS ideal for finding the shortest path in unweighted graphs, or for exploring all reachable nodes from a starting point."
+    
+    a "So..."
+    a "Breadth-First Search."
+    show adrian explaining at left
+    with move
 
-    a "BFS is commonly used in social networks, recommendation systems, and even puzzle solvers like mazes or word ladders."
+    show maze1 at right:
+        matrices
+    with dissolve
+    a "Imagine you are in a maze."
+    
+    show adrian confused
+    a "How would you find the exit?"
+    show adrian explaining
+    a "You can come up with many Strategies"
+    a "In this case Algorithms"
+    hide maze1
+    a "{b}{size=+30}Breadth First"
+    
+    show maze5 at right:
+        matrices
+    with dissolve 
+    a "It visits nodes level by level, always expanding the oldest queued node next."
+    a "Notice how the queue contains the frontier and how visited prevents repeats."
+    a "It checks all possible way it can go to the end"
+    hide maze5
+    
+    show maze6 at right:
+        matrices
+    with dissolve
 
-    a "Understanding how BFS works helps you design algorithms that are both efficient and predictable in their exploration."
+    a "And when it finally reaches the destination"
+    a "And when every possible way has been exhausted"
+    hide maze6
 
-    $ chapter_11_progress += 1
+    show maze7 at right:
+        matrices
+    with dissolve
+    play sound "sfx/explode.mp3"
+
+
+    a "{b}{cps=3}{size=+50}BAM!"
+    show adrian smiling
+    a "It shows the path most efficient path"
+    a "That is basically what Breadth First Means"
+    a "Checking {b}all possible paths{/b} until it finds the most efficient path"
+    hide maze7
+    with dissolve
+    show adrian at center
+    with move
+    a "Its pretty intersting no?"
+
+    $ chapter_10_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
-    a "Let's check your understanding with a quick quiz!"
+    a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+
+    $ chapter_11_progress += 1
     jump chapter_11_BFS_Quiz
 
 init python:
@@ -189,21 +269,90 @@ label chapter_11_BFS_Quiz:
     jump chapter_11_Web_Crawlers
 
 label chapter_11_Web_Crawlers:
+    image website1 = "assets/website_1.png"
+
+    show adrian smiling
+    play sound "sfx/ting.mp3"
 
     a "Next, let’s explore a real-world application of Breadth-First Search: {b}web crawlers{/b}."
-    a "Web crawlers are automated programs that browse the internet to collect and index information from websites."
+    show adrian smiling at left 
+    with move
+    show website1 at right:
+        gmap
+    with dissolve
+    a "Think of a crawler as a little explorer bot that hops from page to page, collecting what it finds."
+    a "Whatever information you want it to collect"
 
-    a "They use BFS to systematically explore web pages—starting from a seed URL, then visiting all the links on that page before moving deeper into the web."
-    a "This level-by-level approach ensures that the crawler doesn’t get stuck going too deep into one site while ignoring others."
+    show adrian explaining
+    with dissolve
+    a "{cps=30}Instead of wandering randomly, crawlers use strategies, {b}often BFS{/b}, to make sure they discover the most important pages quickly."
+    hide website1 
+    with dissolve
+    show adrian smiling at center 
+    with move
+    a "for example"
+    # Simulate a lively crawl with dynamic feedback
+    $ seeds = [
+        "https://www.reddit.com",
+        "https://twitter.com",
+        "https://www.fbi.govservices",
+        "https://op-proper.gov.ph"
+    ]
+    $ discovered = []
 
-    a "Search engines like Google use web crawlers to build massive indexes of the internet, making it possible to retrieve relevant results in milliseconds."
+    a "{cps=40}Booting crawler..."
+    play sound "sfx/start.mp3"
+    pause 0.6
 
-    a "BFS helps ensure that the most accessible and widely linked pages are discovered early, which is crucial for keeping search results fresh and comprehensive."
+    while seeds:
+        $ current = seeds.pop(0)
+        a "{cps=40}Visiting [current]..."
+        play sound "sfx/bell.mp3"
+        pause 0.5
+
+        a "{cps=30}Scanning links on [current]..."
+        pause 0.4
+
+        # pretend we found a few links (dynamic flavor text)
+        $ found = [current + "/about", current + "/products", current + "/contact"]
+        $ discovered.extend(found)
+
+        a "Found: [found[0]], [found[1]], [found[2]]"
+        pause 0.4
+
+        # show a quick visual flourish
+        show adrian shock
+        with vpunch
+        pause 0.25
+        show adrian explaining
+        with dissolve
+
+    a "{cps=30}That was a shallow sweep. You discovered [len(discovered)] pages across several domains."
+
+    menu:
+        "Keep it shallow — explore broad, many domains (BFS)":
+            a "Good call. BFS helps discover widely-linked, high-value pages early."
+            $ strategy = "bfs"
+            $ bonus = 6
+        "Go deep into one site (DFS style)":
+            a "You dig deep into one domain to find hidden details — fewer domains but deeper coverage."
+            $ strategy = "dfs"
+            $ bonus = 2
+        "Use a smart hybrid (prioritize popular then deep-dive)":
+            a "You mix approaches: breadth first to build an index, then focused depth for detail."
+            $ strategy = "hybrid"
+            $ bonus = 10
+
+    show adrian smiling
+    with dissolve
+    play sound "sfx/bell.mp3"
+    a "{cps=40}Your crawler strategy: [strategy]. Estimated pages discovered: [len(discovered) + bonus]."
+    a "That what web crawlers are basically"
 
     $ chapter_11_progress += 1
-    show adrian smiling
+    show adrian happy
     play sound "sfx/bell.mp3"
-    a "Quiz time: Web crawlers!"
+    a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     jump chapter_11_Web_Crawlers_Quiz
 
 init python:
@@ -289,22 +438,54 @@ label chapter_11_Web_Crawlers_Quiz:
 
 label chapter_11_DFS:
 
-    a "Now, let’s explore another powerful graph traversal algorithm: {b}Depth-First Search (DFS){/b}."
-    a "Unlike BFS, which explores level by level, DFS dives deep into each branch before backtracking."
+    image maze2 = "assets/maze_2.png"
+    image maze4 = "assets/maze_4.png"
+    image maze4a = "assets/maze_4a.png"
 
+    show adrian smiling
+    a "Now, let’s explore {b}Depth-First Search (DFS){/b}."
+    
+    show adrian at left
+    with move
+    show maze1 at right:
+        matrices
+    with dissolve
+    a "Lets go back to the maze"
+    a "Unlike BFS, which explores level by level, DFS dives deep into each branch before backtracking."
+    hide maze1
+
+    show maze2 at right:
+        matrices
+    with dissolve
     a "DFS starts at a chosen node and explores as far as it can go along one path, only returning when it hits a dead end."
     a "It uses a {b}stack{/b}—either explicitly or through recursion—to keep track of the path it’s following."
+    a "It goes as deep as it can and then ones it finally finds the path"
+    hide maze2
 
-    a "This makes DFS ideal for tasks like detecting cycles, solving puzzles, and exploring all possible paths in a maze or game tree."
+    show maze4 at right:
+        matrices
+    with dissolve
+    a "Since it has found the path as deep as it can"
+    hide maze4
+
+    show maze4a at right:
+        matrices
+    with dissolve
+    a "It connects!"
 
     a "DFS is also useful in topological sorting, connected component analysis, and many other graph-based algorithms."
+    a "Remember, it dives deep in first, then backtracks until it finds the path"
+    hide maze4a
+    with dissolve
 
-    a "Understanding how DFS works helps you build algorithms that are thorough and flexible in their exploration."
+    show adrian smiling at center
+    a "Thats the basic gist of it"
+    a "Unlike {b}Breadth First{/b} which checks every path, {b}Depth First{/b} goes as deep as it can"
 
     $ chapter_11_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
-    a "Quiz time: DFS!"
+    a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     jump chapter_11_DFS_Quiz
 
 init python:
@@ -389,22 +570,203 @@ label chapter_11_DFS_Quiz:
     jump chapter_11_Uniform_Cost
 label chapter_11_Uniform_Cost:
 
+    show adrian smiling
+    play sound "sfx/ting.mp3"
     a "Let’s take Breadth-First Search one step further with {b}Uniform Cost Search (UCS){/b}."
-    a "UCS is a variant of BFS that takes {b}edge costs{/b} into account, making it ideal for weighted graphs."
+    a "UCS accounts for {b}edge costs{/b} and always expands the path with the {i}lowest cumulative cost{/i}."
+    
+    a "Alright, picture this: you're trying to get to school, but there are multiple routes you could take."
+    a "One path is {i}short but full of traffic{/i}. Another is {i}longer but smooth and fast{/i}. A third has {i}potholes and slow zones{/i}."
+    a "{b}Uniform Cost Search{/b} is like a smart GPS. It doesn’t just look at distance — it looks at the {b}total cost{/b} of each route."
+    a "That cost could be {i}time, effort, or even fuel{/i}. UCS always picks the path with the {b}lowest total cost so far{/b}."
+    a "Instead of rushing ahead, it carefully expands the {i}cheapest option first{/i} — even if that means taking a longer route that’s easier overall."
 
-    a "Instead of exploring nodes in simple layers, UCS uses a {b}priority queue{/b} to always expand the node with the {i}lowest total cost{/i} from the starting point."
-    a "This means it doesn’t just look for the shortest path in terms of steps—it looks for the {b}cheapest path{/b} based on actual weights."
+    a "To take the most efficient path, you pick the one with the least cost"
+    show adrian explaining at center
+    with move
 
-    a "UCS guarantees finding the optimal path as long as all edge costs are non-negative."
-    a "It’s commonly used in routing systems, logistics planning, and any scenario where cost matters more than distance."
+    a "Okay — let's try an interactive demo. Pick a start and a goal node and I'll walk you through UCS step-by-step."
 
-    a "Understanding UCS helps you design smarter algorithms for real-world problems that involve trade-offs and weighted decisions."
+    # Choose start and goal
+    menu:
+        "Start at S":
+            $ start_node = "S"
+        "Start at A":
+            $ start_node = "A"
+        "Start at B":
+            $ start_node = "B"
+
+    menu:
+        "Goal is G":
+            $ goal_node = "G"
+        "Goal is B":
+            $ goal_node = "B"
+        "Goal is A":
+            $ goal_node = "A"
+
+    # Define a small weighted graph for the demo
+    python:
+        import heapq
+
+        graph = {
+            "S": [("A", 2), ("B", 5)],
+            "A": [("B", 2), ("G", 7)],
+            "B": [("G", 1)],
+            "G": []
+        }
+
+        def uniform_cost_search(graph, start, goal):
+            # frontier is a min-heap of (cost, node, path)
+            frontier = []
+            heapq.heappush(frontier, (0, start, [start]))
+            explored_cost = {}  # best known cost to each node
+            steps = []  # snapshots for interactive stepping
+
+            while frontier:
+                # snapshot of frontier before pop
+                frontier_snapshot = sorted([(c, n, list(p)) for (c, n, p) in frontier])
+                cost, node, path = heapq.heappop(frontier)
+
+                steps.append({
+                    "popped": (node, cost, list(path)),
+                    "frontier": frontier_snapshot
+                })
+
+                if node == goal:
+                    return steps, (path, cost)
+
+                # If we've already seen a cheaper path to node, skip
+                if node in explored_cost and explored_cost[node] < cost:
+                    continue
+
+                explored_cost[node] = cost
+
+                for (neighbor, w) in graph.get(node, []):
+                    new_cost = cost + w
+                    # If we haven't seen neighbor or found cheaper path, push
+                    if neighbor not in explored_cost or new_cost < explored_cost.get(neighbor, float("inf")):
+                        heapq.heappush(frontier, (new_cost, neighbor, path + [neighbor]))
+
+            return steps, (None, None)
+
+        demo_steps, result = uniform_cost_search(graph, start_node, goal_node)
+        demo_path, demo_cost = result
+
+    # If no path, tell user
+    if demo_path is None:
+        show adrian sad
+        play sound "sfx/fail.mp3"
+        a "Hmm — no path was found from [start_node] to [goal_node] in this demo graph."
+        a "Try a different start/goal combination."
+        jump chapter_11_Uniform_Cost
+
+    # Interactive stepping through computed snapshots
+    $ step_index = 0
+    while step_index < len(demo_steps):
+        $ snapshot = demo_steps[step_index]
+        $ popped_node, popped_cost, popped_path = snapshot["popped"]
+
+
+        a "{cps=30}Step [step_index + 1] — UCS pops node [popped_node] with cumulative cost [popped_cost]."
+        a "Current path to that node: [popped_path]"
+
+        # Short visual: show a relevant maze image on the right if available
+        # Replace image visuals with a textual info panel on the right (no images).
+        python:
+            if popped_node == "G":
+                status = "GOAL REACHED!\n"
+            else:
+                status = "EXPANDING NODE\n"
+
+            path_str = " -> ".join(popped_path)
+            visual_text = f"{status}Node: {popped_node}\nCost: {popped_cost}\nPath: {path_str}"
+    
+        show text visual_text:
+            xalign 0.8
+            yalign 0.4
+        menu:
+            "Next step":
+                $ step_index += 1
+            "Inspect priority queue":
+                # Show a quick representation of the frontier
+                python:
+                    items = snapshot["frontier"]
+                    # Format lines like "cost: node (path)"
+                    frontier_lines = []
+                    for c, n, p in items:
+                        frontier_lines.append("{:>3} : {} -> {}".format(c, n, "->".join(p)))
+                    ui_text = "\\n".join(frontier_lines) if frontier_lines else "Frontier is empty."
+                    renpy.call_in_new_context("chapter_11_show_queue", ui_text)
+            "Jump to solution":
+                $ step_index = len(demo_steps)
+
+    # After stepping, reveal the solution path and cost
+    show adrian happy
+    play sound "sfx/success.mp3"
+    a "{cps=30}Done stepping! UCS found this least-cost path:"
+    a "{b}[ ' -> '.join(demo_path) ]{/b} with total cost {b}[demo_cost]{/b}."
+
+    # Offer comparison: show what BFS would pick (by steps) ignoring weights
+    menu:
+        "Compare with BFS (ignoring weights)":
+            python:
+                from collections import deque
+                def bfs_path(graph, start, goal):
+                    q = deque([(start, [start])])
+                    visited = set([start])
+                    while q:
+                        node, path = q.popleft()
+                        if node == goal:
+                            return path
+                        for (nbr, _) in graph.get(node, []):
+                            if nbr not in visited:
+                                visited.add(nbr)
+                                q.append((nbr, path + [nbr]))
+                    return None
+                bfs_solution = bfs_path(graph, start_node, goal_node)
+            if bfs_solution:
+                a "BFS (unweighted) would return: [ ' -> '.join(bfs_solution) ]"
+            else:
+                a "BFS didn't find a path in this demo graph."
+
+        "Skip comparison":
+            pass
+
+    # Small interactive question to test understanding
+    menu:
+        "Why did UCS pick this path?":
+            a "Because it minimized cumulative cost across edges, not the number of steps."
+            $ ucs_explain = True
+        "How does the priority queue affect choices?":
+            a "The priority queue orders partial paths by total cost; the cheapest partial path is expanded first."
+            $ ucs_explain = True
+        "I'm good, continue":
+            $ ucs_explain = False
+
+    if ucs_explain:
+        show adrian explaining
+        with dissolve
+        a "Key idea: UCS is optimal with non-negative costs because it always expands the least-cost frontier entry."
+        a "If a cheaper path to a node appears later, UCS will still consider it because the queue orders by total path cost."
+    
 
     $ chapter_11_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
-    a "Quiz time: Uniform Cost Search!"
+    a "You hear that? Its time for some questions. Buckle Up Buckeroo"
+    hide text visual_text
     jump chapter_11_Uniform_Cost_Quiz
+
+# A small helper label used above to display queue contents without breaking the step loop.
+label chapter_11_show_queue(ui_text):
+    show adrian normal
+    a "{cps=30}Priority Queue (cost : node -> path):"
+    nvl clear
+    menu:
+        "OK":
+            pass
+    return
+
 init python:
     import random
     chapter_11_Uniform_Cost_order = [
@@ -488,26 +850,29 @@ label chapter_11_Uniform_Cost_Quiz:
 
 label chapter_11_A_Star:
 
-    a "Let’s wrap up our graph traversal toolkit with one of the most powerful algorithms: {b}A* Search{/b}."
-    a "A* combines the strengths of {b}Uniform Cost Search{/b} and {b}heuristics{/b} to find the shortest path efficiently."
+    a "Let’s talk about one of the smartest pathfinding algorithms out there: {b}A* Search{/b}."
 
-    a "It uses a priority queue to explore paths based on two factors:"
-    a "- The actual cost from the start node to the current node."
-    a "- An estimated cost from the current node to the goal, provided by a heuristic function."
+    a "A* is designed to find the shortest path from a starting point to a goal—quickly and efficiently."
 
-    a "This combination allows A* to make smart decisions about which paths to explore, often reaching the goal faster than other algorithms."
+    a "What makes it powerful is how it balances two things:"
+    a "• {b}g(n){/b} — the actual cost to reach a point"
+    a "• {b}h(n){/b} — a heuristic estimate of the cost to reach the goal from there"
 
-    a "A* is widely used in navigation systems, game AI, robotics, and any application where finding an optimal path matters."
+    a "By adding them together, we get {b}f(n) = g(n) + h(n){/b}, which represents the total estimated cost of a path through that point."
 
-    a "Its success depends on choosing a good heuristic—one that’s {i}admissible{/i} (never overestimates) and {i}consistent{/i} (respects triangle inequality)."
+    a "A* always chooses the path with the lowest {b}f(n){/b}, meaning it prefers paths that are both cheap so far and promising ahead."
 
-    a "Understanding A* helps you design intelligent systems that balance speed and accuracy in decision-making."
+    a "This makes A* both fast and accurate—it often finds the shortest route without wasting time exploring bad options."
+
+    a "It’s widely used in games, robotics, and navigation systems because of its reliability and efficiency."
 
     $ chapter_11_progress += 1
     show adrian smiling
     play sound "sfx/bell.mp3"
-    a "Quiz time: A* Search!"
+    a "Now that you know how A* works, let’s see what you’ve learned!"
     jump chapter_11_A_Star_Quiz
+
+
 init python:
     import random
     chapter_11_A_Star_order = [
@@ -587,137 +952,9 @@ label chapter_11_A_Star_Quiz:
     play sound "sfx/success.mp3"
     a "Great job!"
     a "Your score for this quiz is [chapter_11_A_Star_quiz] out of 5."
-    jump chapter_11_Iterative_Deepening
+    jump chapter_11_restart
 
-label chapter_11_Iterative_Deepening:
 
-    a "Let’s wrap up our exploration of search strategies with {b}Iterative Deepening Search (IDS){/b}."
-    a "IDS cleverly combines the {b}space efficiency{/b} of Depth-First Search with the {b}completeness{/b} of Breadth-First Search."
-
-    a "Here’s how it works:"
-    a "- It performs DFS repeatedly, but with a depth limit that increases each time."
-    a "- On each iteration, it explores the graph up to a certain depth, then starts over with a deeper limit."
-
-    a "This approach ensures that the algorithm doesn’t miss shallow solutions like DFS might, and it doesn’t consume as much memory as BFS."
-
-    a "Although it may seem repetitive, IDS is surprisingly efficient—especially when the branching factor is low and the solution is not too deep."
-
-    a "It’s often used in scenarios like game trees, puzzle solvers, and AI planning systems where memory is limited but completeness is essential."
-
-    $ chapter_11_progress += 1
-    show adrian smiling
-    play sound "sfx/bell.mp3"
-    a "Quiz time: Iterative Deepening!"
-    jump chapter_11_Iterative_Deepening_Quiz
-
-init python:
-    import random
-    chapter_11_Iterative_Deepening_order = [
-        "q1", "q2", "q3", "q4", "q5"
-    ]
-    random.shuffle(chapter_11_Iterative_Deepening_order)
-
-label chapter_11_Iterative_Deepening_Quiz:
-    #5POINTS
-    $ chapter_11_Iterative_Deepening_quiz = 0
-
-    stop music fadeout 0.5
-    play music "bgm/better-answer.mp3" fadein 1.0
-    show adrian normal
-
-    while chapter_11_Iterative_Deepening_order:
-        $ current_q = chapter_11_Iterative_Deepening_order.pop(0)
-
-        if current_q == "q1":
-            a "What does Iterative Deepening Search combine?"
-            menu:
-                "Depth-first and breadth-first strategies":  # Correct (top)
-                    $ chapter_11_Iterative_Deepening_quiz += 1
-                    a "Correct! IDS performs DFS repeatedly with increasing depth limits."
-                "Binary and linear search":
-                    a "Incorrect! Those are array-based search methods."
-                "Uniform cost and greedy search":
-                    a "Incorrect! Those are cost-based algorithms."
-
-        elif current_q == "q2":
-            a "Why is IDS memory-efficient?"
-            menu:
-                "It uses a queue to store all paths":
-                    a "Incorrect! That’s BFS behavior."
-                "It only stores a single path at a time":  # Correct (middle)
-                    $ chapter_11_Iterative_Deepening_quiz += 1
-                    a "Correct! Like DFS, it uses minimal memory."
-                "It compresses the graph before searching":
-                    a "Incorrect! IDS doesn’t alter the graph structure."
-
-        elif current_q == "q3":
-            a "What is the main drawback of IDS?"
-            menu:
-                "It uses too much memory":
-                    a "Incorrect! IDS is memory-efficient."
-                "It repeats searches at each depth level":  # Correct (middle)
-                    $ chapter_11_Iterative_Deepening_quiz += 1
-                    a "Correct! This redundancy increases runtime."
-                "It ignores goal nodes":
-                    a "Incorrect! IDS still checks for goals."
-
-        elif current_q == "q4":
-            a "What does IDS do when the depth limit is reached?"
-            menu:
-                "It switches to BFS":
-                    a "Incorrect! IDS continues with deeper DFS."
-                "It increases the limit and restarts the search":  # Correct (bottom)
-                    $ chapter_11_Iterative_Deepening_quiz += 1
-                    a "Correct! Each iteration explores one level deeper."
-                "It stops and returns failure":
-                    a "Incorrect! IDS is designed to retry with deeper limits."
-
-        elif current_q == "q5":
-            a "Which scenario is ideal for using IDS?"
-            menu:
-                "When memory is limited but completeness is required":  # Correct (top)
-                    $ chapter_11_Iterative_Deepening_quiz += 1
-                    a "Correct! IDS balances low memory use with guaranteed goal discovery."
-                "When the graph is weighted":
-                    a "Incorrect! IDS doesn’t handle weights."
-                "When the goal is always at the deepest level":
-                    a "Incorrect! IDS performs best when goal depth is unknown."
-
-    show adrian happy
-    stop music fadeout 0.5
-    play music "bgm/city-high-life.mp3" fadein 0.5
-    play sound "sfx/success.mp3"
-    a "Great job!"
-    a "Your score for this quiz is [chapter_11_Iterative_Deepening_quiz] out of 5."
-    jump chapter_11_Memory_Management
-label chapter_11_Memory_Management:
-
-    a "Let’s compare how {b}Breadth-First Search (BFS){/b} and {b}Depth-First Search (DFS){/b} manage memory during graph traversal."
-
-    a "BFS explores nodes level by level and uses a {b}queue{/b} to keep track of all frontier nodes."
-    a "This means it can consume a lot of memory—especially in wide graphs—because it stores every node at the current depth before moving on."
-
-    a "However, BFS guarantees the {b}shortest path{/b} in unweighted graphs, making it ideal when accuracy is more important than memory usage."
-
-    a "DFS, on the other hand, dives deep into one path using a {b}stack{/b} or recursion."
-    a "It uses much less memory since it only needs to remember the current path, but it can get stuck exploring long or irrelevant branches."
-
-    a "Choosing between BFS and DFS often depends on the problem’s structure and constraints—whether you need optimal paths or minimal memory usage."
-
-    $ chapter_11_progress += 1
-    show adrian smiling
-    play sound "sfx/bell.mp3"
-    a "Quiz time: Memory Management!"
-    jump chapter_11_Memory_Management_Quiz
-
-init python:
-    import random
-    chapter_11_Memory_Management_order = [
-        "q1", "q2", "q3", "q4", "q5"
-    ]
-    random.shuffle(chapter_11_Memory_Management_order)
-
-label chapter_11_Memory_Management_Quiz:
     #5POINTS
     $ chapter_11_Memory_Management_quiz = 0
 
@@ -796,9 +1033,7 @@ label chapter_11_restart:
         chapter_11_Web_Crawlers_quiz +
         chapter_11_DFS_quiz +
         chapter_11_Uniform_Cost_quiz +
-        chapter_11_A_Star_quiz +
-        chapter_11_Iterative_Deepening_quiz +
-        chapter_11_Memory_Management_quiz
+        chapter_11_A_Star_quiz 
     )
 
     a "Your score is [chapter_11_test]"
@@ -814,26 +1049,336 @@ label chapter_11_restart:
         show adrian confident
         jump chapter_11_quiz_hard
 
+init python:
+    import random
+    chapter_11_easy_question_order = [
+        "q1","q2","q3","q4","q5",
+        "q6","q7","q8","q9","q10"
+    ]
+    random.shuffle(chapter_11_easy_question_order)
+
 label chapter_11_quiz_easy:
+
+    $ chapter_11_score = 0
+
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
-    show adrian normal
 
-    # (Insert easy quiz questions here)
+    show adrian normal
+    a "Welcome to the Chapter Quiz!"
+
+    while chapter_11_easy_question_order:
+        $ current_q = chapter_11_easy_question_order.pop(0)
+
+        if current_q == "q1":
+            a "Q1: What data structure does Breadth-First Search primarily use?"
+            menu:
+                "Stack":
+                    a "Incorrect — that's DFS."
+                "Queue":
+                    $ chapter_11_score += 1
+                    a "Correct — BFS uses a queue to explore nodes level by level."
+                "Priority queue":
+                    a "Incorrect — that's for cost-aware searches."
+
+        elif current_q == "q2":
+            a "Q2: Why do many web crawlers use a breadth-first (BFS-like) approach?"
+            menu:
+                "To quickly cover many sites at shallow depth and avoid getting stuck deep in one site":
+                    $ chapter_11_score += 1
+                    a "Correct — BFS-style crawling improves coverage and fairness."
+                "To prioritize the deepest links first":
+                    a "Incorrect — that biases the crawler."
+                "To guarantee finding the most important pages first":
+                    a "Not necessarily — importance requires ranking."
+
+        elif current_q == "q3":
+            a "Q3: What traversal explores as far as possible along a branch before backtracking?"
+            menu:
+                "Breadth-First Search (BFS)":
+                    a "Incorrect — BFS explores level by level."
+                "Depth-First Search (DFS)":
+                    $ chapter_11_score += 1
+                    a "Correct — DFS dives deep then backtracks."
+                "Uniform Cost Search":
+                    a "Incorrect — UCS is cost-driven."
+
+        elif current_q == "q4":
+            a "Q4: Uniform Cost Search (UCS) expands nodes in order of:"
+            menu:
+                "Smallest heuristic estimate h(n)":
+                    a "Incorrect — that's greedy best-first."
+                "Random order":
+                    a "Incorrect — UCS is systematic and cost-based."
+                "Lowest path cost so far g(n)":
+                    $ chapter_11_score += 1
+                    a "Correct — UCS uses accumulated path cost."
+                
+
+        elif current_q == "q5":
+            a "Q5: In A*, what does f(n) = g(n) + h(n) represent?"
+            menu:
+                "The heuristic alone":
+                    a "Incorrect — that's h(n)."
+                "The sum of cost so far and an estimate to the goal":
+                    $ chapter_11_score += 1
+                    a "Correct — f(n) is the estimated total cost via node n."
+                "Number of neighbors of n":
+                    a "Incorrect — unrelated."
+
+        elif current_q == "q6":
+            a "Q6: When implementing BFS on a graph, when is it best to mark a node as visited to avoid duplicates?"
+            menu:
+                "When dequeued (after removal)":
+                    a "This can work but may allow duplicates to be queued."
+                "Never mark visited":
+                    a "Incorrect — that risks infinite loops."
+
+                "When enqueued (upon insertion)":
+                    $ chapter_11_score += 1
+                    a "Correct — marking on enqueue prevents multiple insertions."
+                
+        elif current_q == "q7":
+            a "Q7: Which is a common reason to limit a crawler's depth?"
+            menu:
+                "To make the crawler find everything on the entire web":
+                    a "Incorrect — limiting depth reduces coverage of deep pages."
+                "To limit resource use and keep crawls focused":
+                    $ chapter_11_score += 1
+                    a "Correct — depth limits manage time, bandwidth, and relevance."
+                "To always start at the deepest pages":
+                    a "Incorrect — counterproductive for broad coverage."
+
+        elif current_q == "q8":
+            a "Q8: Which real task is DFS especially suited for?"
+            menu:
+                "Finding shortest path by edge count in an unweighted graph":
+                    a "Incorrect — BFS is better for that."
+                "Detecting cycles and performing topological sort":
+                    $ chapter_11_score += 1
+                    a "Correct — DFS helps detect cycles and build topological order."
+                "Always finding the minimum-cost route on weighted graphs":
+                    a "Incorrect — use UCS or A* for cost-aware searches."
+
+        elif current_q == "q9":
+            a "Q9: If A* uses an admissible heuristic that never overestimates, what is guaranteed?"
+            menu:
+                "That A* will be faster than any other algorithm":
+                    a "Incorrect — speed depends on many factors."
+                "That A* will find an optimal (shortest-cost) path":
+                    $ chapter_11_score += 1
+                    a "Correct — admissible heuristics ensure optimality."
+                "That A* will use no memory":
+                    a "Incorrect — A* can be memory-intensive."
+
+        elif current_q == "q10":
+            a "Q10: On a graph with non-negative edge weights, which algorithm guarantees shortest paths?"
+            menu:
+                "Breadth-First Search":
+                    a "Incorrect — BFS ignores weights."
+                "Uniform Cost Search (Dijkstra)":
+                    $ chapter_11_score += 1
+                    a "Correct — UCS/Dijkstra guarantee shortest paths with non-negative weights."
+                "Depth-First Search":
+                    a "Incorrect — DFS does not guarantee shortest paths."
 
     show adrian happy
     stop music fadeout 0.5
     play music "bgm/city-high-life.mp3" fadein 0.5
     play sound "sfx/success.mp3"
     a "Great job!"
+
+    if chapter_11_score >= 8:
+        a "Excellent — you clearly understand the topics."
+    elif chapter_11_score >= 5:
+        a "Nice work — a bit more practice and you'll be solid."
+    else:
+        a "Review the chapter topics (BFS, DFS, web crawlers, UCS, A*)."
+
     jump chapter_11_performance
+
+init python:
+    import random
+    chapter_11_medium_question_order = [
+        "q1", "q2", "q3", "q4", "q5",
+        "q6", "q7", "q8", "q9", "q10",
+        "q11", "q12", "q13", "q14", "q15"
+    ]
+    random.shuffle(chapter_11_medium_question_order)
 
 label chapter_11_quiz_medium:
+    $ chapter_11_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert medium quiz questions here)
+    while chapter_11_medium_question_order:
+        $ current_q = chapter_11_medium_question_order.pop(0)
+
+        if current_q == "q1":
+            a " When performing BFS on a graph to find the shortest path in an unweighted graph, which guarantee holds?"
+            menu:
+                "BFS finds a shortest path in number of edges between the start and goal":
+                    $ chapter_11_score += 1
+                    a "Correct — BFS explores by increasing distance in edges."
+                "BFS always finds the path with the lowest total cost":
+                    a "Incorrect — costs matter; BFS assumes equal edge cost."
+                "BFS is guaranteed to use less memory than DFS":
+                    a "Incorrect — BFS often uses more memory."
+
+        elif current_q == "q2":
+            a "Which strategy do polite web crawlers use to avoid overloading a single site?"
+            menu:
+                "Rate limiting and obeying robots.txt":
+                    $ chapter_11_score += 1
+                    a "Correct — good crawlers respect robots.txt and throttle requests per site."
+                "Recursively crawling everything from a domain without pause":
+                    a "Incorrect — that can overload servers."
+                "Always using DFS to get to deep pages first":
+                    a "Incorrect — DFS can concentrate requests on one site and is impolite."
+
+        elif current_q == "q3":
+            a "In DFS, what data structure is typically used to implement the search iteratively?"
+            menu:
+                "Queue":
+                    a "Incorrect — a queue is BFS's structure."
+                "Stack":
+                    $ chapter_11_score += 1
+                    a "Correct — DFS uses a stack (explicit or the call stack in recursion)."
+                "Priority queue":
+                    a "Incorrect — that's for cost-based searches."
+
+        elif current_q == "q4":
+            a "Which of these is a primary weakness of naive breadth-first crawling across the web?"
+            menu:
+                "It quickly finds deep pages":
+                    a "Incorrect — BFS favors shallow pages first."
+                "It may spend lots of resources visiting many low-value shallow pages":
+                    $ chapter_11_score += 1
+                    a "Correct — BFS can fetch many low-value pages before deeper, important ones."
+                "It always finds the most relevant pages first":
+                    a "Incorrect — relevance requires ranking beyond BFS."
+
+        elif current_q == "q5":
+            a "Uniform-Cost Search (UCS) differs from BFS because it expands nodes by:"
+            menu:
+                "Order of node creation":
+                    a "Incorrect — creation order is not the primary difference."
+                "Lowest path cost from the start first":
+                    $ chapter_11_score += 1
+                    a "Correct — UCS uses a priority queue keyed by cumulative cost."
+                "Largest heuristic estimate first":
+                    a "Incorrect — that describes a greedy approach."
+
+        elif current_q == "q6":
+            a "When is DFS preferable to BFS?"
+            menu:
+                "When you need the shortest path in an unweighted graph":
+                    a "Incorrect — BFS is better for shortest unweighted paths."
+                "When memory is constrained and you want a solution quickly without guaranteeing shortest path":
+                    $ chapter_11_score += 1
+                    a "Correct — DFS uses less memory and can find solutions quickly but may not be optimal."
+                "When edge costs differ and optimality is required":
+                    a "Incorrect — UCS or A* handle costs/optimality better."
+
+        elif current_q == "q7":
+            a " A polite crawler uses a URL frontier. Which property should the frontier implement to support BFS-like crawling across many hosts fairly?"
+            menu:
+                "A single queue that enqueues children immediately, ignoring host":
+                    a "Incorrect — that can concentrate requests on one host."
+                "A frontier that interleaves or schedules requests per host (politeness policy)":
+                    $ chapter_11_score += 1
+                    a "Correct — scheduling prevents hitting one host too hard."
+                "A LIFO stack that always follows the most recent link":
+                    a "Incorrect — that's DFS-like and not fair across hosts."
+
+        elif current_q == "q8":
+            a " In A* search, what condition on the heuristic guarantees optimality?"
+            menu:
+                "The heuristic must be admissible (never overestimates true cost)":
+                    $ chapter_11_score += 1
+                    a "Correct — admissible heuristics ensure A* finds an optimal path when combined with proper cost handling."
+                "The heuristic must be larger than the true cost":
+                    a "Incorrect — that makes it inadmissible."
+                "The heuristic must be random to avoid loops":
+                    a "Incorrect — randomness doesn't guarantee optimality."
+
+        elif current_q == "q9":
+            a "Which statement best describes greedy best-first search compared to A*?"
+            menu:
+                "Greedy uses f(n) = g(n) + h(n) and is always optimal":
+                    a "Incorrect — that's A*."
+                "Greedy uses only heuristic h(n) to pick nodes and is not guaranteed optimal":
+                    $ chapter_11_score += 1
+                    a "Correct — greedy prioritizes apparent closeness to goal and can be faster but suboptimal."
+                "Greedy performs the same expansions as BFS":
+                    a "Incorrect — greedy differs significantly from BFS."
+
+        elif current_q == "q10":
+            a " If edges have non-uniform positive costs, which search is required to guarantee an optimal solution without a heuristic?"
+            menu:
+                "Breadth-first search":
+                    a "Incorrect — only for uniform costs."
+                "Uniform-Cost Search":
+                    $ chapter_11_score += 1
+                    a "Correct — UCS expands by lowest cumulative cost and handles varying positive edge costs."
+                "Depth-first search":
+                    a "Incorrect — DFS doesn't guarantee optimality with varying costs."
+
+        elif current_q == "q11":
+            a "For web crawling, what does 'politeness' commonly include besides rate limiting?"
+            menu:
+                "Ignoring robots.txt to crawl everything":
+                    a "Incorrect — ignoring robots.txt is impolite and often disallowed."
+                "Respecting crawl-delay directives and avoiding duplicate downloads":
+                    $ chapter_11_score += 1
+                    a "Correct — obeying robots rules and deduplication reduce load and redundancy."
+                "Always using maximum parallel connections to each host":
+                    a "Incorrect — that risks overloading hosts."
+
+        elif current_q == "q12":
+            a "A* with a heuristic that is admissible but not consistent (monotone) can still be optimal if implemented carefully. What practical issue might arise?"
+            menu:
+                "No issue; admissibility implies no problems":
+                    a "Incorrect — admissibility alone may cause re-expansions."
+                "The search may need to re-open nodes and handle path corrections (more bookkeeping)":
+                    $ chapter_11_score += 1
+                    a "Correct — inconsistent heuristics can force node re-expansion and extra work."
+                "It will always run faster than with a consistent heuristic":
+                    a "Incorrect — inconsistency typically increases work, not decreases."
+
+        elif current_q == "q13":
+            a "Which crawling approach best helps discover new sites broadly across the web quickly?"
+            menu:
+                "Frontier prioritization by domain-level breadth (wide host sampling)":
+                    $ chapter_11_score += 1
+                    a "Correct — prioritizing domain-wide breadth finds many different hosts quickly."
+                "Deep single-domain DFS until exhaustion":
+                    a "Incorrect — that discovers deep pages on one host but not many hosts."
+                "Only following links with high PageRank":
+                    a "Incorrect — that focuses on 'important' pages but not necessarily new hosts."
+
+        elif current_q == "q14":
+            a "When combining cost and heuristic in A*, node priority f(n) is:"
+            menu:
+                "f(n) = g(n) - h(n)":
+                    a "Incorrect — subtraction would be wrong."
+                "f(n) = g(n) + h(n)":
+                    $ chapter_11_score += 1
+                    a "Correct — A* expands nodes by the sum of path cost so far and estimated remaining cost."
+                "f(n) = h(n) only":
+                    a "Incorrect — that's greedy search."
+
+        elif current_q == "q15":
+            a "In practice, what is a common technique to keep a crawler's URL frontier manageable?"
+            menu:
+                "Never remove duplicates and keep everything":
+                    a "Incorrect — that causes massive duplication."
+                "Canonicalization, URL filtering, and deduplication":
+                    $ chapter_11_score += 1
+                    a "Correct — these reduce redundant fetches and keep the frontier useful."
+                "Always fetch pages in the order they were discovered without checks":
+                    a "Incorrect — naive FIFO without filtering leads to inefficiency."
 
     show adrian happy
     stop music fadeout 0.5
@@ -842,12 +1387,234 @@ label chapter_11_quiz_medium:
     a "Great job!"
     jump chapter_11_performance
 
+init python:
+    import random
+    chapter_11_hard_question_order = [
+        "q1","q2","q3","q4","q5",
+        "q6","q7","q8","q9","q10",
+        "q11","q12","q13","q14","q15",
+        "q16","q17","q18","q19","q20"
+    ]
+    random.shuffle(chapter_11_hard_question_order)
+
 label chapter_11_quiz_hard:
+    $ chapter_11_score = 0
     stop music fadeout 0.5
     play music "bgm/better-answer.mp3" fadein 1.0
     show adrian normal
 
-    # (Insert hard quiz questions here)
+    while chapter_11_hard_question_order:
+        $ current_q = chapter_11_hard_question_order.pop(0)
+
+        if current_q == "q1":
+            a "Prove which search (BFS, DFS, UCS, A*) is complete on finite graphs without negative-cost edges."
+            menu:
+                "BFS, DFS, UCS, and A* are complete on finite graphs with appropriate implementations":
+                    $ chapter_11_score += 1
+                    a "Correct — BFS and DFS are complete on finite graphs; UCS and A* are complete with finite branching and positive costs."
+                "Only BFS is complete":
+                    a "Incorrect — others can be complete under conditions."
+
+        elif current_q == "q2":
+            a "For a graph with branching factor b and solution depth d, what is the worst-case time complexity of BFS?"
+            menu:
+                "O(b^d)":
+                    $ chapter_11_score += 1
+                    a "Correct — BFS explores level by level, worst-case nodes ~ b^0 + b^1 + ... + b^d."
+                "O(d)":
+                    a "Incorrect — that's not accounting for branching."
+
+        elif current_q == "q3":
+            a "When using UCS, what data structure is required to ensure we always expand the lowest-cost frontier node next?"
+            menu:
+                "Queue":
+                    a "Incorrect — FIFO queue won't pick lowest cost."
+                "Priority queue (min-heap) keyed by path cost":
+                    $ chapter_11_score += 1
+                    a "Correct — UCS needs a priority queue keyed by g(n)."
+                "Stack":
+                    a "Incorrect — LIFO stack is for DFS."
+
+        elif current_q == "q4":
+            a "Which property of heuristics ensures A* never undercuts optimality even with different path representations?"
+            menu:
+                "Admissibility (never overestimates)":
+                    $ chapter_11_score += 1
+                    a "Correct — admissible heuristics keep A* optimistic and optimal."
+                "Randomness":
+                    a "Incorrect — randomness doesn't ensure optimality."
+
+        elif current_q == "q5":
+            a "How does heuristic consistency (monotonicity) affect node re-expansions in A*?"
+            menu:
+                "Consistent heuristics prevent re-opening nodes leading to fewer re-expansions":
+                    $ chapter_11_score += 1
+                    a "Correct — consistency guarantees f-values along paths do not decrease, avoiding re-openings."
+                "Consistency increases re-expansions":
+                    a "Incorrect — inconsistency usually increases re-expansions."
+
+        elif current_q == "q6":
+            a "For huge web graphs, why is full-graph optimal search impractical and what practical compromise do crawlers use?"
+            menu:
+                "Full optimal search is always fine":
+                    a "Incorrect — impractical at web scale."
+                "Crawlers use heuristics, frontier prioritization, sampling, politeness and freshness heuristics":
+                    $ chapter_11_score += 1
+                    a "Correct — practical crawling balances coverage, freshness, and politeness."
+                "They only use DFS to save memory":
+                    a "Incorrect — DFS alone isn't sufficient at web scale."
+
+        elif current_q == "q7":
+            a "Which of these best describes A*'s f(n) ordering when heuristic equals true remaining cost?"
+            menu:
+                "A* becomes equivalent to an ideal direct oracle and expands only optimal path nodes":
+                    $ chapter_11_score += 1
+                    a "Correct — if h(n) equals true cost, A* expands only nodes on an optimal path."
+                "A* becomes BFS":
+                    a "Incorrect — that only happens if costs are uniform and h=0."
+                "A* fails to find a solution":
+                    a "Incorrect — it still finds optimal solutions."
+
+        elif current_q == "q8":
+            a "In the presence of zero-cost cycles, which search can loop indefinitely unless special handling is used?"
+            menu:
+                "UCS with naive visited checks can loop; need to track best-cost-to-node":
+                    $ chapter_11_score += 1
+                    a "Correct — zero-cost cycles require careful cost checks or cycle detection."
+                "BFS will never loop":
+                    a "Incorrect — BFS can revisit nodes if cycles not tracked."
+                "DFS inherently avoids cycles":
+                    a "Incorrect — DFS can loop without visited set."
+
+        elif current_q == "q9":
+            a "For a crawler that stores billions of URLs, which scalable frontier storage technique is commonly used?"
+            menu:
+                "In-memory list only":
+                    a "Incorrect — memory would be exhausted."
+                "Externalized priority queues with sharding (disk-backed queues, leveldb/rocksdb) and host-based partitions":
+                    $ chapter_11_score += 1
+                    a "Correct — disk-backed, sharded frontiers are practical at scale."
+                "Single global priority queue in RAM":
+                    a "Incorrect — not scalable for billions of URLs."
+
+        elif current_q == "q10":
+            a "Describe a case where greedy best-first search outperforms A* in practice despite being suboptimal."
+            menu:
+                "When heuristic is informative and search time matters more than optimality (e.g., real-time pathing)":
+                    $ chapter_11_score += 1
+                    a "Correct — greedy reduces expansions and latency when approximate is acceptable."
+                "When you need minimum-cost guarantees":
+                    a "Incorrect — greedy won't guarantee that."
+
+        elif current_q == "q11":
+            a "You're designing a crawler politeness scheduler. Which metric helps decide when to revisit a host for freshness while balancing budget?"
+            menu:
+                "Fixed uniform revisit interval for all hosts":
+                    a "Incorrect — too rigid; hosts differ in change frequency."
+                "Adaptive revisit score combining last-modified, change frequency estimate, and page importance":
+                    $ chapter_11_score += 1
+                    a "Correct — adaptive scoring balances freshness and cost."
+                "Never revisit once fetched":
+                    a "Incorrect — staleness increases."
+
+        elif current_q == "q12":
+            a "For a navigation mesh pathfinding problem with edge costs varying by time of day, which search extension handles dynamic costs best?"
+            menu:
+                "Standard A* without modification":
+                    a "Incorrect — static costs assumed."
+                "Time-expanded A* (state includes time) or re-planning with incremental search (D* / LPA*)":
+                    $ chapter_11_score += 1
+                    a "Correct — modeling time or using incremental planners handles dynamic costs."
+                "DFS with backtracking":
+                    a "Incorrect — not suitable for dynamic costs."
+
+        elif current_q == "q13":
+            a "Suppose your heuristic is admissible but has wildly varying values causing huge OPEN-set growth. Which practical step reduces memory usage while preserving reasonable solutions?"
+            menu:
+                "Switch to uninformed search":
+                    a "Incorrect — that sacrifices performance."
+                "Use weighted A* (f(n)=g(n)+(1+w)h(n)) or increase heuristic smoothing; accept bounded suboptimality":
+                    $ chapter_11_score += 1
+                    a "Correct — weighted A* trades optimality for fewer expansions and less memory."
+                "Use DFS instead":
+                    a "Incorrect — DFS doesn't provide good bounded suboptimality guarantees."
+
+        elif current_q == "q14":
+            a "In large-scale crawling, what's a concise strategy to reduce duplicate content storage caused by URL variants?"
+            menu:
+                "Store everything and deduplicate later":
+                    a "Incorrect — wastes bandwidth and storage."
+                "Canonicalize URLs, normalize query parameters, use checksum-based content dedupe (fingerprinting)":
+                    $ chapter_11_score += 1
+                    a "Correct — canonicalization plus content fingerprints reduces duplicates early."
+                "Ignore robots.txt to fetch canonical versions":
+                    a "Incorrect — ignoring robots.txt is not acceptable."
+
+        elif current_q == "q15":
+            a "Complexity comparison — under what circumstances does DFS use less memory than BFS?"
+            menu:
+                "When solution depth is small":
+                    a "Incorrect — that doesn't capture memory tradeoffs."
+                "When branching factor is large and solution depth is much smaller than breadth, DFS uses O(d) memory vs BFS O(b^d) frontier":
+                    $ chapter_11_score += 1
+                    a "Correct — DFS stores depth path while BFS stores wide frontiers."
+                "DFS always uses more memory":
+                    a "Incorrect — not always."
+
+        elif current_q == "q16":
+            a "Mini puzzle: Given this shortest-path heuristic ranking for nodes A->E: h(A)=4, h(B)=3, h(C)=2, h(D)=1, h(E)=0. If A* expands nodes in increasing f=g+h and all edge costs are 1, which node is expanded first after A?"
+            menu:
+                "B":
+                    a "Incorrect — depends on g values from A to neighbors."
+                "Any neighbor with g=1 and lowest h; so the neighbor with h=1 (D) if it's a direct neighbor":
+                    $ chapter_11_score += 1
+                    a "Correct — with g=1, f = 1 + h; the lowest h among neighbors is chosen."
+                "E":
+                    a "Incorrect — E has h=0 but likely farther (higher g)."
+
+        elif current_q == "q17":
+            a "Debug challenge: You see a crawler that keeps refetching the same page because URLs differ by trailing slash. What's the minimal change you'd implement?"
+            menu:
+                "Ignore trailing slashes by canonicalizing URLs before adding to frontier":
+                    $ chapter_11_score += 1
+                    a "Correct — canonicalization (strip/normalize trailing slash) prevents duplicate frontier entries."
+                "Fetch both versions always":
+                    a "Incorrect — duplicates the work."
+                "Block all URLs with trailing slashes":
+                    a "Incorrect — too aggressive and incorrect."
+
+        elif current_q == "q18":
+            a "Design prompt: Propose a one-line heuristic for A* on a grid with 4-way movement that is admissible and tight."
+            menu:
+                "Euclidean distance":
+                    a "Incorrect — admissible but for 4-way Manhattan is tighter."
+                "Manhattan distance (|dx| + |dy|)":
+                    $ chapter_11_score += 1
+                    a "Correct — Manhattan is admissible and tight for 4-way grids with unit costs."
+                "Squared distance":
+                    a "Incorrect — can over/underestimate; not standard."
+
+        elif current_q == "q19":
+            a "Creative scenario: You must prioritize crawling for a breaking-news site vs. an archival site with seldom changes. Which scheduling tweak do you apply?"
+            menu:
+                "Give breaking-news site higher revisit score and more parallel bandwidth; reduce frequency for archival site":
+                    $ chapter_11_score += 1
+                    a "Correct — prioritize freshness and allocate resources adaptively."
+                "Treat both equally":
+                    a "Incorrect — wastes resources or misses breaking updates."
+                "Never revisit the breaking-news site":
+                    a "Incorrect — that misses updates."
+
+        elif current_q == "q20":
+            a "Tiny coding logic: Which of these Python snippets correctly prevents re-expansion in A*/UCS by checking if a better cost was found before pushing to OPEN?"
+            menu:
+                "if neighbor not in closed or new_cost < cost_so_far[neighbor]:\n    cost_so_far[neighbor] = new_cost\n    push neighbor to open":
+                    $ chapter_11_score += 1
+                    a "Correct — updating when new_cost is better and only then pushing avoids unnecessary re-expansions."
+                "Always push neighbor to open without checks":
+                    a "Incorrect — causes extra work."
+                "Only check closed set and ignore cost improvements":
+                    a "Incorrect — misses better paths."
 
     show adrian happy
     stop music fadeout 0.5
@@ -898,22 +1665,20 @@ label chapter_11_performance:
         a "You did okay in A* Search, but there's room for improvement."
         a "Practice designing admissible heuristics."
 
-# Iterative Deepening
-    if chapter_11_Iterative_Deepening_quiz < 2:
-        a "You need to review Iterative Deepening Search."
-        a "Understand how it balances DFS depth with BFS completeness."
-    elif chapter_11_Iterative_Deepening_quiz < 3:
-        a "You did okay in Iterative Deepening, but there's room for improvement."
-        a "Explore its use in memory-constrained environments."
-
-# Memory Management
-    if chapter_11_Memory_Management_quiz < 2:
-        a "You need to review Memory Management in BFS vs DFS."
-        a "Focus on space complexity and trade-offs."
-    elif chapter_11_Memory_Management_quiz < 3:
-        a "You did okay in Memory Management, but there's room for improvement."
-        a "Compare stack vs queue usage and scalability."
-
     jump chapter_11_end
 
-label chapter_11_end:
+label chapter_11_end:    
+    play sound "sfx/success.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
+    $ persistent.chapter_11 = True
+    a "Would You like to test again?"
+    menu:
+        "Yes":
+            jump chapter_10_restart
+        "No":
+            pass
+    show adrian happy
+    a "You have finished chapter 11. The last chapter!"
+    a "I am so proud of you!"
+    a "You made it this far!"
+    jump menu
