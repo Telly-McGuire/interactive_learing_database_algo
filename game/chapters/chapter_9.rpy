@@ -24,7 +24,7 @@ screen chapter_9_AAIntro:  # Associative Arrays Intro
 
 label chapter_9_intro:
 
-    call hideall
+    call hideall from _call_hideall_10
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
 
@@ -32,7 +32,7 @@ label chapter_9_intro:
     pause 1.0
 
     show screen chapter_9_AAIntro
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 2.0
     hide screen chapter_9_AAIntro
 

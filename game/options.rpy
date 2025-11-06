@@ -32,7 +32,7 @@ define config.version = "1.0"
 define gui.about = _p("""\
 Created by Telly McGuire
 
-Educational Program to teach a College Course
+Educational Program to teach Data Structures and Algorithms. A Computer Science Thesis Project
 """)
 
 
@@ -40,7 +40,7 @@ Educational Program to teach a College Course
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Interactive Learning : Data-Structures And Algorithms"
+define build.name = "Interactive_Learning_DataStructures_And_Algorithms"
 
 
 ## Sounds and music ############################################################

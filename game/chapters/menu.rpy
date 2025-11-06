@@ -1,5 +1,5 @@
 label menu_select:
-    call hideall
+    call hideall from _call_hideall_11
     scene bg_blank
     show screen menu_select_screen
     
@@ -20,7 +20,7 @@ label menu_select:
 
 #Chapter Menu Thingy
 label menu:
-    call hideall
+    call hideall from _call_hideall_12
     scene black
     show screen menu_screen
     show black

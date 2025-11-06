@@ -24,7 +24,7 @@ screen chapter_7_RBIntro:
 
 label chapter_7_intro:
 
-    call hideall
+    call hideall from _call_hideall_8
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
     
@@ -32,7 +32,7 @@ label chapter_7_intro:
     pause 1.0
 
     show screen chapter_7_RBIntro
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 2.0
     hide screen chapter_7_RBIntro
     

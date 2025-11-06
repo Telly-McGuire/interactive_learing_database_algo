@@ -24,7 +24,7 @@ screen chapter_2_introscreen:
             text "Chapter 2: Arrays" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 
 label chapter_2_intro:
-    call hideall
+    call hideall from _call_hideall_4
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
     
@@ -32,7 +32,7 @@ label chapter_2_intro:
     pause 1.0
     show screen chapter_2_introscreen
     pause 2.0
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 1.0
     hide screen chapter_2_introscreen
     play music "bgm/city-high-life.mp3" fadein 0.5

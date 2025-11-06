@@ -17,7 +17,7 @@ transform smaller:
     zoom 0.5
 
 label chapter_0:
-    call hideall    
+    call hideall from _call_hideall    
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
     

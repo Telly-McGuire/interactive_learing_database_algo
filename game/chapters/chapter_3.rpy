@@ -166,7 +166,7 @@ label chapter_3_intro:
     pause 1.0
     show screen chapter_3_introscreen
     pause 2.0
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 1.0
     hide screen chapter_3_introscreen
     with dissolve

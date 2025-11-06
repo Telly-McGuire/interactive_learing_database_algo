@@ -19,7 +19,7 @@ screen chapter_5_BinaryTreeIntro:
             text "Binary Tree" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 label chapter_5_intro:
     
-    call hideall
+    call hideall from _call_hideall_6
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
     
@@ -28,7 +28,7 @@ label chapter_5_intro:
 
     show screen chapter_5_BinaryTreeIntro
     with dissolve
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 2.0
     hide screen chapter_5_BinaryTreeIntro
     

@@ -24,7 +24,7 @@ screen chapter_10_GAintro:
             text "Graph Algorithms" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 label chapter_10_intro:
 
-    call hideall
+    call hideall from _call_hideall_2
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
 
@@ -32,7 +32,7 @@ label chapter_10_intro:
     pause 1.0
 
     show screen chapter_10_GAintro
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 2.0
     hide screen chapter_10_GAintro
 

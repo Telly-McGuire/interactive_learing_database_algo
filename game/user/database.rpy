@@ -119,7 +119,7 @@ label database_user_info:
 label submit_all_chapter_scores:
     if current_student_id == "":
         "You need to register first!"
-        call database_user_info
+        call database_user_info from _call_database_user_info_1
     
     $ result = submit_scores(current_student_id)
     "[result]"

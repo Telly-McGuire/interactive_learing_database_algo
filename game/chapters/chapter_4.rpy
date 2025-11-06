@@ -67,7 +67,7 @@ screen StackQueues:
 
 
 label chapter_4_intro:
-    call hideall #This is a stupid fix but it works I think
+    call hideall from _call_hideall_5 #This is a stupid fix but it works I think
     play audio ("sfx/start.mp3")
     play music "bgm/city-high-life.mp3" fadein 1.0
 
@@ -75,7 +75,7 @@ label chapter_4_intro:
     pause 1.0
     show screen chapter_4_introscreen
     pause 2.0
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 1.0
     hide screen chapter_4_introscreen
 
@@ -259,7 +259,7 @@ label chapter_4_stack_operations:
     show adrian normal
     a "Lets try a minigame"
 
-    call stack_minigame
+    call stack_minigame from _call_stack_minigame
     
     show adrian smiling
     play sound "sfx/bell.mp3"

@@ -1,38 +1,39 @@
-# label splashscreen:
-#     scene black
-#     pause 1.0
-#     show text "{size=100}{color=#938CE6}TMC Entertainment \n Presents{/color}{/size}" at truecenter 
-#     with dissolve
-#     pause 2.0
-#     hide text 
-#     with dissolve
-#     pause 1.0
+label splashscreen:
+    scene black
+    play music "bgm/intro.mp3" 
+    pause 1.0
+    show text "{size=100}{color=#938CE6}TMC Entertainment \n Presents{/color}{/size}" at truecenter 
+    with dissolve
+    pause 2.0
+    hide text 
+    with dissolve
+    pause 1.0
 
-#     pause 1.0 
-#     show image "assets/logo.png" at Position(xalign=0.5, yalign=0.3):
-#         zoom 0.8
-#     show text "{size=100}{color=#938CE6}Interactive Learning :{/color}\n{size=60}{color=#ffd700}Data Structures & Algorithms{/color}" at Position(xalign=0.5, yalign=0.8) 
-#     with dissolve
-#     pause 2.0
-#     hide text with dissolve
-#     hide image "assets/logo.png" with dissolve
+    pause 1.0 
+    show image "assets/logo.png" at Position(xalign=0.5, yalign=0.3):
+        zoom 0.8
+    show text "{size=100}{color=#938CE6}Interactive Learning :{/color}\n{size=60}{color=#ffd700}Data Structures & Algorithms{/color}" at Position(xalign=0.5, yalign=0.8) 
+    with dissolve
+    pause 2.0
+    hide text with dissolve
+    hide image "assets/logo.png" with dissolve
     
-#     pause 1.0
-#     show image "assets/cpu_logo.png" at truecenter:
-#         zoom 1.2
-#     with dissolve
-#     show text "In association with \n {color=#ffd700}{size=100}Central Philippine University{/color}{/size}" at Position(xalign=0.5, yalign=0.8)
-#     with dissolve
-#     pause 2.0
+    pause 1.0
+    show image "assets/cpu_logo.png" at Position(xalign=0.5, yalign=0.3):
+        zoom 1.2
+    with dissolve
+    show text "In association with \n {color=#ffd700}{size=100}Central Philippine University{/color}{/size}" at Position(xalign=0.5, yalign=0.8)
+    with dissolve
+    pause 2.0
 
-#     hide image "assets/logo.png" 
-#     with dissolve
-#     hide text with dissolve
+    hide image "assets/logo.png" 
+    with dissolve
+    hide text with dissolve
 
-#     pause 1.0
-#     hide scene 
-#     with dissolve
-#     return
+    pause 1.0
+    hide scene 
+    with dissolve
+    return
 
 
 
@@ -75,7 +76,7 @@ default chapter_11_score = 0
 label start:
     $ persistent.menu = False
     if persistent.menu == False:
-        call database_user_info
+        call database_user_info from _call_database_user_info
     else:
         pass
 

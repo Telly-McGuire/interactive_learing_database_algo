@@ -23,7 +23,7 @@ screen chapter_1_introscreen:
 
 
 label chapter_1_intro:
-    call hideall
+    call hideall from _call_hideall_1
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
     
@@ -31,7 +31,7 @@ label chapter_1_intro:
     pause 1.0
     show screen chapter_1_introscreen
     pause 2.0
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 1.0
     hide screen chapter_1_introscreen
     
@@ -1146,7 +1146,7 @@ label chapter_1_quiz_hard:
             menu:
                 "Deque":
                     show adrian happy
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd
                     a "Correct! A deque allows insertion and deletion at both ends."
                 "Stack":
                     show adrian sad
@@ -1170,7 +1170,7 @@ label chapter_1_quiz_hard:
                 "User Interface Design":
                     show adrian happy
                     a "Correct! User interface design is not a characteristic of data structures."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_1
 
         elif current_q == "mc3":
             a "What is the difference between a stack and a queue?"
@@ -1178,7 +1178,7 @@ label chapter_1_quiz_hard:
                 "A stack is LIFO (Last In First Out) and a queue is FIFO (First In First Out)":
                     show adrian happy
                     a "Correct! A stack is LIFO and a queue is FIFO."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_2
                 "A stack is FIFO and a queue is LIFO":
                     show adrian sad
                     a "Incorrect. A stack is LIFO and a queue is FIFO."
@@ -1192,7 +1192,7 @@ label chapter_1_quiz_hard:
                 "To find specific data within a larger dataset quickly and efficiently":
                     show adrian happy
                     a "Correct! Search algorithms are designed to find specific data quickly and efficiently."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_3
                 "To sort data in a specific order":
                     show adrian sad
                     a "Incorrect. Sorting algorithms are used for arranging data, not searching for it."
@@ -1212,7 +1212,7 @@ label chapter_1_quiz_hard:
                 "Extracting":
                     show adrian happy
                     a "Correct! Extracting is not typically listed as a common category of algorithms."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_4
                 "Deletion":
                     show adrian sad
                     a "Incorrect. Deletion is a common category of algorithms."
@@ -1226,7 +1226,7 @@ label chapter_1_quiz_hard:
                 "Infinite steps":
                     show adrian happy
                     a "Correct! A good algorithm must always terminate after a finite number of steps."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_5
                 "Effective":
                     show adrian sad
                     a "Incorrect. Effectiveness is a key characteristic of a good algorithm."
@@ -1240,7 +1240,7 @@ label chapter_1_quiz_hard:
                 "True":
                     show adrian happy
                     a "You are Correct. Good JOB!!"
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_6
                 "False":
                     show adrian sad
                     a "Incorrect. Of course you add new data, you insert something."
@@ -1251,7 +1251,7 @@ label chapter_1_quiz_hard:
             if answer.lower() == "updating":
                 show adrian happy
                 a "You are Correct. Good Job!!"
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_7
             else:
                 show adrian sad
                 a "Sorry, wrong answer."
@@ -1262,7 +1262,7 @@ label chapter_1_quiz_hard:
             if answer.lower() == "stack":
                 show adrian happy
                 a "Correct! Stack is the right answer."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_8
             else:
                 show adrian sad
                 a "Sorry, the correct answer is 'stack'."
@@ -1273,7 +1273,7 @@ label chapter_1_quiz_hard:
             if answer.lower() == "sorting":
                 show adrian happy
                 a "Correct! Sorting is the process."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_9
             else:
                 show adrian sad
                 a "Sorry, the correct answer is 'sorting'."
@@ -1284,7 +1284,7 @@ label chapter_1_quiz_hard:
             if answer.lower() == "binary":
                 show adrian happy
                 a "Correct! Binary search requires a sorted dataset."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_10
             else:
                 show adrian sad
                 a "Sorry, the correct answer is 'binary'."
@@ -1295,7 +1295,7 @@ label chapter_1_quiz_hard:
                 "Linked List":
                     show adrian happy
                     a "Correct! Linked lists use nodes that point to the next node."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_11
                 "Array":
                     show adrian sad
                     a "Incorrect. Arrays do not use nodes."
@@ -1312,7 +1312,7 @@ label chapter_1_quiz_hard:
                 "Tree":
                     show adrian happy
                     a "Correct! Trees are non-linear data structures."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_12
                 "Queue":
                     show adrian sad
                     a "Incorrect. Queue is linear."
@@ -1329,7 +1329,7 @@ label chapter_1_quiz_hard:
                 "Pop":
                     show adrian happy
                     a "Correct! Pop removes the top element from a stack."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_13
                 "Push":
                     show adrian sad
                     a "Incorrect. Push adds an element."
@@ -1346,7 +1346,7 @@ label chapter_1_quiz_hard:
                 "First In, First Out":
                     show adrian happy
                     a "Correct! Queue is FIFO."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_14
                 "Last In, First Out":
                     show adrian sad
                     a "Incorrect. That's a stack."
@@ -1367,7 +1367,7 @@ label chapter_1_quiz_hard:
     if matching_answer.startswith("1d,2c,3a,4b"):
         show adrian happy
         a "Excellent! All your matches are correct."
-        call ch1_scoreadd
+        call ch1_scoreadd from _call_ch1_scoreadd_15
     else:
         show adrian sad
         a "Not quite. The correct matches are: 1D, 2C, 3A, 4B."
@@ -1380,7 +1380,7 @@ label chapter_1_quiz_hard:
     if matching_answer2.startswith("1c,2d,3b,4a"):
         show adrian happy
         a "Excellent! All your matches are correct."
-        call ch1_scoreadd
+        call ch1_scoreadd from _call_ch1_scoreadd_16
     else:
         show adrian sad
         a "Not quite. The correct matches are: 1C, 2D, 3B, 4A."
@@ -1414,7 +1414,7 @@ label chapter_1_quiz_medium:
             menu:
                 "Deque":
                     show adrian happy
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_17
                     a "Correct! A deque allows insertion and deletion at both ends."
                 "Stack":
                     show adrian sad
@@ -1438,7 +1438,7 @@ label chapter_1_quiz_medium:
                 "User Interface Design":
                     show adrian happy
                     a "Correct! UI design is not a data structure characteristic."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_18
 
         elif current_q == "q3":
             a "What is the difference between a stack and a queue?"
@@ -1446,7 +1446,7 @@ label chapter_1_quiz_medium:
                 "A stack is LIFO and a queue is FIFO":
                     show adrian happy
                     a "Correct! Stack is LIFO and queue is FIFO."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_19
                 "A stack is FIFO and a queue is LIFO":
                     show adrian sad
                     a "Incorrect. You got them reversed."
@@ -1460,7 +1460,7 @@ label chapter_1_quiz_medium:
                 "To find specific data within a larger dataset quickly and efficiently":
                     show adrian happy
                     a "Correct! That’s exactly what search algorithms do."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_20
                 "To sort data in a specific order":
                     show adrian sad
                     a "Incorrect. That’s sorting, not searching."
@@ -1480,7 +1480,7 @@ label chapter_1_quiz_medium:
                 "Extracting":
                     show adrian happy
                     a "Correct! Extracting isn’t typically listed."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_21
                 "Deletion":
                     show adrian sad
                     a "Incorrect. Deletion is a valid category."
@@ -1494,7 +1494,7 @@ label chapter_1_quiz_medium:
                 "Infinite steps":
                     show adrian happy
                     a "Correct! Algorithms must terminate."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_22
                 "Effective":
                     show adrian sad
                     a "Incorrect. Effectiveness is key."
@@ -1508,7 +1508,7 @@ label chapter_1_quiz_medium:
                 "True":
                     show adrian happy
                     a "You are Correct. Good JOB!!"
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_23
                 "False":
                     show adrian sad
                     a "Incorrect. Insertion preserves structure."
@@ -1520,7 +1520,7 @@ label chapter_1_quiz_medium:
         if answer.lower() == "updating":
             show adrian happy
             a "You are Correct. Good Job!!"
-            call ch1_scoreadd
+            call ch1_scoreadd from _call_ch1_scoreadd_24
         else:
             show adrian sad
             a "Sorry, wrong answer."
@@ -1533,7 +1533,7 @@ label chapter_1_quiz_medium:
         if answer.lower() == "stack":
             show adrian happy
             a "Correct! Stack is the right answer."
-            call ch1_scoreadd
+            call ch1_scoreadd from _call_ch1_scoreadd_25
         else:
             show adrian sad
             a "Sorry, the correct answer is 'stack'."
@@ -1546,7 +1546,7 @@ label chapter_1_quiz_medium:
         if answer.lower() == "sorting":
             show adrian happy
             a "Correct! Sorting is the process."
-            call ch1_scoreadd
+            call ch1_scoreadd from _call_ch1_scoreadd_26
         else:
             show adrian sad
             a "Sorry, the correct answer is 'sorting'."
@@ -1559,7 +1559,7 @@ label chapter_1_quiz_medium:
         if answer.lower() == "binary":
             show adrian happy
             a "Correct! Binary search requires a sorted dataset."
-            call ch1_scoreadd
+            call ch1_scoreadd from _call_ch1_scoreadd_27
         else:
             show adrian sad
             a "Sorry, the correct answer is 'binary'."
@@ -1572,7 +1572,7 @@ label chapter_1_quiz_medium:
             "Linked List":
                 show adrian happy
                 a "Correct! Linked lists use nodes that point to the next node."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_28
             "Array":
                 show adrian sad
                 a "Incorrect. Arrays do not use nodes."
@@ -1591,7 +1591,7 @@ label chapter_1_quiz_medium:
             "Tree":
                 show adrian happy
                 a "Correct! Trees are non-linear data structures."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_29
             "Queue":
                 show adrian sad
                 a "Incorrect. Queue is linear."
@@ -1610,7 +1610,7 @@ label chapter_1_quiz_medium:
             "Pop":
                 show adrian happy
                 a "Correct! Pop removes the top element from a stack."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_30
             "Push":
                 show adrian sad
                 a "Incorrect. Push adds an element."
@@ -1629,7 +1629,7 @@ label chapter_1_quiz_medium:
             "First In, First Out":
                 show adrian happy
                 a "Correct! Queue is FIFO."
-                call ch1_scoreadd
+                call ch1_scoreadd from _call_ch1_scoreadd_31
             "Last In, First Out":
                 show adrian sad
                 a "Incorrect. That's a stack."
@@ -1671,7 +1671,7 @@ label chapter_1_quiz_easy:
                 "Array":
                     show adrian happy
                     a "Correct! An array is a data structure."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_32
                 "Button":
                     show adrian sad
                     a "Incorrect. A button is not a data structure."
@@ -1688,7 +1688,7 @@ label chapter_1_quiz_easy:
                 "True":
                     show adrian happy
                     a "Correct! Stack is LIFO."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_33
                 "False":
                     show adrian sad
                     a "Incorrect. Stack is LIFO."
@@ -1699,7 +1699,7 @@ label chapter_1_quiz_easy:
                 "Queue":
                     show adrian happy
                     a "Correct! A queue works like a line."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_34
                 "Stack":
                     show adrian sad
                     a "Incorrect. A stack is not like a line."
@@ -1716,7 +1716,7 @@ label chapter_1_quiz_easy:
                 "False":
                     show adrian happy
                     a "Correct! Algorithms can be used in daily life too."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_35
                 "True":
                     show adrian sad
                     a "Incorrect. Algorithms are everywhere!"
@@ -1727,7 +1727,7 @@ label chapter_1_quiz_easy:
                 "Ambiguity":
                     show adrian happy
                     a "Correct! Algorithms should not be ambiguous."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_36
                 "Finiteness":
                     show adrian sad
                     a "Incorrect. Finiteness is a good characteristic."
@@ -1744,7 +1744,7 @@ label chapter_1_quiz_easy:
                 "True":
                     show adrian happy
                     a "Correct! Queue is FIFO."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_37
                 "False":
                     show adrian sad
                     a "Incorrect. Queue is FIFO."
@@ -1755,7 +1755,7 @@ label chapter_1_quiz_easy:
                 "Search Algorithm":
                     show adrian happy
                     a "Correct! Search algorithms help find data."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_38
                 "Sorting Algorithm":
                     show adrian sad
                     a "Incorrect. Sorting arranges data."
@@ -1772,7 +1772,7 @@ label chapter_1_quiz_easy:
                 "True":
                     show adrian happy
                     a "Correct! Linked lists are dynamic."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_39
                 "False":
                     show adrian sad
                     a "Incorrect. Linked lists are flexible."
@@ -1783,7 +1783,7 @@ label chapter_1_quiz_easy:
                 "Bubble Sort":
                     show adrian happy
                     a "Correct! Bubble Sort is a sorting algorithm."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_40
                 "Binary Search":
                     show adrian sad
                     a "Incorrect. Binary Search is a search algorithm."
@@ -1800,7 +1800,7 @@ label chapter_1_quiz_easy:
                 "True":
                     show adrian happy
                     a "Correct! That's the main purpose of data structures."
-                    call ch1_scoreadd
+                    call ch1_scoreadd from _call_ch1_scoreadd_41
                 "False":
                     show adrian sad
                     a "Incorrect. Data structures do help organize data."

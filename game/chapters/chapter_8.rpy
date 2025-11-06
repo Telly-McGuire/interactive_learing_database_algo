@@ -33,7 +33,7 @@ screen chapter_8_HeapsIntro:
 
 label chapter_8_intro:
 
-    call hideall
+    call hideall from _call_hideall_9
     play sound "sfx/start.mp3"
     stop music fadeout 1.0
 
@@ -41,7 +41,7 @@ label chapter_8_intro:
     pause 1.0
 
     show screen chapter_8_HeapsIntro
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 2.0
     hide screen chapter_8_HeapsIntro
 

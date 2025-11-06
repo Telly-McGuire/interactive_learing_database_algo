@@ -26,7 +26,7 @@ screen chapter_6_AVLIntro:
             yalign 0.5
             text "AVL Trees" size 60 color "#FFFFFF" outlines [(5, "#000000", 0, 0)]
 label chapter_6_intro:
-    call hideall #This is a stupid fix but it works I think
+    call hideall from _call_hideall_7 #This is a stupid fix but it works I think
     play audio ("sfx/start.mp3")
     play music "bgm/city-high-life.mp3" fadein 1.0
 
@@ -34,7 +34,7 @@ label chapter_6_intro:
     pause 1.0
     show screen chapter_6_AVLIntro
     pause 2.0
-    scene mt tree with dissolve
+    scene room with dissolve
     pause 1.0
     hide screen chapter_6_AVLIntro
 
