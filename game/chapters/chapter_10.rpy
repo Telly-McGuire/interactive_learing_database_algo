@@ -335,6 +335,8 @@ label chapter_10_Adjacency_Representation:
         matrices
     with dissolve
     show adrian normal
+    stop music fadeout 1.0
+    play music "bgm/jungle.mp3" fadein 1.0
     a "{b}Adjacency Matrix for Directed-{nw}"
     show adrian shock
     a "{b}{cps=30}{size=+50}MONKE?"
@@ -351,6 +353,7 @@ label chapter_10_Adjacency_Representation:
 
     "Banan"
     play sound "sfx/cave_sound.mp3"
+    play music "bgm/city-high-life.mp3" fadein 1.0
     hide monke
     with dissolve
     a "I...I dont know what that was"
@@ -673,10 +676,10 @@ label chapter_10_restart:
     a "Your score is [chapter_10_test]"
     a "Let's see how well you do in the {size=+20}CHAPTER QUIZ"
 
-    if chapter_9_test <= 7:
+    if chapter_10_test <= 7:
         show adrian thoughtful
         jump chapter_10_quiz_easy
-    elif chapter_9_test <= 12:
+    elif chapter_10_test <= 12:
         show adrian smiling
         jump chapter_10_quiz_medium
     else:

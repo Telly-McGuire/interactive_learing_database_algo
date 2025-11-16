@@ -471,8 +471,8 @@ label chapter_8_Array_Representation:
     show adrian normal at center with dissolve
     play sound "sfx/bell.mp3"
 
-    a "{size=+10}{color=#89CFF0}Array Representation — Heaps Made Compact{/color}{/size}"
-    a "Heaps are nearly perfect for arrays because they are {b}complete binary trees{/b} — filled left to right with no gaps."
+    a "{size=+10}{color=#89CFF0}Array Representation : Heaps Made Compact{/color}{/size}"
+    a "Heaps are nearly perfect for arrays because they are {b}complete binary trees{/b} , filled left to right with no gaps."
 
     show adrian smiling
     a "Instead of pointers, we map tree positions straight to indices. That keeps memory usage tidy and access fast."
@@ -507,9 +507,9 @@ label chapter_8_Array_Representation:
     play sound "sfx/ting.mp3"
     a "Neat, right? No pointers"
     a "This structure makes heaps super efficient: you can jump between parent and child nodes instantly using simple math."
-    a "That’s why heaps are often implemented as arrays — it’s compact, fast, and memory-friendly."
-    a "And since heaps are complete binary trees, there are no gaps — every level is filled left to right, which keeps the array tight and predictable."
-    a "This layout is what makes operations like insertions and deletions run in {b}O(log n){/b} time — perfect for priority queues and heapsort!"
+    a "That’s why heaps are often implemented as arrays, it’s compact, fast, and memory-friendly."
+    a "And since heaps are complete binary trees, there are no gaps, every level is filled left to right, which keeps the array tight and predictable."
+    a "This layout is what makes operations like insertions and deletions run in {b}O(log n){/b} time, perfect for priority queues and heapsort!"
 
     hide screen chapter_8_array_demo
     show adrian explaining at center

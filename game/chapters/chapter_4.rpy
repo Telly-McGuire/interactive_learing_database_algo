@@ -69,13 +69,13 @@ screen StackQueues:
 label chapter_4_intro:
     call hideall from _call_hideall_5 #This is a stupid fix but it works I think
     play audio ("sfx/start.mp3")
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    play music "bgm/country.mp3" fadein 1.0
 
     scene black
     pause 1.0
     show screen chapter_4_introscreen
     pause 2.0
-    scene room with dissolve
+    scene cowboy with dissolve
     pause 1.0
     hide screen chapter_4_introscreen
 
@@ -109,6 +109,9 @@ label chapter_4_intro:
             "No":
                 jump menu
     show screen menu_btn
+    a "Howdy Yall"
+    a "Welcome to my Ranch"
+    a "Well My father's Ranch"
     a "Welcome to chapter 4: {size=+20}{b}Stacks & Queues{/b}"
     a "We will be tackling:"
 
@@ -161,9 +164,15 @@ label chapter_4_how_stack_works:
     show adrian explaining at left
     with move
     show screen ch4_Stack_Info
-    a "Here is a brief information about stacks"
-    a "Stacks are abstract data types that follow the Last In, First Out (LIFO) principle."
-    a "They allow you to push elements onto the stack and pop them off in reverse order."
+    a "Howdy, partner! Let me give ya a quick rundown on stacks."
+
+    a "Stacks are like a cowboy's saddlebag , the last thing ya toss in is the first thing ya pull out."
+
+    a "They follow the ol' Last In, First Out rule, or LIFO for short."
+
+    a "You push items onto the stack like stackin' hay bales, and pop 'em off in reverse, just like grabbin' the top one first."
+
+
     show adrian smiling at center
     with move
     hide screen ch4_Stack_Info
@@ -265,7 +274,7 @@ label chapter_4_stack_operations:
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
     $ chapter_4_progress =+ 1
-    jump ch4_quiz1
+    jump ch4_stack_operations_quiz
 
 init python:
     import random
@@ -345,7 +354,7 @@ label ch4_stack_operations_quiz:
 
     show adrian happy
     stop music fadeout 0.5
-    play music "bgm/city-high-life.mp3" fadein 0.5
+    play music "bgm/country.mp3" fadein 1.0
     play sound "sfx/success.mp3"
 
     a "Congratulations!"
@@ -355,13 +364,18 @@ label ch4_stack_operations_quiz:
     jump chapter_4_stack_properties
 
 label chapter_4_stack_properties:
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    play music "bgm/country.mp3" fadein 1.0
     show adrian mad
-    a "As I was saying"
+    a "As I was sayin', partner..."
+
     show adrian smiling
-    a "Now, let's move on to the next topic: {b}Stack Application & Properties{/b}"
+
+    a "Now let's mosey on to the next roundup: {b}Stack Application & Properties{/b}"
+
     show adrian explaining
-    a "Stacks have various applications, including function call management, expression evaluation, and backtracking algorithms."
+
+    a "Stacks ain't just for show"
+    a "they're mighty useful for wranglin' function calls, sortin' out expressions, and trackin' back through tricky algorithms like a trail scout on a lost path."
 
     screen ch_4_stack_application:
         frame:
@@ -511,8 +525,10 @@ label chapter_4_stack_properties:
 
     show adrian happy
     show screen ch_4_stack_application
-    a "These are the core concepts"
-    a "Please do Take your time to look over them"
+    a "These here are the core concepts, partner."
+
+    a "Take yer sweet time lookin' 'em over"
+    a "no need to rush like a cattle stampede."
     hide screen ch_4_stack_application
 
     screen ch_4_StackVsHeap:
@@ -565,13 +581,17 @@ label chapter_4_stack_properties:
 image ch_4_st_4 = Movie(play="images/videos/chapter_4_recursion.webm", loop=False)
 label chapter_4_stack_and_recursion:
     show adrian normal
-    a "Lets continue to the next topic: {b}Stack and Recursion{/b}"
+    a "Let's ride on to the next topic, partner: {b}Stack and Recursion{/b}"
+
     show adrian explaining at center
     with move
-    a "Recursion is a powerful technique where a function calls itself to {i}solve a problem.{/i}"
-    a "It can be implemented using stacks, as each recursive call is pushed onto the stack."
 
-    a "Recursion is a powerful technique where a function calls itself to solve a problem."
+    a "Recursion’s a mighty clever trick — it’s when a function calls itself to {i}solve a problem.{/i}"
+
+    a "And just like stackin’ saddles in the barn, each call gets piled on top of the stack till the job’s done."
+
+    a "Yessir, recursion’s like a trail that loops back on itself — each step builds on the last."
+
     a "For example..."
 
     show ch_4_st_4 at truecenter
@@ -665,7 +685,7 @@ label ch4_stack_recursion_quiz:
 
     show adrian happy
     stop music fadeout 0.5
-    play music "bgm/city-high-life.mp3" fadein 0.5
+    play music "bgm/country.mp3" fadein 1.0
     play sound "sfx/success.mp3"
 
     a "Congratulations!"
@@ -674,7 +694,7 @@ label ch4_stack_recursion_quiz:
     jump chapter_4_queues
 
 label chapter_4_queues:
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    play music "bgm/country.mp3" fadein 1.0
 
     show screen chapter_4_QueueIntro
     with dissolve
@@ -709,9 +729,20 @@ label chapter_4_queues:
     show adrian explaining at left
     with move
     show screen ch4_Queue_Info
-    a "Queues are another fundamental data structure that follows the First In, First Out (FIFO) principle."
-    a "They allow you to enqueue elements at the back and dequeue them from the front."
-    
+    a "{size=+10}{b}Howdy, partner!{/b}{/size}"
+    a "{i}Let me tell ya 'bout queues—one o’ the handiest tools in a coder’s saddlebag.{/i}"
+
+    a "{size=+5}They follow the {b}First In, First Out{/b} rule,{/size}"
+    a "Kinda like herdin’ cows through a gate. {i}First cow in’s the first one out.{/i}"
+
+    a "You send them cows into the herd from the back—that’s called {b}enqueuein’{/b}—"
+    a "and you let ‘em out the front—that’s {b}dequeuein’{/b}—one hoof at a time."
+
+    a "{color=#DAA520}No cuttin’ in line, no stampedin’.{/color} Just good ol’ order, like a proper cattle drive."
+
+    a "{size=+8}{color=#8B0000}That’s a queue, cowboy. Simple, steady, and always fair.{/color}{/size}"
+
+        
     hide screen ch4_Queue_Info
     with dissolve
     show adrian smiling at center
@@ -743,7 +774,7 @@ label ch4_pingpong:
     a "Ignore that its..."
     show adrian nocomment
     a "I have my needs too you know"
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    play music "bgm/country.mp3" fadein 1.0
     jump chapter_4_queues_vid
 
 image ch_4_qu_1 = Movie(play="images/videos/chapter_4_queue.webm", loop=False)
@@ -972,7 +1003,7 @@ label chapter_4_quiz_easy:
                     a "Incorrect! O(n^2) is not the correct time complexity for recursion."
 
     stop music fadeout 0.5
-    play music "bgm/city-high-life.mp3" fadein 0.5
+    play music "bgm/country.mp3" fadein 1.0
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
 
@@ -1420,7 +1451,7 @@ label chapter_4_quiz_medium:
 
 
     show adrian happy
-    play music "bgm/city-high-life.mp3" fadein 0.5
+    play music "bgm/country.mp3" fadein 1.0
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
     jump chapter_4_review
@@ -2172,7 +2203,7 @@ label chapter_4_quiz_hard:
 
 
     show adrian happy
-    play music "bgm/city-high-life.mp3" fadein 0.5
+    play music "bgm/country.mp3" fadein 1.0
     play sound "sfx/success.mp3"
     a "Your quiz score is: [chapter_4_score]"
     jump chapter_4_review
@@ -2197,7 +2228,7 @@ label chapter_4_review:
     jump chapter_4_ending
 label chapter_4_ending:
     play sound "sfx/success.mp3"
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    play music "bgm/country.mp3" fadein 1.0
     $ persistent.chapter_4 = True
     a "Would You like to test again?"
     menu:

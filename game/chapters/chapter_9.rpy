@@ -306,7 +306,6 @@ label chapter_9_Collisions:
     show screen chapter_9_collision_display
 
     python:
-        import ui
 
         def collision_demo():
             # Use the globals established at init/top-level.

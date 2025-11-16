@@ -66,8 +66,8 @@ label chapter_6_intro:
     else:
         pass
 
-
-    a "Hey there! Whats up aligator."
+    a "Aight no more monke business"
+    a "Welcome back to my room"
     a "Welcome to Chapter 6: AVL Trees."
     show adrian nocomment
     a "..."
@@ -109,19 +109,26 @@ label chapter_6_AVL_Properties:
     show adrian explaining at left
     with move
     show screen ch6_AVL_Info
-    a "AVL Trees maintain balance by keeping the height difference between left and right subtrees within one."
+    a "{size=+10}{b}Okay, so AVL Trees are a computer science concept.{/b}{/size}"
+    a "{i}That means they’re not real trees—they live in your computer’s brain!{/i}"
 
-    a "This difference is called the balance factor. If it strays outside -1 to +1, the tree performs rotations to fix itself."
-
-    a "There are four types of rotations: Left, Right, Left-Right, and Right-Left. They’re surgical—just enough to restore order."
+    a "{color=#4682B4}They’re part of something called data structures,{/color} which are like invisible ways to organize stuff so computers can work faster."
 
     show adrian explaining
-    a "Why does this matter? Because balanced trees mean fast operations. Searching, inserting, and deleting all stay efficient."
+    a "{b}AVL Trees are special because they stay balanced.{/b}"
+    a "That means they don’t let one side get too tall or too short."
 
-    a "AVL Trees are great when you need consistent performance and can’t afford the worst-case slowness of unbalanced trees."
+    a "They check the height difference—called the {color=#DAA520}balance factor{/color}—and if it’s off, they do a little twist to fix it."
+
+    a "{i}These twists are called rotations.{/i} There are four kinds: {b}Left, Right, Left-Right, and Right-Left.{/b}"
+
+    show adrian normal
+    a "{color=#2E8B57}It’s all pretend,{/color} but it helps computers keep things neat so they can {b}find, add, or remove stuff quickly.{/b}"
 
     show adrian smiling
-    a "They’re like disciplined librarians—always keeping things neat so you can find what you need in no time."
+    a "Think of it like {i}sorting your toy box{/i}. You don’t see the sorting rules, but they help you find your favorite toy fast."
+
+    a "{size=+8}{color=#6A5ACD}AVL Trees do that for computers. It’s all in their imagination—but it works!{/color}{/size}"
 
     show adrian smiling at center
     with move

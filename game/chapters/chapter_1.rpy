@@ -65,6 +65,7 @@ label chapter_1_intro:
     else:
         pass
     show screen menu_btn
+    a "Hi there! This is my room!"
     a "Welcome to Chapter 1"
     a "Today, we’re diving into something that forms the backbone of computer science:"
     a "{size=+30}Data Structures and Algorithms."

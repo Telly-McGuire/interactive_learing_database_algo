@@ -4,11 +4,13 @@ label menu_select:
     show screen menu_select_screen
     
     with dissolve
+    play music "bgm/lets-learn.mp3"
     pause 0.5
+    
     show adrian normal:
         xalign 0.3
         smaller
-    play music "bgm/lets-learn.mp3"
+    
     hide window
     $ renpy.pause(1000.0)
 
@@ -23,10 +25,11 @@ label menu:
     call hideall from _call_hideall_12
     scene black
     show screen menu_screen
+    play music "bgm/menu.mp3"
     show black
     with dissolve
     pause 0.5
-    play music "bgm/menu.mp3"
+    
     hide window
     $ renpy.pause(1000.0)
 

@@ -28,13 +28,13 @@ label chapter_5_intro:
 
     show screen chapter_5_BinaryTreeIntro
     with dissolve
-    scene room with dissolve
+    scene jungle with dissolve
     pause 2.0
     hide screen chapter_5_BinaryTreeIntro
     
     show screen menu_btn
     
-    play music "bgm/city-high-life.mp3" fadein 1.0
+    play music "bgm/jungle.mp3" fadein 1.0
     show adrian normal at center:
         smaller
     with dissolve
@@ -59,7 +59,9 @@ label chapter_5_intro:
     else:
         pass
 
+    a "WELCOME TO THE JUNGLE!"
     a "Welcome to Chapter 5: Trees!"
+    
     show adrian explaining
     a "Plants, Bushes, People...dogs?"
     a "All of them have arms"
@@ -75,7 +77,9 @@ label chapter_5_intro:
     a "Who knows"
     show adrian normal
     a "Lmao"
-    
+    a "Also, we're in a jungle now. So if a monkey steals your notes, that's on you."
+    a "Let's swing into this topic like a vine—hold on tight!"
+
 
 label chacter_5_Binary_Trees:
     show adrian happy
@@ -105,11 +109,27 @@ label chacter_5_Binary_Trees:
     show adrian explaining at left
     with move
     show screen ch5_BinaryTree_Info
-    a "Here is a brief overview of binary trees."
-    a "Binary trees are hierarchical structures where each node links to up to two child nodes."
+    show adrian normal
+    a "Alright, listen up, monke."
+    a "Here’s a brief overview of binary trees. Try not to throw a banana at me mid-sentence."
 
-    a "Balanced trees like AVL or Red-Black Trees keep their height in check, so operations stay quick even as data grows."
-    a "Without balance, a binary tree can degrade into a linked list—slow and inefficient."
+    show adrian explaining
+    a "Binary trees are like jungle vines—each node can split into two paths, left and right."
+    a "Imagine you're swinging from one branch, and you’ve got two choices: go left to the mangoes, or right to the coconuts."
+
+    show adrian smug
+    a "Now, smart trees—like AVL or Red-Black Trees—keep their branches balanced."
+    a "That means you can swing through the jungle fast, no tangled mess."
+
+    show adrian nocomment
+    a "But if the tree’s all lopsided, it’s like climbing a single vine straight up—slow, tiring, and you drop your snacks."
+
+    show adrian normal
+    a "So yeah, balance is key. Even in the jungle. Even in code."
+    a "Got it, monke?"
+
+    show adrian smug
+    a "Good. Now stop grooming my hair and let’s move on."
 
     show adrian explaining
     a "Traversals are how we explore trees. Inorder traversal gives sorted output in BSTs. Preorder and Postorder are great for copying or deleting trees."
@@ -414,35 +434,29 @@ label chapter_5_Binary_Search_Tree_Quiz:
 
 
 image ch_5_fn_1 = Movie(play="images/videos/chapter_5_insert.webm", loop=False)
+image ch_5_fn_2 = Movie(play="images/videos/chapter_5_delete.webm", loop=False)
 label ch_5_insert:
     hide screen bst_operations
     window hide
+    stop music
     show ch_5_fn_1 at truecenter #PLACEHOLDER FOR INSERTION ANIMATION
-    pause 25.0
+    pause 65.0
     hide ch_5_fn_1
+    play music "bgm/jungle.mp3" fadein 1.0
     window auto
     jump chapter_5_Functions
 
-label ch_5_find:
-    # hide screen bst_operations
-    # hide screen menu_btn
-    # window hide
-    # show ch_5_fn_2 at truecenter #PLACEHOLDER FOR FIND ANIMATION
-    # pause 12.0
-    # hide ch_5_fn_2
-    # show screen menu_btn
-    # window auto
-    jump chapter_5_Functions
-
 label ch_5_delete:
-    # hide screen bst_operations
-    # hide screen menu_btn
-    # window hide
-    # show ch_5_fn_3 at truecenter  #PLACEHOLDER FOR DELETION ANIMATION
-    # pause 15.0
-    # hide ch_5_fn_3
-    # show screen menu_btn
-    # window auto
+    hide screen bst_operations
+    hide screen menu_btn
+    window hide
+    stop music
+    show ch_5_fn_2 at truecenter  #PLACEHOLDER FOR DELETION ANIMATION
+    pause 80.0
+    hide ch_5_fn_2
+    play music "bgm/jungle.mp3" fadein 1.0
+    show screen menu_btn
+    window auto
     jump chapter_5_Functions
 
 label chapter_5_Functions:
@@ -475,12 +489,6 @@ label chapter_5_Functions:
                         text_color "#FFFFFF"
                         text_hover_color "#00ffcc"
 
-                    textbutton "Find()":
-                        action Call("ch_5_find")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#00ffcc"
-
                     textbutton "Delete()":
                         action Call("ch_5_delete")
                         text_size 40
@@ -491,12 +499,10 @@ label chapter_5_Functions:
     a "Smooth, right?"
     hide screen bst_operations
     with dissolve
+
     show adrian explaining
     a "These operations are the backbone of how BSTs work—adding, searching, and removing nodes while keeping everything in order."
-    show adrian normal
-    # a "Let’s try a quick challenge."
-                                        #GAME HERE MAYBE?
-    # call bst_minigame
+    a "Think of it like organizing your banana stash, monke—fast access, no spoiled fruit, and zero chaos."
 
     show adrian smug
     play sound "sfx/bell.mp3"
@@ -623,30 +629,44 @@ label chapter_5_Traversal:
     a "or whatever idc"
 
     show adrian happy
-    a "{color=#00ccff}Inorder{/color} gives you sorted values in a BST—very neat, very tidy."
 
-    a "{color=#ff66cc}Preorder{/color} is like announcing yourself before entering each room."
+    a "{color=#00ccff}Inorder{/color} is how smart monke sort bananas."
+    a "Left branch first. Then look at banana. Then right branch."
+    a "🍌🍌🍌 All in line. Monke proud."
+
+    a "{color=#ff66cc}Preorder{/color} is how loud monke enter jungle."
+    a "Monke shout: 'ME HERE!' before swing left, then swing right."
+    a "Announce first. Explore later. Loud monke way."
 
     show adrian doubt
-    a "And {color=#ffcc00}Postorder{/color}? That’s the dramatic exit—check everything, then leave."
-    a "{size=+100}{color=#ff00ff}{b}FASHION{/b}{/color}{/size}"
+    a "And {color=#ffcc00}Postorder{/color}? That’s drama monke."
+    a "Monke check left. Then right. Then say goodbye."
+    a "No talk. Just action. Then vanish. 🌪️"
+
+    play sound "sfx/fashion.mp3"
+    a "{cps=4}{size=+100}{color=#ff00ff}{b}FASHION{/b}{/color}{/size}"
 
     hide screen ch5_Traversal_Info
     with dissolve
 
     show screen traversal_ascii
     screen traversal_ascii:
-        vbox:
-            xalign 0.8
+        frame:
+            xalign 0.95
             yalign 0.3
+            xpadding 200
+            ypadding 100
             vbox:
-                spacing 15
-                xalign 0.5
-                yalign 0.5
-                text "Traversal Demo Tree" size 50 color "#00ff59" outlines [(3, "#000000", 0, 0)]
-                text "      A      " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
-                text "     / \\     " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
-                text "    B   C    " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
+                xalign 0.8
+                yalign 0.3
+                vbox:
+                    spacing 15
+                    xalign 0.5
+                    yalign 0.5
+                    text "Traversal Demo Tree" size 50 color "#00ff59" outlines [(3, "#000000", 0, 0)]
+                    text "      A      " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
+                    text "     / \\     " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
+                    text "    B   C    " size 40 color "#00ff59" outlines [(2, "#000000", 0, 0)]
 
     a "{color=#ffcc00}{size=+15}{fast}Ooooh{/fast} {color=#00ffcc}{size=+20}{b}ASCII Tree Time!{/b}{/size}{/color}"
     a "ghost aah oooh"
@@ -662,7 +682,7 @@ label chapter_5_Traversal:
 
     a "See? Same tree, different vibes."
     show adrian normal
-    a "{size=+50}{color=#ff0000}{b}{fast}Riggity{w=0.2} {color=#ff9900}wreck{w=0.2} {color=#ffff00}or{w=0.2} {color=#00ff00}whatever{w=0.2} {color=#0000ff}I'm{w=0.2} {color=#9900ff}tired{/b}{/color}{/size}"
+    a "{size=+50}{color=#ff0000}{b}{fast}Riggity{w=0.2} {color=#ff9900}wreck{w=0.2} {color=#ffff00}or{w=0.2} {color=#00ff00}whatever{w=0.2}{/b}{/color}{/size}"
 
 
     $ chapter_5_progress += 1
