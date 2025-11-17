@@ -3,7 +3,7 @@ init python:
     import json
 
     
-    API_KEY = "AIzaSyDRbPXgDcNxqPOalvOLim2YMeg5PRTj39k"
+    API_KEY = ""
 
     
     FIREBASE_BASE_URL = "https://datastructhesis-default-rtdb.asia-southeast1.firebasedatabase.app/Students/"
