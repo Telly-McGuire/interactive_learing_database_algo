@@ -606,7 +606,7 @@ label chapter_4_stack_and_recursion:
     $ chapter_4_progress =+ 1
     play sound "sfx/bell.mp3"
     a "You hear that? Its time for some questions. Buckle Up Buckeroo"
-    jump ch4_quiz2
+    jump ch4_stack_recursion_quiz
 
 init python:
     import random

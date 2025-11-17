@@ -780,11 +780,11 @@ label chapter_2_quizeasy:
                 "arr(first)":
                     show adrian confused
                     a "Incorrect! Use square brackets and index numbers."
-                "arr[0]":
+                "arr[[0]":
                     $ chapter_2_score += 1
                     show adrian happy
                     a "Correct! The first element is at index 0."
-                "arr[1]":
+                "arr[[1]":
                     show adrian mad
                     a "Incorrect! That is the second element."
                 "arr{0}":
