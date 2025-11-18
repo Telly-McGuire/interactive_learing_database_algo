@@ -849,7 +849,7 @@ label chapter_10_quiz_medium:
             menu:
                 "Entry (i,j) of A^2 (square of adjacency matrix)":
                     $ chapter_10_score += 1
-                    a "Correct! (A^2)[i,j] counts length-2 walks between i and j."
+                    a "Correct! (A^2)[[i,j] counts length-2 walks between i and j."
                 "Entry (i,j) of A transposed":
                     a "Incorrect. A^T just flips directions in directed graphs."
                 "Trace of A":

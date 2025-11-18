@@ -1331,7 +1331,8 @@ label chapter_3_quiz_medium:
                 a "Oops! That's not the right node."
 
         elif current_q == "q13":
-            screen linked_list_quiz3:
+
+            screen linked_list_quiz3():
                 frame:
                     xalign 0.2
                     yalign 0.3
@@ -1358,6 +1359,7 @@ label chapter_3_quiz_medium:
                                 text "Node Z" size 30
                                 text "Data 35" size 20 color "#00FF00"
                                 text "→" size 25 color "#FFD700"
+
                 frame:
                     xalign 0.7
                     yalign 0.3
@@ -1375,11 +1377,13 @@ label chapter_3_quiz_medium:
                                 textbutton "Node X" action [SetVariable("ch3_selected_node3", "Node X"), Return()]
                                 textbutton "Node Y" action [SetVariable("ch3_selected_node3", "Node Y"), Return()]
                                 textbutton "Node Z" action [SetVariable("ch3_selected_node3", "Node Z"), Return()]
+
             show screen linked_list_quiz3
             a "Which node comes immediately after Node X?"
             hide screen linked_list_quiz3
+
             if ch3_selected_node3 is None:
-                a "Please Select an Answer"
+                a "Please select an answer."
                 return
             elif ch3_selected_node3 == "Node Y":
                 $ chapter_3_score += 1

@@ -725,10 +725,10 @@ label chapter_6_restart:
     a "Your score is [chapter_6_test]"
     a "Let's see how well you do in the {size=+20}CHAPTER QUIZ"
 
-    if chapter_5_test <= 8:
+    if chapter_6_test <= 8:
         show adrian concerned
         jump chapter_6_quiz_easy
-    elif chapter_5_test <= 14:
+    elif chapter_6_test <= 14:
         show adrian smiling
         jump chapter_6_quiz_medium
     else:
