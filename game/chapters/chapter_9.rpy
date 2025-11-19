@@ -104,12 +104,14 @@ screen chapter_9_dict_display():
             text "[', '.join([f'{k}: {v}' for k, v in demo_dict.items()])]" size 20 color "#FFFFCC" outlines [(1, "#000000", 0, 0)]
             hbox:
                 spacing 12
-                textbutton "Add entry" action Return("add")
-                textbutton "Lookup" action Return("lookup")
-                textbutton "Close" action Return("close")
+                frame:
+                    textbutton "Add entry" action Return("add")
+                frame:
+                    textbutton "Lookup" action Return("lookup")
+                frame:
+                    textbutton "Close" action Return("close")
 
 init python:
-    # Demo dictionary for the interactive screen. Kept simple so players can experiment.
     try:
         demo_dict
     except NameError:
@@ -289,11 +291,16 @@ screen chapter_9_collision_display():
             text "[table_display()]" size 18 color "#CCFFEE" outlines [(1, "#000000", 0, 0)]
             hbox:
                 spacing 10
-                textbutton "Insert key" action Return("insert")
-                textbutton "Random key" action Return("random")
-                textbutton "Switch method" action Return("switch")
-                textbutton "Clear table" action Return("clear")
-                textbutton "Close" action Return("close")
+                frame:
+                    textbutton "Insert key" action Return("insert")
+                frame:
+                    textbutton "Random key" action Return("random")
+                frame:
+                    textbutton "Switch method" action Return("switch")
+                frame:
+                    textbutton "Clear table" action Return("clear")
+                frame:
+                    textbutton "Close" action Return("close")
 
 label chapter_9_Collisions:
     
@@ -549,10 +556,14 @@ screen chapter_9_resizing_display():
             text "[display_table()]" size 16 color "#CCFFEE"
             hbox:
                 spacing 8
-                textbutton "Insert" action Return("insert")
-                textbutton "Random" action Return("random")
-                textbutton "Reset" action Return("reset")
-                textbutton "Close" action Return("close")
+                frame:
+                    textbutton "Insert" action Return("insert")
+                frame:
+                    textbutton "Random" action Return("random")
+                frame:
+                    textbutton "Reset" action Return("reset")
+                frame:
+                    textbutton "Close" action Return("close")
 init python:
     def resizing_status():
         return f"Size: {table_size}  Items: {item_count}  Threshold: {int(threshold * 100)}%"

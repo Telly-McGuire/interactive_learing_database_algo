@@ -482,18 +482,18 @@ label chapter_5_Functions:
                     yalign 0.5
 
                     text "BST OPERATIONS =>" size 40 color "#00ccff" outlines [(5, "#000000", 0, 0)]
-
-                    textbutton "Insert()":
-                        action Call("ch_5_insert")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#00ffcc"
-
-                    textbutton "Delete()":
-                        action Call("ch_5_delete")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#00ffcc"
+                    frame:
+                        textbutton "Insert()":
+                            action Call("ch_5_insert")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#00ffcc"
+                    frame:
+                        textbutton "Delete()":
+                            action Call("ch_5_delete")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#00ffcc"
 
     show adrian smiling
     a "Smooth, right?"

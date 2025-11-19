@@ -683,24 +683,27 @@ label chapter_3_problems_with_linked_list:
                 spacing 20
                 xalign 0.5
                 yalign 0.5
-                textbutton "Search":
-                    text_color "#00BFFF"
-                    text_hover_color "#FFD700"
-                    action ShowMenu("search_info")
-                    text_size 28
-                    xalign 0.5
-                textbutton "Deletion":
-                    text_color "#00BFFF"
-                    text_hover_color "#FFD700"
-                    action ShowMenu("deletion_info")
-                    text_size 28
-                    xalign 0.5
-                textbutton "Memory Management":
-                    text_color "#00BFFF"
-                    text_hover_color "#FFD700"
-                    action ShowMenu("memory_info")
-                    text_size 28
-                    xalign 0.5
+                frame:
+                    textbutton "Search":
+                        text_color "#00BFFF"
+                        text_hover_color "#FFD700"
+                        action ShowMenu("search_info")
+                        text_size 28
+                        xalign 0.5
+                frame:
+                    textbutton "Deletion":
+                        text_color "#00BFFF"
+                        text_hover_color "#FFD700"
+                        action ShowMenu("deletion_info")
+                        text_size 28
+                        xalign 0.5
+                frame:
+                    textbutton "Memory Management":
+                        text_color "#00BFFF"
+                        text_hover_color "#FFD700"
+                        action ShowMenu("memory_info")
+                        text_size 28
+                        xalign 0.5
 
     screen search_info:
         frame:

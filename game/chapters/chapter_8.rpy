@@ -282,7 +282,8 @@ label chapter_8_Heap_Basics:
 
                 hbox:
                     spacing 12
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heap_demo_1():
         modal True
@@ -299,8 +300,10 @@ label chapter_8_Heap_Basics:
 
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heap_demo_2():
         modal True
@@ -317,8 +320,10 @@ label chapter_8_Heap_Basics:
 
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heap_demo_3():
         modal True
@@ -335,8 +340,10 @@ label chapter_8_Heap_Basics:
 
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:  
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heap_demo_4():
         modal False
@@ -353,8 +360,10 @@ label chapter_8_Heap_Basics:
 
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Close" action [Play("sound", "sfx/success.mp3"), Return("close")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Close" action [Play("sound", "sfx/success.mp3"), Return("close")]
 
     a "We’ll start with an unsorted array and build the heap from it."
     call screen chapter_8_heap_demo_0
@@ -815,7 +824,8 @@ label chapter_8_Heap_Sort:
                 text "Goal: build a max-heap, then repeatedly remove the max to form a sorted array." size 22
                 hbox:
                     spacing 12
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heapsort_step_1():
         modal True
@@ -831,8 +841,10 @@ label chapter_8_Heap_Sort:
                 text "Start heapify from last parent index. Compare children and swap where needed.\nAfter first swaps we get:\n[6, 1, 4, 5, 2, 3]" size 28
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heapsort_step_2():
         modal True
@@ -848,8 +860,10 @@ label chapter_8_Heap_Sort:
                 text "Final max-heap representation (root is max):\n[6, 5, 4, 1, 2, 3]\nRoot (6) is now the largest element." size 28
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heapsort_step_3():
         modal True
@@ -865,8 +879,10 @@ label chapter_8_Heap_Sort:
                 text "Swap root (6) with last element (3), then heapify-down the new root:\nAfter swap: [3, 5, 4, 1, 2, 6]\nHeapify → [5, 3, 4, 1, 2, 6]" size 28
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heapsort_step_4():
         modal True
@@ -882,8 +898,10 @@ label chapter_8_Heap_Sort:
                 text "Swap new root (5) with element at index 3 (2), then heapify:\nAfter swap: [2, 3, 4, 1, 5, 6]\nHeapify → [4, 3, 2, 1, 5, 6]" size 28
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Next" action [Play("sound", "sfx/ting.mp3"), Return("next")]
 
     screen chapter_8_heapsort_step_5():
         modal False
@@ -899,10 +917,11 @@ label chapter_8_Heap_Sort:
                 text "Continue these steps until the heap is empty. Final sorted array (ascending):\n[1, 2, 3, 4, 5, 6]" size 28
                 hbox:
                     spacing 12
-                    textbutton "Prev" action Return("prev")
-                    textbutton "Close" action [Play("sound", "sfx/success.mp3"), Return("close")]
-
-    # Sequentially call each step screen (mirrors the heap demo style)
+                    frame:
+                        textbutton "Prev" action Return("prev")
+                    frame:
+                        textbutton "Close" action [Play("sound", "sfx/success.mp3"), Return("close")]
+                        
     call screen chapter_8_heapsort_step_0
     call screen chapter_8_heapsort_step_1
     call screen chapter_8_heapsort_step_2

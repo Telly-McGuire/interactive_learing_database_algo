@@ -268,10 +268,14 @@ label chapter_1_Data_Structures:
                 xalign 0.5
                 yalign 0.5
                 text "{size=+5}{b}Characteristics of Data Structures{/b}" color "#00FF40" outlines [(4, "#000000", 0, 0)]
-                textbutton "Time Complexity" action Show("ch1_time_complexity")
-                textbutton "Space Complexity" action Show("ch1_space_complexity")
-                textbutton "Correctness" action Show("ch1_correctness")
-                textbutton "Close" action Return()
+                frame:
+                    textbutton "Time Complexity" action Show("ch1_time_complexity")
+                frame:
+                    textbutton "Space Complexity" action Show("ch1_space_complexity")
+                frame:
+                    textbutton "Correctness" action Show("ch1_correctness")
+                frame:
+                    textbutton "Close" action Return()
 
     screen ch1_time_complexity:
         frame:
@@ -287,7 +291,8 @@ label chapter_1_Data_Structures:
                 text "Measures how long an algorithm takes as input size grows" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Choose structures that minimize time for large datasets" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Hash tables: jump straight to data using a unique code" size 28 color "#FFD700" outlines [(2, "#000000", 0, 0)]
-                textbutton "Back" action Hide("ch1_time_complexity")
+                frame:
+                    textbutton "Back" action Hide("ch1_time_complexity")
 
     screen ch1_space_complexity:
         frame:
@@ -303,7 +308,8 @@ label chapter_1_Data_Structures:
                 text "Measures memory used as input size grows" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Important for limited memory or large datasets" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Linked lists use less memory than arrays, but slower access" size 28 color "#FFD700" outlines [(2, "#000000", 0, 0)]
-                textbutton "Back" action Hide("ch1_space_complexity")
+                frame:
+                    textbutton "Back" action Hide("ch1_space_complexity")
 
     screen ch1_correctness:
         frame:
@@ -319,7 +325,8 @@ label chapter_1_Data_Structures:
                 text "Accuracy and reliability of algorithm results" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Right structure ensures correct outcomes" size 28 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Binary search tree: smart guessing game for sorted data" size 28 color "#FFD700" outlines [(2, "#000000", 0, 0)]
-                textbutton "Back" action Hide("ch1_correctness")
+                frame:
+                    textbutton "Back" action Hide("ch1_correctness")
     
     call screen ch1_data_structure_characteristics_select
     a "Please look over these"
@@ -456,7 +463,8 @@ label chapter_1_Characteristics:
                 text "{b}4. Updating Algorithms:{/b} Modify existing data." color "#FF69B4" size 32 outlines [(2, "#000000", 0, 0)]
                 text "{b}5. Deletion Algorithms:{/b} Remove data, keep things organized." color "#FF6347" size 32 outlines [(2, "#000000", 0, 0)]
                 text "These are the most common algorithms you'll encounter in this chapter." color "#FFFFFF" size 28 outlines [(2, "#000000", 0, 0)]
-                textbutton "Close" action Hide("ch1_algorithm_categories")
+                frame:
+                    textbutton "Close" action Hide("ch1_algorithm_categories")
     a "Here are some important categories of algorithms to know:"
 
     hide screen ch1_algorithm_categories
@@ -686,50 +694,54 @@ label chapter_1_Characteristics:
                 hbox:
                     spacing 40
 
-                    textbutton "Unambiguous":
-                        action ShowMenu("algo_prop_1")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Unambiguous":
+                            action ShowMenu("algo_prop_1")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
 
-                    textbutton "Input":
-                        action ShowMenu("algo_prop_2")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Input":
+                            action ShowMenu("algo_prop_2")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
 
-                    textbutton "Output":
-                        action ShowMenu("algo_prop_3")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Output":
+                            action ShowMenu("algo_prop_3")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
 
                 hbox:
                     spacing 40
 
-                    textbutton "Finiteness":
-                        action ShowMenu("algo_prop_4")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Effectiveness":
-                        action ShowMenu("algo_prop_5")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Feasibility":
-                        action ShowMenu("algo_prop_6")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Independent":
-                        action ShowMenu("algo_prop_7")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Finiteness":
+                            action ShowMenu("algo_prop_4")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Effectiveness":
+                            action ShowMenu("algo_prop_5")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Feasibility":
+                            action ShowMenu("algo_prop_6")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Independent":
+                            action ShowMenu("algo_prop_7")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
                         
     a "Here are the key properties that define a good algorithm:"   
     a "Please look over these"
@@ -941,7 +953,8 @@ label chapter_1_Algorithms:
                 text "• Be easy to debug" size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "• Be easy to modify" size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "• Be easy to maintain" size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
-                textbutton "Close" action Return()
+                frame:
+                    textbutton "Close" action Return()
 
     show screen good_programming_features
     show adrian at left
@@ -977,7 +990,8 @@ label chapter_1_Algorithms:
                 text "Step 5: Store the result in c." size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Step 6: Print c—the final total." size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
                 text "Step 7: STOP—the algorithm is complete!" size 32 color "#FFFFFF" outlines [(2, "#000000", 0, 0)]
-                textbutton "Close" action Return()
+                frame:
+                    textbutton "Close" action Return()
     play sound "sfx/cave_sound.mp3"
     pause 0.5
     show adrian explaining at left 

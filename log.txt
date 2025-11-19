@@ -1,36 +1,20 @@
-2025-11-17 06:51:00 UTC
+2025-11-19 02:57:34 UTC
 Windows-10-10.0.26200
 Ren'Py 8.3.0.24082114
 
-Early init took 0.05s
-Loading error handling took 0.06s
-Loading script took 0.23s
-Loading save slot metadata took 0.06s
-Loading persistent took 0.01s
-Running init code took 0.12s
-Loading analysis data took 0.03s
-Analyze and compile ATL took 0.01s
-Reloading save slot metadata took 0.01s
-Index archives took 0.00s
-Dump and make backups took 0.04s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc took 0.05s
+Early init took 0.12s
+Loading error handling took 0.11s
+Loading script took 0.85s
+Loading save slot metadata took 0.27s
+Loading persistent took 0.00s
+
+File "game/chapters/chapter_1.rpy", line 734: Line is indented, but the preceding frame statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
+    textbutton "Feasibility":
+    ^
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: b"Couldn't load nvlib." (can be ignored)
-Creating interface object took 0.00s
-Cleaning stores took 0.00s
-Init translation took 0.05s
-Build styles took 0.00s
-Load screen analysis took 0.05s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.12s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Interface start took 0.42s
+Interface start took 0.13s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -40,75 +24,49 @@ Vendor: "b'Intel'"
 Renderer: b'Intel(R) UHD Graphics'
 Version: b'4.6.0 - Build 32.0.101.6129'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1051) drawable=(1920, 1051)
+Screen sizes: virtual=(1280, 720) physical=(1920, 1051) drawable=(1920, 1051)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1051) drawable=(1920, 1051)
+Screen sizes: virtual=(1280, 720) physical=(1920, 1051) drawable=(1920, 1051)
 Maximum texture size: 4096x4096
-
-Full traceback:
-  File "game/chapters/chapter_11.rpy", line 483, in script call
-    a "Unlike {b}Breadth First{/b} which checks every path, {b}Depth First{/b} goes as deep as it can"
-  File "game/chapters/chapter_4.rpy", line 222, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 222, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 222, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 609, in script
-    jump ch4_quiz2
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\ast.py", line 1699, in execute
-    rv = renpy.game.script.lookup(target)
-  File "C:\Users\ryand\OneDrive\Documents\renpy-8.3.0-sdk\renpy\script.py", line 1103, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'ch4_quiz2'.
-
-While running game code:
-  File "game/chapters/chapter_11.rpy", line 483, in script call
-    a "Unlike {b}Breadth First{/b} which checks every path, {b}Depth First{/b} goes as deep as it can"
-  File "game/chapters/chapter_4.rpy", line 222, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 222, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 222, in script call
-    a "Pick an Operation On how stacks work"
-  File "game/chapters/chapter_4.rpy", line 609, in script
-    jump ch4_quiz2
-ScriptError: could not find label 'ch4_quiz2'.
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1051) drawable=(1920, 1051)
+Screen sizes: virtual=(1280, 720) physical=(1920, 1051) drawable=(1920, 1051)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1051) drawable=(1920, 1051)
+Screen sizes: virtual=(1280, 720) physical=(1920, 1051) drawable=(1920, 1051)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1280, 720) physical=(1920, 1051) drawable=(1920, 1051)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1280, 720) physical=(1920, 1051) drawable=(1920, 1051)
 Maximum texture size: 4096x4096
 Resetting cache.
-Early init took 404.06s
-Loading error handling took 0.04s
-Loading script took 0.44s
-Loading save slot metadata took 0.14s
-Loading persistent took 0.01s
-Running init code took 0.03s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
+Early init took 21.80s
+Loading error handling took 0.05s
+Loading script took 0.34s
+Loading save slot metadata took 0.01s
+Loading persistent took 0.00s
+Running init code took 0.17s
+Loading analysis data took 0.03s
+Analyze and compile ATL took 0.01s
 Reloading save slot metadata took 0.01s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\ryand\\AppData\\Roaming/RenPy/backups\\Interactive Learning _ Database And Algorithms':
-Dump and make backups took 0.07s
+Dump and make backups took 0.05s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc took 0.14s
+Initial gc took 0.08s
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: b"Couldn't load nvlib." (can be ignored)
 Creating interface object took 0.00s
 Cleaning stores took 0.00s
-Init translation took 0.05s
+Init translation took 0.07s
 Build styles took 0.00s
-Load screen analysis took 0.00s
+Load screen analysis took 0.01s
 Analyze screens took 0.01s
-Save screen analysis took 0.04s
-Prepare screens took 0.11s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.12s
+Save pyanalysis. took 0.03s
+Save bytecode. took 0.04s
 Running _start took 0.01s
-Interface start took 0.18s
+Interface start took 0.10s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)

@@ -239,24 +239,24 @@ label chapter_4_stack_operations:
                     yalign 0.5
 
                     text "STACK OPERATIONS =>" size 40 color "#e1ff00" outlines [(5, "#000000", 0, 0)]
-
-                    textbutton "Push()":
-                        action Call("ch_4_push")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Pop()":
-                        action Call("ch_4_pop")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Peek()":
-                        action Call("ch_4_peek")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Push()":
+                            action Call("ch_4_push")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Pop()":
+                            action Call("ch_4_pop")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Peek()":
+                            action Call("ch_4_peek")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
 
 
     show adrian smiling
@@ -391,23 +391,24 @@ label chapter_4_stack_properties:
 
                 hbox:
                     spacing 60
-                    textbutton "Application":
-                        action ShowMenu("ch_4_Application")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Stack":
-                        action ShowMenu("ch_4_Stack")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-
-                    textbutton "Heap Memory":
-                        action ShowMenu("ch_4_HeapMemory")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Application":
+                            action ShowMenu("ch_4_Application")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Stack":
+                            action ShowMenu("ch_4_Stack")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                    frame:
+                        textbutton "Heap Memory":
+                            action ShowMenu("ch_4_HeapMemory")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
     
     screen ch_4_Application:
         frame:
@@ -815,17 +816,18 @@ label chapter_4_queues_vid:
                 yalign 0.5
 
                 text "QUEUE OPERATIONS =>" size 40 color "#e1ff00" outlines [(5, "#000000", 0, 0)]
-
-                textbutton "Queue()":
-                        action Call("ch_4_queue")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
-                textbutton "Dequeue()":
-                        action Call("ch_4_dequeue")
-                        text_size 40
-                        text_color "#FFFFFF"
-                        text_hover_color "#FFD700"
+                frame:
+                    textbutton "Queue()":
+                            action Call("ch_4_queue")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
+                frame:
+                    textbutton "Dequeue()":
+                            action Call("ch_4_dequeue")
+                            text_size 40
+                            text_color "#FFFFFF"
+                            text_hover_color "#FFD700"
         frame: 
             xalign 0.0
             yalign 0.9

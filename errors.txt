@@ -2,11 +2,9 @@
 errors listed below, and try again.
 
 
-The label chapter_11_A_Star is defined twice, at File "game/chapters/chapter_11.rpy", line 865:
-label chapter_11_A_Star:
-and File "game/chapters/chapter_11.rpy", line 904:
-label chapter_11_A_Star:
-
+File "game/chapters/chapter_1.rpy", line 734: Line is indented, but the preceding frame statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
+    textbutton "Feasibility":
+    ^
 
 Ren'Py Version: Ren'Py 8.3.0.24082114
-Fri Oct 31 14:33:48 2025
+Wed Nov 19 10:57:35 2025
